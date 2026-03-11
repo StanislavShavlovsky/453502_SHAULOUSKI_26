@@ -1,0 +1,3 @@
+[submodule "IGI/LR2/springboot_crud_app"]
+	path = IGI/LR2/springboot_crud_app
+	url = https://github.com/RameshMF/springboot-thymeleaf-crud-pagination-sorting-webapp.git
