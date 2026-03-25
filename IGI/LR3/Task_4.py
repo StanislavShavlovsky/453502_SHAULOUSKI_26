@@ -55,7 +55,7 @@ def main():
     """
     Main function performing all three subtasks.
     """
-    print("\n=== Text Analysis (Task 4, Variant 26) ===")
+    print("\n Text Analysis (Task 4, Variant 26)")
     print("\nOriginal text:\n")
     print(TEXT)
 

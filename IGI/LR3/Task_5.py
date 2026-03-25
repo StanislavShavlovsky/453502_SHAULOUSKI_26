@@ -82,7 +82,7 @@ def main():
     Main function with repeat option.
     """
     while True:
-        print("\n=== Task 5 — List Processing ===")
+        print("\n Task 5 — List Processing ")
 
         lst = input_list()
         print_list(lst)

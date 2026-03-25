@@ -58,7 +58,7 @@ def main():
     Main interactive function for computing the series.
     """
 
-    print("\n=== Compute ln((x+1)/(x-1)) using power series ===")
+    print("\n Compute ln((x+1)/(x-1)) using power series ")
 
     # Input
     x = read_float("Enter x (|x| > 1): ")
