@@ -2,13 +2,7 @@
 # Task 2 — Average of even numbers
 # Developer: Shaulouski Stanislau Andreevich | Version: 1.1 | Date: 2026-03-24
 
-def repeatable(func):
-    """Decorator to allow repeating the task execution."""
-    def wrapper():
-        while True:
-            func()
-            if input("\nRun Task 2 again? (y/n): ").strip().lower() != "y": break
-    return wrapper
+from Decorator import repeatable
 
 def read_int(prompt):
     """Reads an integer value with validation."""

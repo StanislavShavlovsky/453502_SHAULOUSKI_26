@@ -3,17 +3,7 @@
 # Developer: Shaulouski Stanislau Andreevich | Version: 1.2 | Date: 2026-03-25
 
 import random
-
-
-def repeatable(func):
-    """Decorator for repeating the task (Requirement 11)."""
-
-    def wrapper():
-        while True:
-            func()
-            if input("\nProcess another list? (y/n): ").lower() != 'y': break
-
-    return wrapper
+from Decorator import repeatable
 
 
 def init_by_generator(n):

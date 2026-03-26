@@ -1,14 +1,7 @@
 # Lab 3 — Standard data types, loops, functions
 # Task 3 — Count words starting with lowercase letter
 # Developer: Shaulouski Stanislau Andreevich | Version: 1.1 | Date: 2026-03-25
-
-def repeatable(func):
-    """Decorator for repeating task."""
-    def wrapper():
-        while True:
-            func()
-            if input("\nTry another text? (y/n): ").lower() != 'y': break
-    return wrapper
+from Decorator import repeatable
 
 def read_text(prompt):
     """Reads non-empty text."""

@@ -5,21 +5,7 @@
 # Date: 2026-03-24
 
 import math
-
-def repeatable(func):
-    """
-    Decorator that allows repeating the program execution
-    without restarting the script.
-    """
-    def wrapper():
-        while True:
-            func()
-            again = input("\nRun again? (y/n): ").strip().lower()
-            if again != "y":
-                print("Goodbye!")
-                break
-    return wrapper
-
+from Decorator import repeatable
 
 def read_float(prompt):
     """
@@ -58,7 +44,7 @@ def main():
     Main interactive function for computing the series.
     """
 
-    print("\n Compute ln((x+1)/(x-1)) using power series ")
+    print("\nCompute ln((x+1)/(x-1)) using power series ")
 
     # Input
     x = read_float("Enter x (|x| > 1): ")

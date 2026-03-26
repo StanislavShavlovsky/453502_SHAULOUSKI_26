@@ -9,7 +9,7 @@ def run_menu():
     Main menu for laboratory work selection.
     """
     while True:
-        print("MENU FOR LAB WORK 3")
+        print("MENU FOR LAB WORK 3 VARIANT 26")
         print("1. Power series calculation: ln((x+1)/(x-1))")
         print("2. Arithmetic mean of even numbers")
         print("3. Count words starting with lowercase")
@@ -32,6 +32,8 @@ def run_menu():
         elif choice == '0':
             print("Exiting program. Goodbye!")
             break
+        elif choice == '999':  # secret code for testing error
+            raise RuntimeError("Тестовый сбой системы!")
         else:
             print("Error: Please enter a number between 0 and 5.")
 
@@ -39,8 +41,8 @@ if __name__ == "__main__":
     try:
         run_menu()
     except KeyboardInterrupt:
-        # Handling the case where the user presses Ctrl+C
         print("\nProgram forcibly stopped by user.")
     except Exception as e:
-        # General exception handling for unexpected errors
-        print(f"\nAn unexpected error occurred: {e}")
+        # Notice user
+        print(f"\n[CRITICAL ERROR]: {e}")
+        raise

@@ -1,17 +1,7 @@
 # Lab 3 — Standard data types, loops, functions
 # Task 4 — Specific text analysis
 # Developer: Shaulouski Stanislau Andreevich | Version: 1.1 | Date: 2026-03-25
-
-def repeatable(func):
-    """Decorator for repeating the task."""
-
-    def wrapper():
-        while True:
-            func()
-            if input("\nShow analysis again? (y/n): ").lower() != 'y': break
-
-    return wrapper
-
+from Decorator import repeatable
 
 # The specific text requested by the user
 TEXT = ("So she was considering in her own mind, as well as she could, for the hot day "
