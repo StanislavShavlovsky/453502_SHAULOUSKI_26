@@ -6,21 +6,20 @@ import Task_5
 
 def run_menu():
     """
-    Главное меню для выбора лабораторных работ.
+    Main menu for laboratory work selection.
     """
     while True:
-        print("   ВЫБОР ЗАДАНИЯ (Лабораторная №3)")
-        print("1. Расчет бесконечного ряда ln((x+1)/(x-1))")
-        print("2. Среднее арифметическое четных чисел")
-        print("3. Подсчет слов с маленькой буквы")
-        print("4. Анализ текста (Алиса в стране чудес)")
-        print("5. Обработка списка вещественных чисел")
-        print("0. Выход")
+        print("MENU FOR LAB WORK 3")
+        print("1. Power series calculation: ln((x+1)/(x-1))")
+        print("2. Arithmetic mean of even numbers")
+        print("3. Count words starting with lowercase")
+        print("4. Text Analysis (Alice in Wonderland)")
+        print("5. Real numbers list processing")
+        print("0. Exit")
 
-        choice = input("Выберите номер задачи (0-5): ").strip()
+        choice = input("Select a task number (0-5): ").strip()
 
         if choice == '1':
-            # В Task_1.py основная логика обернута декоратором @repeatable
             Task_1.main()
         elif choice == '2':
             Task_2.main()
@@ -31,13 +30,17 @@ def run_menu():
         elif choice == '5':
             Task_5.main()
         elif choice == '0':
-            print("Завершение работы. До свидания!")
+            print("Exiting program. Goodbye!")
             break
         else:
-            print("Ошибка: введите число от 0 до 5.")
+            print("Error: Please enter a number between 0 and 5.")
 
 if __name__ == "__main__":
     try:
         run_menu()
     except KeyboardInterrupt:
-        print("\nПрограмма принудительно остановлена.")
+        # Handling the case where the user presses Ctrl+C
+        print("\nProgram forcibly stopped by user.")
+    except Exception as e:
+        # General exception handling for unexpected errors
+        print(f"\nAn unexpected error occurred: {e}")

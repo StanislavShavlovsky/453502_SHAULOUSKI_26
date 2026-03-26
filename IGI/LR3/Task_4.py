@@ -1,9 +1,19 @@
 # Lab 3 — Standard data types, loops, functions
-# Task 4 — Text analysis (words, longest word, odd words)
-# Developer: Stanislav
-# Version: 1.0
-# Date: 2026-03-25
+# Task 4 — Specific text analysis
+# Developer: Shaulouski Stanislau Andreevich | Version: 1.1 | Date: 2026-03-25
 
+def repeatable(func):
+    """Decorator for repeating the task."""
+
+    def wrapper():
+        while True:
+            func()
+            if input("\nShow analysis again? (y/n): ").lower() != 'y': break
+
+    return wrapper
+
+
+# The specific text requested by the user
 TEXT = ("So she was considering in her own mind, as well as she could, for the hot day "
         "made her feel very sleepy and stupid, whether the pleasure of making a "
         "daisy-chain would be worth the trouble of getting up and picking the daisies, "
@@ -11,66 +21,27 @@ TEXT = ("So she was considering in her own mind, as well as she could, for the h
 
 
 def split_text(text):
-    """
-    Splits text into words using spaces and commas.
-    No regular expressions allowed.
-    """
+    """Splits text into cleaned words."""
     cleaned = text.replace(",", "").replace(".", "")
     return cleaned.split()
 
 
-def count_words(words):
-    """
-    Returns the number of words in the list.
-    """
-    return len(words)
-
-
 def find_longest_word(words):
-    """
-    Finds the longest word and its index (1-based).
-    Returns (word, index).
-    """
-    longest = ""
-    index = 0
-
-    for i, w in enumerate(words):
-        if len(w) > len(longest):
-            longest = w
-            index = i + 1  # 1-based index
-
+    """Finds longest word and its 1-based index."""
+    longest = max(words, key=len) if words else ""
+    index = words.index(longest) + 1 if words else 0
     return longest, index
 
 
-def print_odd_words(words):
-    """
-    Prints every odd-position word (1st, 3rd, 5th...).
-    """
-    print("\nOdd-position words:")
-    for i in range(0, len(words), 2):  # 0,2,4... → 1st,3rd,5th...
-        print(words[i])
-
-
+@repeatable
 def main():
-    """
-    Main function performing all three subtasks.
-    """
-    print("\n Text Analysis (Task 4, Variant 26)")
-    print("\nOriginal text:\n")
-    print(TEXT)
-
+    """Main entry point for Task 4."""
     words = split_text(TEXT)
+    long_w, pos = find_longest_word(words)
 
-    # a) number of words
-    total = count_words(words)
-    print(f"\n(a) Number of words: {total}")
-
-    # b) longest word + its index
-    longest, idx = find_longest_word(words)
-    print(f"\n(b) Longest word: '{longest}' (position {idx})")
-
-    # c) odd words
-    print_odd_words(words)
+    print(f"\nTotal words: {len(words)}")
+    print(f"Longest word: '{long_w}' at position {pos}")
+    print("Every odd-position word:", ", ".join(words[::2]))
 
 
 if __name__ == "__main__":
