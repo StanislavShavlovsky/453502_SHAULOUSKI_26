@@ -7,8 +7,7 @@ import csv
 import pickle
 import os
 
-# --- MIXINS ---
-
+# mixins
 class SerializationMixin:
     """Base mixin for file operations help."""
     @staticmethod
@@ -37,9 +36,9 @@ class PickleMixin(SerializationMixin):
             pickle.dump(trees, f)
 
 
-# --- CLASSES ---
+# ооp
 
-class BiologicalEntity:
+class BiologicalEntity:  # base class
     """Base class to demonstrate inheritance and super()."""
     def __init__(self, species):
         self._species = species.capitalize()  # Encapsulation
@@ -72,7 +71,7 @@ class ForestTree(BiologicalEntity):
         return f"Дерево(Вид: {self.species}, Всего: {self.total_count}, Здоровых: {self.healthy_count})"
 
 
-# --- MAIN SERVICE ---
+# main service
 
 class ForestManager(CsvMixin, PickleMixin):
     def __init__(self, csv_fn, pkl_fn):
@@ -89,7 +88,7 @@ class ForestManager(CsvMixin, PickleMixin):
 
     def run(self):
         while True:
-            print("\n--- СИСТЕМА УЧЕТА ЛЕСА (ВАР 26) ---")
+            print("\n СИСТЕМА УЧЕТА ЛЕСА (ВАР 26) ")
             print("1. Рассчитать общую статистику и проценты")
             print("2. Поиск вида в CSV файле")
             print("3. Показать все записи (из CSV)")
@@ -143,8 +142,6 @@ class ForestManager(CsvMixin, PickleMixin):
             else:
                 print("Некорректный ввод, попробуйте снова.")
 
-
-# --- EXECUTION ---
 
 HARDCODED_DATA = [
     {"species": "Дуб", "total_count": 500, "healthy_count": 420},
