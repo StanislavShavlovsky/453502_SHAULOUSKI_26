@@ -1,52 +1,52 @@
 # Program: Main Integration Module for Laboratory Work No. 4
 # Lab Work: No. 4 (Tasks 1-6)
-# Version: 1.0
+# Version: 1.1 (English Documentation)
 # Developer: Shaulouski Stanislau Andreevich
-# Date: 2026-04-23
+# Date: 2026-05-07
 
 import re
 import sys
 
-
 def validate_menu_input(prompt):
     """
-    Валидация выбора меню с использованием регулярных выражений.
-    Соответствует требованию №8 (защита от некорректных данных).
+    Validates menu selection using Regular Expressions.
+    Satisfies Requirement #8: Protection against incorrect user data.
     """
     while True:
         user_input = input(prompt).strip()
-        # регулярка - цифры от 0 до 6
+        # Regex: allows digits from 0 to 6 only
         if re.match(r'^[0-6]$', user_input):
             return int(user_input)
-        print("Ошибка! Введите число от 1 до 6 (или 0 для выхода).")
-
+        print("Error! Please enter a number between 1 and 6 (or 0 to Exit).")
 
 def main():
     """
-    Центральный модуль управления лабораторной работой.
-    Интерфейс сделан максимально простым и понятным.
+    Central control module for Laboratory Work No. 4.
+    Provides a unified interface for all modularized tasks.
     """
-
-    print("ЛАБОРАТОРНАЯ РАБОТА №4. ВАРИАНТ 26")
+    print("=" * 45)
+    print("LABORATORY WORK NO. 4 | VARIANT 26")
+    print("DEVELOPER: SHAULOUSKI STANISLAU ANDREEVICH")
+    print("=" * 45)
 
     while True:
-        print("\nСПИСОК ЗАДАНИЙ:")
-        print("1. Сериализация (Деревья)")
-        print("2. Анализ текста (Регулярные выражения)")
-        print("3. Вычисление ряда (Логарифм)")
-        print("4. Геометрия (Ромб)")
-        print("5. Матрицы (NumPy)")
-        print("6. Анализ планет (Pandas)")
-        print("0. Выход")
+        print("\n--- TASK LIST ---")
+        print("1. Serialization (Advanced Trees)")
+        print("2. Text Analysis (Regular Expressions)")
+        print("3. Series Calculation (Logarithmic Functions)")
+        print("4. Geometry Visualization (Rhombus)")
+        print("5. Matrix Operations (NumPy Analysis)")
+        print("6. Planetary Dataset Analysis (Pandas)")
+        print("0. Exit Application")
 
-        choice = validate_menu_input("\nВыберите номер задания (0-6): ")
+        choice = validate_menu_input("\nSelect task number (0-6): ")
 
         if choice == 0:
-            print("\nПрограмма завершена. До свидания!")
+            print("\nApplication closed. Have a productive day!")
             break
 
         try:
-            # вызов модулей в зависимости от выбора
+            # Dynamic module loading based on user selection
             if choice == 1:
                 import Serializer
                 Serializer.main()
@@ -67,14 +67,14 @@ def main():
                 DatasetAnalyzer.main()
 
         except ImportError as e:
-            print(f"\nОшибка: Не удалось найти файл модуля. Проверьте название: {e}")
+            # Requirement: Logical grouping in modules
+            print(f"\n[ERROR]: Module file not found. Check filename: {e}")
         except AttributeError:
-            print(f"\nОшибка: В модуле {choice} не найдена функция main().")
+            print(f"\n[ERROR]: Entry point 'main()' not found in module {choice}.")
         except Exception as e:
-            print(f"\nПроизошла ошибка при выполнении задания {choice}: {e}")
+            print(f"\n[CRITICAL ERROR] in Task {choice}: {e}")
 
-        input("\nНажмите Enter, чтобы вернуться в меню...")
-
+        input("\nPress Enter to return to the main menu...")
 
 if __name__ == "__main__":
     main()

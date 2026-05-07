@@ -1,8 +1,8 @@
 # Program: Exoplanet Data Analysis using real OEC Dataset
 # Lab Work: No. 4, Task 6, Variant 26
-# Version: 1.2
+# Version: 1.3 (English Documentation)
 # Developer: Shaulouski Stanislau Andreevich
-# Date: 2026-04-22
+# Date: 2026-05-07
 
 import pandas as pd
 import re
@@ -12,9 +12,10 @@ import os
 # --- MODULE 1: MIXINS ---
 
 class DataReportMixin:
-    """Mixin to provide formatted reporting for data analysis."""
+    """Mixin to provide formatted reporting for data analysis steps."""
 
     def report_step(self, message):
+        """Prints a standardized header for each analysis step."""
         print(f"\n[STEP]: {message}")
         print("-" * 30)
 
@@ -22,132 +23,143 @@ class DataReportMixin:
 # --- MODULE 2: BASE CLASSES ---
 
 class BaseDatasetHandler:
-    """Base class for handling datasets."""
+    """Base class for handling datasets and verifying file integrity."""
 
     def __init__(self, file_path):
+        """Initializes the handler with a file path and checks existence."""
         self.file_path = file_path
         self._exists = os.path.exists(file_path)
 
     def get_info(self):
-        """Polymorphic method."""
-        return f"File path: {self.file_path} | Status: {'Found' if self._exists else 'Not Found'}"
+        """Demonstrates polymorphism: returns file status information."""
+        return f"File: {self.file_path} | Found: {self._exists}"
 
 
 class PlanetaryAnalyzer(BaseDatasetHandler, DataReportMixin):
     """
     Analyzes exoplanet data using Pandas.
-    Demonstrates: static attributes, encapsulation, properties, magic methods.
+    Demonstrates: static attributes, encapsulation, properties, and magic methods.
     """
     # Static attribute (Requirement 4)
     analysis_instances = 0
 
     def __init__(self, file_path="oec.csv"):
+        """Loads the CSV data into a private DataFrame and increments instance counter."""
         super().__init__(file_path)
         if not self._exists:
-            raise FileNotFoundError(f"Файл {file_path} не найден в папке с программой!")
+            raise FileNotFoundError(f"Data file {file_path} not found!")
 
-        # Инкапсуляция: загружаем данные (Requirement 4)
+        # Encapsulation: the raw DataFrame is kept private (Requirement 4)
         self.__df = pd.read_csv(file_path)
         PlanetaryAnalyzer.analysis_instances += 1
 
-    # Magic Method (Requirement 4)
+    # Magic Method: provides object description (Requirement 4)
     def __str__(self):
-        return f"PlanetaryAnalyzer (Rows: {len(self.__df)})"
+        return f"PlanetaryAnalyzer (Rows: {len(self.__df)}, Cols: {len(self.__df.columns)})"
 
-    # Property (Requirement 4)
+    # Property: safe access to the internal data (Requirement 4)
     @property
     def data(self):
+        """Returns the internal Pandas DataFrame."""
         return self.__df
 
-    # --- TASK A: Series and Filtering ---
+    # --- TASK A: Series, Filtering, and Reindexing ---
     def perform_task_a(self):
         """
-        Creates mass_series, filters mass > 1 (Jupiter mass), and reindexes.
+        Creates mass_series, filters mass > 1, and reindexes the result.
+        Requirements: Pandas Series, .loc/.iloc, Filtering, Reindexing.
         """
-        self.report_step("ЗАДАНИЕ А: Фильтрация Series (Mass > 1)")
+        self.report_step("TASK A: Mass Series Filtering (Mass > 1)")
 
-        # Создаем Series (используем ID планеты как индекс)
-        # В датасете масса указана в массах Юпитера (PlanetaryMassJpt)
+        # 3. Creating a Series (PlanetaryMassJpt values indexed by Planet Identifier)
         mass_series = self.__df.set_index('PlanetIdentifier')['PlanetaryMassJpt']
 
-        # Удаляем пустые значения перед фильтрацией
+        # Cleaning: drop NaN values to ensure correct comparison
         mass_series = mass_series.dropna()
 
-        # Фильтрация (масса > 1 масс Юпитера)
-        filtered = mass_series[mass_series > 1]
+        # 5. Accessing/Filtering using boolean indexing
+        # Filter: only planets with mass > 1 Jupiter Mass
+        filtered_series = mass_series[mass_series > 1]
 
-        # Переиндексация результата
-        reindexed_result = filtered.reset_index()
+        # Reindexing: converting the Series back to a clean DataFrame with new index
+        reindexed_result = filtered_series.reset_index()
 
-        print(f"Найдено планет с массой > 1 Jpt: {len(reindexed_result)}")
-        print(reindexed_result.head(10))  # Вывод первых 10 для краткости
+        print(f"Planets with mass > 1 Jpt found: {len(reindexed_result)}")
+        # 4. Displaying top results
+        print(reindexed_result.head(10))
 
     # --- TASK B: Statistical Analysis ---
     def perform_task_b(self):
         """
         Calculates ratio of avg periods for max vs min radius planets.
+        Requirements: Indexing, max/min extraction, statistical mean.
         """
-        self.report_step("ЗАДАНИЕ Б: Статистика (Period vs Radius)")
+        self.report_step("TASK B: Orbital Period Statistics (Ratio calculation)")
 
-        df = self.__df[['PlanetIdentifier', 'RadiusJpt', 'PeriodDays']].dropna()
+        # Selecting relevant columns and dropping incomplete rows
+        temp_df = self.__df[['RadiusJpt', 'PeriodDays']].dropna()
 
-        if df.empty:
-            print("Недостаточно данных для расчета (пустые значения).")
+        if temp_df.empty:
+            print("Error: No valid data points found for Radius/Period.")
             return
 
-        # Находим макс и мин радиус
-        max_r = df['RadiusJpt'].max()
-        min_r = df['RadiusJpt'].min()
+        # Finding Max and Min values for Radius
+        max_r = temp_df['RadiusJpt'].max()
+        min_r = temp_df['RadiusJpt'].min()
 
-        # Средний период обращения (PeriodDays) для таких планет
-        avg_period_max = df[df['RadiusJpt'] == max_r]['PeriodDays'].mean()
-        avg_period_min = df[df['RadiusJpt'] == min_r]['PeriodDays'].mean()
+        # Extracting orbital periods for planets matching these specific radii
+        # and calculating the arithmetic mean (Requirement b.1)
+        avg_period_max = temp_df[temp_df['RadiusJpt'] == max_r]['PeriodDays'].mean()
+        avg_period_min = temp_df[temp_df['RadiusJpt'] == min_r]['PeriodDays'].mean()
 
-        # Расчет отношения
-        ratio = avg_period_max / avg_period_min
-
-        print(f"Макс. радиус: {max_r} Jpt, Средний период: {avg_period_max:.2f} дн.")
-        print(f"Мин. радиус: {min_r} Jpt, Средний период: {avg_period_min:.2f} дн.")
-        print(f"\nРЕЗУЛЬТАТ: Период макс. планет в {ratio:.2f} раз больше мин. планет.")
+        # Final Ratio calculation
+        if avg_period_min != 0:
+            ratio = avg_period_max / avg_period_min
+            print(f"Max Radius: {max_r} Jpt | Avg Period: {avg_period_max:.2f} days")
+            print(f"Min Radius: {min_r} Jpt | Avg Period: {avg_period_min:.2f} days")
+            print(f"\nRESULT: Period of largest planets is {ratio:.2f}x longer than smallest.")
+        else:
+            print("Calculation failed: Division by zero (min period is 0).")
 
 
 # --- MODULE 3: INTERFACE ---
 
 def validate_input(prompt):
-    """Protection using Regex (Requirement 8)."""
+    """Ensures menu selection is between 1-3 using Regular Expressions (Requirement 8)."""
     while True:
         choice = input(prompt).strip()
         if re.match(r'^[1-3]$', choice):
             return choice
-        print("Ошибка! Введите число от 1 до 3.")
+        print("Invalid entry! Choose a number between 1 and 3.")
 
 
 def main():
-    """Main testing module (Requirement 7)."""
+    """Main execution entry point (Requirement 7)."""
     try:
+        # Initializing the analyzer (OEC = Open Exoplanet Catalogue)
         analyzer = PlanetaryAnalyzer("oec.csv")
 
         while True:
             print("\n" + "=" * 45)
-            print("АНАЛИЗ ЭКЗОПЛАНЕТ (CSV) - ВАРИАНТ 26")
+            print("EXOPLANET DATA ANALYSIS (VARIANT 26)")
             print("=" * 45)
-            print(f"Инфо: {analyzer.get_info()}")
+            print(analyzer.get_info())
             print("-" * 45)
-            print("1. Задание А (Фильтрация масс)")
-            print("2. Задание Б (Статистика периодов)")
-            print("3. Выход")
+            print("1. Task A (Mass Filtering)")
+            print("2. Task B (Orbital Period Stats)")
+            print("3. Exit")
 
-            choice = validate_input("Выберите пункт меню: ")
+            user_choice = validate_input("Select an option: ")
 
-            if choice == '1':
+            if user_choice == '1':
                 analyzer.perform_task_a()
-            elif choice == '2':
+            elif user_choice == '2':
                 analyzer.perform_task_b()
             else:
-                print("Программа завершена.")
+                print("Analysis completed. Goodbye!")
                 break
     except Exception as e:
-        print(f"Ошибка при работе с файлом: {e}")
+        print(f"Critical error: {e}")
 
 
 if __name__ == "__main__":

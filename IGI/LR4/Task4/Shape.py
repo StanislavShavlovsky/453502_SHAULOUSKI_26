@@ -36,7 +36,7 @@ class Color:
         self.__color = "blue"  # Default fallback color
         self.set_color(color_name)
 
-    def set_color(self, name):
+    def set_color(self, name):  #setter
         """
         Validates and sets the color name.
         Uses Regex to ensure the name contains only Latin letters.
@@ -89,7 +89,7 @@ class Rhombus(Shape):
     def side(self): return self.__side
 
     @property
-    def angle(self): return self.__angle
+    def angle(self): return self.__angle   # getters
 
     @property
     def color(self): return self.__color_obj.value
@@ -174,9 +174,7 @@ def main():
         rhomb_obj, text_label = get_user_data()
 
         # Display info in terminal
-        print("\n" + "=" * 30)
         print(rhomb_obj.get_full_info())
-        print("=" * 30)
 
         # Draw the shape
         draw_shape(rhomb_obj, text_label)
