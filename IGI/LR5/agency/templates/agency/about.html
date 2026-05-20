@@ -1,0 +1,107 @@
+{% extends 'agency/base.html' %}
+{% block title %}О компании | EliteEstate{% endblock %}
+
+{% block content %}
+<div class="card" style="background: #ffffff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 900px; margin: 2rem auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <h1 style="color: #1a252f; margin-bottom: 1.5rem; border-bottom: 2px solid #edf2f7; padding-bottom: 0.5rem; font-weight: 700;">О компании</h1>
+
+    <div style="margin-top: 1.5rem; margin-bottom: 2.5rem; border-left: 5px solid #227c9d; background-color: #fcfcfc; padding: 20px; border-radius: 4px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
+        <h5 style="color: #2c3e50; font-size: 1.15rem; margin-top: 0; margin-bottom: 10px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-user-shield" style="color: #227c9d;"></i>
+            Контроль доступа к Security & Market Analytics API
+        </h5>
+
+        <p style="font-size: 0.88rem; color: #718096; margin-bottom: 15px; line-height: 1.4; margin-top: 0;">
+            Интерактивный шлюз эндпоинта <code>/api/v1/agency-stats/</code>.
+            Доступ к внутренней аналитике закрыт сквозным middleware проекта. Анонимные сессии принудительно сбрасываются бэкендом с кодом <span style="background-color: #dc3545; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">401 Unauthorized</span>.
+        </p>
+
+        <div id="api-status-container" style="padding: 15px; border-radius: 6px; font-family: inherit; font-size: 0.95rem; background-color: #f8f9fa; color: #4a5568; border: 1px solid #edf2f7; line-height: 1.5;">
+            <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i>Инициализация асинхронного fetch-запроса к подсистеме ядра...
+        </div>
+    </div>
+    {% for section in company_sections %}
+        <div style="margin-bottom: 2rem;">
+            <h3 style="color: var(--primary-color, #2c3e50); font-size: 1.4rem; margin-bottom: 0.75rem; font-weight: 600; margin-top: 0;">
+                {{ section.name }}
+            </h3>
+            <p style="color: #4a5568; font-size: 1.05rem; line-height: 1.6; white-space: pre-line; margin: 0;">
+                {{ section.description|linebreaksbr }}
+            </p>
+        </div>
+        {% if not forloop.last %}
+            <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 2rem 0;">
+        {% endif %}
+    {% empty %}
+        <p style="color: #718096; font-style: italic; text-align: center; margin: 2rem 0;">Информация о компании временно недоступна.</p>
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const statusContainer = document.getElementById("api-status-container");
+
+        fetch("{% url 'secured_agency_stats_api' %}")
+            .then(response => {
+                // Сценарий 1: Пользователь не залогинен (Блокировка API)
+                if (response.status === 401) {
+                    return response.json().then(errData => {
+                        statusContainer.style.color = "#721c24";
+                        statusContainer.style.backgroundColor = "#f8d7da";
+                        statusContainer.style.border = "1px solid #f5c6cb";
+                        statusContainer.style.fontFamily = "'Courier New', Courier, monospace";
+                        statusContainer.innerHTML = `<i class="fas fa-ban" style="margin-right:8px;"></i><strong>[API БЛОКИРОВКА - HTTP 401]:</strong> ${errData.message}`;
+                    });
+                }
+
+                // Сценарий 2: Доступ подтвержден (Рендерим красивую аналитику)
+                if (response.ok) {
+                    return response.json().then(res => {
+                        statusContainer.style.color = "#2d3748";
+                        statusContainer.style.backgroundColor = "#ffffff";
+                        statusContainer.style.border = "1px solid #c3e6cb";
+                        statusContainer.style.boxShadow = "0 2px 4px rgba(0,0,0,0.02)";
+
+                        // Переводим секунды сессии в читаемый формат
+                        let sec = res.security_audit.session_active_seconds;
+                        let sessionText = sec < 60 ? `${sec} сек.` : `${Math.floor(sec/60)} мин. ${sec%60} сек.`;
+
+                        statusContainer.innerHTML = `
+                            <div style="color: #155724; background-color: #d4edda; padding: 8px 12px; border-radius: 4px; font-weight: bold; margin-bottom: 15px; display: flex; justify-content: space-between;">
+                                <span><i class="fas fa-check-circle"></i> Сессия верифицирована (HTTP 200 OK)</span>
+                                <small style="font-family: monospace;">${res.server_timestamp}</small>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px;">
+                                <div style="background: #f1f5f9; padding: 12px; border-radius: 6px; border-top: 3px solid #64748b;">
+                                    <h6 style="margin:0 0 8px 0; color:#475569; font-weight:700; text-uppercase: uppercase; font-size:0.8rem; letter-spacing:0.05em;"><i class="fas fa-fingerprint"></i> Аудит авторизации</h6>
+                                    <div style="font-size:0.85rem; color:#334155;"> Пользователь: <b>${res.security_audit.user_identity}</b></div>
+                                    <div style="font-size:0.85rem; color:#334155;"> Группа: <span class="badge bg-secondary" style="font-size:0.75rem; padding: 2px 5px;">${res.security_audit.role}</span></div>
+                                    <div style="font-size:0.85rem; color:#334155;"> Активность: <span>${sessionText}</span></div>
+                                </div>
+
+                                <div style="background: #f0fdf4; padding: 12px; border-radius: 6px; border-top: 3px solid #16a34a;">
+                                    <h6 style="margin:0 0 8px 0; color:#166534; font-weight:700; text-uppercase: uppercase; font-size:0.8rem; letter-spacing:0.05em;"><i class="fas fa-chart-line"></i> Объем торговли (БД)</h6>
+                                    <div style="font-size:0.85rem; color:#14532d;"> Общий оборот: <b>${res.market_analytics.gross_volume_usd}</b></div>
+                                    <div style="font-size:0.85rem; color:#14532d;"> В валюте BYN: <b style="color:#16a34a;">${res.market_analytics.gross_volume_byn}</b></div>
+                                    <div style="font-size:0.85rem; color:#718096; font-style:italic; font-size:0.75rem; margin-top:3px;">По курсу НБРБ: ${res.market_analytics.nbrb_exchange_rate}</div>
+                                </div>
+
+                                <div style="background: #f0f9ff; padding: 12px; border-radius: 6px; border-top: 3px solid #0284c7; grid-column: span 1;">
+                                    <h6 style="margin:0 0 8px 0; color:#0369a1; font-weight:700; text-uppercase: uppercase; font-size:0.8rem; letter-spacing:0.05em;"><i class="far fa-lightbulb"></i> Вектор рынка</h6>
+                                    <div style="font-size:0.85rem; color:#0c4a6e; font-weight:600;"> ${res.ai_recommendation.current_trend}</div>
+                                    <div style="font-size:0.8rem; color:#075985; margin-top:4px; line-height:1.3;"> ${res.ai_recommendation.advice}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            })
+            .catch(error => {
+                statusContainer.style.color = "#721c24";
+                statusContainer.style.backgroundColor = "#f8d7da";
+                statusContainer.innerHTML = "<i class=\"fas fa-exclamation-triangle\"></i> Ошибка сетевого стека: " + error;
+            });
+    });
+</script>
+{% endblock %}

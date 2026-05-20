@@ -1,0 +1,88 @@
+{% extends 'agency/base.html' %}
+{% block title %}Наши сотрудники и контакты | EliteEstate{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 2.5rem auto; padding: 0 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+
+    <div style="margin-bottom: 2.5rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1.25rem;">
+        <h2 style="color: #1a252f; font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: -0.5px;">
+            Наши сотрудники и контакты
+        </h2>
+        <p style="color: #718096; margin: 0.5rem 0 0 0; font-size: 1.05rem;">
+            Профессиональная команда EliteEstate всегда готова помочь вам с решением любых вопросов в сфере недвижимости.
+        </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px;">
+        {% for emp in employees %}
+            <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem 1.5rem; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; justify-content: space-between; transition: transform 0.2s ease, box-shadow 0.2s ease;" class="emp-card">
+
+                <div style="width: 100%; display: flex; flex-direction: column; align-items: center; background: transparent !important;">
+                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin-bottom: 1.25rem; border: 3px solid #edf2f7; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background: #f7fafc; flex-shrink: 0;">
+                        {% if emp.photo %}
+                            <img src="{{ emp.photo.url }}" alt="{{ emp.user.get_full_name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        {% else %}
+                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #edf2f7; color: #a0aec0;">
+                                <i class="fas fa-user" style="font-size: 3rem; opacity: 0.5;"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.35rem; font-weight: 700; color: #1a252f; line-height: 1.3;">
+                        {% if emp.user.get_full_name %}
+                            {{ emp.user.get_full_name }}
+                        {% else %}
+                            {{ emp.user.username }}
+                        {% endif %}
+                    </h3>
+
+                    <span style="display: inline-block; background: #e3fafc; color: #0c8599; font-weight: 700; font-size: 0.9rem; padding: 4px 14px; border-radius: 20px; margin-bottom: 1.25rem; letter-spacing: 0.3px;">
+                        {{ emp.position }}
+                    </span>
+
+                    <div style="border-top: 1px dashed #edf2f7; border-bottom: 1px dashed #edf2f7; padding: 1rem 0; margin-bottom: 1.5rem; width: 100%; background: transparent !important;">
+                        <p style="margin: 0; font-size: 0.95rem; color: #4a5568; line-height: 1.5; text-align: center; font-style: italic;">
+                            {% if emp.job_description %}
+                                {{ emp.job_description }}
+                            {% else %}
+                                Обязанности уточняются.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                <div style="width: 100%; display: flex; flex-direction: column; gap: 8px; font-size: 0.95rem; text-align: left; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #edf2f7;">
+                    <div style="display: flex; align-items: center; gap: 8px; color: #2d3748;">
+                        <span style="color: #17a2b8; width: 18px; text-align: center;">📞</span>
+                        <a href="tel:{{ emp.phone }}" style="color: #2d3748; text-decoration: none; font-weight: 600;">{{ emp.phone }}</a>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; color: #2d3748;">
+                        <span style="color: #17a2b8; width: 18px; text-align: center;">✉️</span>
+                        {% if emp.user.email %}
+                            <a href="mailto:{{ emp.user.email }}" style="color: #17a2b8; text-decoration: none; word-break: break-all;">{{ emp.user.email }}</a>
+                        {% else %}
+                            <span style="color: #a0aec0; font-style: italic;">not-configured@domain.com</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        {% empty %}
+            <div style="grid-column: 1 / -1; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 4rem 2rem; text-align: center; color: #a0aec0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+                <i class="fas fa-users-slash" style="font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.4; color: #17a2b8;"></i>
+                <p style="margin: 0; font-size: 1.15rem; font-style: italic;">Список сотрудников пуст.</p>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Заполните профили сотрудников через панель управления Django Admin.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<style>
+    .emp-card:hover {
+        transform: translateY(-4px) !important;
+        box-shadow: 0 12px 20px -5px rgba(0,0,0,0.05), 0 8px 8px -5px rgba(0,0,0,0.03) !important;
+        border-color: #cbd5e0 !important;
+    }
+</style>
+{% endblock %}

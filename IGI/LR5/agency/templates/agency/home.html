@@ -1,0 +1,104 @@
+{% extends 'agency/base.html' %}
+{% block title %}Главная | EliteEstate{% endblock %}
+
+{% block content %}
+<div class="card" style="background: linear-gradient(135deg, var(--primary-color) 0%, #2c3e50 100%); color: white; text-align: center; padding: 3rem 1rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Найдите дом своей мечты</h1>
+    <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; color: #ced4da;">Премиальное агентство недвижимости. Покупка, продажа и аренда объектов с абсолютной юридической чистотой.</p>
+    <a href="{% url 'property_list' %}" class="btn" style="font-size: 1.1rem; padding: 0.8rem 2rem;">Перейти в каталог</a>
+</div>
+
+<div class="grid-3" style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+
+    <div class="card" style="background: #ffffff !important; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: flex-start;">
+        <h2 style="margin: 0 0 5px 0; font-size: 1.5rem; color: #1a252f;">Последняя публикация</h2>
+        <hr style="margin: 10px 0 20px 0; border: 0; border-top: 1px solid #eee;">
+
+        {% if latest_article %}
+            <div style="display: flex; gap: 20px; align-items: center; background: transparent !important;">
+
+                <div style="flex-shrink: 0; width: 240px; height: 145px; overflow: hidden; border-radius: 10px; background: #f7fafc; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                    {% if latest_article.image %}
+                        <img src="{{ latest_article.image.url }}" alt="{{ latest_article.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    {% else %}
+                        <div style="width: 100%; height: 100%; background: #edf2f7; display: flex; align-items: center; justify-content: center; color: #a0aec0;">
+                            <i class="fas fa-image" style="font-size: 2rem; opacity: 0.4;"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div style="flex-grow: 1; min-width: 0; background: transparent !important;">
+                    <div style="color: #a0aec0; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; background: transparent !important;">
+                        {{ latest_article.published_date|date:"d.m.Y" }}
+                    </div>
+
+                    <h3 style="margin: 0 0 8px 0; font-size: 1.6rem; font-weight: 800; color: #1a252f; line-height: 1.3; background: transparent !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        {{ latest_article.title }}
+                    </h3>
+
+                    <p style="margin: 0 0 15px 0; color: #718096; font-size: 1.05rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; background: transparent !important;">
+                        {% if latest_article.short_description %}
+                            {{ latest_article.short_description }}
+                        {% else %}
+                            {{ latest_article.content|truncatewords:15 }}
+                        {% endif %}
+                    </p>
+
+                    <div style="background: transparent !important;">
+                        <a href="{% url 'article_detail' latest_article.pk %}" class="btn" style="padding: 0.55rem 1.75rem; font-size: 0.95rem; font-weight: 700; background-color: #17a2b8; color: white; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; transition: background-color 0.15s ease;" onmouseover="this.style.backgroundColor='#138496'" onmouseout="this.style.backgroundColor='#17a2b8'">
+                            Читать далее
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        {% else %}
+            <p style="color: #718096; font-style: italic; margin: 10px 0;">Статей пока нет.</p>
+        {% endif %}
+    </div>
+
+    <div class="card" style="background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+        <h3>Панель времени</h3>
+        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
+        <div style="font-size: 0.95rem; color: #2d3748; line-height: 1.6;">
+            <div><strong>Ваш пояс:</strong> {{ tz_name }}</div>
+            <div><strong>Локальное время:</strong> <span id="js-local-clock" class="fw-bold" style="font-weight: 600; color: #1a252f; font-variant-numeric: tabular-nums;">--:--:--</span></div>
+            <div><strong>Время UTC:</strong> <span id="js-utc-clock" style="color: #718096; font-variant-numeric: tabular-nums;">--:--:--</span></div>
+        </div>
+
+        <h4 style="margin-top: 20px; margin-bottom: 8px; color: #4a5568;">Календарь:</h4>
+        <pre style="font-family: monospace; background: #f8fafc; padding: 12px; border-radius: 6px; margin: 0; border: 1px solid #edf2f7; font-size: 0.9rem; line-height: 1.4; color: #2d3748; text-align: center;">{{ text_calendar }}</pre>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let serverTime = new Date("{{ current_local_iso }}");
+
+        function tick() {
+            serverTime.setSeconds(serverTime.getSeconds() + 1);
+
+            let localOptions = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const localClock = document.getElementById('js-local-clock');
+            if (localClock) {
+                localClock.textContent = serverTime.toLocaleString('ru-RU', localOptions);
+            }
+
+            const utcClock = document.getElementById('js-utc-clock');
+            if (utcClock) {
+                let utcDay = serverTime.getUTCDate().toString().padStart(2, '0');
+                let utcMonth = (serverTime.getUTCMonth() + 1).toString().padStart(2, '0');
+                let utcYear = serverTime.getUTCFullYear();
+                let utcHours = serverTime.getUTCHours().toString().padStart(2, '0');
+                let utcMinutes = serverTime.getUTCMinutes().toString().padStart(2, '0');
+                let utcSeconds = serverTime.getUTCSeconds().toString().padStart(2, '0');
+
+                utcClock.textContent = `${utcDay}.${utcMonth}.${utcYear} ${utcHours}:${utcMinutes}:${utcSeconds}`;
+            }
+        }
+
+        setInterval(tick, 1000);
+        tick();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+Index: Task2/result_26.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>--- ОБЩАЯ СТАТИСТИКА ---\r\nПредложений: 5 (Повеств: 5, Вопросительный: 0, Побудительный: 0)\r\nСредняя длина слова: 4.5\r\nКол-во смайликов: 2\r\n\r\n--- ВАРИАНТ 26 ---\r\n1. Слова на строчную согласную: ['sky', 'fly', 'на', 'город', 'машина', 'длинное', 'слово', 'dictionary']\r\n2. Найденные авто-номера: ['A123BC 77']\r\n3. Слов с мин. длиной (1 симв.): 1\r\n4. Слова перед запятой: ['apple', 'sky', 'город', 'машина']\r\n5. Самое длинное на 'y': dictionary
+===================================================================
+diff --git a/Task2/result_26.txt b/Task2/result_26.txt
+--- a/Task2/result_26.txt	
++++ b/Task2/result_26.txt	
+@@ -1,11 +1,11 @@
+---- ОБЩАЯ СТАТИСТИКА ---
+-Предложений: 5 (Повеств: 5, Вопросительный: 0, Побудительный: 0)
+-Средняя длина слова: 4.5
+-Кол-во смайликов: 2
++--- GENERAL STATISTICS ---
++Sentences: 5 (Decl: 5, Interrogative: 0, Imperative: 0)
++Average word length: 4.5
++Emoticons count: 2
+ 
+---- ВАРИАНТ 26 ---
+-1. Слова на строчную согласную: ['sky', 'fly', 'на', 'город', 'машина', 'длинное', 'слово', 'dictionary']
+-2. Найденные авто-номера: ['A123BC 77']
+-3. Слов с мин. длиной (1 симв.): 1
+-4. Слова перед запятой: ['apple', 'sky', 'город', 'машина']
+-5. Самое длинное на 'y': dictionary
+\ No newline at end of file
++--- VARIANT 26 RESULTS ---
++1. Words starting with lowercase consonant: ['sky', 'fly', 'на', 'город', 'машина', 'длинное', 'слово', 'dictionary']
++2. Found license plates: ['A123BC 77']
++3. Words with min length (1 chars): 1
++4. Words followed by comma: ['apple', 'sky', 'город', 'машина']
++5. Longest word ending in 'y': dictionary
+\ No newline at end of file

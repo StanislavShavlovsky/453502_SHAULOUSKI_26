@@ -1,0 +1,198 @@
+{% extends 'agency/base.html' %}
+{% load tz %} {% block title %}Панель сотрудника | EliteEstate{% endblock %}
+
+{% block content %}
+<div class="card" style="background: linear-gradient(135deg, var(--primary-color) 0%, #2c3e50 100%); color: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <h2 style="color: #ffffff; margin: 0 0 0.5rem 0; font-weight: 700;">Панель управления сотрудника: {{ user.get_full_name|default:user.username }}</h2>
+    <p style="color: #ced4da; margin: 0; font-size: 1rem; opacity: 0.95;">
+        Роль: Менеджер по сделкам | <strong>Таймзона сервера:</strong> {{ tz_name }}
+        (<span id="employee-live-clock" style="font-variant-numeric: tabular-nums; font-weight: 600; color: #ffcb77;">--.--.---- --:--:--</span>)
+    </p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <div class="card" style="background: #ffffff; text-align: center; border-bottom: 4px solid #28a745; padding: 1.2rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <p style="color:#666; text-transform: uppercase; font-size:0.8rem; font-weight:bold; margin: 0;">Общие продажи</p>
+        <h2 style="color:#28a745; margin-top:0.5rem; font-size: 1.8rem; font-weight: 700;">{{ total_sales }} BYN</h2>
+    </div>
+
+    <div class="card" style="background: #ffffff; text-align: center; border-bottom: 4px solid var(--accent-color); padding: 1.2rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <p style="color:#666; text-transform: uppercase; font-size:0.8rem; font-weight:bold; margin: 0;">Средний чек</p>
+        <h2 style="color:var(--accent-color); margin-top:0.5rem; font-size: 1.8rem; font-weight: 700;">{{ avg_sales|floatformat:0 }} BYN</h2>
+    </div>
+
+    <div class="card" style="background: #ffffff; text-align: center; border-bottom: 4px solid #ffc107; padding: 1.2rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <p style="color:#666; text-transform: uppercase; font-size:0.8rem; font-weight:bold; margin: 0;">Медиана / Мода</p>
+        <h2 style="color:#e0a800; margin-top:0.5rem; font-size: 1.4rem; line-height: 2.2rem; font-weight: 700;">{{ median_sales }} / {{ mode_sales }}</h2>
+    </div>
+
+    <div class="card" style="background: #ffffff; text-align: center; border-bottom: 4px solid #9c27b0; padding: 1.2rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <p style="color:#666; text-transform: uppercase; font-size:0.8rem; font-weight:bold; margin: 0;">Сделки (Продажа / Аренда)</p>
+        <h2 style="color:#9c27b0; margin-top:0.5rem; font-size: 1.6rem; font-weight: 700;">{{ avg_age }} / {{ median_age }} шт.</h2>
+    </div>
+</div>
+
+<div class="grid-3" style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.5rem; align-items: start; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+        <div class="card" style="background: #ffffff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); overflow: hidden;">
+            <h3 style="margin-top: 0; margin-bottom: 1.2rem; color: #2d3748; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-briefcase" style="color: var(--primary-color);"></i>
+                Ваши закрепленные сделки
+            </h3>
+
+            <div style="width: 100%; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+                    <thead>
+                        <tr style="background-color: #f8fafc; border-bottom: 2px solid #edf2f7;">
+                            <th style="padding: 0.85rem; color: #4a5568; font-weight: 600;">Объект</th>
+                            <th style="padding: 0.85rem; color: #4a5568; font-weight: 600;">Клиент</th>
+                            <th style="padding: 0.85rem; color: #4a5568; font-weight: 600; text-align: right;">Сумма</th>
+                            <th style="padding: 0.85rem; color: #4a5568; font-weight: 600; text-align: center;">Время (UTC)</th>
+                            <th style="padding: 0.85rem; color: #4a5568; font-weight: 600; text-align: center;">Локальное время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for deal in deals %}
+                            <tr class="emp-table-row" style="border-bottom: 1px solid #edf2f7;">
+                                <td style="padding: 0.85rem; color: #2d3748; font-weight: 500;">{{ deal.property.title }}</td>
+                                <td style="padding: 0.85rem; color: #4a5568;">
+                                    <span style="background: #edf2f7; padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; font-family: monospace;">{{ deal.client.user.username }}</span>
+                                </td>
+                                <td style="padding: 0.85rem; font-weight: 700; color: #28a745; text-align: right; white-space: nowrap;">{{ deal.amount }} BYN</td>
+                                <td style="padding: 0.85rem; color: #e28743; text-align: center; font-size: 0.85rem; white-space: nowrap; font-family: monospace;">
+                                    {{ deal.created_at_utc|timezone:"UTC"|date:"d.m.Y H:i:s" }}
+                                </td>
+                                <td style="padding: 0.85rem; color: #2b7a8d; text-align: center; font-size: 0.85rem; white-space: nowrap; font-family: monospace; font-weight: 500;">
+                                    {{ deal.created_at_local|date:"d.m.Y H:i:s" }}
+                                    <br><small style="font-size: 0.75rem; color: #a0aec0;">({{ deal.timezone_name }})</small>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" style="padding: 3rem; text-align: center; color: #a0aec0; font-style: italic;">
+                                    <i class="fas fa-folder-open d-block mb-2" style="font-size: 1.8rem; opacity: 0.6;"></i>
+                                    Сделок пока не зафиксировано.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card" style="background: #ffffff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); overflow: hidden;">
+            <h3 style="margin-top: 0; margin-bottom: 1.2rem; color: #2d3748; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-users" style="color: #227c9d;"></i>
+                Клиенты в активной работе
+            </h3>
+
+            <div style="width: 100%; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+                    <thead>
+                        <tr style="background-color: #f8fafc; border-bottom: 2px solid #edf2f7;">
+                            <th style="padding: 0.85rem; color: #4a5568; font-weight: 600;">Имя пользователя</th>
+                            <th style="padding: 0.85rem; color: #4a5568; font-weight: 600;">Полное имя / Контрагент</th>
+                            <th style="padding: 0.85rem; color: #4a5568; font-weight: 600;">Контактный телефон</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in clients %}
+                            <tr class="emp-table-row" style="border-bottom: 1px solid #edf2f7;">
+                                <td style="padding: 0.85rem;">
+                                    <span style="background: #f1f5f9; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; color: #1e293b; font-weight: 600;">
+                                        {{ client.user.username }}
+                                    </span>
+                                </td>
+                                <td style="padding: 0.85rem; color: #2d3748; font-weight: 500;">
+                                    {% if client.user.get_full_name %}
+                                        {{ client.user.get_full_name }}
+                                    {% else %}
+                                        <span style="color: #718096; font-style: italic;">Имя не указано</span>
+                                    {% endif %}
+                                </td>
+                                <td style="padding: 0.85rem; color: #4a5568; font-variant-numeric: tabular-nums;">
+                                    {% if client.phone %}
+                                        {{ client.phone }}
+                                    {% else %}
+                                        <span style="color: #a0aec0; font-style: italic;">Не привязан</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3" style="padding: 3rem; text-align: center; color: #a0aec0; font-style: italic;">
+                                    <i class="fas fa-user-slash d-block mb-2" style="font-size: 1.8rem; opacity: 0.6;"></i>
+                                    Связанные клиенты не найдены.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+        <div class="card" style="background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 1.5rem; min-height: 300px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <h3 style="margin-top: 0; margin-bottom: 1rem; text-align: center; color: #2d3748; font-weight: 600;">
+                Популярный тип: <span style="color:var(--accent-color)">{{ popular_type }}</span>
+            </h3>
+            {% if chart_data %}
+                <div style="width: 100%; text-align: center;">
+                    <img src="data:image/png;base64,{{ chart_data }}" alt="Статистика популярности" style="max-width: 100%; height: auto; border-radius: 4px; display: block; margin: 0 auto;">
+                </div>
+            {% else %}
+                <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; color: #a0aec0; font-style: italic; text-align: center;">
+                    <div>
+                        <i class="fas fa-chart-pie fa-2x mb-2" style="opacity: 0.5;"></i>
+                        <p style="margin: 0; font-size: 0.9rem;">Недостаточно данных для графика.</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="card" style="background: #ffffff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <h4 style="margin-top: 0; margin-bottom: 8px; color: #4a5568; font-weight: 600; text-align: center;"><i class="far fa-calendar-alt text-primary"></i> Текстовый календарь:</h4>
+            <pre style="font-family: monospace; background: #f8fafc; padding: 12px; border-radius: 6px; margin: 0; border: 1px solid #edf2f7; font-size: 0.9rem; line-height: 1.4; color: #2d3748; text-align: center;">{{ text_calendar }}</pre>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const isoString = "{{ current_local_iso }}";
+        if (isoString) {
+            let employeeTime = new Date(isoString);
+            const clockContainer = document.getElementById('employee-live-clock');
+
+            if (clockContainer) {
+                function tickEmployeeClock() {
+                    employeeTime.setSeconds(employeeTime.getSeconds() + 1);
+                    let options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                    clockContainer.textContent = employeeTime.toLocaleString('ru-RU', options);
+                }
+                setInterval(tickEmployeeClock, 1000);
+                tickEmployeeClock();
+            }
+        }
+    });
+</script>
+
+<style>
+    .emp-table-row:hover {
+        background-color: #f8fafc !important;
+        transition: background-color 0.15s ease;
+    }
+
+    @media (max-width: 991px) {
+        div[style*="grid-template-columns: 1.6fr 1fr"] {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+{% endblock %}

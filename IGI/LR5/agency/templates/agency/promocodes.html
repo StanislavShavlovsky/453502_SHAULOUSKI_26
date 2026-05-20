@@ -1,0 +1,39 @@
+{% extends 'agency/base.html' %}
+{% block title %}Промокоды | EliteEstate{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 2rem auto; padding: 0 1rem; font-family: sans-serif;">
+
+    <div style="margin-bottom: 2rem;">
+        <h2 style="color: #1a252f;">🎁 Промокоды и купоны</h2>
+        <p style="color: #666;">Используйте наши промокоды при оформлении сделки для получения скидки.</p>
+    </div>
+
+    <h3 style="color: #2b8a3e; border-bottom: 2px solid #2b8a3e; display: inline-block;">Действующие промокоды</h3>
+    <div style="margin: 1.5rem 0 3rem 0; display: grid; gap: 1rem;">
+        {% for p in active %}
+            <div style="background: #f1fcf1; border: 1px solid #b2f2bb; padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="font-size: 1.2rem; color: #087f5b; letter-spacing: 1px;">{{ p.code }}</strong>
+                    <div style="font-size: 0.9rem; color: #555;">Скидка: <span style="font-weight: bold; color: #e67700;">{{ p.discount }}%</span></div>
+                </div>
+                <div style="font-size: 0.8rem; color: #888;">Действует до: {{ p.valid_until|date:"d.m.Y" }}</div>
+            </div>
+        {% empty %}
+            <p style="color: #888; font-style: italic;">На данный момент активных промокодов нет.</p>
+        {% endfor %}
+    </div>
+
+    <h3 style="color: #868e96; border-bottom: 2px solid #ced4da; display: inline-block;">Архив</h3>
+    <div style="margin: 1.5rem 0; display: grid; gap: 0.5rem;">
+        {% for p in archived %}
+            <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 0.8rem; border-radius: 6px; color: #adb5bd; display: flex; justify-content: space-between;">
+                <span><del>{{ p.code }}</del></span>
+                <small>Истек {{ p.valid_until|date:"d.m.Y" }}</small>
+            </div>
+        {% empty %}
+            <p style="color: #888; font-style: italic;">Архив пуст.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

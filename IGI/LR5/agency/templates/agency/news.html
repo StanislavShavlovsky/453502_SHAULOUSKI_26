@@ -1,0 +1,113 @@
+{% extends 'agency/base.html' %}
+{% block title %}Новости и Статьи | EliteEstate{% endblock %}
+
+{% block content %}
+<div style="max-width: 1000px; margin: 3rem auto; padding: 0 1.5rem;">
+
+    <div style="margin-bottom: 2.5rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+        <div>
+            <h2 style="color: var(--primary-color, #1a252f); font-size: 2.2rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">Новости и Аналитика</h2>
+            <p style="color: #718096; margin: 0.5rem 0 0 0; font-size: 1.05rem;">Актуальные тренды рынка недвижимости, обзоры и прогнозы экспертов.</p>
+        </div>
+
+        {% if perms.agency.add_article %}
+            <a href="{% url 'article_create' %}" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; background-color: #10b981; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#059669'" onmouseout="this.style.backgroundColor='#10b981'">
+                <i class="fas fa-plus"></i> Добавить новость
+            </a>
+        {% endif %}
+    </div>
+
+    {% if messages %}
+        <div style="margin-bottom: 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+            {% for message in messages %}
+                <div style="padding: 12px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;
+                    {% if message.tags == 'error' %}
+                        background-color: #fef2f2; color: #991b1b; border: 1px solid #fca5a5;
+                    {% else %}
+                        background-color: #f0fdf4; color: #166534; border: 1px solid #86efac;
+                    {% endif %}">
+                    <i class="fas {% if message.tags == 'error' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        {% for article in articles %}
+            <div class="news-feed-card" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; gap: 1.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); align-items: flex-start;">
+
+                <div style="flex-shrink: 0; width: 240px; height: 160px; overflow: hidden; border-radius: 8px; background: #f7fafc; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
+                    {% if article.image %}
+                        <img src="{{ article.image.url }}" alt="{{ article.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                    {% else %}
+                        <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #a0aec0; background: #edf2f7;">
+                            <i class="fas fa-camera" style="font-size: 1.75rem; margin-bottom: 0.5rem; opacity: 0.7;"></i>
+                            <span style="font-size: 0.85rem; font-weight: 500;">EliteEstate Media</span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; width: 100%;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; font-size: 0.85rem; color: #718096;">
+                            <span style="background: #e2e8f0; color: #4a5568; padding: 2px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px;">Тренды</span>
+                            <span><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> {{ article.published_date|date:"d.m.Y" }}</span>
+                        </div>
+
+                        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.4rem; font-weight: 700; line-height: 1.3; color: #1a252f;">
+                            <a href="{% url 'article_detail' article.pk %}" style="color: inherit; text-decoration: none; transition: color 0.15s ease;" class="news-title-link">{{ article.title }}</a>
+                        </h3>
+
+                        <p style="margin: 0; color: #4a5568; font-size: 1rem; line-height: 1.5; font-weight: 400;">
+                            {{ article.short_description|default:article.content|truncatewords:20 }}
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                        <a href="{% url 'article_detail' article.pk %}" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px;">
+                            Читать далее <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+                        </a>
+
+                        {% if perms.agency.change_article or perms.agency.delete_article %}
+                            <div style="display: flex; gap: 0.5rem;">
+                                {% if perms.agency.change_article %}
+                                    <a href="{% url 'article_update' article.pk %}" class="btn" style="padding: 0.4rem 1rem; font-size: 0.85rem; background-color: #ffc107; color: #212529; text-decoration: none; border-radius: 6px; font-weight: 500;">Редакт.</a>
+                                {% endif %}
+
+                                {% if perms.agency.delete_article %}
+                                    <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger" style="padding: 0.4rem 1rem; font-size: 0.85rem; text-decoration: none; border-radius: 6px; font-weight: 500;">Удалить</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        {% empty %}
+            <div style="background: #ffffff; border: 1px dashed #cbd5e0; border-radius: 12px; padding: 4rem 2rem; text-align: center; color: #718096;">
+                <i class="far fa-newspaper" style="font-size: 3rem; margin-bottom: 1rem; color: #cbd5e0;"></i>
+                <p style="margin: 0; font-size: 1.1rem; font-style: italic;">Лента новостей пуста.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .news-feed-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02) !important;
+        border-color: #cbd5e1 !important;
+    }
+    .news-feed-card:hover img {
+        transform: scale(1.03);
+    }
+    .news-feed-card:hover .news-title-link {
+        color: var(--accent-color, #2b6cb0) !important;
+    }
+    @media (max-width: 768px) {
+        .news-feed-card { flex-direction: column !important; }
+        .news-feed-card > div:first-child { width: 100% !important; height: 200px !important; }
+    }
+</style>
+{% endblock %}

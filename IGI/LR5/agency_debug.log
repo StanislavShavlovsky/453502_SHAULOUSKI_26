@@ -1,0 +1,1320 @@
+INFO 2026-05-20 22:52:46,483 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:05:15,362 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:06:57,211 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\models.py changed, reloading.
+INFO 2026-05-20 23:06:59,018 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:07:12,116 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:08:37,546 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:09:27,384 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:10:12,170 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\models.py changed, reloading.
+INFO 2026-05-20 23:10:13,682 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:10:21,965 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:11:44,431 autoreload Watching for file changes with StatReloader
+INFO 2026-05-20 23:11:53,561 log "GET / HTTP/1.1" 200 12446
+INFO 2026-05-20 23:11:53,641 log "GET /media/news_images/maxresdefault.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:39,318 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:12:43,204 log "GET /properties/ HTTP/1.1" 200 40693
+INFO 2026-05-20 23:12:43,260 log "GET /media/property_images/svisl.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,266 log "GET /media/property_images/loft_2Phcqic.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,292 log "GET /media/property_images/office.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,294 log "GET /media/property_images/pent.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,307 log "GET /media/property_images/villa.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,308 log "GET /media/property_images/compl.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,308 log "GET /media/property_images/taunhouse.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,308 log "GET /media/property_images/loft.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,308 log "GET /media/property_images/torg.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,309 log "GET /media/property_images/proizv.-sklad.-kompl.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,319 log "GET /media/property_images/uch.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,320 log "GET /media/property_images/cottege.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:43,321 log "GET /media/property_images/taunhouse_iu5apCJ.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,373 log "GET /news/ HTTP/1.1" 200 42993
+INFO 2026-05-20 23:12:48,434 log "GET /media/news_images/nagr.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,440 log "GET /media/news_images/uspech.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,473 log "GET /media/news_images/houses.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,473 log "GET /media/news_images/agenc.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,474 log "GET /media/news_images/proverka.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,474 log "GET /media/news_images/skl.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,475 log "GET /media/news_images/ipot.jpeg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,476 log "GET /media/news_images/disighn.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:48,480 log "GET /media/news_images/mayak.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:12:53,012 views User admin requested updates for article ID: 22
+INFO 2026-05-20 23:12:53,060 log "GET /news/22/update/ HTTP/1.1" 200 9053
+INFO 2026-05-20 23:13:00,889 views User admin requested updates for article ID: 22
+INFO 2026-05-20 23:13:00,899 views User admin modified news block identifier: 22
+INFO 2026-05-20 23:13:00,901 log "POST /news/22/update/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:13:00,928 log "GET /news/ HTTP/1.1" 200 44001
+INFO 2026-05-20 23:13:03,763 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:13:07,222 log "GET /properties/ HTTP/1.1" 200 40693
+INFO 2026-05-20 23:13:10,562 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-20 23:13:13,180 views User admin (ID: 2) accessed the management dashboard view.
+WARNING 2026-05-20 23:13:14,066 views Client profile record missing for authenticated user context: admin
+INFO 2026-05-20 23:13:14,078 log "GET /dashboard/ HTTP/1.1" 200 12622
+INFO 2026-05-20 23:14:33,595 log "GET /admin/ HTTP/1.1" 200 18580
+INFO 2026-05-20 23:14:36,579 log "GET /admin/agency/deal/ HTTP/1.1" 200 29103
+INFO 2026-05-20 23:14:36,668 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:14:39,202 log "GET /admin/agency/deal/19/change/ HTTP/1.1" 200 26277
+INFO 2026-05-20 23:14:39,260 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:14:41,180 log "GET /admin/agency/deal/ HTTP/1.1" 200 29103
+INFO 2026-05-20 23:14:42,762 log "GET /admin/auth/user/ HTTP/1.1" 200 30542
+INFO 2026-05-20 23:14:42,825 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:14:44,326 log "GET /admin/auth/user/1/change/ HTTP/1.1" 200 35138
+INFO 2026-05-20 23:14:44,381 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:14:48,613 log "GET /admin/auth/group/ HTTP/1.1" 200 14665
+INFO 2026-05-20 23:14:48,665 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:14:50,188 log "GET /admin/auth/group/add/ HTTP/1.1" 200 23182
+INFO 2026-05-20 23:14:50,243 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:15:00,551 log "GET /admin/auth/user/ HTTP/1.1" 200 30542
+INFO 2026-05-20 23:15:00,606 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:15:05,255 log "GET /admin/auth/user/1/change/ HTTP/1.1" 200 35138
+INFO 2026-05-20 23:15:05,310 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:17:23,448 log "GET /admin/auth/user/ HTTP/1.1" 200 30542
+INFO 2026-05-20 23:17:31,782 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-20 23:17:34,538 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:17:37,440 log "GET /properties/ HTTP/1.1" 200 40693
+INFO 2026-05-20 23:17:41,389 views User admin opened the property creation page.
+INFO 2026-05-20 23:17:41,408 log "GET /properties/add/ HTTP/1.1" 200 12495
+INFO 2026-05-20 23:18:18,972 views User admin opened the property creation page.
+INFO 2026-05-20 23:18:19,111 views User admin created property 'KKK' (ID: 44)
+INFO 2026-05-20 23:18:19,113 log "POST /properties/add/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:18:19,121 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:18:21,903 log "GET /properties/ HTTP/1.1" 200 43767
+INFO 2026-05-20 23:18:22,077 log "GET /media/property_images/ann.jpg HTTP/1.1" 200 62596
+INFO 2026-05-20 23:18:26,415 log "GET /properties/44/delete/ HTTP/1.1" 200 7360
+INFO 2026-05-20 23:18:28,045 log "POST /properties/44/delete/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:18:28,053 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:18:30,862 log "GET /properties/ HTTP/1.1" 200 41599
+INFO 2026-05-20 23:19:27,727 log "GET /glossary/ HTTP/1.1" 200 37243
+INFO 2026-05-20 23:19:29,192 log "GET /contacts/ HTTP/1.1" 200 42895
+INFO 2026-05-20 23:19:29,239 log "GET /media/employees_photos/stas.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,248 log "GET /media/employees_photos/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,272 log "GET /media/employees_photos/olga.webp HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,274 log "GET /media/employees_photos/max.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,285 log "GET /media/employees_photos/lena.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,286 log "GET /media/employees_photos/ann.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,287 log "GET /media/employees_photos/%D0%B5%D1%84%D1%82%D0%BD%D1%84.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,287 log "GET /media/employees_photos/lazarev.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,288 log "GET /media/employees_photos/dima.webp HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,289 log "GET /media/employees_photos/1920x.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:29,294 log "GET /media/employees_photos/%D0%B3%D0%B4%D1%88%D0%BD%D1%84.jpeg HTTP/1.1" 304 0
+INFO 2026-05-20 23:19:30,674 log "GET /vacancies/ HTTP/1.1" 200 40746
+INFO 2026-05-20 23:19:32,633 log "GET /reviews/ HTTP/1.1" 200 30198
+INFO 2026-05-20 23:19:35,819 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:19:37,718 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:19:38,864 log "GET /properties/ HTTP/1.1" 200 40693
+INFO 2026-05-20 23:19:40,499 log "GET /properties/ HTTP/1.1" 200 40693
+INFO 2026-05-20 23:23:13,863 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:23:13,886 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-20 23:23:15,064 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-20 23:23:24,381 log "POST /accounts/login/ HTTP/1.1" 200 8096
+INFO 2026-05-20 23:23:25,226 log "GET /privacy/ HTTP/1.1" 200 6470
+INFO 2026-05-20 23:23:44,637 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:23:44,657 log "GET / HTTP/1.1" 200 12414
+INFO 2026-05-20 23:23:48,145 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:23:51,086 log "GET /properties/ HTTP/1.1" 200 59427
+INFO 2026-05-20 23:26:14,819 views User sss (ID: 3) accessed the management dashboard view.
+INFO 2026-05-20 23:26:15,514 log "GET /dashboard/ HTTP/1.1" 200 19539
+INFO 2026-05-20 23:26:22,840 log "GET /news/ HTTP/1.1" 200 35171
+INFO 2026-05-20 23:26:25,545 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:26:28,672 log "GET /properties/ HTTP/1.1" 200 59427
+INFO 2026-05-20 23:29:48,552 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:29:51,700 log "GET /properties/ HTTP/1.1" 200 62779
+INFO 2026-05-20 23:29:59,018 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:30:01,853 log "GET /properties/ HTTP/1.1" 200 62779
+INFO 2026-05-20 23:30:04,223 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:30:06,769 log "GET /properties/?search=&prop_type=&price_min=&price_max= HTTP/1.1" 200 62779
+INFO 2026-05-20 23:32:17,244 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:32:20,446 log "GET /properties/?search=&prop_type=&price_min=&price_max= HTTP/1.1" 200 63778
+INFO 2026-05-20 23:32:20,482 log "GET /media/property_images/loft_2Phcqic.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:32:20,595 log "GET /media/property_images/taunhouse_iu5apCJ.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:32:34,164 views Catalog requested. Params: search='квартиры', type='', sort='title'
+INFO 2026-05-20 23:32:36,699 log "GET /properties/?search=%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B8%D1%80%D1%8B&type= HTTP/1.1" 200 13646
+INFO 2026-05-20 23:32:41,098 views Catalog requested. Params: search='квартира', type='', sort='title'
+INFO 2026-05-20 23:32:43,660 log "GET /properties/?search=%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B8%D1%80%D0%B0&type= HTTP/1.1" 200 21252
+INFO 2026-05-20 23:32:47,713 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:32:50,417 log "GET /properties/?search=&type= HTTP/1.1" 200 63778
+INFO 2026-05-20 23:36:35,140 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:36:38,296 log "GET /properties/?search=&type= HTTP/1.1" 200 65261
+INFO 2026-05-20 23:36:38,325 log "GET /media/property_images/svisl.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,332 log "GET /media/property_images/office.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,401 log "GET /media/property_images/pent.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,407 log "GET /media/property_images/villa.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,436 log "GET /media/property_images/compl.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,437 log "GET /media/property_images/loft.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,439 log "GET /media/property_images/proizv.-sklad.-kompl.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,443 log "GET /media/property_images/taunhouse.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,445 log "GET /media/property_images/torg.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,445 log "GET /media/property_images/uch.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:38,446 log "GET /media/property_images/cottege.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:36:45,677 views Catalog requested. Params: search='', type='', sort='price'
+INFO 2026-05-20 23:36:48,709 log "GET /properties/?search=&type=&price_min=&price_max=&sort=price HTTP/1.1" 200 65261
+INFO 2026-05-20 23:37:22,225 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:37:22,597 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:37:25,339 log "GET /properties/ HTTP/1.1" 200 65261
+INFO 2026-05-20 23:37:25,837 log "GET /properties/ HTTP/1.1" 200 65261
+INFO 2026-05-20 23:38:39,767 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:38:42,899 log "GET /properties/ HTTP/1.1" 200 65261
+INFO 2026-05-20 23:38:44,076 log "GET /news/ HTTP/1.1" 200 35171
+INFO 2026-05-20 23:38:44,117 log "GET /media/news_images/maxresdefault.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,121 log "GET /media/news_images/nagr.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,145 log "GET /media/news_images/uspech.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,158 log "GET /media/news_images/agenc.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,159 log "GET /media/news_images/houses.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,160 log "GET /media/news_images/skl.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,160 log "GET /media/news_images/proverka.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,161 log "GET /media/news_images/ipot.jpeg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,161 log "GET /media/news_images/disighn.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:44,166 log "GET /media/news_images/mayak.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:38:46,210 log "GET /glossary/ HTTP/1.1" 200 37241
+INFO 2026-05-20 23:38:47,623 log "GET /contacts/ HTTP/1.1" 200 42893
+INFO 2026-05-20 23:38:49,124 log "GET /vacancies/ HTTP/1.1" 200 40744
+INFO 2026-05-20 23:38:50,443 log "GET /reviews/ HTTP/1.1" 200 30196
+INFO 2026-05-20 23:38:51,498 log "GET /promocodes/ HTTP/1.1" 200 19842
+INFO 2026-05-20 23:38:53,482 views Initializing statistical analytics compiler.
+INFO 2026-05-20 23:38:55,433 log "GET /statistics/ HTTP/1.1" 200 322049
+INFO 2026-05-20 23:39:14,552 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:39:17,363 log "GET /properties/ HTTP/1.1" 200 65261
+INFO 2026-05-20 23:39:29,177 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:39:29,195 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-20 23:39:30,251 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-20 23:39:40,650 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:39:40,672 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-20 23:39:43,206 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:39:45,821 log "GET /properties/ HTTP/1.1" 200 46527
+INFO 2026-05-20 23:39:49,040 views User admin opened the property creation page.
+INFO 2026-05-20 23:39:49,059 log "GET /properties/add/ HTTP/1.1" 200 12495
+INFO 2026-05-20 23:39:54,737 views Initializing statistical analytics compiler.
+INFO 2026-05-20 23:39:56,432 log "GET /statistics/ HTTP/1.1" 200 322051
+INFO 2026-05-20 23:40:09,384 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:40:12,218 log "GET /properties/ HTTP/1.1" 200 46527
+INFO 2026-05-20 23:40:14,058 views User admin opened the property creation page.
+INFO 2026-05-20 23:40:14,072 log "GET /properties/add/ HTTP/1.1" 200 12495
+INFO 2026-05-20 23:40:38,751 views User admin opened the property creation page.
+INFO 2026-05-20 23:40:38,774 views User admin created property 'Таун' (ID: 45)
+INFO 2026-05-20 23:40:38,775 log "POST /properties/add/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:40:38,784 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:40:41,792 log "GET /properties/ HTTP/1.1" 200 49518
+INFO 2026-05-20 23:40:52,198 views Initializing statistical analytics compiler.
+INFO 2026-05-20 23:40:53,914 log "GET /statistics/ HTTP/1.1" 200 308363
+INFO 2026-05-20 23:41:09,907 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:41:13,000 log "GET /properties/ HTTP/1.1" 200 48618
+INFO 2026-05-20 23:41:15,555 log "GET /properties/45/delete/ HTTP/1.1" 200 7365
+INFO 2026-05-20 23:41:17,134 log "POST /properties/45/delete/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:41:17,143 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:41:19,988 log "GET /properties/ HTTP/1.1" 200 47433
+INFO 2026-05-20 23:41:24,264 log "GET /glossary/ HTTP/1.1" 200 37243
+INFO 2026-05-20 23:41:25,295 log "GET /contacts/ HTTP/1.1" 200 42895
+INFO 2026-05-20 23:41:25,331 log "GET /media/employees_photos/stas.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:41:25,345 log "GET /media/employees_photos/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:41:25,372 log "GET /media/employees_photos/olga.webp HTTP/1.1" 304 0
+INFO 2026-05-20 23:41:25,374 log "GET /media/employees_photos/max.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:41:25,381 log "GET /media/employees_photos/lena.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:41:25,381 log "GET /media/employees_photos/lazarev.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:41:25,381 log "GET /media/employees_photos/ann.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:41:25,382 log "GET /media/employees_photos/dima.webp HTTP/1.1" 304 0
+INFO 2026-05-20 23:41:26,271 log "GET /vacancies/ HTTP/1.1" 200 40746
+INFO 2026-05-20 23:41:27,555 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:41:30,167 log "GET /properties/ HTTP/1.1" 200 46527
+INFO 2026-05-20 23:43:34,793 views User admin opened the property creation page.
+INFO 2026-05-20 23:43:34,808 log "GET /properties/add/ HTTP/1.1" 200 12495
+INFO 2026-05-20 23:46:52,385 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:46:52,407 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-20 23:46:57,469 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-20 23:47:15,268 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:47:15,290 log "GET / HTTP/1.1" 200 12414
+INFO 2026-05-20 23:47:18,026 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:47:21,511 log "GET /properties/ HTTP/1.1" 200 65261
+INFO 2026-05-20 23:49:29,641 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:49:29,665 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-20 23:49:34,315 log "GET /admin/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:49:34,366 log "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4285
+INFO 2026-05-20 23:49:45,004 log "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:49:45,079 log "GET /admin/ HTTP/1.1" 200 18580
+INFO 2026-05-20 23:49:51,082 log "GET /admin/agency/deal/ HTTP/1.1" 200 29103
+INFO 2026-05-20 23:49:51,187 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:49:53,236 log "GET /admin/agency/deal/28/change/ HTTP/1.1" 200 26287
+INFO 2026-05-20 23:49:53,308 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:50:09,544 log "POST /admin/agency/deal/28/change/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:50:09,637 log "GET /admin/agency/deal/ HTTP/1.1" 200 29359
+INFO 2026-05-20 23:50:09,724 log "GET /admin/jsi18n/ HTTP/1.1" 200 16820
+INFO 2026-05-20 23:50:39,765 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-20 23:50:44,864 views User admin (ID: 2) accessed the management dashboard view.
+WARNING 2026-05-20 23:50:46,259 views Client profile record missing for authenticated user context: admin
+INFO 2026-05-20 23:50:46,272 log "GET /dashboard/ HTTP/1.1" 200 12622
+INFO 2026-05-20 23:50:47,884 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:50:47,906 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-20 23:50:50,048 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-20 23:51:00,851 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:51:00,877 log "GET / HTTP/1.1" 200 12414
+INFO 2026-05-20 23:51:02,826 views User sss (ID: 3) accessed the management dashboard view.
+INFO 2026-05-20 23:51:04,063 log "GET /dashboard/ HTTP/1.1" 200 19537
+INFO 2026-05-20 23:51:09,408 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:51:14,295 log "GET /properties/ HTTP/1.1" 200 65261
+INFO 2026-05-20 23:51:30,461 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:51:30,483 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-20 23:51:32,497 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-20 23:51:43,595 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-20 23:51:43,621 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-20 23:52:05,636 log "GET /news/ HTTP/1.1" 200 42963
+INFO 2026-05-20 23:52:08,084 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-20 23:52:12,534 log "GET /properties/ HTTP/1.1" 200 46527
+INFO 2026-05-20 23:52:12,595 log "GET /media/property_images/loft_2Phcqic.jpg HTTP/1.1" 304 0
+INFO 2026-05-20 23:52:14,003 views User admin opened the property creation page.
+INFO 2026-05-20 23:52:14,024 log "GET /properties/add/ HTTP/1.1" 200 12495
+INFO 2026-05-21 00:00:04,175 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\models.py changed, reloading.
+INFO 2026-05-21 00:00:05,938 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:01:03,376 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\models.py changed, reloading.
+INFO 2026-05-21 00:01:05,024 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:01:37,891 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\models.py changed, reloading.
+INFO 2026-05-21 00:01:39,398 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:04:29,443 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:04:33,403 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-21 00:04:35,588 views Catalog requested. Params: search='', type='', sort='title'
+INFO 2026-05-21 00:04:38,660 log "GET /properties/ HTTP/1.1" 200 46568
+INFO 2026-05-21 00:04:38,723 log "GET /media/property_images/svisl.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,762 log "GET /media/property_images/pent.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,762 log "GET /media/property_images/office.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,777 log "GET /media/property_images/compl.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,778 log "GET /media/property_images/villa.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,778 log "GET /media/property_images/proizv.-sklad.-kompl.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,779 log "GET /media/property_images/loft.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,779 log "GET /media/property_images/taunhouse.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,780 log "GET /media/property_images/torg.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,788 log "GET /media/property_images/uch.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,791 log "GET /media/property_images/cottege.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:38,792 log "GET /media/property_images/taunhouse_iu5apCJ.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:04:41,972 views User admin opened the property creation page.
+INFO 2026-05-21 00:04:42,002 log "GET /properties/add/ HTTP/1.1" 200 15892
+INFO 2026-05-21 00:07:05,805 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py changed, reloading.
+INFO 2026-05-21 00:07:07,287 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:09:50,163 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:10:14,687 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-21 00:10:14,774 log "GET /media/news_images/maxresdefault.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:10:33,941 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:10:37,102 log "GET /properties/ HTTP/1.1" 200 52125
+INFO 2026-05-21 00:10:45,122 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:10:47,842 log "GET /properties/ HTTP/1.1" 200 52125
+INFO 2026-05-21 00:11:07,199 views User admin opened the property creation page.
+INFO 2026-05-21 00:11:07,228 log "GET /properties/add/ HTTP/1.1" 200 15892
+INFO 2026-05-21 00:11:47,087 views User admin opened the property creation page.
+INFO 2026-05-21 00:11:47,205 views User admin created property 'Студия в мм в аренду' (ID: 44)
+INFO 2026-05-21 00:11:47,205 log "POST /properties/add/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:11:47,220 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:11:50,053 log "GET /properties/ HTTP/1.1" 200 56004
+INFO 2026-05-21 00:11:50,218 log "GET /media/property_images/disighn.jpg HTTP/1.1" 200 326578
+INFO 2026-05-21 00:11:59,118 views Catalog requested. Params: search='', type='', deal_type='rent', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:12:01,844 log "GET /properties/?search=&type=&deal_type=rent&price_min=&price_max=&sort=title HTTP/1.1" 200 18983
+INFO 2026-05-21 00:12:01,885 log "GET /media/property_images/disighn.jpg HTTP/1.1" 304 0
+ERROR 2026-05-21 00:16:34,017 log Internal Server Error: /about/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 87, in about_view
+    return render(request, 'agency/about.html', {'company_sections': company_sections})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 174, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\urls\resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'secured_agency_stats_api' not found. 'secured_agency_stats_api' is not a valid view function or pattern name.
+ERROR 2026-05-21 00:16:34,028 log "GET /about/ HTTP/1.1" 500 153758
+INFO 2026-05-21 00:18:13,576 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\urls.py changed, reloading.
+INFO 2026-05-21 00:18:15,035 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:18:24,873 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-21 00:18:27,005 log "GET /about/ HTTP/1.1" 200 13896
+INFO 2026-05-21 00:18:27,856 log "GET /api/v1/secured-stats/ HTTP/1.1" 200 578
+INFO 2026-05-21 00:18:28,100 views Initializing statistical analytics compiler.
+INFO 2026-05-21 00:18:29,973 log "GET /statistics/ HTTP/1.1" 200 317135
+INFO 2026-05-21 00:18:40,111 log "GET /promocodes/ HTTP/1.1" 200 19844
+INFO 2026-05-21 00:18:41,857 log "GET /reviews/ HTTP/1.1" 200 30325
+INFO 2026-05-21 00:18:43,032 log "GET /vacancies/ HTTP/1.1" 200 40746
+INFO 2026-05-21 00:18:44,046 log "GET /contacts/ HTTP/1.1" 200 42895
+INFO 2026-05-21 00:18:44,083 log "GET /media/employees_photos/stas.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,083 log "GET /media/employees_photos/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,112 log "GET /media/employees_photos/olga.webp HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,113 log "GET /media/employees_photos/max.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,122 log "GET /media/employees_photos/lena.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,124 log "GET /media/employees_photos/dima.webp HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,126 log "GET /media/employees_photos/ann.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,126 log "GET /media/employees_photos/%D0%B5%D1%84%D1%82%D0%BD%D1%84.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,126 log "GET /media/employees_photos/1920x.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,129 log "GET /media/employees_photos/lazarev.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:44,131 log "GET /media/employees_photos/%D0%B3%D0%B4%D1%88%D0%BD%D1%84.jpeg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:45,074 log "GET /glossary/ HTTP/1.1" 200 37243
+INFO 2026-05-21 00:18:46,371 log "GET /news/ HTTP/1.1" 200 42963
+INFO 2026-05-21 00:18:46,409 log "GET /media/news_images/nagr.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:46,417 log "GET /media/news_images/uspech.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:46,448 log "GET /media/news_images/houses.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:46,450 log "GET /media/news_images/agenc.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:46,451 log "GET /media/news_images/skl.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:46,451 log "GET /media/news_images/proverka.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:46,451 log "GET /media/news_images/disighn.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:46,451 log "GET /media/news_images/ipot.jpeg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:46,456 log "GET /media/news_images/mayak.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:48,292 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:18:51,459 log "GET /properties/ HTTP/1.1" 200 55104
+INFO 2026-05-21 00:18:51,507 log "GET /media/property_images/loft_2Phcqic.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:51,540 log "GET /media/property_images/disighn.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:18:59,370 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:19:02,137 log "GET /properties/?search=&type=&deal_type=&price_min=&price_max=&sort=title HTTP/1.1" 200 55104
+INFO 2026-05-21 00:19:58,119 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:20:01,088 log "GET /properties/ HTTP/1.1" 200 55104
+INFO 2026-05-21 00:20:01,113 log "GET /media/property_images/disighn.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:20:02,808 log "GET /news/ HTTP/1.1" 200 42963
+INFO 2026-05-21 00:20:04,381 log "GET /glossary/ HTTP/1.1" 200 37243
+INFO 2026-05-21 00:20:05,839 log "GET /contacts/ HTTP/1.1" 200 42895
+INFO 2026-05-21 00:20:07,351 log "GET /vacancies/ HTTP/1.1" 200 40746
+INFO 2026-05-21 00:20:08,595 log "GET /reviews/ HTTP/1.1" 200 30325
+INFO 2026-05-21 00:20:12,391 log "GET /promocodes/ HTTP/1.1" 200 19844
+INFO 2026-05-21 00:20:14,734 views Initializing statistical analytics compiler.
+INFO 2026-05-21 00:20:16,983 log "GET /statistics/ HTTP/1.1" 200 317135
+INFO 2026-05-21 00:20:46,723 log "GET /privacy/ HTTP/1.1" 200 6508
+INFO 2026-05-21 00:20:48,612 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-21 00:21:15,925 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:21:15,941 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-21 00:21:20,781 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-21 00:21:30,315 log "POST /accounts/login/ HTTP/1.1" 200 8096
+INFO 2026-05-21 00:21:35,288 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:21:35,311 log "GET / HTTP/1.1" 200 12414
+INFO 2026-05-21 00:21:37,594 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:21:40,508 log "GET /properties/ HTTP/1.1" 200 102024
+INFO 2026-05-21 00:21:40,590 log "GET /media/property_images/disighn.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:21:52,227 log "POST /catalog/book/44/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:21:52,240 views User sss (ID: 3) accessed the management dashboard view.
+INFO 2026-05-21 00:21:52,971 log "GET /dashboard/ HTTP/1.1" 200 21765
+INFO 2026-05-21 00:23:51,731 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py changed, reloading.
+INFO 2026-05-21 00:23:53,542 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:24:32,931 log "GET / HTTP/1.1" 200 12414
+INFO 2026-05-21 00:24:37,900 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:24:40,865 log "GET /properties/ HTTP/1.1" 200 95421
+INFO 2026-05-21 00:24:57,416 views User sss (ID: 3) accessed the management dashboard view.
+INFO 2026-05-21 00:24:58,121 log "GET /dashboard/ HTTP/1.1" 200 21262
+INFO 2026-05-21 00:27:51,489 views User sss (ID: 3) accessed the management dashboard view.
+INFO 2026-05-21 00:27:52,438 log "GET /dashboard/ HTTP/1.1" 200 14989
+INFO 2026-05-21 00:29:01,401 views User sss (ID: 3) accessed the management dashboard view.
+INFO 2026-05-21 00:29:02,144 log "GET /dashboard/ HTTP/1.1" 200 21173
+INFO 2026-05-21 00:29:26,748 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:29:29,584 log "GET /properties/ HTTP/1.1" 200 95421
+INFO 2026-05-21 00:29:44,944 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:29:44,961 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-21 00:29:47,483 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-21 00:29:58,213 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:29:58,232 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-21 00:30:01,257 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:30:04,284 log "GET /properties/ HTTP/1.1" 200 52125
+INFO 2026-05-21 00:30:08,566 views User admin opened the property creation page.
+INFO 2026-05-21 00:30:08,597 log "GET /properties/add/ HTTP/1.1" 200 15892
+INFO 2026-05-21 00:30:27,429 views User admin opened the property creation page.
+INFO 2026-05-21 00:30:27,441 views User admin created property '555555' (ID: 45)
+INFO 2026-05-21 00:30:27,441 log "POST /properties/add/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:30:27,455 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:30:30,220 log "GET /properties/ HTTP/1.1" 200 55791
+INFO 2026-05-21 00:30:36,835 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:30:36,851 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-21 00:30:38,049 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-21 00:30:44,976 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:30:44,997 log "GET / HTTP/1.1" 200 12414
+INFO 2026-05-21 00:30:49,799 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:30:52,243 log "GET /properties/ HTTP/1.1" 200 101781
+INFO 2026-05-21 00:31:00,994 log "POST /catalog/book/45/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:31:01,005 views User sss (ID: 3) accessed the management dashboard view.
+INFO 2026-05-21 00:31:01,685 log "GET /dashboard/ HTTP/1.1" 200 23419
+INFO 2026-05-21 00:31:11,915 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:31:11,933 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-21 00:31:14,313 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-21 00:31:32,348 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:31:32,370 log "GET / HTTP/1.1" 200 12419
+INFO 2026-05-21 00:31:34,546 views User Stasname (ID: 1) accessed the management dashboard view.
+INFO 2026-05-21 00:31:35,511 log "GET /dashboard/ HTTP/1.1" 200 36469
+INFO 2026-05-21 00:32:08,448 log "GET /about/ HTTP/1.1" 200 13899
+INFO 2026-05-21 00:32:09,213 log "GET /api/v1/secured-stats/ HTTP/1.1" 200 597
+INFO 2026-05-21 00:32:11,642 views Initializing statistical analytics compiler.
+INFO 2026-05-21 00:32:13,506 log "GET /statistics/ HTTP/1.1" 200 328942
+INFO 2026-05-21 00:32:31,419 log "GET /glossary/ HTTP/1.1" 200 37246
+INFO 2026-05-21 00:32:32,683 log "GET /contacts/ HTTP/1.1" 200 42898
+INFO 2026-05-21 00:32:34,616 views Initializing statistical analytics compiler.
+INFO 2026-05-21 00:32:36,364 log "GET /statistics/ HTTP/1.1" 200 328942
+INFO 2026-05-21 00:36:24,348 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py changed, reloading.
+INFO 2026-05-21 00:36:25,924 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:37:45,927 log "GET / HTTP/1.1" 200 12419
+INFO 2026-05-21 00:37:49,444 log "GET /statistics/ HTTP/1.1" 200 120795
+INFO 2026-05-21 00:38:12,081 log "GET /statistics/ HTTP/1.1" 200 121126
+INFO 2026-05-21 00:38:16,274 log "GET /statistics/ HTTP/1.1" 200 121126
+INFO 2026-05-21 00:40:18,697 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py changed, reloading.
+INFO 2026-05-21 00:40:20,573 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:40:28,097 log "GET / HTTP/1.1" 200 12419
+INFO 2026-05-21 00:40:28,126 log "GET /media/news_images/maxresdefault.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:40:31,504 log "GET /statistics/ HTTP/1.1" 200 210962
+INFO 2026-05-21 00:41:35,151 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py changed, reloading.
+INFO 2026-05-21 00:41:36,612 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:41:59,656 log "GET / HTTP/1.1" 200 12419
+INFO 2026-05-21 00:42:46,645 log "GET /statistics/ HTTP/1.1" 200 261166
+INFO 2026-05-21 00:44:08,455 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py changed, reloading.
+INFO 2026-05-21 00:44:09,924 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:44:31,612 log "GET / HTTP/1.1" 200 12419
+INFO 2026-05-21 00:44:36,347 log "GET /statistics/ HTTP/1.1" 200 261694
+INFO 2026-05-21 00:45:51,694 autoreload C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py changed, reloading.
+INFO 2026-05-21 00:45:53,121 autoreload Watching for file changes with StatReloader
+INFO 2026-05-21 00:46:04,132 log "GET / HTTP/1.1" 200 12419
+INFO 2026-05-21 00:46:14,103 log "GET /statistics/ HTTP/1.1" 200 305410
+INFO 2026-05-21 00:46:43,620 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:46:46,434 log "GET /properties/ HTTP/1.1" 200 52128
+INFO 2026-05-21 00:46:46,487 log "GET /media/property_images/svisl.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,487 log "GET /media/property_images/loft_2Phcqic.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,519 log "GET /media/property_images/office.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,520 log "GET /media/property_images/pent.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,531 log "GET /media/property_images/proizv.-sklad.-kompl.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,531 log "GET /media/property_images/villa.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,531 log "GET /media/property_images/compl.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,532 log "GET /media/property_images/taunhouse.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,533 log "GET /media/property_images/loft.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,535 log "GET /media/property_images/torg.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,543 log "GET /media/property_images/uch.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:46,543 log "GET /media/property_images/cottege.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:46:50,128 views User Stasname opened the property creation page.
+INFO 2026-05-21 00:46:50,159 log "GET /properties/add/ HTTP/1.1" 200 15895
+INFO 2026-05-21 00:47:11,787 views User Stasname opened the property creation page.
+INFO 2026-05-21 00:47:11,920 views User Stasname created property 'фвывфыв' (ID: 46)
+INFO 2026-05-21 00:47:11,924 log "POST /properties/add/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:47:11,927 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:47:14,686 log "GET /properties/ HTTP/1.1" 200 55866
+INFO 2026-05-21 00:47:14,855 log "GET /media/property_images/igor.jpg HTTP/1.1" 200 340527
+INFO 2026-05-21 00:47:23,417 log "GET /statistics/ HTTP/1.1" 200 295510
+INFO 2026-05-21 00:47:41,091 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:47:43,792 log "GET /properties/ HTTP/1.1" 200 54966
+INFO 2026-05-21 00:47:43,872 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:47:47,991 log "GET /statistics/ HTTP/1.1" 200 295510
+INFO 2026-05-21 00:47:50,961 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:47:53,789 log "GET /properties/ HTTP/1.1" 200 54966
+INFO 2026-05-21 00:47:53,883 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:47:55,384 views User Stasname opened the property creation page.
+INFO 2026-05-21 00:47:55,398 log "GET /properties/add/ HTTP/1.1" 200 15895
+INFO 2026-05-21 00:48:14,791 views User Stasname opened the property creation page.
+INFO 2026-05-21 00:48:14,800 views User Stasname created property 'мсчмчсмчсм' (ID: 47)
+INFO 2026-05-21 00:48:14,808 log "POST /properties/add/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:48:14,818 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:48:17,388 log "GET /properties/ HTTP/1.1" 200 58587
+INFO 2026-05-21 00:48:17,469 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:48:23,862 log "GET /statistics/ HTTP/1.1" 200 303554
+INFO 2026-05-21 00:48:40,048 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:48:42,975 log "GET /properties/ HTTP/1.1" 200 57687
+INFO 2026-05-21 00:48:43,015 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:48:47,416 log "GET /properties/47/update/ HTTP/1.1" 200 15972
+INFO 2026-05-21 00:48:52,544 log "POST /properties/47/update/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:48:52,555 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:48:55,258 log "GET /properties/ HTTP/1.1" 200 58575
+INFO 2026-05-21 00:48:55,299 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:48:58,302 log "GET /properties/46/update/ HTTP/1.1" 200 16231
+INFO 2026-05-21 00:51:16,339 log "POST /properties/46/update/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:51:16,348 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:51:19,194 log "GET /properties/ HTTP/1.1" 200 58573
+INFO 2026-05-21 00:51:19,280 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:51:36,972 views Catalog requested. Params: search='', type='', deal_type='rent', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:51:41,832 log "GET /properties/?search=&type=&deal_type=rent&price_min=&price_max=&sort=title HTTP/1.1" 200 16170
+INFO 2026-05-21 00:51:45,935 views Catalog requested. Params: search='', type='', deal_type='sale', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:51:48,777 log "GET /properties/?search=&type=&deal_type=sale&price_min=&price_max=&sort=title HTTP/1.1" 200 57683
+INFO 2026-05-21 00:51:48,818 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:00,222 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:52:00,239 log "GET / HTTP/1.1" 200 12378
+INFO 2026-05-21 00:52:01,718 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-21 00:52:14,782 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:52:14,807 log "GET / HTTP/1.1" 200 12416
+INFO 2026-05-21 00:52:17,424 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:52:20,178 log "GET /properties/ HTTP/1.1" 200 57672
+INFO 2026-05-21 00:52:20,208 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,032 log "GET /news/ HTTP/1.1" 200 42963
+INFO 2026-05-21 00:52:22,086 log "GET /media/news_images/nagr.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,086 log "GET /media/news_images/uspech.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,109 log "GET /media/news_images/houses.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,109 log "GET /media/news_images/agenc.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,121 log "GET /media/news_images/skl.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,121 log "GET /media/news_images/disighn.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,122 log "GET /media/news_images/mayak.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,123 log "GET /media/news_images/proverka.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:22,124 log "GET /media/news_images/ipot.jpeg HTTP/1.1" 304 0
+INFO 2026-05-21 00:52:24,396 log "GET /news/22/ HTTP/1.1" 200 11444
+INFO 2026-05-21 00:52:28,970 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:52:31,857 log "GET /properties/ HTTP/1.1" 200 57672
+INFO 2026-05-21 00:52:35,679 log "GET /properties/47/delete/ HTTP/1.1" 200 7367
+INFO 2026-05-21 00:52:37,427 log "POST /properties/47/delete/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:52:37,434 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:52:40,130 log "GET /properties/ HTTP/1.1" 200 55867
+INFO 2026-05-21 00:52:44,223 log "GET /news/ HTTP/1.1" 200 42963
+INFO 2026-05-21 00:52:46,060 views User admin requested updates for article ID: 22
+INFO 2026-05-21 00:52:46,074 log "GET /news/22/update/ HTTP/1.1" 200 9038
+INFO 2026-05-21 00:52:49,021 log "GET /news/ HTTP/1.1" 200 42963
+INFO 2026-05-21 00:52:51,714 views User admin requested updates for article ID: 22
+INFO 2026-05-21 00:52:51,727 log "GET /news/22/update/ HTTP/1.1" 200 9038
+INFO 2026-05-21 00:52:59,249 views User admin requested updates for article ID: 22
+INFO 2026-05-21 00:52:59,259 views User admin modified news block identifier: 22
+INFO 2026-05-21 00:52:59,261 log "POST /news/22/update/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:52:59,287 log "GET /news/ HTTP/1.1" 200 44051
+INFO 2026-05-21 00:53:07,709 log "GET /glossary/ HTTP/1.1" 200 37243
+INFO 2026-05-21 00:53:09,147 log "GET /contacts/ HTTP/1.1" 200 42895
+INFO 2026-05-21 00:53:09,186 log "GET /media/employees_photos/stas.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,194 log "GET /media/employees_photos/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,227 log "GET /media/employees_photos/olga.webp HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,227 log "GET /media/employees_photos/max.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,240 log "GET /media/employees_photos/lena.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,241 log "GET /media/employees_photos/dima.webp HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,241 log "GET /media/employees_photos/ann.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,242 log "GET /media/employees_photos/lazarev.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,242 log "GET /media/employees_photos/1920x.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,242 log "GET /media/employees_photos/%D0%B5%D1%84%D1%82%D0%BD%D1%84.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:09,250 log "GET /media/employees_photos/%D0%B3%D0%B4%D1%88%D0%BD%D1%84.jpeg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:10,442 log "GET /vacancies/ HTTP/1.1" 200 40746
+INFO 2026-05-21 00:53:12,683 log "GET /reviews/ HTTP/1.1" 200 30440
+INFO 2026-05-21 00:53:13,885 log "GET /promocodes/ HTTP/1.1" 200 19844
+INFO 2026-05-21 00:53:16,844 log "GET /statistics/ HTTP/1.1" 200 295507
+INFO 2026-05-21 00:53:21,881 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:53:24,677 log "GET /properties/ HTTP/1.1" 200 54961
+INFO 2026-05-21 00:53:24,764 log "GET /media/property_images/igor.jpg HTTP/1.1" 304 0
+INFO 2026-05-21 00:53:28,103 views User admin (ID: 2) accessed the management dashboard view.
+WARNING 2026-05-21 00:53:28,834 views Client profile record missing for authenticated user context: admin
+INFO 2026-05-21 00:53:28,837 log "GET /dashboard/ HTTP/1.1" 200 12622
+INFO 2026-05-21 00:53:31,378 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:53:31,387 log "GET / HTTP/1.1" 200 12428
+INFO 2026-05-21 00:53:33,105 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-21 00:53:44,994 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:53:45,021 log "GET / HTTP/1.1" 200 12469
+INFO 2026-05-21 00:53:47,236 views User Stasname (ID: 1) accessed the management dashboard view.
+INFO 2026-05-21 00:53:48,067 log "GET /dashboard/ HTTP/1.1" 200 36029
+INFO 2026-05-21 00:53:54,544 log "GET /statistics/ HTTP/1.1" 200 295510
+INFO 2026-05-21 00:53:59,131 log "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:53:59,149 log "GET / HTTP/1.1" 200 12428
+INFO 2026-05-21 00:54:00,217 log "GET /accounts/login/ HTTP/1.1" 200 7745
+INFO 2026-05-21 00:54:07,227 log "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2026-05-21 00:54:07,254 log "GET / HTTP/1.1" 200 12464
+INFO 2026-05-21 00:54:09,199 views User sss (ID: 3) accessed the management dashboard view.
+INFO 2026-05-21 00:54:10,015 log "GET /dashboard/ HTTP/1.1" 200 22952
+INFO 2026-05-21 00:54:19,858 log "GET / HTTP/1.1" 200 12464
+INFO 2026-05-21 00:54:58,109 log "GET / HTTP/1.1" 200 12415
+INFO 2026-05-21 00:55:49,614 views User ghost (ID: 4) accessed the management dashboard view.
+WARNING 2026-05-21 00:55:50,281 views Client profile record missing for authenticated user context: ghost
+INFO 2026-05-21 00:55:54,207 views User client (ID: 1) accessed the management dashboard view.
+INFO 2026-05-21 00:55:55,834 views User emp (ID: 2) accessed the management dashboard view.
+WARNING 2026-05-21 00:56:09,960 log Not Found: /properties/99999/update/
+WARNING 2026-05-21 00:56:09,971 log Not Found: /properties/99999/delete/
+WARNING 2026-05-21 00:56:09,979 log Not Found: /news/99999/
+INFO 2026-05-21 00:56:20,767 views User emp (ID: 2) accessed the management dashboard view.
+ERROR 2026-05-21 00:56:20,768 views Dashboard currency extraction failed: Нацбанк не отвечает, проверяем ветку except
+INFO 2026-05-21 00:56:24,799 views User admin opened the property creation page.
+WARNING 2026-05-21 00:56:24,807 views Form validation failed for property creation by admin
+WARNING 2026-05-21 00:56:42,047 log Forbidden (Permission denied): /properties/add/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 56, in _view_wrapper
+    test_pass = test_func(request.user)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 129, in check_perms
+    raise PermissionDenied
+django.core.exceptions.PermissionDenied
+INFO 2026-05-21 00:56:50,786 views Catalog requested. Params: search='!!!@@@', type='', deal_type='', price_min='', price_max='', sort='title'
+ERROR 2026-05-21 00:56:50,789 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title
+INFO 2026-05-21 00:56:53,666 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='price_asc'
+WARNING 2026-05-21 00:56:53,667 views Unsupported sorting parameter provided: 'price_asc'
+INFO 2026-05-21 00:56:56,200 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 00:57:19,299 views User admin triggered deletion confirmation UI for article ID: 1 ('Тестовая статья для удаления')
+ERROR 2026-05-21 00:57:19,304 log Internal Server Error: /news/1/delete/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 409, in article_delete_view
+    return render(request, 'agency/article_confirm_delete.html', {'article': article})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 174, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\urls\resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'news_view' not found. 'news_view' is not a valid view function or pattern name.
+INFO 2026-05-21 01:00:02,782 views User ghost (ID: 4) accessed the management dashboard view.
+WARNING 2026-05-21 01:00:03,434 views Client profile record missing for authenticated user context: ghost
+INFO 2026-05-21 01:00:07,261 views User client (ID: 1) accessed the management dashboard view.
+INFO 2026-05-21 01:00:08,840 views User emp (ID: 2) accessed the management dashboard view.
+WARNING 2026-05-21 01:00:18,888 log Not Found: /properties/99999/update/
+WARNING 2026-05-21 01:00:18,896 log Not Found: /properties/99999/delete/
+WARNING 2026-05-21 01:00:18,902 log Not Found: /news/99999/
+INFO 2026-05-21 01:00:28,146 views User emp (ID: 2) accessed the management dashboard view.
+ERROR 2026-05-21 01:00:28,147 views Dashboard currency extraction failed: Нацбанк не отвечает, проверяем ветку except
+INFO 2026-05-21 01:00:32,155 views User admin opened the property creation page.
+WARNING 2026-05-21 01:00:32,162 views Form validation failed for property creation by admin
+WARNING 2026-05-21 01:00:50,737 log Not Found: /news/1/delete/
+WARNING 2026-05-21 01:00:54,486 log Forbidden (Permission denied): /properties/add/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 56, in _view_wrapper
+    test_pass = test_func(request.user)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 129, in check_perms
+    raise PermissionDenied
+django.core.exceptions.PermissionDenied
+INFO 2026-05-21 01:01:02,860 views Catalog requested. Params: search='!!!@@@', type='', deal_type='', price_min='', price_max='', sort='title'
+ERROR 2026-05-21 01:01:02,862 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title
+INFO 2026-05-21 01:01:05,660 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='price_asc'
+WARNING 2026-05-21 01:01:05,661 views Unsupported sorting parameter provided: 'price_asc'
+INFO 2026-05-21 01:01:08,344 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 01:01:25,666 views Catalog requested. Params: search='test', type='Квартира', deal_type='', price_min='1000', price_max='500000', sort='title'
+ERROR 2026-05-21 01:01:25,668 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title
+INFO 2026-05-21 01:01:32,203 views User admin triggered deletion confirmation UI for article ID: 1 ('Тестовая статья для удаления')
+ERROR 2026-05-21 01:01:32,207 log Internal Server Error: /news/1/delete/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 409, in article_delete_view
+    return render(request, 'agency/article_confirm_delete.html', {'article': article})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 174, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\urls\resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'news_view' not found. 'news_view' is not a valid view function or pattern name.
+INFO 2026-05-21 01:05:09,437 views User ghost (ID: 4) accessed the management dashboard view.
+WARNING 2026-05-21 01:05:10,095 views Client profile record missing for authenticated user context: ghost
+INFO 2026-05-21 01:05:13,892 views User client (ID: 1) accessed the management dashboard view.
+INFO 2026-05-21 01:05:15,458 views User emp (ID: 2) accessed the management dashboard view.
+WARNING 2026-05-21 01:05:25,497 log Not Found: /properties/99999/update/
+WARNING 2026-05-21 01:05:25,506 log Not Found: /properties/99999/delete/
+WARNING 2026-05-21 01:05:25,511 log Not Found: /news/99999/
+INFO 2026-05-21 01:05:34,704 views User emp (ID: 2) accessed the management dashboard view.
+ERROR 2026-05-21 01:05:34,705 views Dashboard currency extraction failed: Нацбанк не отвечает, проверяем ветку except
+INFO 2026-05-21 01:05:38,645 views User admin opened the property creation page.
+WARNING 2026-05-21 01:05:38,653 views Form validation failed for property creation by admin
+WARNING 2026-05-21 01:05:57,171 log Not Found: /news/1/delete/
+INFO 2026-05-21 01:06:00,885 views User admin triggered deletion confirmation UI for article ID: 1 ('Статья')
+INFO 2026-05-21 01:06:00,887 views User admin dropped article entry: 'Статья' (ID: 1)
+WARNING 2026-05-21 01:06:04,612 log Forbidden (Permission denied): /properties/add/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 56, in _view_wrapper
+    test_pass = test_func(request.user)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 129, in check_perms
+    raise PermissionDenied
+django.core.exceptions.PermissionDenied
+INFO 2026-05-21 01:06:12,943 views Catalog requested. Params: search='!!!@@@', type='', deal_type='', price_min='', price_max='', sort='title'
+ERROR 2026-05-21 01:06:12,945 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title
+INFO 2026-05-21 01:06:15,734 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='price_asc'
+WARNING 2026-05-21 01:06:15,735 views Unsupported sorting parameter provided: 'price_asc'
+INFO 2026-05-21 01:06:18,342 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 01:06:38,557 views Catalog requested. Params: search='test', type='Квартира', deal_type='', price_min='1000', price_max='500000', sort='title'
+ERROR 2026-05-21 01:06:38,559 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title
+INFO 2026-05-21 01:06:41,379 views Catalog requested. Params: search='test', type='1', deal_type='', price_min='1000', price_max='500000', sort='title'
+ERROR 2026-05-21 01:06:41,381 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title
+INFO 2026-05-21 01:06:47,890 views User admin triggered deletion confirmation UI for article ID: 1 ('Тестовая статья для удаления')
+ERROR 2026-05-21 01:06:47,895 log Internal Server Error: /news/1/delete/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 409, in article_delete_view
+    return render(request, 'agency/article_confirm_delete.html', {'article': article})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 174, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\template\defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\urls\resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'news_view' not found. 'news_view' is not a valid view function or pattern name.
+INFO 2026-05-21 01:09:48,858 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='invalid_param'
+WARNING 2026-05-21 01:09:48,860 views Unsupported sorting parameter provided: 'invalid_param'
+INFO 2026-05-21 01:09:53,439 views User admin triggered deletion confirmation UI for article ID: 1 ('Статья')
+INFO 2026-05-21 01:09:53,440 views User admin dropped article entry: 'Статья' (ID: 1)
+INFO 2026-05-21 01:09:57,220 views Catalog requested. Params: search='test', type='1', deal_type='', price_min='1000', price_max='500000', sort='title'
+ERROR 2026-05-21 01:09:57,227 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title
+INFO 2026-05-21 01:11:25,334 views User admin triggered deletion confirmation UI for article ID: 1 ('Тест')
+INFO 2026-05-21 01:11:25,336 views User admin dropped article entry: 'Тест' (ID: 1)
+INFO 2026-05-21 01:11:26,270 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='bad_sort'
+WARNING 2026-05-21 01:11:26,271 views Unsupported sorting parameter provided: 'bad_sort'
+INFO 2026-05-21 01:11:30,704 views User admin opened the property creation page.
+INFO 2026-05-21 01:11:30,714 views User admin created property 'Новый объект' (ID: 2)
+INFO 2026-05-21 01:11:32,606 views Catalog requested. Params: search='Элитная', type='1', deal_type='', price_min='1000', price_max='500000', sort='title'
+ERROR 2026-05-21 01:11:32,614 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title
+INFO 2026-05-21 01:13:52,261 views User admin triggered deletion confirmation UI for article ID: 1 ('Del')
+INFO 2026-05-21 01:13:52,264 views User admin dropped article entry: 'Del' (ID: 1)
+INFO 2026-05-21 01:13:58,846 views User testuser (ID: 1) accessed the management dashboard view.
+WARNING 2026-05-21 01:13:59,478 views Client profile record missing for authenticated user context: testuser
+INFO 2026-05-21 01:14:05,179 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='bad_sort'
+WARNING 2026-05-21 01:14:05,180 views Unsupported sorting parameter provided: 'bad_sort'
+INFO 2026-05-21 01:14:15,117 views Catalog requested. Params: search='', type='', deal_type='', price_min='', price_max='', sort='title'
+INFO 2026-05-21 01:14:21,107 views Catalog requested. Params: search='Тестовый', type='', deal_type='', price_min='', price_max='', sort='title'
+ERROR 2026-05-21 01:14:21,114 log Internal Server Error: /properties/
+Traceback (most recent call last):
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\agency\views.py", line 171, in property_list_view
+    properties = properties.filter(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1542, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1560, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\query.py", line 1570, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1676, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1533, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1708, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1556, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1363, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\453502_SHAULOUSKI_26\IGI\LR5\.venv\Lib\site-packages\django\db\models\sql\query.py", line 1842, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'address' into field. Choices are: deal, deal_type, description, id, image, is_active, owner, owner_id, price, prop_type, prop_type_id, review, title

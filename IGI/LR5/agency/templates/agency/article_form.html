@@ -1,0 +1,30 @@
+{% extends 'agency/base.html' %}
+{% block title %}{{ action }} новость | EliteEstate{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 700px; margin: 2rem auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <h2 style="margin-bottom: 1.5rem; text-align: center; color: var(--primary-color);">{{ action }} Публикацию</h2>
+
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group" style="margin-bottom: 1.2rem;">
+                <label style="display: block; width: 100%;">
+                    <span style="display: block; margin-bottom: 0.4rem; font-weight: 600;">{{ field.label }}</span>
+                    {{ field }}
+                </label>
+
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <p style="color: var(--danger-color); font-size: 0.85rem; margin-top: 0.2rem; margin-bottom: 0;">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button type="submit" class="btn" style="flex: 1;">Опубликовать</button>
+            <a href="{% url 'news' %}" class="btn btn-secondary" style="flex: 1; text-align: center; line-height: 2;">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
