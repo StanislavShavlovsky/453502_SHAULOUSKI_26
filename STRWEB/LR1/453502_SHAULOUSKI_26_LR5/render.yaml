@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: realestate-agency
+    runtime: python
+    repo: https://github.com/StanislavShavlovsky/453502_SHAULOUSKI_26_LR5
+    branch: main
+    plan: free
+    region: frankfurt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py collectstatic --noinput
+    startCommand: "python create_superuser.py && gunicorn RealEstateProject.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: estate-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: estate-db
+    plan: free
+    region: frankfurt

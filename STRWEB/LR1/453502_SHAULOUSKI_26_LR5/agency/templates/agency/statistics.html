@@ -1,0 +1,54 @@
+{% extends 'agency/base.html' %}
+
+{% block title %}Аналитика рынка | EliteEstate{% endblock %}
+
+{% block content %}
+<div class="analytics-container" style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
+
+    <div class="card" style="background: #e3fafc; border-left: 5px solid #17c3b2; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.95rem; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;">
+    <div>
+        <strong>Курс НБРБ (USD/BYN):</strong> <span style="color:#0b7285; font-weight:bold;">{{ usd_rate }} за $1</span>
+    </div>
+    <div style="flex: 1; max-width: 700px; font-style: italic; text-align: right; color: #6c757d;">
+        *Вся аналитика ниже приведена в USD ($)
+    </div>
+</div>
+
+    <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-weight: bold; color: #227c9d; font-size: 2rem; margin-bottom: 10px;">Аналитика рынка недвижимости</h2>
+        <p style="color: #666; font-size: 1.05rem;">Автоматический расчет показателей и визуализация данных на основе текущего состояния БД.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 35px;">
+
+        <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
+            <h3 style="color: #333; margin-bottom: 20px; font-size: 1.2rem;">Структура каталога объектов</h3>
+            <div style="display: inline-block; max-width: 100%;">
+                <img src="data:image/png;base64,{{ chart_pie }}" alt="Круговая диаграмма долей" style="max-width: 100%; height: auto; border-radius: 6px;">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 30px;">
+
+            <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
+                <h3 style="color: #333; margin-bottom: 20px; font-size: 1.2rem;">Сравнение средних цен</h3>
+                <img src="data:image/png;base64,{{ chart_bar }}" alt="Столбчатая диаграмма цен" style="max-width: 100%; height: auto; border-radius: 6px;">
+            </div>
+
+            <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
+                <h3 style="color: #333; margin-bottom: 20px; font-size: 1.2rem;">Рыночный тренд стоимости</h3>
+                <img src="data:image/png;base64,{{ chart_line }}" alt="Линейный график тренда" style="max-width: 100%; height: auto; border-radius: 6px;">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+        <a href="{% url 'property_list' %}" class="btn" style="padding: 12px 30px; text-decoration: none; font-size: 1rem; border-radius: 6px;">
+            &larr; Вернуться в каталог объектов
+        </a>
+    </div>
+
+</div>
+{% endblock %}

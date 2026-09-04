@@ -1,0 +1,74 @@
+{% extends 'agency/base.html' %}
+
+{% block title %}{{ article.title }} | EliteEstate{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem; background: transparent !important; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+    <div style="margin-bottom: 2rem; background: transparent !important;">
+        <a href="{% url 'news' %}" style="text-decoration: none; color: #718096; font-size: 1rem; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s ease;" onmouseover="this.style.color='#1a252f'" onmouseout="this.style.color='#718096'">
+            <i class="fas fa-arrow-left"></i> Вернуться к публикациям
+        </a>
+    </div>
+
+    <div style="background: #ffffff !important; border: 1px solid #e2e8f0; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.03);">
+
+        {% if article.image %}
+            <div style="width: 100%; height: 500px; overflow: hidden; position: relative; background: #1a202c !important;">
+                <img src="{{ article.image.url }}" alt="{{ article.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);"></div>
+            </div>
+        {% endif %}
+
+        <div style="padding: 4rem 4rem 3.5rem 4rem; background: #ffffff !important;">
+
+            <div style="background: transparent !important; display: flex; align-items: center; gap: 0.5rem; color: #a0aec0; font-size: 0.95rem; margin-bottom: 1rem; font-weight: 500;">
+                <i class="far fa-calendar-alt"></i>
+                <span>Опубликовано: <strong style="color: #4a5568;">{{ article.published_date|date:"d E Y" }}</strong></span>
+            </div>
+
+            <div style="background: transparent !important; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid #f7fafc;">
+                <h1 style="color: #1a252f !important; background: transparent !important; font-size: 3rem !important; font-weight: 800 !important; line-height: 1.25 !important; margin: 0; letter-spacing: -1px; white-space: normal !important;">
+                    {{ article.title }}
+                </h1>
+            </div>
+
+            {% if article.short_description %}
+                <div style="background: #f7fafc !important; border-left: 5px solid var(--accent-color, #3182ce) !important; padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; margin-bottom: 3rem; box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);">
+                    <p style="font-size: 1.3rem !important; font-weight: 600 !important; color: #2d3748 !important; line-height: 1.6 !important; margin: 0; font-style: italic; background: transparent !important; white-space: normal !important;">
+                        {{ article.short_description }}
+                    </p>
+                </div>
+            {% endif %}
+
+            <div class="article-text-body" style="background: transparent !important; line-height: 1.9; font-size: 1.2rem; color: #2d3748; margin-bottom: 4rem; text-align: justify; white-space: normal !important; display: block !important; overflow: visible !important; word-wrap: break-word !important; word-break: break-word !important;">
+                {{ article.content|linebreaks }}
+            </div>
+
+            <div style="background: transparent !important; border-top: 1px solid #edf2f7; padding-top: 2.5rem; display: flex; justify-content: flex-start;">
+                <a href="{% url 'news' %}" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; padding: 0.8rem 2.2rem; background-color: #edf2f7; color: #4a5568; border-radius: 8px; font-weight: 600; font-size: 1rem; border: none; transition: all 0.2s ease-in-out; box-shadow: 0 2px 4px rgba(0,0,0,0.02);" onmouseover="this.style.backgroundColor='#e2e8f0'; this.style.color='#1a252f'; this.style.transform='translateX(-2px)';" onmouseout="this.style.backgroundColor='#edf2f7'; this.style.color='#4a5568'; this.style.transform='translateX(0)';">
+                    &larr; Назад к общей ленте
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Насильно разрешаем перенос строк для параграфов внутри статьи и сбрасываем обрезку webkit-box */
+    .article-text-body p {
+        margin-bottom: 1.75rem !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        white-space: normal !important;
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        overflow: visible !important;
+        word-wrap: break-word !important;
+    }
+    .article-text-body p:last-child {
+        margin-bottom: 0 !important;
+    }
+</style>
+{% endblock %}
