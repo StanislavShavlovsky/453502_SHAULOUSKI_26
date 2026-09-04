@@ -1,39 +1,117 @@
-{% extends 'agency/base.html' %}
-{% block title %}Промокоды | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Действующие и архивные промокоды и купоны на скидку от агентства недвижимости EliteEstate.">
+    <meta name="keywords" content="промокоды, купоны, скидки, акции, элитная недвижимость, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-{% block content %}
-<div style="max-width: 800px; margin: 2rem auto; padding: 0 1rem; font-family: sans-serif;">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Промокоды и купоны — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Используйте наши промокоды при оформлении сделки или услуг для получения скидки.">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+    <meta property="og:type" content="website">
 
-    <div style="margin-bottom: 2rem;">
-        <h2 style="color: #1a252f;">🎁 Промокоды и купоны</h2>
-        <p style="color: #666;">Используйте наши промокоды при оформлении сделки для получения скидки.</p>
-    </div>
+    <title>Промокоды и купоны — {{ company_info.name|default:'EliteEstate' }}</title>
 
-    <h3 style="color: #2b8a3e; border-bottom: 2px solid #2b8a3e; display: inline-block;">Действующие промокоды</h3>
-    <div style="margin: 1.5rem 0 3rem 0; display: grid; gap: 1rem;">
-        {% for p in active %}
-            <div style="background: #f1fcf1; border: 1px solid #b2f2bb; padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <strong style="font-size: 1.2rem; color: #087f5b; letter-spacing: 1px;">{{ p.code }}</strong>
-                    <div style="font-size: 0.9rem; color: #555;">Скидка: <span style="font-weight: bold; color: #e67700;">{{ p.discount }}%</span></div>
-                </div>
-                <div style="font-size: 0.8rem; color: #888;">Действует до: {{ p.valid_until|date:"d.m.Y" }}</div>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body id="top">
+
+    <!-- Шапка сайта и Полное Навигационное Меню -->
+<header>
+    <a href="{% url 'home' %}">
+        {% if company_info.logo %}
+            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
+        {% else %}
+            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
+        {% endif %}
+    </a>
+    <nav style="margin-top: 10px; line-height: 1.8;">
+        <a href="{% url 'home' %}">Главная</a> |
+        <a href="{% url 'about' %}">О компании</a> |
+        <a href="{% url 'news' %}">Новости</a> |
+        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
+        <a href="{% url 'contacts' %}">Контакты</a> |
+        <a href="{% url 'vacancies' %}">Вакансии</a> |
+        <a href="{% url 'reviews' %}">Отзывы</a> |
+        <a href="{% url 'promocodes' %}">Промокоды</a> |
+        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
+        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
+    </nav>
+</header>
+
+    <!-- Основное содержимое -->
+    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px;">
+
+        <section id="promocodes-header">
+            <h1>🎁 Промокоды и купоны</h1>
+            <p>Используйте наши промокоды при оформлении сделки или заказе услуг для получения скидки.</p>
+        </section>
+
+        <hr>
+
+        <!-- Действующие промокоды -->
+        <section id="active-promocodes" style="margin-bottom: 30px;">
+            <h2 style="color: #28a745;">Действующие промокоды</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+                {% for p in active %}
+                    <article id="promocode-{{ p.pk }}" style="background-color: #e8f5e9; border: 1px solid #c8e6c9; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong style="font-size: 1.3em; color: #2e7d32; letter-spacing: 1px;">CODE: {{ p.code }}</strong>
+                            <div style="font-size: 0.95em; color: #333; margin-top: 4px;">
+                                Скидка: <span style="font-weight: bold; color: #d9534f; font-size: 1.1em;">{{ p.discount }}%</span>
+                            </div>
+                        </div>
+
+                        <div style="font-size: 0.9em; color: #555; background-color: #fff; padding: 6px 12px; border-radius: 4px; border: 1px solid #a5d6a7;">
+                            📅 Действует до: <strong>{{ p.valid_until|date:"d.m.Y" }}</strong>
+                        </div>
+                    </article>
+                {% empty %}
+                    <p style="color: #6c757d; font-style: italic;">На данный момент активных промокодов нет.</p>
+                {% endfor %}
             </div>
-        {% empty %}
-            <p style="color: #888; font-style: italic;">На данный момент активных промокодов нет.</p>
-        {% endfor %}
-    </div>
+        </section>
 
-    <h3 style="color: #868e96; border-bottom: 2px solid #ced4da; display: inline-block;">Архив</h3>
-    <div style="margin: 1.5rem 0; display: grid; gap: 0.5rem;">
-        {% for p in archived %}
-            <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 0.8rem; border-radius: 6px; color: #adb5bd; display: flex; justify-content: space-between;">
-                <span><del>{{ p.code }}</del></span>
-                <small>Истек {{ p.valid_until|date:"d.m.Y" }}</small>
+        <hr>
+
+        <!-- Архив промокодов -->
+        <section id="archived-promocodes">
+            <h2 style="color: #6c757d;">Архив промокодов</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px;">
+                {% for p in archived %}
+                    <article style="background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 10px 15px; border-radius: 6px; color: #6c757d; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <span><del>CODE: {{ p.code }}</del> (Скидка {{ p.discount }}%)</span>
+                        <small style="color: #a71d2a;">Истёк: {{ p.valid_until|date:"d.m.Y" }}</small>
+                    </article>
+                {% empty %}
+                    <p style="color: #6c757d; font-style: italic;">Архив промокодов пуст.</p>
+                {% endfor %}
             </div>
-        {% empty %}
-            <p style="color: #888; font-style: italic;">Архив пуст.</p>
-        {% endfor %}
-    </div>
-</div>
-{% endblock %}
+        </section>
+
+    </main>
+
+    <hr>
+
+    <!-- Подвал (Footer) -->
+    <footer>
+        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
+        {% if company_info.requisites %}
+            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
+        {% endif %}
+        <p><a href="#top">Наверх страницы &#8593;</a></p>
+    </footer>
+
+</body>
+</html>

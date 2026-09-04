@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.db.models import Avg, Sum
 from .models import (
-    Article, ClientProfile, CompanyInfo, Deal, EmployeeProfile,
-    FAQ, Owner, PromoCode, Property, PropertyType, Review, Vacancy
+    Article, Cart, CartItem, ClientProfile, CompanyInfo, Deal,
+    EmployeeProfile, FAQ, Owner, Partner, PromoCode, Property,
+    PropertyType, Review, Vacancy
 )
 
 
@@ -39,7 +40,40 @@ class PropertyAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
 
 
-# Register remaining structural models to the Django administration interface
+# Настройка отображения элементов корзины прямо внутри корзины пользователя
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 0
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('user', 'created_at', 'get_total_price')
+    search_fields = ('user__username',)
+    inlines = [CartItemInline]
+
+    def get_total_price(self, obj):
+        return obj.total_price
+    get_total_price.short_description = "Общая стоимость"
+
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('cart', 'item_property', 'quantity', 'get_cost')
+    search_fields = ('cart__user__username', 'item_property__title')
+
+    def get_cost(self, obj):
+        return obj.get_cost
+    get_cost.short_description = "Стоимость позиции"
+
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'website_url')
+    search_fields = ('name',)
+
+
+# Регистрация остальных стандартных моделей
 admin.site.register(PropertyType)
 admin.site.register(Owner)
 admin.site.register(ClientProfile)

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Оплата заказа — {{ company_info.name|default:"EliteEstate" }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'home' %}"><h2>{{ company_info.name|default:"EliteEstate" }}</h2></a>
+    </header>
+
+    <main>
+        <h1>Оформление и оплата заказа</h1>
+
+        <section>
+            <h3>Ваш заказ:</h3>
+            <ul>
+                {% for item in cart.items.all %}
+                    <li>{{ item.item_property.title }} — {{ item.quantity }} шт. по ${{ item.item_property.price }}</li>
+                {% endfor %}
+            </ul>
+            <h4>К оплате: ${{ cart.total_price }}</h4>
+        </section>
+
+        <hr>
+
+        <!-- Форма имитации оплаты -->
+        <section>
+            <h3>Введите данные для оплаты</h3>
+            <form action="{% url 'checkout' %}" method="post">
+                {% csrf_token %}
+
+                <p>
+                    <label for="card-holder">Имя на карте:</label><br>
+                    <input type="text" id="card-holder" name="card_holder" required placeholder="IVAN IVANOV">
+                </p>
+
+                <p>
+                    <label for="card-number">Номер карты:</label><br>
+                    <input type="text" id="card-number" name="card_number" required placeholder="4000 0000 0000 0000" maxlength="19">
+                </p>
+
+                <p>
+                    <label for="exp-date">Срок действия:</label><br>
+                    <input type="text" id="exp-date" name="exp_date" required placeholder="MM/YY" size="5">
+                </p>
+
+                <p>
+                    <label for="cvv">CVC/CVV:</label><br>
+                    <input type="password" id="cvv" name="cvv" required size="3" maxlength="3">
+                </p>
+
+                <button type="submit" style="background: #28a745; color: white; padding: 10px 20px; font-size: 16px; border: none; cursor: pointer;">
+                    Подтвердить и оплатить ${{ cart.total_price }}
+                </button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

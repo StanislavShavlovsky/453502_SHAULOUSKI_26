@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ property.title }} — {{ company_info.name|default:"EliteEstate" }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'home' %}"><h2>{{ company_info.name|default:"EliteEstate" }}</h2></a>
+        <nav>
+            <a href="{% url 'home' %}">Главная</a> |
+            <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h1>{{ property.title }}</h1>
+
+            {% if property.image %}
+                <img src="{{ property.image.url }}" alt="{{ property.title }}" width="500">
+            {% endif %}
+
+            <p><strong>Тип объекта:</strong> {{ property.prop_type.name }}</p>
+            <p><strong>Тип сделки:</strong> {{ property.get_deal_type_display }}</p>
+            <p><strong>Цена:</strong> ${{ property.price }} ({{ property.get_price_in_byn }} BYN)</p>
+
+            <h3>Описание объекта:</h3>
+            <p>{{ property.description|linebreaks }}</p>
+
+            <!-- Кнопка "Добавить в корзину" -->
+            <form action="{% url 'cart_add' property.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+                    🛒 Добавить в корзину
+                </button>
+            </form>
+        </article>
+    </main>
+</body>
+</html>

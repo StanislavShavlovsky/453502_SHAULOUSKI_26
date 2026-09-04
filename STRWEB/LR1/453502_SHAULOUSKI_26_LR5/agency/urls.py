@@ -31,11 +31,18 @@ urlpatterns = [
     path('accounts/logout/', views.logout_view, name='logout'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
 
-    # Real Estate Properties CRUD
+    # Real Estate Properties CRUD & Detail Page
     path('properties/', views.property_list_view, name='property_list'),
     path('properties/add/', views.property_create_view, name='property_create'),
+    re_path(r'^properties/(?P<pk>\d+)/$', views.property_detail_view, name='property_detail'),
     re_path(r'^properties/(?P<pk>\d+)/update/$', views.property_update_view, name='property_update'),
     re_path(r'^properties/(?P<pk>\d+)/delete/$', views.property_delete_view, name='property_delete'),
+
+    # Cart & Checkout Logic (Корзина и Оплата)
+    path('cart/', views.cart_view, name='cart_detail'),
+    path('cart/add/<int:property_id>/', views.cart_add_view, name='cart_add'),
+    path('cart/remove/<int:property_id>/', views.cart_remove_view, name='cart_remove'),
+    path('cart/checkout/', views.checkout_view, name='checkout'),
 
     # Async API Endpoints
     path('api/v1/secured-stats/', views.secured_agency_stats_api, name='secured_agency_stats_api'),

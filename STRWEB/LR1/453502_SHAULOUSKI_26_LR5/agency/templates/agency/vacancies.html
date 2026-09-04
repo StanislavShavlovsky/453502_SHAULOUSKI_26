@@ -1,63 +1,122 @@
-{% extends 'agency/base.html' %}
-{% block title %}Открытые вакансии | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Открытые вакансии и работа в агентстве недвижимости EliteEstate.">
+    <meta name="keywords" content="вакансии, работа, карьера, риелтор, агентство недвижимости, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-{% block content %}
-<div style="max-width: 950px; margin: 2.5rem auto; padding: 0 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Открытые вакансии — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Присоединяйтесь к команде профессионалов EliteEstate. Мы предлагаем отличные условия для карьерного и финансового роста.">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+    <meta property="og:type" content="website">
 
-    <div style="margin-bottom: 2.5rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1.25rem;">
-        <h2 style="color: #1a252f; font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: -0.5px;">
-            Открытые вакансии
-        </h2>
-        <p style="color: #718096; margin: 0.5rem 0 0 0; font-size: 1.05rem;">
-            Присоединяйтесь к команде профессионалов EliteEstate. Мы предлагаем отличные условия для карьерного и финансового роста.
-        </p>
-    </div>
+    <title>Открытые вакансии — {{ company_info.name|default:'EliteEstate' }}</title>
 
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-        {% for vac in vacancies %}
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; gap: 15px; transition: border-color 0.2s ease, box-shadow 0.2s ease;" class="vacancy-card">
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body id="top">
 
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; background: transparent !important;">
-                    <h3 style="margin: 0; font-size: 1.4rem; font-weight: 700; color: #1a252f; line-height: 1.3;">
-                        {{ vac.title }}
-                    </h3>
+    <!-- Шапка сайта и Навигация -->
+<header>
+    <a href="{% url 'home' %}">
+        {% if company_info.logo %}
+            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
+        {% else %}
+            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
+        {% endif %}
+    </a>
+    <nav style="margin-top: 10px; line-height: 1.8;">
+        <a href="{% url 'home' %}">Главная</a> |
+        <a href="{% url 'about' %}">О компании</a> |
+        <a href="{% url 'news' %}">Новости</a> |
+        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
+        <a href="{% url 'contacts' %}">Контакты</a> |
+        <a href="{% url 'vacancies' %}">Вакансии</a> |
+        <a href="{% url 'reviews' %}">Отзывы</a> |
+        <a href="{% url 'promocodes' %}">Промокоды</a> |
+        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
+        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
+    </nav>
+</header>
 
-                    <div style="display: inline-flex; align-items: center; background: #e6fffa; color: #00a389; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 1.1rem; white-space: nowrap; border: 1px solid #b2f5ea;">
-                        <span style="margin-right: 4px;">💰</span>
-                        {% if vac.salary %}
-                            {{ vac.salary }} BYN
-                        {% else %}
-                            По результатам собеседования
-                        {% endif %}
-                    </div>
-                </div>
+    <!-- Основное содержимое -->
+    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px;">
 
-                <div style="color: #4a5568; font-size: 1.05rem; line-height: 1.6; text-align: justify; white-space: normal; border-left: 3px solid #17a2b8; padding-left: 15px; margin: 5px 0; background: transparent !important;">
-                    {{ vac.description|linebreaksbr }}
-                </div>
+        <section id="vacancies-header">
+            <h1>Открытые вакансии</h1>
+            <p>Присоединяйтесь к команде профессионалов EliteEstate. Мы предлагаем отличные условия для карьерного и финансового роста.</p>
+        </section>
 
-                <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px; margin-top: 5px; background: transparent !important;">
-                    <span style="font-size: 0.9rem; color: #a0aec0; display: inline-flex; align-items: center; gap: 5px;">
-                        <span>💼</span> Полная занятость, гибкий график
-                    </span>
-                </div>
+        <hr>
 
+        <!-- Список вакансий из БД -->
+        <section id="vacancies-list">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                {% for vac in vacancies %}
+                    <article id="vacancy-{{ vac.pk }}" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #fff;">
+                        
+                        <!-- Заголовок и Зарплата -->
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                            <h3 style="margin: 0; color: #007bff; font-size: 1.3em;">
+                                {{ vac.title }}
+                            </h3>
+                            
+                            <div style="background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; padding: 5px 12px; border-radius: 4px; font-weight: bold; font-size: 1em;">
+                                💰 Зарплата: 
+                                {% if vac.salary %}
+                                    {{ vac.salary }} BYN
+                                {% else %}
+                                    По результатам собеседования
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Описание вакансии -->
+                        <div style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #007bff; color: #333; line-height: 1.6;">
+                            <strong>Описание вакансии и требования:</strong>
+                            <p style="margin: 5px 0 0 0;">
+                                {{ vac.description|linebreaksbr }}
+                            </p>
+                        </div>
+
+                        <!-- Дополнительная информация и действие -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 0.9em; color: #6c757d;">
+                            <span>💼 Условия: Полная занятость, гибкий график</span>
+                            <a href="{% url 'contacts' %}" style="padding: 6px 12px; background-color: #17a2b8; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;">
+                                Откликнуться (Контакты) &rarr;
+                            </a>
+                        </div>
+
+                    </article>
+                {% empty %}
+                    <p style="text-align: center; color: #6c757d; margin: 40px 0;">
+                        На данный момент активных вакансий нет. Вы можете отправить своё резюме на электронную почту через раздел <a href="{% url 'contacts' %}" style="color: #007bff;">Контакты</a>.
+                    </p>
+                {% endfor %}
             </div>
-        {% empty %}
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 4rem 2rem; text-align: center; color: #a0aec0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
-                <span style="font-size: 3rem; display: block; margin-bottom: 1rem; opacity: 0.5;">📭</span>
-                <p style="margin: 0; font-size: 1.15rem; font-style: italic;">На данный момент активных вакансий нет.</p>
-                <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Вы можете отправить своё резюме на общую почту компании через раздел Контакты.</p>
-            </div>
-        {% endfor %}
-    </div>
+        </section>
 
-</div>
+    </main>
 
-<style>
-    .vacancy-card:hover {
-        border-color: #cbd5e0 !important;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04) !important;
-    }
-</style>
-{% endblock %}
+    <hr>
+
+    <!-- Подвал (Footer) -->
+    <footer>
+        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
+        {% if company_info.requisites %}
+            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
+        {% endif %}
+        <p><a href="#top">Наверх страницы &#8593;</a></p>
+    </footer>
+
+</body>
+</html>

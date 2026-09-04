@@ -1,5 +1,123 @@
-{% extends 'agency/base.html' %}
-{% block content %}
-<h2>Политика конфиденциальности</h2>
-<p>Данная страница находится в стадии разработки. Ваша конфиденциальность имеет первостепенное значение для нашего агентства недвижимости.</p>
-{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Политика конфиденциальности и защиты персональных данных агентства недвижимости EliteEstate.">
+    <meta name="keywords" content="политика конфиденциальности, персональные данные, защита информации, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Политика конфиденциальности — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Политика обработки и защиты персональных данных клиентов агентства недвижимости EliteEstate.">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+    <meta property="og:type" content="website">
+
+    <title>Политика конфиденциальности — {{ company_info.name|default:'EliteEstate' }}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body id="top">
+
+    <!-- Шапка сайта и Навигация -->
+<header>
+    <a href="{% url 'home' %}">
+        {% if company_info.logo %}
+            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
+        {% else %}
+            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
+        {% endif %}
+    </a>
+    <nav style="margin-top: 10px; line-height: 1.8;">
+        <a href="{% url 'home' %}">Главная</a> |
+        <a href="{% url 'about' %}">О компании</a> |
+        <a href="{% url 'news' %}">Новости</a> |
+        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
+        <a href="{% url 'contacts' %}">Контакты</a> |
+        <a href="{% url 'vacancies' %}">Вакансии</a> |
+        <a href="{% url 'reviews' %}">Отзывы</a> |
+        <a href="{% url 'promocodes' %}">Промокоды</a> |
+        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
+        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
+    </nav>
+</header>
+
+    <!-- Основное содержимое -->
+    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px; line-height: 1.6;">
+
+        <section id="privacy-header">
+            <h1>Политика конфиденциальности</h1>
+            <p>Ваша конфиденциальность имеет первостепенное значение для нашего агентства недвижимости «{{ company_info.name|default:"EliteEstate" }}»[cite: 13].</p>
+        </section>
+
+        <hr>
+
+        <section id="privacy-content">
+            <article style="background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+                
+                <h3>1. Общие положения</h3>
+                <p>
+                    Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональной информации пользователей, которую агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}» может получить во время использования сайта, оформления заявок на покупку или аренду объектов, а также подписки на рассылку новостей.
+                </p>
+
+                <h3>2. Какие данные мы собираем</h3>
+                <p>При поиске, подборе и бронировании недвижимости мы можем запрашивать следующие данные:</p>
+                <ul>
+                    <li>Фамилия, имя и отчество;</li>
+                    <li>Контактный номер телефона;</li>
+                    <li>Адрес электронной почты (Email);</li>
+                    <li>Параметры и предпочтения по подбору объектов недвижимости (бюджет, тип объекта, локация);</li>
+                    <li>Технические данные (IP-адрес, файлы cookie, данные браузера).</li>
+                </ul>
+
+                <h3>3. Цели сбора информации</h3>
+                <p>Мы используем полученные данные исключительно для:</p>
+                <ul>
+                    <li>Предоставления консультаций по вопросам купли-продажи и аренды недвижимости;</li>
+                    <li>Организации просмотров объектов недвижимости в удобное для вас время;</li>
+                    <li>Обработки заказов и запросов через Корзину и формочки обратной связи;</li>
+                    <li>Отправки уведомлений, новостей и аналитических отчетов рынка (с вашего согласия).</li>
+                </ul>
+
+                <h3>4. Защита и передача данных третьим лицам</h3>
+                <p>
+                    Агентство «{{ company_info.name|default:"EliteEstate" }}» гарантирует конфиденциальность ваших данных и обязуется не передавать информацию третьим лицам, за исключением случаев, предусмотренных законодательством Республики Беларусь (или законодательством страны присутствия), либо при необходимости оформления юридических сделок с вашим явным согласием.
+                </p>
+
+                <h3>5. Использование файлов Cookie</h3>
+                <p>
+                    Наш сайт использует файлы cookie для корректного сохранения пользовательских сессий, работы корзины и сбора анонимной аналитики взаимодействия с объектами недвижимости. Вы можете отключить cookie в настройках браузера.
+                </p>
+
+                <h3>6. Контактная информация</h3>
+                <p>
+                    Если у вас возникли вопросы по поводу обработки персональных данных, вы можете связаться с нами через страницу <a href="{% url 'contacts' %}" style="color: #007bff;">Контакты</a> или по реквизитам организации:
+                </p>
+                {% if company_info.requisites %}
+                    <pre style="background: #f8f9fa; padding: 10px; border-left: 3px solid #007bff;">{{ company_info.requisites }}</pre>
+                {% endif %}
+
+            </article>
+        </section>
+
+    </main>
+
+    <hr>
+
+    <!-- Подвал (Footer) -->
+    <footer>
+        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
+        {% if company_info.requisites %}
+            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
+        {% endif %}
+        <p><a href="#top">Наверх страницы &#8593;</a></p>
+    </footer>
+
+</body>
+</html>

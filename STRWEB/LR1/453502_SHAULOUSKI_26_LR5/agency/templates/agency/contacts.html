@@ -1,88 +1,140 @@
-{% extends 'agency/base.html' %}
-{% block title %}Наши сотрудники и контакты | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ company_info.description|default:'Контакты и сотрудники агентства недвижимости EliteEstate.'|truncatewords:25 }}">
+    <meta name="keywords" content="контакты, сотрудники, риелторы, телефоны, почта, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-{% block content %}
-<div style="max-width: 1200px; margin: 2.5rem auto; padding: 0 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Наши сотрудники и контакты — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Профессиональная команда EliteEstate всегда готова помочь вам в сфере недвижимости.">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+    <meta property="og:type" content="website">
 
-    <div style="margin-bottom: 2.5rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1.25rem;">
-        <h2 style="color: #1a252f; font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: -0.5px;">
-            Наши сотрудники и контакты
-        </h2>
-        <p style="color: #718096; margin: 0.5rem 0 0 0; font-size: 1.05rem;">
-            Профессиональная команда EliteEstate всегда готова помочь вам с решением любых вопросов в сфере недвижимости.
-        </p>
-    </div>
+    <title>Наши сотрудники и контакты — {{ company_info.name|default:'EliteEstate' }}</title>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px;">
-        {% for emp in employees %}
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem 1.5rem; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; justify-content: space-between; transition: transform 0.2s ease, box-shadow 0.2s ease;" class="emp-card">
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body id="top">
 
-                <div style="width: 100%; display: flex; flex-direction: column; align-items: center; background: transparent !important;">
-                    <div style="width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin-bottom: 1.25rem; border: 3px solid #edf2f7; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background: #f7fafc; flex-shrink: 0;">
-                        {% if emp.photo %}
-                            <img src="{{ emp.photo.url }}" alt="{{ emp.user.get_full_name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                        {% else %}
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #edf2f7; color: #a0aec0;">
-                                <i class="fas fa-user" style="font-size: 3rem; opacity: 0.5;"></i>
-                            </div>
-                        {% endif %}
-                    </div>
+    <!-- Шапка сайта и Навигация -->
+<header>
+    <a href="{% url 'home' %}">
+        {% if company_info.logo %}
+            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
+        {% else %}
+            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
+        {% endif %}
+    </a>
+    <nav style="margin-top: 10px; line-height: 1.8;">
+        <a href="{% url 'home' %}">Главная</a> |
+        <a href="{% url 'about' %}">О компании</a> |
+        <a href="{% url 'news' %}">Новости</a> |
+        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
+        <a href="{% url 'contacts' %}">Контакты</a> |
+        <a href="{% url 'vacancies' %}">Вакансии</a> |
+        <a href="{% url 'reviews' %}">Отзывы</a> |
+        <a href="{% url 'promocodes' %}">Промокоды</a> |
+        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
+        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
+    </nav>
+</header>
 
-                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.35rem; font-weight: 700; color: #1a252f; line-height: 1.3;">
-                        {% if emp.user.get_full_name %}
-                            {{ emp.user.get_full_name }}
-                        {% else %}
-                            {{ emp.user.username }}
-                        {% endif %}
-                    </h3>
+    <!-- Основное содержимое -->
+    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px;">
 
-                    <span style="display: inline-block; background: #e3fafc; color: #0c8599; font-weight: 700; font-size: 0.9rem; padding: 4px 14px; border-radius: 20px; margin-bottom: 1.25rem; letter-spacing: 0.3px;">
-                        {{ emp.position }}
-                    </span>
+        <section id="contacts-header">
+            <h1>Наши сотрудники и контакты</h1>
+            <p>Профессиональная команда EliteEstate всегда готова помочь вам с решением любых вопросов в сфере недвижимости.</p>
+        </section>
 
-                    <div style="border-top: 1px dashed #edf2f7; border-bottom: 1px dashed #edf2f7; padding: 1rem 0; margin-bottom: 1.5rem; width: 100%; background: transparent !important;">
-                        <p style="margin: 0; font-size: 0.95rem; color: #4a5568; line-height: 1.5; text-align: center; font-style: italic;">
-                            {% if emp.job_description %}
-                                {{ emp.job_description }}
+        <hr>
+
+        <!-- Список сотрудников из БД -->
+        <section id="employees-list">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                {% for emp in employees %}
+                    <article id="employee-{{ emp.pk }}" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; background-color: #fff;">
+                        
+                        <!-- Фото сотрудника -->
+                        <div style="width: 150px; text-align: center; flex-shrink: 0;">
+                            {% if emp.photo %}
+                                <img src="{{ emp.photo.url }}" alt="{{ emp.user.get_full_name|default:emp.user.username }}" width="150" height="150" style="object-fit: cover; border-radius: 50%; border: 2px solid #ccc;">
                             {% else %}
-                                Обязанности уточняются.
+                                <img src="{% static 'images/flat1.jpg' %}" alt="Нет фото" width="150" height="150" style="object-fit: cover; border-radius: 50%; border: 2px solid #ccc;">
                             {% endif %}
-                        </p>
-                    </div>
-                </div>
+                        </div>
 
-                <div style="width: 100%; display: flex; flex-direction: column; gap: 8px; font-size: 0.95rem; text-align: left; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #edf2f7;">
-                    <div style="display: flex; align-items: center; gap: 8px; color: #2d3748;">
-                        <span style="color: #17a2b8; width: 18px; text-align: center;">📞</span>
-                        <a href="tel:{{ emp.phone }}" style="color: #2d3748; text-decoration: none; font-weight: 600;">{{ emp.phone }}</a>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px; color: #2d3748;">
-                        <span style="color: #17a2b8; width: 18px; text-align: center;">✉️</span>
-                        {% if emp.user.email %}
-                            <a href="mailto:{{ emp.user.email }}" style="color: #17a2b8; text-decoration: none; word-break: break-all;">{{ emp.user.email }}</a>
-                        {% else %}
-                            <span style="color: #a0aec0; font-style: italic;">not-configured@domain.com</span>
-                        {% endif %}
-                    </div>
-                </div>
+                        <!-- Информация о сотруднике -->
+                        <div style="flex: 1; min-width: 280px;">
+                            <h3 style="margin: 0 0 5px 0; color: #007bff;">
+                                {% if emp.user.get_full_name %}
+                                    {{ emp.user.get_full_name }}
+                                {% else %}
+                                    {{ emp.user.username }}
+                                {% endif %}
+                            </h3>
 
+                            <p style="margin: 0 0 10px 0; font-weight: bold; color: #495057;">
+                                Должность: {{ emp.position }}
+                            </p>
+
+                            <!-- Описание выполняемых работ -->
+                            <div style="margin-bottom: 12px; background-color: #f8f9fa; padding: 10px; border-left: 3px solid #007bff; border-radius: 2px;">
+                                <strong>Выполняемые работы и обязанности:</strong>
+                                <p style="margin: 5px 0 0 0; color: #333; font-style: italic;">
+                                    {% if emp.job_description %}
+                                        {{ emp.job_description }}
+                                    {% else %}
+                                        Обязанности уточняются.
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                            <!-- Контакты сотрудника -->
+                            <div style="font-size: 0.95em; line-height: 1.6;">
+                                <p style="margin: 0;">
+                                    <strong>Телефон:</strong> 
+                                    <a href="tel:{{ emp.phone }}" style="color: #212529; text-decoration: none; font-weight: bold;">{{ emp.phone }}</a>
+                                </p>
+                                <p style="margin: 0;">
+                                    <strong>Email:</strong> 
+                                    {% if emp.user.email %}
+                                        <a href="mailto:{{ emp.user.email }}" style="color: #007bff; text-decoration: none;">{{ emp.user.email }}</a>
+                                    {% else %}
+                                        <span style="color: #6c757d; font-style: italic;">не указан</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+
+                    </article>
+                {% empty %}
+                    <p style="text-align: center; color: #6c757d; margin: 40px 0;">Список сотрудников пока пуст.</p>
+                {% endfor %}
             </div>
-        {% empty %}
-            <div style="grid-column: 1 / -1; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 4rem 2rem; text-align: center; color: #a0aec0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
-                <i class="fas fa-users-slash" style="font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.4; color: #17a2b8;"></i>
-                <p style="margin: 0; font-size: 1.15rem; font-style: italic;">Список сотрудников пуст.</p>
-                <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Заполните профили сотрудников через панель управления Django Admin.</p>
-            </div>
-        {% endfor %}
-    </div>
+        </section>
 
-</div>
+    </main>
 
-<style>
-    .emp-card:hover {
-        transform: translateY(-4px) !important;
-        box-shadow: 0 12px 20px -5px rgba(0,0,0,0.05), 0 8px 8px -5px rgba(0,0,0,0.03) !important;
-        border-color: #cbd5e0 !important;
-    }
-</style>
-{% endblock %}
+    <hr>
+
+    <!-- Подвал (Footer) -->
+    <footer>
+        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
+        {% if company_info.requisites %}
+            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
+        {% endif %}
+        <p><a href="#top">Наверх страницы &#8593;</a></p>
+    </footer>
+
+</body>
+</html>

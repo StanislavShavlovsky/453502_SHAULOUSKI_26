@@ -1,87 +1,170 @@
-{% extends 'agency/base.html' %}
-{% block title %}Отзывы клиентов | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Отзывы клиентов о работе агентства недвижимости EliteEstate.">
+    <meta name="keywords" content="отзывы, клиенты, рейтинги, оценки, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-{% block content %}
-<div style="max-width: 1000px; margin: 2.5rem auto; padding: 0 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Отзывы клиентов — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Читайте отзывы наших клиентов и оставляйте свое мнение о работе агентства EliteEstate.">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+    <meta property="og:type" content="website">
 
-    <div style="margin-bottom: 2.5rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1.25rem;">
-        <h2 style="color: #1a252f; font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: -0.5px;">
-            Отзывы о нашей работе
-        </h2>
-    </div>
+    <title>Отзывы клиентов — {{ company_info.name|default:'EliteEstate' }}</title>
 
-    <div style="display: grid; grid-template-columns: 320px 1fr; align-items: start; gap: 2.5rem;" class="reviews-grid">
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body id="top">
 
-        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0; position: sticky; top: 20px;">
-            <h3 style="margin-top: 0; color: #1a252f; font-size: 1.2rem;">Оставить отзыв</h3>
-            {% if user.is_authenticated %}
-                <form method="post" style="margin-top: 1rem;">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        <div style="margin-bottom: 1rem;">
-                            <label style="display: block; margin-bottom: 0.3rem; font-weight: 600; font-size: 0.9rem; color: #4a5568;">
-                                {{ field.label }}
-                            </label>
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                    <button type="submit" style="width: 100%; padding: 0.8rem; background: #17a2b8; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s;">
-                        Отправить отзыв
-                    </button>
-                </form>
-            {% else %}
-                <p style="margin-top: 1rem; color: #666; font-size: 0.95rem;">Только зарегистрированные пользователи могут оставлять отзывы.</p>
-                <a href="{% url 'login' %}" style="display: block; width: 100%; text-align: center; padding: 0.8rem; background: #718096; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 1rem;">Войти на сайт</a>
-            {% endif %}
-        </div>
+    <!-- Шапка сайта и Навигация -->
+<header>
+    <a href="{% url 'home' %}">
+        {% if company_info.logo %}
+            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
+        {% else %}
+            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
+        {% endif %}
+    </a>
+    <nav style="margin-top: 10px; line-height: 1.8;">
+        <a href="{% url 'home' %}">Главная</a> |
+        <a href="{% url 'about' %}">О компании</a> |
+        <a href="{% url 'news' %}">Новости</a> |
+        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
+        <a href="{% url 'contacts' %}">Контакты</a> |
+        <a href="{% url 'vacancies' %}">Вакансии</a> |
+        <a href="{% url 'reviews' %}">Отзывы</a> |
+        <a href="{% url 'promocodes' %}">Промокоды</a> |
+        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
+        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
+    </nav>
+</header>
 
-        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-            {% for r in reviews %}
-                <div style="
-                    background: #ffffff;
-                    border: 1px solid #e2e8f0;
-                    border-left: 5px solid {{ r.get_rating_color }};
-                    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-                    padding: 1.5rem;
-                    border-radius: 8px;
-                    transition: transform 0.2s;
-                " class="review-card">
+    <!-- Основное содержимое -->
+    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px;">
 
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
-                        <div>
-                            <strong style="color: #2d3748; display: block; font-size: 1.1rem;">{{ r.property.title }}</strong>
-                            <small style="color: #a0aec0; font-size: 0.8rem;">Автор: {{ r.user.username }}</small>
-                        </div>
+        <section id="reviews-header">
+            <h1>Отзывы о нашей работе</h1>
+            <p>Ознакомьтесь с отзывами клиентов или поделитесь своим впечатлением от сотрудничества с агентством EliteEstate.</p>
+        </section>
 
-                        <span style="color: {{ r.get_rating_color }}; font-weight: 800; font-size: 0.95rem; background: #fff; padding: 2px 8px; border-radius: 4px; border: 1px solid #edf2f7;">
-                            ★ {{ r.rating }}/5
-                        </span>
-                    </div>
+        <hr>
 
-                    <p style="color: #4a5568; line-height: 1.6; margin: 0.5rem 0; font-style: italic;">
-                        "{{ r.comment }}"
+        <section id="reviews-container" style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+
+            <!-- Форма добавления отзыва / Кнопка входа -->
+            <aside style="flex: 1; min-width: 280px; border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #f8f9fa;">
+                <h3 style="margin-top: 0; color: #007bff;">Оставить отзыв</h3>
+
+                {% if user.is_authenticated %}
+                    <p style="font-size: 0.9em; color: #6c757d;">
+                        Вы вошли как: <strong>{{ user.username }}</strong>
+                        (<a href="{% url 'profile' %}" style="color: #007bff;">Перейти в Личный кабинет</a>)
                     </p>
 
-                    <div style="text-align: right; margin-top: 0.5rem;">
-                        <small style="color: #cbd5e0; font-size: 0.75rem;">
-                            {{ r.created_at|date:"d.m.Y H:i" }}
-                        </small>
-                    </div>
-                </div>
-            {% empty %}
-                <div style="text-align: center; padding: 3rem; color: #a0aec0; border: 2px dashed #e2e8f0; border-radius: 12px;">
-                    <p style="font-style: italic;">Отзывов еще нет. Станьте первым, кто оценит работу нашей команды!</p>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+                    <form method="post" style="margin-top: 15px;">
+                        {% csrf_token %}
 
-<style>
-    /* Адаптивность для мобилок */
-    @media (max-width: 768px) {
-        .reviews-grid { grid-template-columns: 1fr !important; }
-    }
-    .review-card:hover { transform: translateY(-2px); border-color: #cbd5e0; }
-</style>
-{% endblock %}
+                        <!-- Выбор оценки -->
+                        <div style="margin-bottom: 12px;">
+                            <label for="id_rating" style="display: block; font-weight: bold; margin-bottom: 5px;">Оценка (от 1 до 5):</label>
+                            {% if form.rating %}
+                                {{ form.rating }}
+                            {% else %}
+                                <select name="rating" id="id_rating" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                                    <option value="5" selected>★ ★ ★ ★ ★ (5 - Отлично)</option>
+                                    <option value="4">★ ★ ★ ★ ☆ (4 - Хорошо)</option>
+                                    <option value="3">★ ★ ★ ☆ ☆ (3 - Удовлетворительно)</option>
+                                    <option value="2">★ ★ ☆ ☆ ☆ (2 - Плохо)</option>
+                                    <option value="1">★ ☆ ☆ ☆ ☆ (1 - Ужасно)</option>
+                                </select>
+                            {% endif %}
+                        </div>
+
+                        <!-- Текст отзыва -->
+                        <div style="margin-bottom: 15px;">
+                            <label for="id_comment" style="display: block; font-weight: bold; margin-bottom: 5px;">Текст отзыва:</label>
+                            {% if form.comment %}
+                                {{ form.comment }}
+                            {% else %}
+                                <textarea name="comment" id="id_comment" rows="4" required placeholder="Напишите ваш отзыв здесь..." style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; box-sizing: border-box;"></textarea>
+                            {% endif %}
+                        </div>
+
+                        <!-- Кнопка отправки -->
+                        <button type="submit" style="width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+                            Отправить отзыв
+                        </button>
+                    </form>
+                {% else %}
+                    <p style="color: #6c757d; font-size: 0.95em; line-height: 1.5;">
+                        Оставлять отзывы могут только зарегистрированные пользователи. Пожалуйста, войдите в систему или зарегистрируйтесь.
+                    </p>
+                    <a href="{% url 'login' %}" style="display: block; text-align: center; padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 15px;">
+                        Войти / Зарегистрироваться
+                    </a>
+                {% endif %}
+            </aside>
+
+            <!-- Список отзывов из БД -->
+            <div style="flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 15px;">
+                {% for r in reviews %}
+                    <article id="review-{{ r.pk }}" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background-color: #fff;">
+
+                        <!-- Шапка отзыва: Автор и Оценка -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 10px;">
+                            <div>
+                                <strong style="color: #333; font-size: 1.05em;">Пользователь: {{ r.user.username }}</strong>
+                                {% if r.property %}
+                                    <br><small style="color: #6c757d;">Объект: {{ r.property.title }}</small>
+                                {% endif %}
+                            </div>
+
+                            <span style="font-weight: bold; color: #ffc107; font-size: 1.1em; background-color: #fff3cd; padding: 3px 8px; border-radius: 4px; border: 1px solid #ffeeba;">
+                                ★ {{ r.rating }}/5
+                            </span>
+                        </div>
+
+                        <!-- Текст отзыва -->
+                        <p style="margin: 0 0 10px 0; color: #495057; font-style: italic; line-height: 1.5;">
+                            "{{ r.comment }}"
+                        </p>
+
+                        <!-- Дата добавления -->
+                        <div style="text-align: right; font-size: 0.8em; color: #6c757d;">
+                            <em>Дата публикации: {{ r.created_at|date:"d.m.Y H:i" }}</em>
+                        </div>
+
+                    </article>
+                {% empty %}
+                    <p style="text-align: center; color: #6c757d; margin: 40px 0; padding: 20px; border: 1px dashed #ccc; border-radius: 8px;">
+                        Отзывов пока нет. Будьте первым, кто оставит свой отзыв!
+                    </p>
+                {% endfor %}
+            </div>
+
+        </section>
+
+    </main>
+
+    <hr>
+
+    <!-- Подвал (Footer) -->
+    <footer>
+        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
+        {% if company_info.requisites %}
+            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
+        {% endif %}
+        <p><a href="#top">Наверх страницы &#8593;</a></p>
+    </footer>
+
+</body>
+</html>

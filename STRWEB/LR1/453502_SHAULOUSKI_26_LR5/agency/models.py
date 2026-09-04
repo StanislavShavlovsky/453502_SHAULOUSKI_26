@@ -1,7 +1,6 @@
 from zoneinfo import ZoneInfo
 import requests
 from PIL.Image import logger
-from django.contrib.sites import requests
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import User
@@ -19,7 +18,6 @@ class PropertyType(models.Model):
         verbose_name_plural = "Виды недвижимости"
 
 
-
 class Owner(models.Model):
     full_name = models.CharField(max_length=255, verbose_name="ФИО владельца")
     phone = models.CharField(max_length=20, verbose_name="Телефон")
@@ -35,7 +33,6 @@ class Owner(models.Model):
 class ClientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Аккаунт")
     phone = models.CharField(max_length=20, verbose_name="Телефон")
-    # ДОБАВИЛИ СВЯЗЬ: теперь у клиента есть доступные ему промокоды
     promo_codes = models.ManyToManyField(
         'PromoCode',
         blank=True,
@@ -55,21 +52,18 @@ class EmployeeProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Аккаунт")
     position = models.CharField(max_length=100, verbose_name="Должность")
     phone = models.CharField(max_length=20, verbose_name="Телефон")
-    # ТРЕБОВАНИЕ ЛР: Фото сотрудников
     photo = models.ImageField(
         upload_to="employees_photos/",
         blank=True,
         null=True,
         verbose_name="Фото сотрудника"
     )
-    # ТРЕБОВАНИЕ ЛР: Описание выполняемых работ
     job_description = models.TextField(
         blank=True,
         verbose_name="Выполняемые работы / Обязанности"
     )
 
     def __str__(self):
-        # Если у User заполнены имя и фамилия, выведем их, иначе — username
         full_name = self.user.get_full_name()
         return f"{full_name if full_name else self.user.username} ({self.position})"
 
@@ -92,7 +86,6 @@ class Property(models.Model):
         verbose_name="Фото объекта"
     )
 
-    # Поле выбора типа сделки (согласовано со структурой твоих будущих сделок Deal)
     DEAL_TYPE_CHOICES = [
         ('sale', 'Продажа'),
         ('rent', 'Аренда'),
@@ -104,7 +97,6 @@ class Property(models.Model):
         verbose_name="Тип сделки"
     )
 
-    # Переменная на уровне самого класса для кэширования курса (чтобы не спамить API при рендере списка)
     _cached_usd_rate = None
 
     class Meta:
@@ -116,13 +108,8 @@ class Property(models.Model):
 
     @classmethod
     def get_usd_rate(cls):
-        """
-        Метод класса для получения и кэширования актуального курса доллара с НБРБ.
-        Если запрос падает — отдает дефолтный хардкод (3.25), чтобы не ломать страницу.
-        """
         if cls._cached_usd_rate is None:
             try:
-                # Запрос к API НБРБ (аналогично твоей вьюхе)
                 res = requests.get('https://api.nbrb.by/exrates/rates/USD?parammode=2', timeout=2)
                 if res.status_code == 200:
                     data = res.json()
@@ -136,19 +123,14 @@ class Property(models.Model):
                     cls._cached_usd_rate = 3.25
             except Exception as e:
                 logger.warning("Не удалось получить курс во время работы модели Property: %s. Используем дефолт.", e)
-                cls._cached_usd_rate = 3.25  # Фолбэк, если интернета нет или Минск заблокирован
+                cls._cached_usd_rate = 3.25
         return cls._cached_usd_rate
 
     @property
     def get_price_in_byn(self):
-        """
-        Вычисляемое свойство для шаблонов. Преобразует стоимость из USD в BYN.
-        Используется в HTML как {{ prop.get_price_in_byn }}
-        """
         if not self.price:
             return "0.00"
         rate = self.get_usd_rate()
-        # Перемножаем цену на курс и красиво форматируем с пробелами по разрядам
         total_byn = float(self.price) * rate
         return f"{total_byn:,.2f}".replace(",", " ")
 
@@ -160,7 +142,6 @@ class Deal(models.Model):
     final_price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Финальная цена ($)")
     deal_type = models.CharField(max_length=10, choices=[('sale', 'Продажа'), ('rent', 'Аренда')], default='sale')
 
-    # ТРЕБОВАНИЕ ЛР: Сохранение времени в разных форматах и таймзонах
     created_at_utc = models.DateTimeField(auto_now_add=True, verbose_name="Дата/Время создания (UTC)")
     created_at_local = models.DateTimeField(null=True, blank=True, verbose_name="Дата/Время создания (Локальное)")
     timezone_name = models.CharField(max_length=50, default='Europe/Minsk', verbose_name="Таймзона фиксации")
@@ -173,30 +154,18 @@ class Deal(models.Model):
     def __str__(self):
         return f"Сделка #{self.id} — {self.property.title}"
 
-    # ТРЕБОВАНИЕ ЛР: Валидация на уровне модели (Бизнес-логика)
     def clean(self):
         super().clean()
-        # 1. Проверка валидности цены
         if self.final_price and self.final_price <= 0:
             raise ValidationError({'final_price': 'Стоимость сделки должна быть строго больше нуля.'})
 
-        # 2. Проверка доступности объекта недвижимости
         if self.property and not self.property.is_active:
             raise ValidationError({'property': 'Выбранный объект недвижимости сейчас неактивен или уже продан.'})
 
-    # Переопределяем метод сохранения, чтобы аппаратно высчитывать время в локальной таймзоне
-        # Переопределяем метод сохранения, чтобы аппаратно высчитывать время в локальной таймзоне
     def save(self, *args, **kwargs):
-        # 1. Вызываем внутреннюю валидацию
         self.full_clean()
-
-        # 2. Имя таймзоны фиксации
         self.timezone_name = 'Europe/Minsk'
-
-        # 3. Фиксируем точное время прямо сейчас
-        now_utc = timezone.now()  # Чистое время по Гринвичу (UTC)
-
-        # 4. Переводим UTC время конкретно в Минскую зону (+3 часа)
+        now_utc = timezone.now()
         minsk_tz = ZoneInfo(self.timezone_name)
 
         if not self.created_at_local:
@@ -205,28 +174,21 @@ class Deal(models.Model):
         super().save(*args, **kwargs)
 
 
-# ЖЕСТКАЯ ФИКСАЦИЯ ИМЕН ПОЛЕЙ: property и comment
 class Review(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, verbose_name="Объект недвижимости")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор", null=True)  # Добавили автора
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор", null=True)
     rating = models.PositiveIntegerField(verbose_name="Оценка")
     comment = models.TextField(verbose_name="Отзыв")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата отзыва")  # Добавили дату
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата отзыва")
 
     def __str__(self):
         return f"Отзыв на {self.property.title}"
 
     def get_rating_color(self):
-        """
-        Возвращает цвет в зависимости от оценки:
-        1-2: Красный (#ff6b6b)
-        3-4: Жёлтый (#ffd43b)
-        5:   Зелёный (#2b8a3e)
-        """
         try:
             rating_val = int(self.rating)
         except (ValueError, TypeError):
-            return "#2b8a3e"  # Дефолтный зеленый, если оценка пустая
+            return "#2b8a3e"
 
         if rating_val in [1, 2]:
             return "#ff6b6b"
@@ -245,7 +207,6 @@ class PromoCode(models.Model):
     discount = models.PositiveIntegerField(verbose_name="Скидка (%)")
     valid_until = models.DateField(verbose_name="Действует до")
 
-    # ДОБАВИТЬ ЭТОТ МЕТОД:
     @property
     def is_active(self):
         return self.valid_until >= timezone.now().date()
@@ -267,7 +228,6 @@ class Article(models.Model):
         verbose_name="Краткое содержание (одно предложение)"
     )
     content = models.TextField(verbose_name="Содержание")
-    # ИСПРАВЛЕНО: меняем upload_name на upload_to
     image = models.ImageField(
         upload_to="news_images/",
         blank=True,
@@ -284,15 +244,9 @@ class Article(models.Model):
         verbose_name_plural = "Новости"
 
 
-class CompanyInfo(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-
-
 class FAQ(models.Model):
     question = models.CharField(max_length=255, verbose_name="Вопрос / Термин")
     answer = models.TextField(verbose_name="Ответ / Определение")
-    # ТРЕБОВАНИЕ: Дата добавления на сайт (заполняется автоматически при создании)
     date_added = models.DateField(auto_now_add=True, verbose_name="Дата добавления")
 
     def __str__(self):
@@ -301,13 +255,12 @@ class FAQ(models.Model):
     class Meta:
         verbose_name = "Вопрос-ответ (FAQ)"
         verbose_name_plural = "Вопросы-ответы (FAQ)"
-        ordering = ['-date_added'] # Свежие термины будут сверху
+        ordering = ['-date_added']
 
 
 class Vacancy(models.Model):
     title = models.CharField(max_length=100, verbose_name="Название вакансии")
     description = models.TextField(verbose_name="Описание и требования")
-    # Исправлено: вместо blue=True теперь blank=True
     salary = models.PositiveIntegerField(verbose_name="Предлагаемая оплата (BYN)", null=True, blank=True)
 
     def __str__(self):
@@ -318,3 +271,67 @@ class Vacancy(models.Model):
     class Meta:
         verbose_name = "Вакансия"
         verbose_name_plural = "Вакансии"
+
+
+class Partner(models.Model):
+    name = models.CharField(max_length=150, verbose_name="Название компании")
+    logo = models.ImageField(upload_to="partners_logos/", verbose_name="Логотип")
+    website_url = models.URLField(verbose_name="Ссылка на сайт компании")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Партнер"
+        verbose_name_plural = "Партнеры"
+
+
+class CompanyInfo(models.Model):
+    name = models.CharField(max_length=150, default="EliteEstate", verbose_name="Название компании")
+    logo = models.ImageField(upload_to="company_logos/", blank=True, null=True, verbose_name="Логотип компании")
+    description = models.TextField(verbose_name="Информация о компании")
+    history_by_years = models.TextField(blank=True, verbose_name="История по годам")
+    requisites = models.TextField(blank=True, verbose_name="Реквизиты компании")
+    certificate_text = models.TextField(blank=True, verbose_name="Текст сертификата")
+    video_file = models.FileField(upload_to="company_videos/", blank=True, null=True, verbose_name="Видео о компании (файл)")
+    video_url = models.URLField(blank=True, null=True, verbose_name="Ссылка на видео (YouTube/iframe)")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "О компании"
+        verbose_name_plural = "О компании"
+
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Пользователь")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+
+    def __str__(self):
+        return f"Корзина {self.user.username}"
+
+    @property
+    def total_price(self):
+        return sum(item.get_cost for item in self.items.all())
+
+    class Meta:
+        verbose_name = "Корзина"
+        verbose_name_plural = "Корзины"
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items', verbose_name="Корзина")
+    item_property = models.ForeignKey(Property, on_delete=models.CASCADE, verbose_name="Объект недвижимости")
+    quantity = models.PositiveIntegerField(default=1, verbose_name="Количество")
+
+    @property
+    def get_cost(self):
+        return self.item_property.price * self.quantity
+
+    def __str__(self):
+        return f"{self.item_property.title} (x{self.quantity})"
+
+    class Meta:
+        verbose_name = "Элемент корзины"
+        verbose_name_plural = "Элементы корзины"

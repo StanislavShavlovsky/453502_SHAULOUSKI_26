@@ -1,107 +1,201 @@
-{% extends 'agency/base.html' %}
-{% block title %}О компании | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ company_info.description|default:'Информация о компании EliteEstate — продажа и аренда элитной недвижимости.'|truncatewords:25 }}">
+    <meta name="keywords" content="о компании, EliteEstate, недвижимость, сертификаты, история">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-{% block content %}
-<div class="card" style="background: #ffffff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 900px; margin: 2rem auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-    <h1 style="color: #1a252f; margin-bottom: 1.5rem; border-bottom: 2px solid #edf2f7; padding-bottom: 0.5rem; font-weight: 700;">О компании</h1>
+    <!-- Open Graph -->
+    <meta property="og:title" content="О компании — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="{{ company_info.description|default:'Покупка и аренда премиальной недвижимости.'|truncatewords:15 }}">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+    <meta property="og:type" content="website">
 
-    <div style="margin-top: 1.5rem; margin-bottom: 2.5rem; border-left: 5px solid #227c9d; background-color: #fcfcfc; padding: 20px; border-radius: 4px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
-        <h5 style="color: #2c3e50; font-size: 1.15rem; margin-top: 0; margin-bottom: 10px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-            <i class="fas fa-user-shield" style="color: #227c9d;"></i>
-            Контроль доступа к Security & Market Analytics API
-        </h5>
+    <title>О компании — {{ company_info.name|default:'EliteEstate' }}</title>
 
-        <p style="font-size: 0.88rem; color: #718096; margin-bottom: 15px; line-height: 1.4; margin-top: 0;">
-            Интерактивный шлюз эндпоинта <code>/api/v1/agency-stats/</code>.
-            Доступ к внутренней аналитике закрыт сквозным middleware проекта. Анонимные сессии принудительно сбрасываются бэкендом с кодом <span style="background-color: #dc3545; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">401 Unauthorized</span>.
-        </p>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
 
-        <div id="api-status-container" style="padding: 15px; border-radius: 6px; font-family: inherit; font-size: 0.95rem; background-color: #f8f9fa; color: #4a5568; border: 1px solid #edf2f7; line-height: 1.5;">
-            <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i>Инициализация асинхронного fetch-запроса к подсистеме ядра...
-        </div>
-    </div>
-    {% for section in company_sections %}
-        <div style="margin-bottom: 2rem;">
-            <h3 style="color: var(--primary-color, #2c3e50); font-size: 1.4rem; margin-bottom: 0.75rem; font-weight: 600; margin-top: 0;">
-                {{ section.name }}
-            </h3>
-            <p style="color: #4a5568; font-size: 1.05rem; line-height: 1.6; white-space: pre-line; margin: 0;">
-                {{ section.description|linebreaksbr }}
-            </p>
-        </div>
-        {% if not forloop.last %}
-            <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 2rem 0;">
+    <!-- Шапка сайта и Навигация -->
+<header>
+    <a href="{% url 'home' %}">
+        {% if company_info.logo %}
+            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
+        {% else %}
+            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
         {% endif %}
-    {% empty %}
-        <p style="color: #718096; font-style: italic; text-align: center; margin: 2rem 0;">Информация о компании временно недоступна.</p>
-    {% endfor %}
-</div>
+    </a>
+    <nav style="margin-top: 10px; line-height: 1.8;">
+        <a href="{% url 'home' %}">Главная</a> |
+        <a href="{% url 'about' %}">О компании</a> |
+        <a href="{% url 'news' %}">Новости</a> |
+        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
+        <a href="{% url 'contacts' %}">Контакты</a> |
+        <a href="{% url 'vacancies' %}">Вакансии</a> |
+        <a href="{% url 'reviews' %}">Отзывы</a> |
+        <a href="{% url 'promocodes' %}">Промокоды</a> |
+        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
+        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
+    </nav>
+</header>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const statusContainer = document.getElementById("api-status-container");
+    <main>
+        <h1>О компании {{ company_info.name|default:"EliteEstate" }}</h1>
 
-        fetch("{% url 'secured_agency_stats_api' %}")
-            .then(response => {
-                // Сценарий 1: Пользователь не залогинен (Блокировка API)
-                if (response.status === 401) {
-                    return response.json().then(errData => {
-                        statusContainer.style.color = "#721c24";
-                        statusContainer.style.backgroundColor = "#f8d7da";
-                        statusContainer.style.border = "1px solid #f5c6cb";
-                        statusContainer.style.fontFamily = "'Courier New', Courier, monospace";
-                        statusContainer.innerHTML = `<i class="fas fa-ban" style="margin-right:8px;"></i><strong>[API БЛОКИРОВКА - HTTP 401]:</strong> ${errData.message}`;
-                    });
-                }
+        <!-- Контроль доступа к Security API -->
+        <section id="security-api-status" style="margin-bottom: 20px; border-left: 4px solid #007bff; padding: 10px; background-color: #f8f9fa;">
+            <h4>Контроль доступа к Security & Market Analytics API</h4>
+            <p style="font-size: 0.9em; color: #555;">
+                Интерактивный шлюз эндпоинта <code>/api/v1/agency-stats/</code>. Анонимные сессии сбрасываются с кодом 401 Unauthorized.
+            </p>
+            <div id="api-status-container" style="padding: 10px; border: 1px solid #ccc; font-family: monospace;">
+                Инициализация асинхронного fetch-запроса...
+            </div>
+        </section>
 
-                // Сценарий 2: Доступ подтвержден (Рендерим красивую аналитику)
-                if (response.ok) {
-                    return response.json().then(res => {
-                        statusContainer.style.color = "#2d3748";
-                        statusContainer.style.backgroundColor = "#ffffff";
-                        statusContainer.style.border = "1px solid #c3e6cb";
-                        statusContainer.style.boxShadow = "0 2px 4px rgba(0,0,0,0.02)";
+        <hr>
 
-                        // Переводим секунды сессии в читаемый формат
-                        let sec = res.security_audit.session_active_seconds;
-                        let sessionText = sec < 60 ? `${sec} сек.` : `${Math.floor(sec/60)} мин. ${sec%60} сек.`;
+        {% if company_info %}
+            <!-- Информация о компании и Логотип -->
+            <section id="company-overview">
+                <h2>Общие сведения</h2>
+                {% if company_info.logo %}
+                    <figure>
+                        <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="200">
+                    </figure>
+                {% endif %}
+                <p>{{ company_info.description|linebreaksbr }}</p>
+            </section>
 
-                        statusContainer.innerHTML = `
-                            <div style="color: #155724; background-color: #d4edda; padding: 8px 12px; border-radius: 4px; font-weight: bold; margin-bottom: 15px; display: flex; justify-content: space-between;">
-                                <span><i class="fas fa-check-circle"></i> Сессия верифицирована (HTTP 200 OK)</span>
-                                <small style="font-family: monospace;">${res.server_timestamp}</small>
-                            </div>
+            <hr>
 
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px;">
-                                <div style="background: #f1f5f9; padding: 12px; border-radius: 6px; border-top: 3px solid #64748b;">
-                                    <h6 style="margin:0 0 8px 0; color:#475569; font-weight:700; text-uppercase: uppercase; font-size:0.8rem; letter-spacing:0.05em;"><i class="fas fa-fingerprint"></i> Аудит авторизации</h6>
-                                    <div style="font-size:0.85rem; color:#334155;"> Пользователь: <b>${res.security_audit.user_identity}</b></div>
-                                    <div style="font-size:0.85rem; color:#334155;"> Группа: <span class="badge bg-secondary" style="font-size:0.75rem; padding: 2px 5px;">${res.security_audit.role}</span></div>
-                                    <div style="font-size:0.85rem; color:#334155;"> Активность: <span>${sessionText}</span></div>
-                                </div>
+            <!-- Видео о компании -->
+            <!-- Видео о компании -->
+{% if company_info.video_file or company_info.video_url %}
+    <section id="company-video">
+        <h2>Видеопрезентация</h2>
 
-                                <div style="background: #f0fdf4; padding: 12px; border-radius: 6px; border-top: 3px solid #16a34a;">
-                                    <h6 style="margin:0 0 8px 0; color:#166534; font-weight:700; text-uppercase: uppercase; font-size:0.8rem; letter-spacing:0.05em;"><i class="fas fa-chart-line"></i> Объем торговли (БД)</h6>
-                                    <div style="font-size:0.85rem; color:#14532d;"> Общий оборот: <b>${res.market_analytics.gross_volume_usd}</b></div>
-                                    <div style="font-size:0.85rem; color:#14532d;"> В валюте BYN: <b style="color:#16a34a;">${res.market_analytics.gross_volume_byn}</b></div>
-                                    <div style="font-size:0.85rem; color:#718096; font-style:italic; font-size:0.75rem; margin-top:3px;">По курсу НБРБ: ${res.market_analytics.nbrb_exchange_rate}</div>
-                                </div>
+        {% if company_info.video_file %}
+            <video controls width="560" height="315" preload="metadata">
+                <source src="{{ company_info.video_file.url }}">
+                Ваш браузер не поддерживает элемент <code>video</code>.
+            </video>
+        {% else %}
+            <iframe width="560" height="315" src="{{ company_info.video_url }}" style="border:0;" allowfullscreen></iframe>
+        {% endif %}
+    </section>
+    <hr>
+{% endif %}
 
-                                <div style="background: #f0f9ff; padding: 12px; border-radius: 6px; border-top: 3px solid #0284c7; grid-column: span 1;">
-                                    <h6 style="margin:0 0 8px 0; color:#0369a1; font-weight:700; text-uppercase: uppercase; font-size:0.8rem; letter-spacing:0.05em;"><i class="far fa-lightbulb"></i> Вектор рынка</h6>
-                                    <div style="font-size:0.85rem; color:#0c4a6e; font-weight:600;"> ${res.ai_recommendation.current_trend}</div>
-                                    <div style="font-size:0.8rem; color:#075985; margin-top:4px; line-height:1.3;"> ${res.ai_recommendation.advice}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                }
-            })
-            .catch(error => {
-                statusContainer.style.color = "#721c24";
-                statusContainer.style.backgroundColor = "#f8d7da";
-                statusContainer.innerHTML = "<i class=\"fas fa-exclamation-triangle\"></i> Ошибка сетевого стека: " + error;
-            });
-    });
-</script>
-{% endblock %}
+            <!-- История по годам (Таблица в БД) -->
+            {% if history_list %}
+                <section id="company-history">
+                    <h2>История компании по годам</h2>
+                    <table border="1" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>Год</th>
+                                <th>Событие</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in history_list %}
+                                <tr>
+                                    <td><strong>{{ item.year }}</strong></td>
+                                    <td>{{ item.event }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+                <hr>
+            {% endif %}
+
+            <!-- Реквизиты -->
+            {% if company_info.requisites %}
+                <section id="company-requisites">
+                    <h2>Реквизиты</h2>
+                    <pre>{{ company_info.requisites }}</pre>
+                </section>
+                <hr>
+            {% endif %}
+
+            <!-- Сертификат (Без оформления стилями) -->
+            {% if company_info.certificate_text %}
+                <section id="company-certificate">
+                    <h2>Сертификат</h2>
+                    <div>
+                        {{ company_info.certificate_text|linebreaksbr }}
+                    </div>
+                </section>
+            {% endif %}
+
+        {% else %}
+            <!-- Резервный вывод разделов из базы -->
+            {% for section in company_sections %}
+                <section>
+                    <h3>{{ section.name }}</h3>
+                    <p>{{ section.description|linebreaksbr }}</p>
+                </section>
+            {% empty %}
+                <p>Информация о компании пока не заполнена.</p>
+            {% endfor %}
+        {% endif %}
+    </main>
+
+    <hr>
+
+    <!-- Подвал (Footer) -->
+    <footer>
+        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
+        {% if company_info.requisites %}
+            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
+        {% endif %}
+        <p><a href="#top">Наверх страницы &#8593;</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const statusContainer = document.getElementById("api-status-container");
+
+            fetch("{% url 'secured_agency_stats_api' %}")
+                .then(response => {
+                    if (response.status === 401) {
+                        return response.json().then(errData => {
+                            statusContainer.style.color = "red";
+                            statusContainer.innerHTML = `[API БЛОКИРОВКА - HTTP 401]: ${errData.message}`;
+                        });
+                    }
+
+                    if (response.ok) {
+                        return response.json().then(res => {
+                            statusContainer.style.color = "green";
+                            let sec = res.security_audit.session_active_seconds;
+                            let sessionText = sec < 60 ? `${sec} сек.` : `${Math.floor(sec/60)} мин. ${sec%60} сек.`;
+
+                            statusContainer.innerHTML = `
+                                <strong>[HTTP 200 OK] Сессия верифицирована</strong><br>
+                                Пользователь: ${res.security_audit.user_identity} | Роль: ${res.security_audit.role}<br>
+                                Время активности сессии: ${sessionText}<br>
+                                Общий оборот: ${res.market_analytics.gross_volume_usd} (${res.market_analytics.gross_volume_byn} BYN)
+                            `;
+                        });
+                    }
+                })
+                .catch(error => {
+                    statusContainer.style.color = "red";
+                    statusContainer.innerHTML = "Ошибка сетевого запроса: " + error;
+                });
+        });
+    </script>
+</body>
+</html>
