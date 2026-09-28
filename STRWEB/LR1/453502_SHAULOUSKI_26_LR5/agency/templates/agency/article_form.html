@@ -1,30 +1,176 @@
-{% extends 'agency/base.html' %}
-{% block title %}{{ action }} новость | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ action }} новость — EliteEstate.">
+    <meta name="author" content="EliteEstate Agency">
+    <meta name="robots" content="noindex, nofollow">
 
-{% block content %}
-<div class="card" style="max-width: 700px; margin: 2rem auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-    <h2 style="margin-bottom: 1.5rem; text-align: center; color: var(--primary-color);">{{ action }} Публикацию</h2>
+    <title>{{ action }} новость — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
 
-    <form method="post" enctype="multipart/form-data" novalidate>
-        {% csrf_token %}
-        {% for field in form %}
-            <div class="form-group" style="margin-bottom: 1.2rem;">
-                <label style="display: block; width: 100%;">
-                    <span style="display: block; margin-bottom: 0.4rem; font-weight: 600;">{{ field.label }}</span>
-                    {{ field }}
-                </label>
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
 
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <p style="color: var(--danger-color); font-size: 0.85rem; margin-top: 0.2rem; margin-bottom: 0;">{{ error }}</p>
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                <li>Привет, <strong>{{ user.username }}</strong></li>
+                <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li aria-current="page">{{ action }} новость</li>
+            </ol>
+        </nav>
+
+        <article>
+            <header>
+                <h2>{{ action }} новость</h2>
+                <p>Заполните форму. Поля со звёздочкой обязательны.</p>
+            </header>
+
+            {% if form.errors %}
+            <section role="alert" aria-labelledby="form-error-heading">
+                <h3 id="form-error-heading">Ошибки в форме</h3>
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ field }}: {{ error }}</li>
+                        {% endfor %}
                     {% endfor %}
-                {% endif %}
-            </div>
-        {% endfor %}
-        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-            <button type="submit" class="btn" style="flex: 1;">Опубликовать</button>
-            <a href="{% url 'news' %}" class="btn btn-secondary" style="flex: 1; text-align: center; line-height: 2;">Отмена</a>
-        </div>
-    </form>
-</div>
-{% endblock %}
+                </ul>
+            </section>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+
+                <fieldset>
+                    <legend>Основная информация</legend>
+
+                    <p>
+                        <label for="id_title">Заголовок *:</label>
+                        <input type="text"
+                               id="id_title"
+                               name="title"
+                               value="{{ form.title.value|default:'' }}"
+                               minlength="5"
+                               maxlength="200"
+                               placeholder="Введите заголовок новости"
+                               title="От 5 до 200 символов"
+                               required>
+                    </p>
+
+                    <p>
+                        <label for="id_short_description">Краткое содержание (одно предложение):</label>
+                        <textarea id="id_short_description"
+                                  name="short_description"
+                                  rows="2"
+                                  maxlength="255"
+                                  placeholder="Краткое содержание для ленты новостей">{{ form.short_description.value|default:'' }}</textarea>
+                    </p>
+
+                    <p>
+                        <label for="id_content">Полный текст *:</label>
+                        <textarea id="id_content"
+                                  name="content"
+                                  rows="10"
+                                  minlength="20"
+                                  placeholder="Полный текст новости"
+                                  required>{{ form.content.value|default:'' }}</textarea>
+                    </p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Изображение</legend>
+
+                    {% if form.instance.image %}
+                    <figure>
+                        <img src="{{ form.instance.image.url }}"
+                             alt="Текущее изображение новости"
+                             width="200"
+                             loading="lazy">
+                        <figcaption>Текущее изображение (можно заменить)</figcaption>
+                    </figure>
+                    {% endif %}
+
+                    <p>
+                        <label for="id_image">Загрузить изображение:</label>
+                        <input type="file"
+                               id="id_image"
+                               name="image"
+                               accept="image/png, image/jpeg, image/webp"
+                               title="Форматы: PNG, JPEG, WEBP">
+                    </p>
+                </fieldset>
+
+                <p>
+                    <button type="submit">Сохранить</button>
+                    <a href="{% url 'news' %}">
+                        <button type="button">Отмена</button>
+                    </a>
+                </p>
+            </form>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

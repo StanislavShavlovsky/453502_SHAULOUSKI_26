@@ -1,4 +1,5 @@
 from django.contrib import admin
+from .models import Banner
 from django.db.models import Avg, Sum
 from .models import (
     Article, Cart, CartItem, ClientProfile, CompanyInfo, Deal,
@@ -71,6 +72,27 @@ class CartItemAdmin(admin.ModelAdmin):
 class PartnerAdmin(admin.ModelAdmin):
     list_display = ('name', 'website_url')
     search_fields = ('name',)
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'order', 'image_preview')
+    list_editable = ('is_active', 'order')
+    list_filter = ('is_active',)
+    search_fields = ('title',)
+    fieldsets = (
+        ('Основная информация', {'fields': ('title', 'image', 'link')}),
+        ('Настройки отображения', {'fields': ('is_active', 'order')}),
+    )
+
+    def image_preview(self, obj):
+        if obj.image:
+            from django.utils.html import format_html
+            return format_html(
+                '<img src="{}" style="max-height: 60px; border-radius: 4px;">',
+                obj.image.url
+            )
+        return "—"
+    image_preview.short_description = "Превью"
 
 
 # Регистрация остальных стандартных моделей

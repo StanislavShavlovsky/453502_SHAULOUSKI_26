@@ -335,3 +335,18 @@ class CartItem(models.Model):
     class Meta:
         verbose_name = "Элемент корзины"
         verbose_name_plural = "Элементы корзины"
+
+class Banner(models.Model):
+    title = models.CharField(max_length=200, verbose_name="Название баннера")
+    image = models.ImageField(upload_to='banners/', verbose_name="Изображение баннера")
+    link = models.URLField(blank=True, null=True, verbose_name="Ссылка (опционально)")
+    is_active = models.BooleanField(default=True, verbose_name="Активен")
+    order = models.PositiveIntegerField(default=0, verbose_name="Порядок отображения")
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Баннер"
+        verbose_name_plural = "Баннеры"
+        ordering = ['order', 'id']

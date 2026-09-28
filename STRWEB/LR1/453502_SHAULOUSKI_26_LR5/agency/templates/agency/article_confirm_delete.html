@@ -1,20 +1,151 @@
-{% extends 'agency/base.html' %}
-{% block title %}Удаление публикации | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Подтверждение удаления новости — EliteEstate.">
+    <meta name="author" content="EliteEstate Agency">
+    <meta name="robots" content="noindex, nofollow">
 
-{% block content %}
-<div class="card" style="max-width: 500px; margin: 4rem auto; text-align: center; border-top: 4px solid var(--danger-color); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-    <h2 style="color: var(--danger-color); margin-bottom: 1rem;">Удалить публикацию?</h2>
-    
-    <p style="margin-bottom: 2rem; color: #475569; font-size: 1rem; line-height: 1.5;">
-        Вы собираетесь безвозвратно удалить новость <strong style="color: #0f172a;">"{{ article.title }}"</strong> из базы данных агентства.
-    </p>
-    
-    <form method="post">
-        {% csrf_token %}
-        <div style="display: flex; gap: 1rem; justify-content: center;">
-            <button type="submit" class="btn btn-danger" style="padding: 0.6rem 2rem; cursor: pointer;">Да, удалить</button>
-            <a href="{% url 'news_view' %}" class="btn btn-secondary" style="padding: 0.6rem 2rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Отмена</a>
-        </div>
-    </form>
-</div>
-{% endblock %}
+    <title>Удаление новости — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                <li>Привет, <strong>{{ user.username }}</strong></li>
+                <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></li>
+                <li aria-current="page">Удаление</li>
+            </ol>
+        </nav>
+
+        <article>
+            <header>
+                <h2>Удаление публикации</h2>
+            </header>
+
+            <section role="alert" aria-labelledby="warning-heading">
+                <h3 id="warning-heading">Внимание!</h3>
+
+                <p>
+                    Вы собираетесь <strong>безвозвратно удалить</strong> новость
+                    «<cite>{{ article.title }}</cite>» из базы данных агентства.
+                </p>
+
+                <p>
+                    <mark>Это действие невозможно отменить.</mark>
+                </p>
+            </section>
+
+            <section aria-labelledby="details-heading">
+                <h3 id="details-heading">Информация о публикации</h3>
+
+                <table border="1">
+                    <caption>Параметры удаляемой новости</caption>
+                    <tbody>
+                        <tr>
+                            <th id="del-title" scope="row">Заголовок</th>
+                            <td headers="del-title">{{ article.title }}</td>
+                        </tr>
+                        <tr>
+                            <th id="del-date" scope="row">Дата публикации</th>
+                            <td headers="del-date">
+                                <time datetime="{{ article.published_date|date:'Y-m-d' }}">
+                                    {{ article.published_date|date:"d.m.Y" }}
+                                </time>
+                            </td>
+                        </tr>
+                        {% if article.short_description %}
+                        <tr>
+                            <th id="del-short" scope="row">Краткое содержание</th>
+                            <td headers="del-short">{{ article.short_description }}</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </section>
+
+            <hr>
+
+            <section aria-labelledby="confirm-heading">
+                <h3 id="confirm-heading">Подтверждение</h3>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <p>
+                        <button type="submit">Да, удалить новость</button>
+                        <a href="{% url 'article_detail' article.pk %}">
+                            <button type="button">Отмена</button>
+                        </a>
+                        <a href="{% url 'news' %}">Вернуться к новостям</a>
+                    </p>
+                </form>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

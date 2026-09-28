@@ -2,274 +2,443 @@
 {% load static %}
 <html lang="ru">
 <head>
-    <!-- 3.1. Метаданные и Микроразметка -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ company_info.description|default:'EliteEstate — продажа и аренда элитной недвижимости в Минске.'|truncatewords:25 }}">
+    <meta name="description" content="EliteEstate — продажа и аренда элитной недвижимости в Минске. Каталог квартир, домов и офисов.">
     <meta name="keywords" content="недвижимость, элитная недвижимость, купить квартиру, Минск, EliteEstate">
-    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
+    <meta name="author" content="EliteEstate Agency">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{ company_info.name|default:'EliteEstate' }} — Элитная недвижимость">
-    <meta property="og:description" content="{{ company_info.description|default:'Покупка и аренда премиальной недвижимости.'|truncatewords:15 }}">
+    <meta property="og:title" content="EliteEstate — Элитная недвижимость">
+    <meta property="og:description" content="Покупка и аренда премиальной недвижимости в Минске.">
+    <meta property="og:type" content="website">
     {% if company_info.logo %}
         <meta property="og:image" content="{{ company_info.logo.url }}">
     {% endif %}
-    <meta property="og:type" content="website">
 
-    <title>{{ company_info.name|default:'EliteEstate' }} — Главная страница</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>EliteEstate — Главная</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
 </head>
-<body>
+<body id="top">
 
-    <!-- 1.1 & 3.1. Шапка сайта и Навигация -->
-<header>
-    <a href="{% url 'home' %}">
-        {% if company_info.logo %}
-            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
-        {% else %}
-            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
-        {% endif %}
-    </a>
-    <nav style="margin-top: 10px; line-height: 1.8;">
-        <a href="{% url 'home' %}">Главная</a> |
-        <a href="{% url 'about' %}">О компании</a> |
-        <a href="{% url 'news' %}">Новости</a> |
-        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
-        <a href="{% url 'contacts' %}">Контакты</a> |
-        <a href="{% url 'vacancies' %}">Вакансии</a> |
-        <a href="{% url 'reviews' %}">Отзывы</a> |
-        <a href="{% url 'promocodes' %}">Промокоды</a> |
-        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
-        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
-    </nav>
-</header>
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
 
-    <!-- Основное содержимое -->
-    <main>
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+                <li><a href="{% url 'demo' %}">Демка</a></li>
+            </ul>
+        </nav>
 
-        <!-- 1.2. Рекламный баннер / О компании -->
-        <section id="hero-banner">
-            <h2>О компании {{ company_info.name|default:"EliteEstate" }}</h2>
-            <figure>
-                <p>{{ company_info.description|default:"Добро пожаловать в наше агентство недвижимости!" }}</p>
-                {% if company_info.history_by_years %}
-                    <figcaption><strong>Наша история:</strong> {{ company_info.history_by_years }}</figcaption>
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
                 {% endif %}
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация по разделам страницы">
+            <ul>
+                <li><a href="#banners">Акции</a></li>
+                <li><a href="#hero-banner">О компании</a></li>
+                <li><a href="#catalog">Каталог</a></li>
+                <li><a href="#articles">Публикация</a></li>
+                <li><a href="#partners">Партнёры</a></li>
+                <li><a href="#media-content">Медиа</a></li>
+                <li><a href="#contacts">Заявка</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        {% if banners %}
+        <section id="banners" aria-labelledby="banners-heading">
+            <h2 id="banners-heading">Акции и предложения</h2>
+
+            <ul>
+                {% for banner in banners %}
+                <li>
+                    <figure>
+                        {% if banner.link %}
+                            <a href="{{ banner.link }}">
+                                <img src="{{ banner.image.url }}"
+                                     alt="{{ banner.title }}"
+                                     width="720"
+                                     loading="lazy">
+                            </a>
+                        {% else %}
+                            <img src="{{ banner.image.url }}"
+                                 alt="{{ banner.title }}"
+                                 width="720"
+                                 loading="lazy">
+                        {% endif %}
+                        <figcaption>{{ banner.title }}</figcaption>
+                    </figure>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <hr>
+        {% endif %}
+
+        <section id="hero-banner" aria-labelledby="hero-heading">
+            <h2 id="hero-heading">О компании {{ company_info.name|default:"EliteEstate" }}</h2>
+
+            {% if company_info.logo %}
+            <figure>
+                <img src="{{ company_info.logo.url }}"
+                     alt="Логотип {{ company_info.name }}"
+                     width="200"
+                     loading="lazy">
+                <figcaption>Логотип компании</figcaption>
             </figure>
+            {% endif %}
+
+            <p>{{ company_info.description|default:"Добро пожаловать в наше агентство недвижимости!" }}</p>
+
+            {% if company_info.history_by_years %}
+                <p><strong>Наша история:</strong> {{ company_info.history_by_years }}</p>
+            {% endif %}
+
+            <p>
+                Наш девиз: <q>Качество, которому можно доверять</q>.
+                Мы работаем с <mark>{{ company_info.name|default:"EliteEstate" }}</mark> с 2005 года.
+            </p>
+
+            <p>
+                <dfn>Недвижимость</dfn> — это имущество в виде земельных участков,
+                зданий и сооружений, которое можно покупать, продавать или арендовать.
+            </p>
         </section>
 
         <hr>
 
-        <!-- 1.3. Динамический каталог объектов из БД -->
-        <section id="catalog">
-            <h2>Каталог объектов недвижимости</h2>
-            <p>Выбирайте наилучшие варианты с <abbr title="{{ company_info.name|default:'EliteEstate' }}">EE</abbr> Real Estate.</p>
+        <section id="catalog" aria-labelledby="catalog-heading">
+            <h2 id="catalog-heading">Каталог объектов недвижимости</h2>
 
-            <div class="catalog-grid" style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <p>
+                Выбирайте наилучшие варианты с
+                <abbr title="{{ company_info.name|default:'EliteEstate' }}">EE</abbr> Real Estate.
+            </p>
+
+            {% if properties %}
+            <ul>
                 {% for property in properties %}
-                    <article id="property-{{ property.id }}" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; width: 300px; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <!-- Кликабельный заголовок перехода на детальную страницу -->
-                            <h3 style="margin-top: 0;">
-                                <a href="{% url 'property_detail' property.id %}" style="text-decoration: none; color: #007bff;">
+                <li>
+                    <article>
+                        <header>
+                            <h3>
+                                <a href="{% url 'property_detail' property.id %}">
                                     {{ property.title }}
                                 </a>
                             </h3>
+                        </header>
 
-                            <!-- Кликабельное изображение перехода на детальную страницу -->
-                            <a href="{% url 'property_detail' property.id %}">
-                                {% if property.image %}
-                                    <img src="{{ property.image.url }}" alt="{{ property.title }}" width="300" height="200" style="object-fit: cover; border-radius: 4px;">
-                                {% else %}
-                                    <img src="{% static 'images/flat1.jpg' %}" alt="Нет фото" width="300" height="200" style="border-radius: 4px;">
-                                {% endif %}
-                            </a>
+                        <a href="{% url 'property_detail' property.id %}">
+                            {% if property.image %}
+                                <img src="{{ property.image.url }}"
+                                     alt="Фото объекта «{{ property.title }}»"
+                                     width="300"
+                                     height="200"
+                                     loading="lazy">
+                            {% else %}
+                                <img src="{% static 'images/flat1.jpg' %}"
+                                     alt="Фото отсутствует"
+                                     width="300"
+                                     height="200"
+                                     loading="lazy">
+                            {% endif %}
+                        </a>
 
-                            <p style="margin: 8px 0 4px 0;"><strong>Вид:</strong> {{ property.prop_type.name }}</p>
-                            <p style="margin: 4px 0;"><strong>Тип сделки:</strong> {{ property.get_deal_type_display }}</p>
-                            <p style="margin: 4px 0;"><strong>Стоимость:</strong> ${{ property.price }}</p>
-                            <p style="font-size: 0.9em; color: #555;">{{ property.description|truncatewords:12 }}</p>
-                        </div>
+                        <table border="1">
+                            <caption>Характеристики объекта «{{ property.title }}»</caption>
+                            <tbody>
+                                <tr>
+                                    <th id="h-{{ property.id }}-type" scope="row">Вид</th>
+                                    <td headers="h-{{ property.id }}-type">{{ property.prop_type.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th id="h-{{ property.id }}-deal" scope="row">Тип сделки</th>
+                                    <td headers="h-{{ property.id }}-deal">{{ property.get_deal_type_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th id="h-{{ property.id }}-price" scope="row">Стоимость</th>
+                                    <td headers="h-{{ property.id }}-price">${{ property.price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                        <!-- Действия с объектом: Подробнее и Добавление в корзину -->
-                        <div style="margin-top: 15px; display: flex; gap: 8px;">
-                            <a href="{% url 'property_detail' property.id %}" style="flex: 1; text-align: center; padding: 8px 0; background: #6c757d; color: white; border-radius: 4px; text-decoration: none; font-size: 0.85em;">
-                                Подробнее
-                            </a>
-                            <a href="{% url 'cart_add' property.id %}" style="flex: 1; text-align: center; padding: 8px 0; background: #28a745; color: white; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85em;">
-                                🛒 В корзину
-                            </a>
-                        </div>
+                        <p>{{ property.description|truncatewords:12 }}</p>
+
+                        <footer>
+                            <p>
+                                <a href="{% url 'property_detail' property.id %}">Подробнее</a>
+                                |
+                                <a href="{% url 'cart_add' property.id %}">🛒 В корзину</a>
+                            </p>
+                        </footer>
                     </article>
-                {% empty %}
-                    <p>На данный момент нет доступных объектов недвижимости.</p>
+
+                    <hr>
+                </li>
                 {% endfor %}
-            </div>
-            <p style="margin-top: 15px;"><a href="{% url 'property_list' %}">Посмотреть весь каталог &rarr;</a></p>
-        </section>
+            </ul>
 
-        <hr>
-
-        <!-- 1.4. Последняя опубликованная статья из БД -->
-        <section id="articles">
-            <h2>Последняя публикация</h2>
-
-            {% if latest_article %}
-                <article>
-                    <header>
-                        <h3>
-                            <a href="{% url 'article_detail' latest_article.id %}" style="text-decoration: none; color: inherit;">
-                                {{ latest_article.title }}
-                            </a>
-                        </h3>
-                        <p>
-                            Опубликовано:
-                            <time datetime="{{ latest_article.published_date|date:'Y-m-d' }}">
-                                {{ latest_article.published_date|date:"j E Y г." }}
-                            </time>
-                            | Автор:
-                            <address style="display:inline;">
-                                <a href="mailto:info@eliteestate.by">Редакция {{ company_info.name|default:"EliteEstate" }}</a>
-                            </address>
-                        </p>
-                    </header>
-
-                    {% if latest_article.image %}
-                        <figure style="margin: 0 0 15px 0;">
-                            <a href="{% url 'article_detail' latest_article.id %}">
-                                <img src="{{ latest_article.image.url }}" alt="{{ latest_article.title }}" width="600" style="max-width: 100%; height: auto; border-radius: 6px;">
-                            </a>
-                        </figure>
-                    {% endif %}
-
-                    {% if latest_article.short_description %}
-                        <p><strong>{{ latest_article.short_description }}</strong></p>
-                    {% endif %}
-
-                    <div>
-                        {{ latest_article.content|linebreaks|truncatewords:50 }}
-                    </div>
-
-                    <p style="margin-top: 15px;">
-                        <a href="{% url 'article_detail' latest_article.id %}">Читать полностью &rarr;</a> |
-                        <a href="{% url 'news' %}">Все новости и статьи &rarr;</a>
-                    </p>
-                </article>
+            <p><a href="{% url 'property_list' %}">Посмотреть весь каталог →</a></p>
             {% else %}
-                <p>На данный момент нет опубликованных статей в базе данных.</p>
+            <p><em>На данный момент нет доступных объектов недвижимости.</em></p>
             {% endif %}
         </section>
 
         <hr>
 
-        <!-- 1.5 & 3.2. Таблица партнеров из БД -->
-        <section id="partners">
-            <h2>Наши надежные партнеры</h2>
+        <section id="articles" aria-labelledby="articles-heading">
+            <h2 id="articles-heading">Последняя публикация</h2>
+
+            {% if latest_article %}
+            <article>
+                <header>
+                    <h3>
+                        <a href="{% url 'article_detail' latest_article.id %}">
+                            {{ latest_article.title }}
+                        </a>
+                    </h3>
+                    <p>
+                        Опубликовано:
+                        <time datetime="{{ latest_article.published_date|date:'Y-m-d' }}">
+                            {{ latest_article.published_date|date:"d.m.Y" }}
+                        </time>
+                        |
+                        Автор:
+                        <address>
+                            <a href="mailto:info@eliteestate.by">
+                                Редакция {{ company_info.name|default:"EliteEstate" }}
+                            </a>
+                        </address>
+                    </p>
+                </header>
+
+                {% if latest_article.image %}
+                <figure>
+                    <a href="{% url 'article_detail' latest_article.id %}">
+                        <img src="{{ latest_article.image.url }}"
+                             alt="Иллюстрация к публикации «{{ latest_article.title }}»"
+                             width="600"
+                             loading="lazy">
+                    </a>
+                    <figcaption>{{ latest_article.title }}</figcaption>
+                </figure>
+                {% endif %}
+
+                {% if latest_article.short_description %}
+                    <p><strong>{{ latest_article.short_description }}</strong></p>
+                {% endif %}
+
+                <div>
+                    {{ latest_article.content|linebreaks|truncatewords:50 }}
+                </div>
+
+                <footer>
+                    <p>
+                        <a href="{% url 'article_detail' latest_article.id %}">Читать полностью →</a>
+                        |
+                        <a href="{% url 'news' %}">Все новости и статьи →</a>
+                    </p>
+                </footer>
+            </article>
+            {% else %}
+            <p><em>На данный момент нет опубликованных статей в базе данных.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section id="partners" aria-labelledby="partners-heading">
+            <h2 id="partners-heading">Наши надёжные партнёры</h2>
+
             <p>Мы сотрудничаем только с проверенными финансовыми и строительными организациями.</p>
 
-            <table border="1" style="width: 100%; border-collapse: collapse;">
-                <caption>Реестр аккредитованных партнеров</caption>
+            {% if partners %}
+            <table border="1">
+                <caption>Реестр аккредитованных партнёров</caption>
                 <thead>
                     <tr>
-                        <th id="th-partner">Партнер</th>
-                        <th id="th-logo">Логотип</th>
-                        <th id="th-site">Официальный сайт</th>
+                        <th id="p-name" scope="col">Партнёр</th>
+                        <th id="p-logo" scope="col">Логотип</th>
+                        <th id="p-site" scope="col">Официальный сайт</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for partner in partners %}
-                        <tr>
-                            <td headers="th-partner"><strong>{{ partner.name }}</strong></td>
-                            <td headers="th-logo" style="text-align: center;">
-                                {% if partner.logo %}
-                                    <img src="{{ partner.logo.url }}" alt="Логотип {{ partner.name }}" width="100">
-                                {% else %}
-                                    —
-                                {% endif %}
-                            </td>
-                            <td headers="th-site">
-                                <a href="{{ partner.website_url }}" target="_blank" rel="noopener">{{ partner.website_url }}</a>
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="3">Список партнеров пока пуст. Добавьте записи через админку.</td>
-                        </tr>
+                    <tr>
+                        <td headers="p-name"><strong>{{ partner.name }}</strong></td>
+                        <td headers="p-logo">
+                            {% if partner.logo %}
+                                <img src="{{ partner.logo.url }}"
+                                     alt="Логотип {{ partner.name }}"
+                                     width="100"
+                                     loading="lazy">
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td headers="p-site">
+                            <a href="{{ partner.website_url }}" target="_blank" rel="noopener">
+                                {{ partner.website_url }}
+                            </a>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3">Всего аккредитованных партнеров: {{ partners|length }}</td>
+                        <td colspan="3" headers="p-name">
+                            Всего аккредитованных партнёров: <strong>{{ partners|length }}</strong>
+                        </td>
                     </tr>
                 </tfoot>
             </table>
+            {% else %}
+            <p><em>Список партнёров пока пуст.</em></p>
+            {% endif %}
         </section>
 
         <hr>
 
-        <!-- 3.3. Медиа-контент из БД -->
-        <section id="media-content">
-            <h2>Медиа-презентация проектов</h2>
+        <section id="media-content" aria-labelledby="media-heading">
+            <h2 id="media-heading">Медиа-презентация проектов</h2>
 
             {% if company_info.video_file %}
-                <article>
-                    <h3>Видеоэкскурсия о компании</h3>
-                    <video controls width="560" height="315" preload="metadata">
-                        <source src="{{ company_info.video_file.url }}">
+            <article>
+                <h3>Видеоэкскурсия о компании</h3>
+
+                <figure>
+                    <video controls width="720" preload="metadata" poster="{% static 'logo.png' %}">
+                        <source src="{{ company_info.video_file.url }}" type="video/mp4">
                         Ваш браузер не поддерживает элемент <code>video</code>.
+                        <a href="{{ company_info.video_file.url }}" download>Скачать видео</a>.
                     </video>
-                </article>
+                    <figcaption>Видеопрезентация о компании</figcaption>
+                </figure>
+            </article>
             {% elif company_info.video_url %}
-                <article>
-                    <h3>Видеопрезентация</h3>
-                    <iframe width="560" height="315" src="{{ company_info.video_url }}" style="border:0;" allowfullscreen></iframe>
-                </article>
+            <article>
+                <h3>Видеопрезентация</h3>
+
+                <figure>
+                    <iframe width="720"
+                            height="405"
+                            src="{{ company_info.video_url }}"
+                            title="Видеопрезентация EliteEstate"
+                            allowfullscreen
+                            loading="lazy">
+                    </iframe>
+                    <figcaption>Видео о компании</figcaption>
+                </figure>
+            </article>
             {% endif %}
 
-            <article style="margin-top: 20px;">
+            <article>
                 <h3>Мы на карте</h3>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.288282386345!2d27.558832!3d53.900601!2m3!1f0!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDU0JzAyLjIiTiAyN8KwMzMnMzEuOCJF!5e0!3m2!1sru!2sby!4v1600000000000!5m2!1sru!2sby"
-                    width="100%"
-                    height="300"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    title="Карта расположения офиса EliteEstate">
-                </iframe>
+
+                <figure>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.288282386345!2d27.558832!3d53.900601!2m3!1f0!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDU0JzAyLjIiTiAyN8KwMzMnMzEuOCJF!5e0!3m2!1sru!2sby!4v1600000000000!5m2!1sru!2sby"
+                            width="720"
+                            height="405"
+                            title="Карта: офис EliteEstate"
+                            allowfullscreen
+                            loading="lazy">
+                    </iframe>
+                    <figcaption>Расположение офиса агентства</figcaption>
+                </figure>
+            </article>
+
+            <article>
+                <h3>Аудиогид по офису</h3>
+
+                <figure>
+                    <audio controls preload="metadata">
+                        <source src="{% static 'audio/office-tour.m4a' %}" type="audio/mpeg">
+                        <source src="{% static 'audio/office-tour.ogg' %}" type="audio/ogg">
+                        Ваш браузер не поддерживает аудио.
+                        <a href="{% static 'audio/office-tour.m4a' %}" download>Скачать аудио</a>.
+                    </audio>
+                    <figcaption>Аудиогид по офису EliteEstate</figcaption>
+                </figure>
             </article>
         </section>
 
         <hr>
 
-        <!-- 3.4. Форма обратной связи -->
-        <section id="contacts">
-            <h2>Оставить заявку на подбор недвижимости</h2>
+        <section id="contacts" aria-labelledby="form-heading">
+            <h2 id="form-heading">Оставить заявку на подбор недвижимости</h2>
 
-            <form action="{% url 'contacts' %}" method="post">
+            <form action="{% url 'contacts' %}" method="post" novalidate>
                 {% csrf_token %}
 
                 <fieldset>
                     <legend>Персональные данные</legend>
 
                     <p>
-                        <label for="user-name">Ваше имя *:</label><br>
-                        <input type="text" id="user-name" name="name" required placeholder="Иван Иванов">
+                        <label for="user-name">Ваше имя *:</label>
+                        <input type="text"
+                               id="user-name"
+                               name="name"
+                               placeholder="Иван Иванов"
+                               maxlength="100"
+                               autocomplete="name"
+                               required>
                     </p>
 
                     <p>
-                        <label for="user-email">Email *:</label><br>
-                        <input type="email" id="user-email" name="email" required placeholder="example@mail.ru">
+                        <label for="user-email">Email *:</label>
+                        <input type="email"
+                               id="user-email"
+                               name="email"
+                               placeholder="example@mail.ru"
+                               maxlength="254"
+                               autocomplete="email"
+                               required>
                     </p>
 
                     <p>
-                        <label for="user-phone">Телефон *:</label><br>
-                        <input type="tel" id="user-phone" name="phone" required placeholder="+375291234567">
+                        <label for="user-phone">Телефон *:</label>
+                        <input type="tel"
+                               id="user-phone"
+                               name="phone"
+                               placeholder="+375 (29) 123-45-67"
+                               pattern="\+375\s?\(\d{2}\)\s?\d{3}-\d{2}-\d{2}"
+                               autocomplete="tel"
+                               title="Формат: +375 (XX) XXX-XX-XX"
+                               required>
                     </p>
                 </fieldset>
 
@@ -277,7 +446,7 @@
                     <legend>Параметры объекта</legend>
 
                     <p>
-                        <label for="property-type">Тип недвижимости:</label><br>
+                        <label for="property-type">Тип недвижимости:</label>
                         <select id="property-type" name="property_type">
                             <option value="apartment">Квартира</option>
                             <option value="house">Дом/Коттедж</option>
@@ -286,36 +455,66 @@
                     </p>
 
                     <p>
-                        <label for="max-budget">Максимальный бюджет ($):</label><br>
-                        <input type="number" id="max-budget" name="budget" min="10000" max="10000000" step="5000" value="100000">
+                        <label for="max-budget">Максимальный бюджет ($):</label>
+                        <input type="number"
+                               id="max-budget"
+                               name="budget"
+                               min="10000"
+                               max="10000000"
+                               step="5000"
+                               value="100000">
                     </p>
                 </fieldset>
 
-                <br>
-                <button type="submit">Отправить заявку</button>
-                <button type="reset">Очистить форму</button>
+                <p>
+                    <button type="submit">Отправить заявку</button>
+                    <button type="reset">Очистить форму</button>
+                </p>
             </form>
         </section>
 
+        <hr>
+
+        <!-- 8. СТИХ -->
+        <section aria-labelledby="poem-heading">
+            <h2 id="poem-heading">О нашей работе</h2>
+
+            <pre>
+Дом — не стены и не крыша,
+Дом — где радостно и тихо.
+Мы находим то, что важно,
+Чтобы стало вам не страшно.
+            </pre>
+        </section>
     </main>
 
-    <!-- Подвал (Footer) и Якорь наверх -->
+    <hr>
+
     <footer>
-        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
 
-        {% if company_info.requisites %}
-            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
-        {% endif %}
-
-        <div itemscope itemtype="http://schema.org/RealEstateAgent">
-            <span itemprop="name">{{ company_info.name|default:"EliteEstate Agency" }}</span>
-            <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                <span itemprop="streetAddress">ул. Платонова, д. 39</span>,
-                <span itemprop="addressLocality">г. Минск</span>
+            <div itemscope itemtype="http://schema.org/RealEstateAgent">
+                <span itemprop="name">{{ company_info.name|default:"EliteEstate Agency" }}</span>
+                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                    <span itemprop="streetAddress">ул. Платонова, д. 39</span>,
+                    <span itemprop="addressLocality">г. Минск</span>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <p><a href="#top">Наверх страницы &#8593;</a></p>
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
     </footer>
 
 </body>

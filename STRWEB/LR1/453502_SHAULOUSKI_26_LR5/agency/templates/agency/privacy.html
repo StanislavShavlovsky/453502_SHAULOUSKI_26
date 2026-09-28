@@ -4,119 +4,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Политика конфиденциальности и защиты персональных данных агентства недвижимости EliteEstate.">
+    <meta name="description" content="Политика конфиденциальности агентства недвижимости EliteEstate — обработка и защита персональных данных клиентов.">
     <meta name="keywords" content="политика конфиденциальности, персональные данные, защита информации, EliteEstate">
     <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Политика конфиденциальности — {{ company_info.name|default:'EliteEstate' }}">
-    <meta property="og:description" content="Политика обработки и защиты персональных данных клиентов агентства недвижимости EliteEstate.">
+    <meta property="og:description" content="Политика обработки и защиты персональных данных клиентов агентства недвижимости.">
+    <meta property="og:type" content="website">
     {% if company_info.logo %}
         <meta property="og:image" content="{{ company_info.logo.url }}">
     {% endif %}
-    <meta property="og:type" content="website">
 
     <title>Политика конфиденциальности — {{ company_info.name|default:'EliteEstate' }}</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
 </head>
 <body id="top">
 
-    <!-- Шапка сайта и Навигация -->
-<header>
-    <a href="{% url 'home' %}">
-        {% if company_info.logo %}
-            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
-        {% else %}
-            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
-        {% endif %}
-    </a>
-    <nav style="margin-top: 10px; line-height: 1.8;">
-        <a href="{% url 'home' %}">Главная</a> |
-        <a href="{% url 'about' %}">О компании</a> |
-        <a href="{% url 'news' %}">Новости</a> |
-        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
-        <a href="{% url 'contacts' %}">Контакты</a> |
-        <a href="{% url 'vacancies' %}">Вакансии</a> |
-        <a href="{% url 'reviews' %}">Отзывы</a> |
-        <a href="{% url 'promocodes' %}">Промокоды</a> |
-        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
-        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
-    </nav>
-</header>
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
 
-    <!-- Основное содержимое -->
-    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px; line-height: 1.6;">
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
 
-        <section id="privacy-header">
-            <h1>Политика конфиденциальности</h1>
-            <p>Ваша конфиденциальность имеет первостепенное значение для нашего агентства недвижимости «{{ company_info.name|default:"EliteEstate" }}»[cite: 13].</p>
-        </section>
-
-        <hr>
-
-        <section id="privacy-content">
-            <article style="background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
-                
-                <h3>1. Общие положения</h3>
-                <p>
-                    Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональной информации пользователей, которую агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}» может получить во время использования сайта, оформления заявок на покупку или аренду объектов, а также подписки на рассылку новостей.
-                </p>
-
-                <h3>2. Какие данные мы собираем</h3>
-                <p>При поиске, подборе и бронировании недвижимости мы можем запрашивать следующие данные:</p>
-                <ul>
-                    <li>Фамилия, имя и отчество;</li>
-                    <li>Контактный номер телефона;</li>
-                    <li>Адрес электронной почты (Email);</li>
-                    <li>Параметры и предпочтения по подбору объектов недвижимости (бюджет, тип объекта, локация);</li>
-                    <li>Технические данные (IP-адрес, файлы cookie, данные браузера).</li>
-                </ul>
-
-                <h3>3. Цели сбора информации</h3>
-                <p>Мы используем полученные данные исключительно для:</p>
-                <ul>
-                    <li>Предоставления консультаций по вопросам купли-продажи и аренды недвижимости;</li>
-                    <li>Организации просмотров объектов недвижимости в удобное для вас время;</li>
-                    <li>Обработки заказов и запросов через Корзину и формочки обратной связи;</li>
-                    <li>Отправки уведомлений, новостей и аналитических отчетов рынка (с вашего согласия).</li>
-                </ul>
-
-                <h3>4. Защита и передача данных третьим лицам</h3>
-                <p>
-                    Агентство «{{ company_info.name|default:"EliteEstate" }}» гарантирует конфиденциальность ваших данных и обязуется не передавать информацию третьим лицам, за исключением случаев, предусмотренных законодательством Республики Беларусь (или законодательством страны присутствия), либо при необходимости оформления юридических сделок с вашим явным согласием.
-                </p>
-
-                <h3>5. Использование файлов Cookie</h3>
-                <p>
-                    Наш сайт использует файлы cookie для корректного сохранения пользовательских сессий, работы корзины и сбора анонимной аналитики взаимодействия с объектами недвижимости. Вы можете отключить cookie в настройках браузера.
-                </p>
-
-                <h3>6. Контактная информация</h3>
-                <p>
-                    Если у вас возникли вопросы по поводу обработки персональных данных, вы можете связаться с нами через страницу <a href="{% url 'contacts' %}" style="color: #007bff;">Контакты</a> или по реквизитам организации:
-                </p>
-                {% if company_info.requisites %}
-                    <pre style="background: #f8f9fa; padding: 10px; border-left: 3px solid #007bff;">{{ company_info.requisites }}</pre>
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
                 {% endif %}
+            </ul>
+        </nav>
 
-            </article>
-        </section>
+        <nav aria-label="Навигация по разделам политики">
+            <ul>
+                <li><a href="#p-general">Общие положения</a></li>
+                <li><a href="#p-data">Какие данные собираем</a></li>
+                <li><a href="#p-purposes">Цели обработки</a></li>
+                <li><a href="#p-cookies">Cookies</a></li>
+                <li><a href="#p-rights">Права пользователя</a></li>
+                <li><a href="#p-contacts">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Политика конфиденциальности</li>
+            </ol>
+        </nav>
+
+        <article>
+            <header>
+                <h2>Политика конфиденциальности</h2>
+                <p>
+                    <small>
+                        Последнее обновление:
+                        <time datetime="2026-01-01">01.01.2026</time>
+                    </small>
+                </p>
+            </header>
+
+            <section id="p-general" aria-labelledby="p-general-heading">
+                <h3 id="p-general-heading">1. Общие положения</h3>
+                <p>
+                    Настоящая Политика конфиденциальности (далее — «Политика») определяет порядок
+                    обработки и защиты персональных данных пользователей сайта агентства недвижимости
+                    <strong>{{ company_info.name|default:"EliteEstate" }}</strong> (далее — «Агентство»).
+                </p>
+                <p>
+                    Используя сайт, вы соглашаетесь с условиями данной Политики.
+                    Если вы не согласны с условиями — прекратите использование сайта.
+                </p>
+
+                <p>Термины и определения:</p>
+                <dl>
+                    <dt><dfn>Персональные данные</dfn></dt>
+                    <dd>Любая информация, относящаяся к прямо или косвенно определённому физическому лицу.</dd>
+
+                    <dt><dfn>Обработка персональных данных</dfn></dt>
+                    <dd>Любое действие с персональными данными: сбор, запись, хранение, использование, удаление.</dd>
+
+                    <dt><dfn>Пользователь</dfn></dt>
+                    <dd>Лицо, использующее сайт агентства EliteEstate.</dd>
+
+                    <dt><dfn><abbr title="General Data Protection Regulation">GDPR</abbr></dfn></dt>
+                    <dd>Общий регламент по защите данных Европейского союза.</dd>
+                </dl>
+            </section>
+
+            <hr>
+
+            <section id="p-data" aria-labelledby="p-data-heading">
+                <h3 id="p-data-heading">2. Какие данные мы собираем</h3>
+                <p>Мы можем собирать следующие категории данных:</p>
+
+                <table border="1">
+                    <caption>Категории персональных данных</caption>
+                    <thead>
+                        <tr>
+                            <th id="d-category" scope="col">Категория</th>
+                            <th id="d-examples" scope="col">Примеры</th>
+                            <th id="d-source" scope="col">Источник</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td headers="d-category">Идентификационные</td>
+                            <td headers="d-examples">Логин, имя, фамилия, дата рождения</td>
+                            <td headers="d-source">Регистрация</td>
+                        </tr>
+                        <tr>
+                            <td headers="d-category">Контактные</td>
+                            <td headers="d-examples">Email, номер телефона</td>
+                            <td headers="d-source">Регистрация, заявка на подбор</td>
+                        </tr>
+                        <tr>
+                            <td headers="d-category">Параметры поиска</td>
+                            <td headers="d-examples">Тип недвижимости, бюджет, локация</td>
+                            <td headers="d-source">Форма заявки</td>
+                        </tr>
+                        <tr>
+                            <td headers="d-category">Технические</td>
+                            <td headers="d-examples">
+                                <abbr title="Internet Protocol">IP</abbr>-адрес, cookies, браузер
+                            </td>
+                            <td headers="d-source">Автоматически</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Мы <strong>не собираем</strong> данные о политических взглядах, религии, здоровье.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+
+            <hr>
+
+            <section id="p-purposes" aria-labelledby="p-purposes-heading">
+                <h3 id="p-purposes-heading">3. Цели обработки данных</h3>
+                <p>Ваши персональные данные обрабатываются в следующих целях:</p>
+                <ol>
+                    <li>Регистрация и авторизация на сайте.</li>
+                    <li>Подбор объектов недвижимости согласно вашим параметрам.</li>
+                    <li>Оформление и сопровождение сделок купли-продажи и аренды.</li>
+                    <li>Отправка уведомлений о статусе заявки.</li>
+                    <li>Улучшение качества обслуживания.</li>
+                    <li>Информирование об акциях и специальных предложениях (при согласии).</li>
+                    <li>Соблюдение требований законодательства.</li>
+                </ol>
+                <p>
+                    <mark>Важно:</mark> мы не передаём ваши данные третьим лицам,
+                    за исключением случаев, предусмотренных законом.
+                </p>
+            </section>
+
+            <hr>
+
+            <section id="p-cookies" aria-labelledby="p-cookies-heading">
+                <h3 id="p-cookies-heading">4. Использование Cookies</h3>
+                <p>
+                    Сайт использует <dfn>cookies</dfn> — небольшие текстовые файлы, сохраняемые
+                    в браузере пользователя. Они помогают:
+                </p>
+                <ul>
+                    <li>сохранять сессию авторизации;</li>
+                    <li>запоминать настройки отображения;</li>
+                    <li>анализировать поведение пользователей на сайте.</li>
+                </ul>
+                <p>
+                    Вы можете отключить cookies в настройках браузера,
+                    однако это может повлиять на работу сайта.
+                </p>
+            </section>
+
+            <hr>
+
+            <section id="p-rights" aria-labelledby="p-rights-heading">
+                <h3 id="p-rights-heading">5. Ваши права</h3>
+                <p>Вы имеете право:</p>
+                <ul>
+                    <li>получить доступ к своим персональным данным;</li>
+                    <li>требовать исправления неточных данных;</li>
+                    <li>требовать удаления данных («право на забвение»);</li>
+                    <li>отозвать согласие на обработку;</li>
+                    <li>подать жалобу в надзорный орган.</li>
+                </ul>
+                <p>
+                    Для реализации любого из прав свяжитесь с нами через
+                    <a href="{% url 'contacts' %}">контакты</a>.
+                </p>
+            </section>
+
+            <hr>
+
+            <section id="p-contacts" aria-labelledby="p-contacts-heading">
+                <h3 id="p-contacts-heading">6. Контакты</h3>
+                <p>По вопросам обработки персональных данных обращайтесь:</p>
+                <address>
+                    <p><strong>ООО «{{ company_info.name|default:"EliteEstate" }}»</strong></p>
+                    <p>220020, г. Минск, ул. Платонова, д. 39</p>
+                    <p>Телефон: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                    <p>Email: <a href="mailto:privacy@eliteestate.by">privacy@eliteestate.by</a></p>
+                </address>
+
+                {% if company_info.requisites %}
+                    <h4>Реквизиты организации</h4>
+                    <pre>{{ company_info.requisites }}</pre>
+                {% endif %}
+            </section>
+
+            <hr>
+
+            <section aria-labelledby="p-download-heading">
+                <h3 id="p-download-heading">Документы для скачивания</h3>
+                <p>
+                    <a href="{% static 'docs/privacy-policy.pdf' %}" download>
+                        Скачать полную версию Политики конфиденциальности (PDF)
+                    </a>
+                </p>
+                <p>
+                    <a href="{% static 'docs/consent.pdf' %}" download>
+                        Скачать форму согласия на обработку данных (PDF)
+                    </a>
+                </p>
+            </section>
+
+            <hr>
+
+            <blockquote>
+                <p>
+                    «Мы уважаем вашу приватность и делаем всё, чтобы ваши данные оставались в безопасности».
+                </p>
+                <footer>
+                    <p>— Администрация агентства <cite>{{ company_info.name|default:"EliteEstate" }}</cite></p>
+                </footer>
+            </blockquote>
+
+            <footer>
+                <p>
+                    <a href="{% url 'home' %}">← Вернуться на главную</a>
+                </p>
+            </footer>
+        </article>
     </main>
 
     <hr>
 
-    <!-- Подвал (Footer) -->
     <footer>
-        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
-        {% if company_info.requisites %}
-            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
-        {% endif %}
-        <p><a href="#top">Наверх страницы &#8593;</a></p>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
     </footer>
 
 </body>

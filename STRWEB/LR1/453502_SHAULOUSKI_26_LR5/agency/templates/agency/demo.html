@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Демонстрационная страница HTML-элементов.">
+    <meta name="keywords" content="HTML, демо, элементы, теги">
+    <meta name="author" content="Студент">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>HTML Demo</title>
+    <link rel="icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T/AP8A/62n1zAAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZSURBVDjLY2AY2YARzU2MBoPhMBgMhsMAAALMAAF1x50LAAAAAElFTkSuQmCC" type="image/x-icon">
+
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 20px auto; padding: 0 20px; line-height: 1.6; }
+        section { border: 1px solid #ddd; padding: 15px 20px; margin-bottom: 25px; border-radius: 6px; }
+        section > h2 { margin-top: 0; color: #227c9d; border-bottom: 2px solid #227c9d; padding-bottom: 5px; }
+        table { border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #999; padding: 6px 12px; }
+        th { background: #f0f0f0; }
+        code, pre { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; }
+        pre { padding: 10px; overflow-x: auto; }
+        mark { background: yellow; }
+        img, video, iframe, embed, object { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body id="top">
+
+<header>
+    <h1>HTML Demo</h1>
+
+    <nav aria-label="Содержание">
+        <h2>Содержание</h2>
+        <ul>
+            <li><a href="#section1">Структура документа и метаданные</a></li>
+            <li><a href="#section2">Выделение текста</a></li>
+            <li><a href="#section3">Ссылки и якоря</a></li>
+            <li><a href="#section4">Группировка контента</a></li>
+            <li><a href="#section5">Семантические секции</a></li>
+            <li><a href="#section6">Таблицы</a></li>
+            <li><a href="#section7">Формы</a></li>
+            <li><a href="#section8">Изображения</a></li>
+            <li><a href="#section9">Фреймы и объекты</a></li>
+            <li><a href="#section10">Видео и аудио</a></li>
+        </ul>
+    </nav>
+</header>
+
+<hr>
+
+<main>
+
+<section id="section1">
+    <h2>Структура документа и метаданные</h2>
+
+    <h3>Атрибуты элемента</h3>
+
+    <p title="Подсказка при наведении">
+        Наведите курсор на этот абзац — появится подсказка.
+    </p>
+
+    <p contenteditable="true">
+        Этот текст можно отредактировать прямо в браузере.
+    </p>
+
+    <p spellcheck="true" lang="en">
+        This paragraf has spellcheck enabled (with error).
+    </p>
+
+    <p translate="no">
+        This text should not be translated.
+    </p>
+
+    <p hidden>
+        Этот текст скрыт от пользователя.
+    </p>
+
+    <ul>
+        <li data-animaltype="bird">Сова</li>
+        <li data-animaltype="mammal">Лиса</li>
+        <li data-animaltype="fish">Щука</li>
+    </ul>
+
+    <h3>Специальные символы</h3>
+    <p>
+        Неразрывный пробел:&nbsp;|&nbsp;пример.<br>
+        Знаки &lt; и &gt;.<br>
+        Копирайт &copy;, зарегистрировано &reg;, торговая марка &trade;.<br>
+        Кавычки: &laquo;русские&raquo;, &ldquo;английские&rdquo;.
+    </p>
+
+    <h3>Микроданные</h3>
+    <div itemscope itemtype="http://schema.org/Movie">
+        <h4 itemprop="name">Аватар</h4>
+        <p>Режиссер: <span itemprop="director">Джеймс Кэмерон</span></p>
+        <p>Жанр: <span itemprop="genre">Фантастика</span></p>
+        <p>Рейтинг: <span itemprop="ratingValue">7.8</span></p>
+    </div>
+</section>
+
+<hr>
+
+<section id="section2">
+    <h2>Выделение текста</h2>
+
+    <h3>Разные виды акцентов</h3>
+    <p>
+        <em>I</em> like <b>apples</b> and <b>oranges</b>.
+        My favorite kind of orange is the mandarin,
+        properly known as <i>citrus reticulata</i>.
+        Oranges at my local store cost <s>$1 each</s> $2 for 3
+        <small>(plus tax)</small>.
+    </p>
+    <p>
+        <strong>Warning:</strong> Eating <u>too many</u> oranges can give you heart burn.
+    </p>
+    <p>
+        The point x<sub>10</sub> is the 10<sup>th</sup> point.
+    </p>
+
+    <h3>Фрагменты кода</h3>
+    <p>
+        <code>
+            var fruits = ["apples", "oranges", "mangoes", "cherries"];<br>
+            document.writeln("I like " + fruits.length + " fruits");
+        </code>
+    </p>
+    <p>The variable in this example is <var>fruits</var></p>
+    <p>The output from the code is: <samp>I like 4 fruits</samp></p>
+    <p>When prompted for my favorite fruit, I typed: <kbd>cherries</kbd></p>
+
+    <h3>Сокращения и определения</h3>
+    <p>
+        <abbr title="Florida Department of Citrus">FDOC</abbr> —
+        Департамент цитрусовых Флориды.
+    </p>
+    <p>
+        The <dfn title="apple">apple</dfn> is the pomeaceous fruit of the apple tree.
+    </p>
+
+    <h3>Цитаты</h3>
+    <p>
+        <q cite="http://en.wikipedia.org/wiki/Apple">
+            The apple is the pomeaceous fruit of the apple tree.
+        </q>
+    </p>
+    <p>
+        My favorite book is <cite>Fruit: Edible, Inedible, Incredible</cite>.
+    </p>
+
+    <h3>Дата и время</h3>
+    <p>
+        At <time datetime="15:00">3 o'clock</time>
+        on <time datetime="1984-12-07">December 7th</time>.
+    </p>
+
+    <h3>Выделенный текст</h3>
+    <p>I would like a <mark>pair</mark> of <mark>pears</mark>.</p>
+
+    <h3>Переносы строк</h3>
+    <p>
+        I wandered lonely as a cloud<br>
+        That floats on high o'er vales and hills,<br>
+        When all at once I saw a crowd,<br>
+        A host, of golden daffodils.
+    </p>
+    <p>
+        Самое длинное слово:
+        метоксихлор<wbr>диэтиламино<wbr>метил<wbr>бутил<wbr>амино<wbr>акридин.
+    </p>
+</section>
+
+<hr>
+
+<section id="section3">
+    <h2>Ссылки и якоря</h2>
+
+    <h3>Внешние ссылки</h3>
+    <p>
+        Хочешь на mail.ru? <a href="https://mail.ru" target="_blank" rel="noopener">Жми сюда!</a>
+    </p>
+
+    <h3>Связь по почте и телефону</h3>
+    <p>
+        <a href="mailto:info@example.com?subject=Вопрос">Написать письмо</a>
+    </p>
+    <p>
+        <a href="tel:+375291234567">+375 (29) 123-45-67</a>
+    </p>
+
+    <h3>Скачивание файла</h3>
+    <p>
+        <a href="files/report.pdf" download="March 2014 Report.pdf">
+            Скачать отчёт за март 2014
+        </a>
+    </p>
+
+    <h3>Переход к фрагменту страницы</h3>
+    <p>
+        <a href="#anchor-example">Перейти к примечанию внизу раздела</a>
+    </p>
+    <p>... контент раздела ...</p>
+    <p>... контент раздела ...</p>
+    <p>... контент раздела ...</p>
+    <p>... контент раздела ...</p>
+    <p>... контент раздела ...</p>
+    <p>... контент раздела ...</p>
+    <p id="anchor-example"><strong>Примечание:</strong> это место, куда ведёт ссылка.</p>
+</section>
+
+<hr>
+
+<section id="section4">
+    <h2>Группировка контента</h2>
+
+    <h3>Блочный контейнер и абзацы</h3>
+    <div class="block-container" id="block1">
+        Это универсальный блочный контейнер <code>&lt;div&gt;</code>.
+    </div>
+    <p>Обычный абзац текста.</p>
+    <p>Второй абзац — между ними отбивка.</p>
+
+    <h3>Форматированный текст</h3>
+    <pre>
+function f(x) {
+    if (x > 0)
+        alert(x);
+}
+    </pre>
+
+    <h3>Цитаты</h3>
+    <p>I like apples and oranges.</p>
+    <blockquote cite="http://en.wikipedia.org/wiki/Apple">
+        The apple forms a tree that is small and deciduous,
+        reaching 3 to 12 meters tall, with a broad, often densely twiggy crown.
+    </blockquote>
+    <p>My favorite kind of orange is the mandarin.</p>
+
+    <h3>Горизонтальная линия</h3>
+    <hr>
+    <p>Текст после первой линии.</p>
+    <hr>
+    <p>Текст после второй линии.</p>
+
+    <h3>Списки</h3>
+    <ul>
+        <li>Первый элемент</li>
+        <li>Второй элемент</li>
+        <li>Третий элемент</li>
+    </ul>
+
+    <ol>
+        <li>Первый</li>
+        <li>Второй</li>
+        <li>Третий</li>
+    </ol>
+
+    <ol>
+        <li>Первый пункт</li>
+        <li>
+            Второй пункт с подпунктами:
+            <ul>
+                <li>Подпункт 1</li>
+                <li>Подпункт 2</li>
+            </ul>
+        </li>
+        <li>Третий пункт</li>
+    </ol>
+
+    <dl>
+        <dt>HTML-документ</dt>
+        <dd>Обычный текстовый файл, который может содержать...</dd>
+
+        <dt>Сайт</dt>
+        <dd>Набор отдельных веб-страниц, связанных между собой ссылками.</dd>
+    </dl>
+
+    <h3>Фигуры</h3>
+    <figure>
+        <figcaption>Пример с фрагментом кода</figcaption>
+        <code>
+            var fruits = ["apples", "oranges"];<br>
+            document.writeln("I like " + fruits.length + " fruits");
+        </code>
+    </figure>
+</section>
+
+<hr>
+
+<section id="section5">
+    <h2>Семантические секции</h2>
+
+    <section>
+        <h3>Основной контент</h3>
+        <article>
+            <h4>Первая статья</h4>
+            <p>Текст первой статьи...</p>
+        </article>
+        <article>
+            <h4>Вторая статья</h4>
+            <p>Текст второй статьи...</p>
+        </article>
+    </section>
+
+    <article>
+        <header>
+            <h4>Персональный сайт Ивана Иванова</h4>
+        </header>
+        <p>Добро пожаловать!</p>
+        <footer>
+            Copyright Иван Иванов
+        </footer>
+    </article>
+
+    <aside>
+        <h4>Боковая панель</h4>
+        <p>Здесь могут быть рубрики, ссылки на архив, метки.</p>
+    </aside>
+
+    <details>
+        <summary>Виды триатлона</summary>
+        <ol>
+            <li>1.5 км плавание</li>
+            <li>40 км велогонка</li>
+            <li>10 км бег</li>
+        </ol>
+    </details>
+
+    <address>
+        Автор: Иван Иванов<br>
+        <a href="mailto:ivan@example.com">ivan@example.com</a><br>
+        г. Минск, ул. Платонова, д. 39
+    </address>
+</section>
+
+<hr>
+
+<section id="section6">
+    <h2>Таблицы</h2>
+
+    <h3>Простая таблица</h3>
+    <table border="1">
+        <caption>Заголовок таблицы</caption>
+        <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+        </tr>
+        <tr>
+            <td>Row 1, Cell 1</td>
+            <td>Row 1, Cell 2</td>
+        </tr>
+        <tr>
+            <td>Row 2, Cell 1</td>
+            <td>Row 2, Cell 2</td>
+        </tr>
+    </table>
+
+    <h3>Объединение ячеек</h3>
+    <table border="1">
+        <tr>
+            <td rowspan="2">(1,1) — rowspan=2</td>
+            <td>(1,2)</td>
+            <td>(1,3)</td>
+        </tr>
+        <tr>
+            <td colspan="2">(2,1) — colspan=2</td>
+        </tr>
+    </table>
+
+    <h3>Заголовочные ячейки</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th id="th-rank">Rank</th>
+                <th id="th-name">Name</th>
+                <th id="th-color">Color</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th id="th-fav" headers="th-rank">Favorite:</th>
+                <td headers="th-fav th-name">Apples</td>
+                <td headers="th-fav th-color">Green</td>
+            </tr>
+            <tr>
+                <th id="th-fav2" headers="th-rank">2nd Favorite:</th>
+                <td headers="th-fav2 th-name">Oranges</td>
+                <td headers="th-fav2 th-color">Orange</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Заголовок, тело и подвал таблицы</h3>
+    <table border="1">
+        <caption>Группировка строк</caption>
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Row 1, Cell 1</td>
+                <td>Row 1, Cell 2</td>
+            </tr>
+            <tr>
+                <td>Row 2, Cell 1</td>
+                <td>Row 2, Cell 2</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Footer 1</td>
+                <td>Footer 2</td>
+            </tr>
+        </tfoot>
+    </table>
+</section>
+
+<hr>
+
+<section id="section7">
+    <h2>Формы</h2>
+
+    <h3>Контакты</h3>
+    <form action="#" method="post">
+        <p>
+            <label for="f-username">Имя:</label>
+            <input type="text" id="f-username" name="username" placeholder="Введите имя" autocomplete="name">
+        </p>
+        <p>
+            <label for="f-email">Email:</label>
+            <input type="email" id="f-email" name="email" placeholder="example@mail.com" autocomplete="email">
+        </p>
+        <p>
+            Пол:<br>
+            <label><input type="radio" name="sex" value="male" checked> мужской</label><br>
+            <label><input type="radio" name="sex" value="female"> женский</label>
+        </p>
+        <p>
+            <input type="submit" value="Отправить">
+            <input type="reset" value="Очистить">
+        </p>
+    </form>
+
+    <h3>Вход в систему</h3>
+    <form action="#">
+        <p>
+            <label for="f-login">Login:</label>
+            <input type="text" id="f-login" name="login" size="10" autocomplete="username">
+        </p>
+        <p>
+            <label for="f-pass">Password:</label>
+            <input type="password" id="f-pass" name="pass" maxlength="8">
+        </p>
+        <p><input type="submit" value="Log in"></p>
+    </form>
+
+    <h3>Несколько вариантов</h3>
+    <form action="#">
+        <p>
+            <label><input type="checkbox" name="vehicle" value="Bike" checked> У меня есть велосипед</label><br>
+            <label><input type="checkbox" name="vehicle" value="Car"> У меня есть машина</label>
+        </p>
+    </form>
+
+    <h3>Разные поля ввода</h3>
+    <form action="#">
+        <p>Color: <input type="color" name="color" value="#ff0000"></p>
+        <p>Date: <input type="date" name="date"></p>
+        <p>Datetime-local: <input type="datetime-local" name="dtl"></p>
+        <p>Email: <input type="email" name="email2"></p>
+        <p>Number: <input type="number" name="number" min="1" max="10" step="1"></p>
+        <p>Range: <input type="range" name="range" min="10" max="20"></p>
+        <p>Search: <input type="search" name="search"></p>
+        <p>Tel: <input type="tel" name="tel"></p>
+        <p>Time: <input type="time" name="time"></p>
+        <p>URL: <input type="url" name="url"></p>
+        <p>Month: <input type="month" name="month"></p>
+        <p>Week: <input type="week" name="week"></p>
+    </form>
+
+    <h3>Многострочное поле</h3>
+    <form action="#">
+        <p>
+            <textarea name="desc" cols="45" rows="5"
+                      placeholder="Введите описание" maxlength="450"></textarea>
+        </p>
+        <p><input type="submit" value="Send!"></p>
+    </form>
+
+    <h3>Выпадающие списки</h3>
+    <form action="#">
+        <p>
+            <label for="f-hero1">Выберите героя (список с прокруткой):</label><br>
+            <select size="4" name="s1" id="f-hero1">
+                <option disabled>Choose a hero:</option>
+                <option value="iron">Iron Man</option>
+                <option selected value="captain">Captain America</option>
+                <option value="thor">Thor</option>
+            </select>
+        </p>
+        <p>
+            <label for="f-hero2">Выберите героя (компактный):</label><br>
+            <select size="1" name="s2" id="f-hero2">
+                <option disabled>Choose a hero:</option>
+                <option value="iron">Iron Man</option>
+                <option selected value="captain">Captain America</option>
+                <option value="thor">Thor</option>
+            </select>
+        </p>
+    </form>
+
+    <h3>Группы в списке</h3>
+    <form action="#">
+        <select size="7" name="list">
+            <option value="v1">Not in group</option>
+            <optgroup label="Group 1">
+                <option value="v2">Item G1-1</option>
+                <option value="v3">Item G1-2</option>
+            </optgroup>
+            <optgroup label="Group 2">
+                <option value="v4">Item G2-1</option>
+                <option value="v5">Item G2-2</option>
+            </optgroup>
+        </select>
+    </form>
+
+    <h3>Поле с подсказками</h3>
+    <form action="#">
+        <p>
+            <label for="f-fruit">Fruit:</label>
+            <input list="fruitlist" id="f-fruit" name="fave">
+            <datalist id="fruitlist">
+                <option value="Apples" label="Lovely Apples"></option>
+                <option value="Oranges">Refreshing Oranges</option>
+                <option value="Cherries"></option>
+            </datalist>
+        </p>
+        <p><button type="submit">Submit Vote</button></p>
+    </form>
+
+    <h3>Кнопка с содержимым</h3>
+    <form action="#">
+        <button type="button" name="btn">
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </button>
+    </form>
+
+    <h3>Группировка полей</h3>
+    <form action="#">
+        <fieldset title="Login info">
+            <legend>User info</legend>
+            <label for="f-user">User:</label>
+            <input id="f-user" type="text" name="usr"><br>
+            <label>Pass: <input type="password" name="pass"></label><br>
+            <input type="submit" value="Login">
+        </fieldset>
+    </form>
+
+    <h3>Загрузка файла</h3>
+    <form action="#" method="post" enctype="multipart/form-data">
+        <p>
+            <label for="f-file">Select file:</label>
+            <input type="file" id="f-file" name="fileinput" accept="image/jpeg,image/png">
+        </p>
+        <p><input type="submit" value="Send!"></p>
+    </form>
+</section>
+
+<hr>
+
+<section id="section8">
+    <h2>Изображения</h2>
+
+    <h3>Обычное изображение</h3>
+    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'><rect width='100%' height='100%' fill='%23227c9d'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='20'>Demo Image (300x200)</text></svg>"
+         alt="Демонстрационное изображение 300x200"
+         width="300" height="200">
+
+    <h3>Изображение-ссылка</h3>
+    <a href="https://example.com" target="_blank" rel="noopener">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='100' viewBox='0 0 200 100'><rect width='100%' height='100%' fill='%2317a2b8'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='18'>Click Me</text></svg>"
+             alt="Кликните по картинке" width="200" height="100">
+    </a>
+
+    <h3>Адаптивное изображение</h3>
+    <picture>
+        <source media="(min-width: 800px)"
+                srcset="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='300' viewBox='0 0 800 300'><rect width='100%' height='100%' fill='%23227c9d'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='28'>Large Screen (800x300)</text></svg>">
+        <source media="(min-width: 400px)"
+                srcset="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'><rect width='100%' height='100%' fill='%2317a2b8'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='22'>Medium Screen (400x200)</text></svg>">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='150' viewBox='0 0 200 150'><rect width='100%' height='100%' fill='%239b59b6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='18'>Small</text></svg>"
+             alt="Адаптивное изображение">
+    </picture>
+
+    <h3>Разные версии для разных разрешений экрана</h3>
+    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'><rect width='100%' height='100%' fill='%23227c9d'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='20'>1x Speed/DPI</text></svg>"
+         srcset="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='100%' height='100%' fill='%23227c9d'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='32'>2x Speed/DPI</text></svg> 2x,
+                 data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'><rect width='100%' height='100%' fill='%23227c9d'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='40'>3x Speed/DPI</text></svg> 3x"
+         alt="Изображение с srcset"
+         width="300">
+</section>
+
+<hr>
+
+<section id="section9">
+    <h2>Фреймы и внедрение объектов</h2>
+
+    <h3>Встроенный фрейм</h3>
+    <iframe src="https://example.com"
+            width="600" height="300"
+            title="Демонстрационный iframe"
+            loading="lazy">
+        Ваш браузер не поддерживает iframe.
+    </iframe>
+
+    <h3>Фрейм с картой</h3>
+    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=27.5,53.85,27.65,53.95&amp;layer=mapnik"
+            width="600" height="350"
+            title="Карта Минска"
+            loading="lazy">
+    </iframe>
+
+    <h3>Внедрение через object</h3>
+    <object data="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'><rect width='100%' height='100%' fill='%23227c9d'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='20'>Object Content (SVG)</text></svg>"
+            type="image/svg+xml"
+            width="400" height="200">
+        <p>Ваш браузер не поддерживает объекты.</p>
+    </object>
+
+    <h3>Внедрение через embed</h3>
+    <embed src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'><rect width='100%' height='100%' fill='%2317a2b8'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='20'>Embed Content (SVG)</text></svg>"
+           type="image/svg+xml"
+           width="400" height="200">
+</section>
+
+<hr>
+
+<section id="section10">
+    <h2>Внедрение видео и аудио</h2>
+
+    <h3>Видео</h3>
+    <figure>
+        <video width="480" height="270"
+               controls preload="metadata"
+               poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='270' viewBox='0 0 480 270'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='22'>Video Poster</text></svg>">
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+            <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" download>Скачать видео</a>.
+        </video>
+        <figcaption>Демонстрационное видео</figcaption>
+    </figure>
+
+    <h3>Видео с субтитрами</h3>
+    <video width="480" height="270" controls>
+        <track kind="subtitles" src="data:text/vtt;charset=utf-8,WEBVTT%0A%0A1%0A00:00:00.000%20--%3E%2000:00:05.000%0A%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B5%20%D1%81%D1%83%D0%B1%D1%82%D0%B8%D1%82%D1%80%D1%8B" srclang="ru" label="Русский" default>
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+
+    <h3>Аудио</h3>
+    <figure>
+        <audio controls preload="metadata">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио.
+        </audio>
+        <figcaption>Демонстрационное аудио</figcaption>
+    </figure>
+
+    <h3>Видео с YouTube</h3>
+    <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="YouTube видео"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+    </iframe>
+</section>
+
+</main>
+
+<hr>
+
+<footer>
+    <p><a href="#top">Наверх ↑</a></p>
+    <p>&copy; HTML Demo.</p>
+</footer>
+
+</body>
+</html>

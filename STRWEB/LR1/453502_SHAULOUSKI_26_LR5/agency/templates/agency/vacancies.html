@@ -4,118 +4,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Открытые вакансии и работа в агентстве недвижимости EliteEstate.">
-    <meta name="keywords" content="вакансии, работа, карьера, риелтор, агентство недвижимости, EliteEstate">
+    <meta name="description" content="Открытые вакансии и работа в агентстве недвижимости EliteEstate — присоединяйтесь к нашей команде.">
+    <meta name="keywords" content="вакансии, работа, карьера, риелтор, EliteEstate">
     <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Открытые вакансии — {{ company_info.name|default:'EliteEstate' }}">
-    <meta property="og:description" content="Присоединяйтесь к команде профессионалов EliteEstate. Мы предлагаем отличные условия для карьерного и финансового роста.">
+    <meta property="og:title" content="Вакансии — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Присоединяйтесь к команде профессионалов EliteEstate.">
+    <meta property="og:type" content="website">
     {% if company_info.logo %}
         <meta property="og:image" content="{{ company_info.logo.url }}">
     {% endif %}
-    <meta property="og:type" content="website">
 
-    <title>Открытые вакансии — {{ company_info.name|default:'EliteEstate' }}</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Вакансии — {{ company_info.name|default:'EliteEstate' }}</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
 </head>
 <body id="top">
 
-    <!-- Шапка сайта и Навигация -->
-<header>
-    <a href="{% url 'home' %}">
-        {% if company_info.logo %}
-            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
-        {% else %}
-            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
-        {% endif %}
-    </a>
-    <nav style="margin-top: 10px; line-height: 1.8;">
-        <a href="{% url 'home' %}">Главная</a> |
-        <a href="{% url 'about' %}">О компании</a> |
-        <a href="{% url 'news' %}">Новости</a> |
-        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
-        <a href="{% url 'contacts' %}">Контакты</a> |
-        <a href="{% url 'vacancies' %}">Вакансии</a> |
-        <a href="{% url 'reviews' %}">Отзывы</a> |
-        <a href="{% url 'promocodes' %}">Промокоды</a> |
-        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
-        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
-    </nav>
-</header>
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
 
-    <!-- Основное содержимое -->
-    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px;">
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
 
-        <section id="vacancies-header">
-            <h1>Открытые вакансии</h1>
-            <p>Присоединяйтесь к команде профессионалов EliteEstate. Мы предлагаем отличные условия для карьерного и финансового роста.</p>
-        </section>
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация по разделам страницы">
+            <ul>
+                <li><a href="#section-vacancies">Вакансии</a></li>
+                <li><a href="#section-why">Почему мы</a></li>
+                <li><a href="#section-how">Как откликнуться</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Вакансии</li>
+            </ol>
+        </nav>
+
+        <h2>Открытые вакансии</h2>
+        <p>
+            Присоединяйтесь к команде профессионалов EliteEstate.
+            Мы предлагаем отличные условия для карьерного и финансового роста.
+        </p>
 
         <hr>
 
-        <!-- Список вакансий из БД -->
-        <section id="vacancies-list">
-            <div style="display: flex; flex-direction: column; gap: 20px;">
+        <section id="section-vacancies" aria-labelledby="vacancies-heading">
+            <h3 id="vacancies-heading">Список открытых вакансий</h3>
+
+            {% if vacancies %}
+            <ul>
                 {% for vac in vacancies %}
-                    <article id="vacancy-{{ vac.pk }}" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #fff;">
-                        
-                        <!-- Заголовок и Зарплата -->
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-                            <h3 style="margin: 0; color: #007bff; font-size: 1.3em;">
-                                {{ vac.title }}
-                            </h3>
-                            
-                            <div style="background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; padding: 5px 12px; border-radius: 4px; font-weight: bold; font-size: 1em;">
-                                💰 Зарплата: 
+                <li>
+                    <article>
+                        <header>
+                            <h4>{{ vac.title }}</h4>
+
+                            <p>
+                                <strong>Зарплата:</strong>
                                 {% if vac.salary %}
                                     {{ vac.salary }} BYN
                                 {% else %}
                                     По результатам собеседования
                                 {% endif %}
-                            </div>
-                        </div>
-
-                        <!-- Описание вакансии -->
-                        <div style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #007bff; color: #333; line-height: 1.6;">
-                            <strong>Описание вакансии и требования:</strong>
-                            <p style="margin: 5px 0 0 0;">
-                                {{ vac.description|linebreaksbr }}
                             </p>
-                        </div>
+                        </header>
 
-                        <!-- Дополнительная информация и действие -->
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 0.9em; color: #6c757d;">
-                            <span>💼 Условия: Полная занятость, гибкий график</span>
-                            <a href="{% url 'contacts' %}" style="padding: 6px 12px; background-color: #17a2b8; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;">
-                                Откликнуться (Контакты) &rarr;
-                            </a>
-                        </div>
+                        <section aria-label="Описание вакансии">
+                            <h5>Описание и требования</h5>
+                            <p>{{ vac.description|linebreaks }}</p>
+                        </section>
 
+                        <footer>
+                            <p>
+                                Условия: полная занятость, гибкий график.
+                                <a href="{% url 'contacts' %}">Откликнуться</a>
+                            </p>
+                        </footer>
                     </article>
-                {% empty %}
-                    <p style="text-align: center; color: #6c757d; margin: 40px 0;">
-                        На данный момент активных вакансий нет. Вы можете отправить своё резюме на электронную почту через раздел <a href="{% url 'contacts' %}" style="color: #007bff;">Контакты</a>.
-                    </p>
+
+                    <hr>
+                </li>
                 {% endfor %}
-            </div>
+            </ul>
+            {% else %}
+            <p>
+                <em>На данный момент активных вакансий нет.</em>
+                Вы можете отправить своё резюме на
+                <a href="mailto:hr@eliteestate.by">hr@eliteestate.by</a>.
+            </p>
+            {% endif %}
         </section>
 
+        <hr>
+
+        {% if vacancies %}
+        <section aria-labelledby="summary-heading">
+            <h3 id="summary-heading">Сводная таблица вакансий</h3>
+
+            <table border="1">
+                <caption>Все актуальные вакансии агентства</caption>
+                <thead>
+                    <tr>
+                        <th id="v-num" scope="col">№</th>
+                        <th id="v-title" scope="col">Должность</th>
+                        <th id="v-salary" scope="col">Зарплата (BYN)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vac in vacancies %}
+                    <tr>
+                        <td headers="v-num">{{ forloop.counter }}</td>
+                        <td headers="v-title">{{ vac.title }}</td>
+                        <td headers="v-salary">
+                            {% if vac.salary %}
+                                {{ vac.salary }}
+                            {% else %}
+                                По договорённости
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" headers="v-title">
+                            Всего вакансий: <strong>{{ vacancies|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <hr>
+        {% endif %}
+
+        <section id="section-why" aria-labelledby="why-heading">
+            <h3 id="why-heading">Почему стоит работать у нас</h3>
+
+            <ul>
+                <li>Официальное трудоустройство согласно Трудовому кодексу.</li>
+                <li>Стабильная зарплата и бонусы за успешные сделки.</li>
+                <li>Обучение и повышение квалификации за счёт компании.</li>
+                <li>Дружный коллектив и корпоративные мероприятия.</li>
+                <li>Карьерный рост от помощника риелтора до руководителя отдела.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="section-how" aria-labelledby="how-heading">
+            <h3 id="how-heading">Как откликнуться на вакансию</h3>
+
+            <ol>
+                <li>
+                    <strong>По email:</strong>
+                    <a href="mailto:hr@eliteestate.by">hr@eliteestate.by</a>
+                </li>
+                <li>
+                    <strong>По телефону:</strong>
+                    <a href="tel:+375291234567">+375 (29) 123-45-67</a>
+                </li>
+                <li>
+                    <strong>Лично в офисе:</strong>
+                    <a href="{% url 'contacts' %}">посмотреть адрес</a>
+                </li>
+            </ol>
+
+            <hr>
+
+            <aside aria-labelledby="form-heading">
+                <h4 id="form-heading">Быстрая форма отклика</h4>
+
+                <form action="{% url 'contacts' %}" method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+
+                    <fieldset>
+                        <legend>Ваши данные</legend>
+
+                        <p>
+                            <label for="apply-name">Ваше имя *:</label>
+                            <input type="text"
+                                   id="apply-name"
+                                   name="name"
+                                   placeholder="Иван Иванов"
+                                   maxlength="150"
+                                   autocomplete="name"
+                                   required>
+                        </p>
+
+                        <p>
+                            <label for="apply-email">Email *:</label>
+                            <input type="email"
+                                   id="apply-email"
+                                   name="email"
+                                   placeholder="ivan@example.com"
+                                   maxlength="254"
+                                   autocomplete="email"
+                                   required>
+                        </p>
+
+                        <p>
+                            <label for="apply-phone">Телефон:</label>
+                            <input type="tel"
+                                   id="apply-phone"
+                                   name="phone"
+                                   placeholder="+375 (29) 123-45-67"
+                                   pattern="\+375\s?\(\d{2}\)\s?\d{3}-\d{2}-\d{2}"
+                                   autocomplete="tel"
+                                   title="Формат: +375 (XX) XXX-XX-XX">
+                        </p>
+
+                        <p>
+                            <label for="apply-position">Желаемая должность *:</label>
+                            <select id="apply-position" name="position" required>
+                                <option value="" disabled selected>Выберите вакансию</option>
+                                {% for vac in vacancies %}
+                                    <option value="{{ vac.title }}">{{ vac.title }}</option>
+                                {% endfor %}
+                                <option value="other">Другая</option>
+                            </select>
+                        </p>
+
+                        <p>
+                            <label for="apply-experience">Опыт работы:</label>
+                            <select id="apply-experience" name="experience">
+                                <option value="no">Нет опыта</option>
+                                <option value="1-3">1–3 года</option>
+                                <option value="3-5">3–5 лет</option>
+                                <option value="5+">Более 5 лет</option>
+                            </select>
+                        </p>
+
+                        <p>
+                            <label for="apply-message">Сопроводительное письмо:</label>
+                            <textarea id="apply-message"
+                                      name="message"
+                                      rows="5"
+                                      maxlength="2000"
+                                      placeholder="Расскажите о себе..."></textarea>
+                        </p>
+
+                        <p>
+                            <label for="apply-resume">Резюме (PDF, DOCX):</label>
+                            <input type="file"
+                                   id="apply-resume"
+                                   name="resume"
+                                   accept=".pdf,.doc,.docx">
+                        </p>
+
+                        <p>
+                            <label>
+                                <input type="checkbox" name="agree" required>
+                                Я согласен на обработку
+                                <a href="{% url 'privacy' %}">персональных данных</a>
+                            </label>
+                        </p>
+                    </fieldset>
+
+                    <p>
+                        <button type="submit">Отправить заявку</button>
+                        <button type="reset">Очистить</button>
+                    </p>
+                </form>
+            </aside>
+        </section>
+
+        <hr>
+
+        <blockquote>
+            <p>
+                «Найдите работу по душе — и вам не придётся работать ни одного дня в жизни».
+            </p>
+            <footer>
+                <p>— <cite>Конфуций</cite></p>
+            </footer>
+        </blockquote>
     </main>
 
     <hr>
 
-    <!-- Подвал (Footer) -->
     <footer>
-        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
-        {% if company_info.requisites %}
-            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
-        {% endif %}
-        <p><a href="#top">Наверх страницы &#8593;</a></p>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:hr@eliteestate.by">hr@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
     </footer>
 
 </body>

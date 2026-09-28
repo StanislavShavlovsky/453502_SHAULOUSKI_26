@@ -4,103 +4,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ company_info.description|default:'Словарь терминов и часто задаваемые вопросы (FAQ) агентства недвижимости EliteEstate.'|truncatewords:25 }}">
+    <meta name="description" content="Словарь терминов и часто задаваемые вопросы (FAQ) агентства недвижимости EliteEstate.">
     <meta name="keywords" content="FAQ, словарь терминов, вопросы и ответы, недвижимость, EliteEstate">
     <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Словарь терминов и FAQ — {{ company_info.name|default:'EliteEstate' }}">
     <meta property="og:description" content="Список часто задаваемых вопросов и ответов на них с датой добавления.">
+    <meta property="og:type" content="website">
     {% if company_info.logo %}
         <meta property="og:image" content="{{ company_info.logo.url }}">
     {% endif %}
-    <meta property="og:type" content="website">
 
     <title>Словарь терминов и FAQ — {{ company_info.name|default:'EliteEstate' }}</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
 </head>
 <body id="top">
 
-    <!-- Шапка сайта и Навигация -->
-<header>
-    <a href="{% url 'home' %}">
-        {% if company_info.logo %}
-            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
-        {% else %}
-            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
-        {% endif %}
-    </a>
-    <nav style="margin-top: 10px; line-height: 1.8;">
-        <a href="{% url 'home' %}">Главная</a> |
-        <a href="{% url 'about' %}">О компании</a> |
-        <a href="{% url 'news' %}">Новости</a> |
-        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
-        <a href="{% url 'contacts' %}">Контакты</a> |
-        <a href="{% url 'vacancies' %}">Вакансии</a> |
-        <a href="{% url 'reviews' %}">Отзывы</a> |
-        <a href="{% url 'promocodes' %}">Промокоды</a> |
-        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
-        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
-    </nav>
-</header>
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
 
-    <!-- Основное содержимое -->
-    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px;">
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
 
-        <section id="faq-header">
-            <h1>Словарь терминов и Часто задаваемые вопросы (FAQ)</h1>
-            <p>Список часто задаваемых вопросов и ответов на них с фиксацией даты добавления.</p>
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация по разделам страницы">
+            <ul>
+                <li><a href="#section-faq">Вопросы и ответы</a></li>
+                <li><a href="#section-glossary">Глоссарий</a></li>
+                <li><a href="#section-help">Помощь</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Словарь терминов и FAQ</li>
+            </ol>
+        </nav>
+
+        <h2>Словарь терминов и часто задаваемые вопросы</h2>
+        <p>
+            Здесь собраны ответы на <mark>часто задаваемые вопросы</mark> о работе агентства недвижимости.
+            Нажмите на вопрос, чтобы развернуть ответ.
+        </p>
+
+        <hr>
+
+        <section id="section-faq" aria-labelledby="faq-heading">
+            <h3 id="faq-heading">Часто задаваемые вопросы (FAQ)</h3>
+
+            {% if faqs %}
+            <dl>
+                {% for faq in faqs %}
+                <dt>
+                    <details>
+                        <summary>{{ faq.question }}</summary>
+
+                        <dd>
+                            <p>{{ faq.answer }}</p>
+
+                            <footer>
+                                <p>
+                                    <small>
+                                        Дата добавления на сайт:
+                                        <time datetime="{{ faq.date_added|date:'Y-m-d' }}">
+                                            {{ faq.date_added|date:"d.m.Y" }}
+                                        </time>
+                                    </small>
+                                </p>
+                            </footer>
+                        </dd>
+                    </details>
+                </dt>
+                {% endfor %}
+            </dl>
+            {% else %}
+            <p><em>Список вопросов и терминов пока пуст.</em></p>
+            {% endif %}
         </section>
 
         <hr>
 
-        <!-- Список вопросов и ответов из БД -->
-        <section id="faq-list">
-            <div style="display: flex; flex-direction: column; gap: 15px;">
-                {% for faq in faqs %}
-                    <details id="faq-{{ faq.pk }}" style="border: 1px solid #ddd; border-radius: 8px; padding: 10px 15px; background: #fff;">
+        <section id="section-glossary" aria-labelledby="glossary-heading">
+            <h3 id="glossary-heading">Глоссарий терминов недвижимости</h3>
 
-                        <!-- Заголовок / Вопрос -->
-                        <summary style="font-weight: bold; font-size: 1.1em; cursor: pointer; padding: 5px 0;">
-                            <strong>Вопрос:</strong> {{ faq.question }}
-                        </summary>
+            <dl>
+                <dt><dfn>Риелтор</dfn></dt>
+                <dd>Специалист по операциям с недвижимостью: покупке, продаже, аренде.</dd>
 
-                        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
+                <dt><dfn>Агентство недвижимости</dfn></dt>
+                <dd>Компания, оказывающая посреднические услуги при сделках с недвижимостью.</dd>
 
-                        <!-- Развернутый ответ -->
-                        <div style="padding: 5px 0;">
-                            <p style="margin: 0 0 10px 0; color: #333;">
-                                <strong>Ответ:</strong> {{ faq.answer }}
-                            </p>
+                <dt><dfn>Залог</dfn></dt>
+                <dd>Имущество, передаваемое в обеспечение исполнения обязательств по договору.</dd>
 
-                            <!-- Дата добавления на сайт -->
-                            <p style="font-size: 0.85em; color: #6c757d; margin: 0;">
-                                <em>Дата добавления на сайт: <time datetime="{{ faq.date_added|date:'Y-m-d' }}">{{ faq.date_added|date:"d.m.Y" }}</time></em>
-                            </p>
-                        </div>
+                <dt><dfn>Ипотека</dfn></dt>
+                <dd>Кредит на покупку недвижимости под залог самой недвижимости.</dd>
 
-                    </details>
-                {% empty %}
-                    <p style="text-align: center; color: #6c757d; margin: 40px 0;">Список вопросов и терминов пока пуст.</p>
-                {% endfor %}
-            </div>
+                <dt><dfn><abbr title="Кадастровый номер">КН</abbr></dfn></dt>
+                <dd>Уникальный идентификатор объекта недвижимости в государственном кадастре.</dd>
+
+                <dt><dfn>Курирование сделки</dfn></dt>
+                <dd>Полное сопровождение сделки юристом и риелтором от начала до регистрации права собственности.</dd>
+            </dl>
         </section>
 
+        <hr>
+
+        <aside id="section-help" aria-labelledby="help-heading">
+            <h3 id="help-heading">Не нашли ответ?</h3>
+            <p>Свяжитесь с нами удобным способом:</p>
+
+            <address>
+                <p>Телефон: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+
+            <p>
+                Или посмотрите <a href="{% url 'contacts' %}">контакты наших сотрудников</a>.
+            </p>
+        </aside>
+
+        <hr>
+
+        <section aria-labelledby="poem-heading">
+            <h3 id="poem-heading">О знании терминов</h3>
+
+            <pre>
+Слово — ключ к любому делу,
+Знать язык — большое дело.
+Кто в терминах разбирается,
+Тот в сделках не ошибается.
+            </pre>
+        </section>
     </main>
 
     <hr>
 
-    <!-- Подвал (Footer) -->
     <footer>
-        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
-        {% if company_info.requisites %}
-            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
-        {% endif %}
-        <p><a href="#top">Наверх страницы &#8593;</a></p>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
     </footer>
 
 </body>

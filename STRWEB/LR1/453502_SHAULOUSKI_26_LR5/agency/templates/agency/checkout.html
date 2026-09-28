@@ -3,60 +3,306 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Оплата заказа — {{ company_info.name|default:"EliteEstate" }}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Оформление и оплата заказа недвижимости — EliteEstate.">
+    <meta name="keywords" content="оплата, оформление заказа, недвижимость, EliteEstate">
+    <meta name="author" content="EliteEstate Agency">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Оплата заказа — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
 </head>
-<body>
+<body id="top">
+
     <header>
-        <a href="{% url 'home' %}"><h2>{{ company_info.name|default:"EliteEstate" }}</h2></a>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                <li>Привет, <strong>{{ user.username }}</strong></li>
+                <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация по разделам страницы">
+            <ul>
+                <li><a href="#order-summary">Ваш заказ</a></li>
+                <li><a href="#payment-form">Оплата</a></li>
+                <li><a href="#secure-info">Безопасность</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <h1>Оформление и оплата заказа</h1>
+    <hr>
 
-        <section>
-            <h3>Ваш заказ:</h3>
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                <li aria-current="page">Оплата</li>
+            </ol>
+        </nav>
+
+        <h2>Оформление и оплата заказа</h2>
+
+        {% if messages %}
+        <section aria-label="Сообщения">
             <ul>
-                {% for item in cart.items.all %}
-                    <li>{{ item.item_property.title }} — {{ item.quantity }} шт. по ${{ item.item_property.price }}</li>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
                 {% endfor %}
             </ul>
-            <h4>К оплате: ${{ cart.total_price }}</h4>
+        </section>
+        {% endif %}
+
+        <section id="order-summary" aria-labelledby="order-heading">
+            <h3 id="order-heading">Ваш заказ</h3>
+
+            <table border="1">
+                <caption>Состав заказа</caption>
+                <thead>
+                    <tr>
+                        <th id="o-num" scope="col">№</th>
+                        <th id="o-title" scope="col">Объект</th>
+                        <th id="o-price" scope="col">Цена за единицу ($)</th>
+                        <th id="o-qty" scope="col">Количество</th>
+                        <th id="o-sum" scope="col">Сумма ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td headers="o-num">{{ forloop.counter }}</td>
+                        <td headers="o-title">
+                            <a href="{% url 'property_detail' item.property.pk %}">
+                                {{ item.property.title }}
+                            </a>
+                        </td>
+                        <td headers="o-price">${{ item.property.price }}</td>
+                        <td headers="o-qty">{{ item.quantity }}</td>
+                        <td headers="o-sum">${{ item.subtotal }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" headers="o-sum"><strong>Итого к оплате:</strong></td>
+                        <td headers="o-sum"><strong>${{ total_usd }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" headers="o-sum"><strong>В BYN (по курсу НБРБ):</strong></td>
+                        <td headers="o-sum"><strong>{{ total_byn }} BYN</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
         </section>
 
         <hr>
 
-        <!-- Форма имитации оплаты -->
-        <section>
-            <h3>Введите данные для оплаты</h3>
-            <form action="{% url 'checkout' %}" method="post">
+        <section id="payment-form" aria-labelledby="payment-heading">
+            <h3 id="payment-heading">Платёжные данные</h3>
+
+            <form action="{% url 'checkout' %}" method="post" novalidate>
                 {% csrf_token %}
 
-                <p>
-                    <label for="card-holder">Имя на карте:</label><br>
-                    <input type="text" id="card-holder" name="card_holder" required placeholder="IVAN IVANOV">
-                </p>
+                <fieldset>
+                    <legend>Персональный менеджер</legend>
+
+                    <p>
+                        <label for="employee_id">Выберите менеджера *:</label>
+                        <select name="employee_id" id="employee_id" required>
+                            <option value="" disabled selected>-- Выберите сотрудника --</option>
+                            {% for manager in managers %}
+                                <option value="{{ manager.id }}">
+                                    {{ manager.user.get_full_name|default:manager.user.username }}
+                                    ({{ manager.position }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Данные банковской карты</legend>
+
+                    <p>
+                        <label for="card-holder">Имя на карте *:</label>
+                        <input type="text"
+                               id="card-holder"
+                               name="card_holder"
+                               placeholder="IVAN IVANOV"
+                               pattern="[A-Za-z\s]+"
+                               maxlength="100"
+                               autocomplete="cc-name"
+                               title="Только латинские буквы и пробелы"
+                               required>
+                    </p>
+
+                    <p>
+                        <label for="card-number">Номер карты *:</label>
+                        <input type="text"
+                               id="card-number"
+                               name="card_number"
+                               placeholder="4000 0000 0000 0000"
+                               pattern="\d{4}\s?\d{4}\s?\d{4}\s?\d{4}"
+                               inputmode="numeric"
+                               maxlength="19"
+                               autocomplete="cc-number"
+                               title="Введите 16 цифр номера карты"
+                               required>
+                    </p>
+
+                    <p>
+                        <label for="exp-date">Срок действия (ММ/ГГ) *:</label>
+                        <input type="text"
+                               id="exp-date"
+                               name="exp_date"
+                               placeholder="12/28"
+                               pattern="(0[1-9]|1[0-2])/\d{2}"
+                               maxlength="5"
+                               autocomplete="cc-exp"
+                               title="Формат: ММ/ГГ"
+                               required>
+                    </p>
+
+                    <p>
+                        <label for="cvv">CVC/CVV *:</label>
+                        <input type="password"
+                               id="cvv"
+                               name="cvv"
+                               placeholder="123"
+                               pattern="\d{3}"
+                               inputmode="numeric"
+                               maxlength="3"
+                               autocomplete="cc-csc"
+                               title="Три цифры с обратной стороны карты"
+                               required>
+                    </p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Контактные данные</legend>
+
+                    <p>
+                        <label for="checkout-email">Email для чека *:</label>
+                        <input type="email"
+                               id="checkout-email"
+                               name="email"
+                               value="{{ user.email }}"
+                               maxlength="254"
+                               autocomplete="email"
+                               required>
+                    </p>
+
+                    <p>
+                        <label for="checkout-phone">Телефон *:</label>
+                        <input type="tel"
+                               id="checkout-phone"
+                               name="phone"
+                               placeholder="+375 (29) 123-45-67"
+                               pattern="\+375\s?\(\d{2}\)\s?\d{3}-\d{2}-\d{2}"
+                               autocomplete="tel"
+                               title="Формат: +375 (XX) XXX-XX-XX"
+                               required>
+                    </p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Согласие</legend>
+
+                    <p>
+                        <label>
+                            <input type="checkbox" name="agree_terms" required>
+                            Я согласен с
+                            <a href="{% url 'privacy' %}">политикой конфиденциальности</a>
+                        </label>
+                    </p>
+                </fieldset>
 
                 <p>
-                    <label for="card-number">Номер карты:</label><br>
-                    <input type="text" id="card-number" name="card_number" required placeholder="4000 0000 0000 0000" maxlength="19">
+                    <button type="submit">💳 Оплатить ${{ total_usd }}</button>
+                    <a href="{% url 'cart_detail' %}">
+                        <button type="button">Вернуться в корзину</button>
+                    </a>
                 </p>
-
-                <p>
-                    <label for="exp-date">Срок действия:</label><br>
-                    <input type="text" id="exp-date" name="exp_date" required placeholder="MM/YY" size="5">
-                </p>
-
-                <p>
-                    <label for="cvv">CVC/CVV:</label><br>
-                    <input type="password" id="cvv" name="cvv" required size="3" maxlength="3">
-                </p>
-
-                <button type="submit" style="background: #28a745; color: white; padding: 10px 20px; font-size: 16px; border: none; cursor: pointer;">
-                    Подтвердить и оплатить ${{ cart.total_price }}
-                </button>
             </form>
         </section>
+
+        <hr>
+
+        <aside id="secure-info" aria-labelledby="secure-heading">
+            <h3 id="secure-heading">Безопасность оплаты</h3>
+            <p>
+                Все платежи обрабатываются через защищённое соединение
+                <abbr title="Secure Sockets Layer">SSL</abbr>.
+                Мы <mark>не храним</mark> данные ваших банковских карт.
+            </p>
+
+            <h4>Правила безопасной оплаты:</h4>
+            <ul>
+                <li>Проверяйте адрес сайта перед вводом данных карты.</li>
+                <li>Никогда не сообщайте CVV-код третьим лицам.</li>
+                <li>Используйте только защищённые соединения.</li>
+                <li>При подозрительной активности свяжитесь с банком.</li>
+            </ul>
+
+            <address>
+                <p>
+                    Возникли вопросы?
+                    Звоните: <a href="tel:+375291234567">+375 (29) 123-45-67</a>
+                    или пишите: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a>
+                </p>
+            </address>
+        </aside>
     </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
 </body>
 </html>

@@ -4,160 +4,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ company_info.description|default:'Новости и аналитика рынка недвижимости от EliteEstate.'|truncatewords:25 }}">
-    <meta name="keywords" content="новости недвижимости, аналитика, элитная недвижимость, купить квартиру, Минск, EliteEstate">
+    <meta name="description" content="Новости и аналитика рынка недвижимости от агентства EliteEstate — тренды, обзоры, прогнозы экспертов.">
+    <meta name="keywords" content="новости недвижимости, аналитика, обзоры, EliteEstate">
     <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Новости и аналитика — {{ company_info.name|default:'EliteEstate' }}">
     <meta property="og:description" content="Актуальные тренды рынка недвижимости, обзоры и прогнозы экспертов.">
+    <meta property="og:type" content="website">
     {% if company_info.logo %}
         <meta property="og:image" content="{{ company_info.logo.url }}">
     {% endif %}
-    <meta property="og:type" content="website">
 
-    <title>Новости и Статьи — {{ company_info.name|default:'EliteEstate' }}</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Новости и статьи — {{ company_info.name|default:'EliteEstate' }}</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
 </head>
 <body id="top">
 
-    <!-- Шапка сайта и Навигация -->
-<header>
-    <a href="{% url 'home' %}">
-        {% if company_info.logo %}
-            <img src="{{ company_info.logo.url }}" alt="Логотип {{ company_info.name }}" width="180">
-        {% else %}
-            <h2>{{ company_info.name|default:"EliteEstate" }}</h2>
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Новости и статьи</li>
+            </ol>
+        </nav>
+
+        <h2>Новости и аналитика</h2>
+        <p>Актуальные тренды рынка недвижимости, обзоры и прогнозы экспертов.</p>
+
+        {% if perms.agency.add_article %}
+        <p>
+            <a href="{% url 'article_create' %}">
+                <button type="button">+ Добавить новость</button>
+            </a>
+        </p>
         {% endif %}
-    </a>
-    <nav style="margin-top: 10px; line-height: 1.8;">
-        <a href="{% url 'home' %}">Главная</a> |
-        <a href="{% url 'about' %}">О компании</a> |
-        <a href="{% url 'news' %}">Новости</a> |
-        <a href="{% url 'faq' %}">FAQ / Словарь</a> |
-        <a href="{% url 'contacts' %}">Контакты</a> |
-        <a href="{% url 'vacancies' %}">Вакансии</a> |
-        <a href="{% url 'reviews' %}">Отзывы</a> |
-        <a href="{% url 'promocodes' %}">Промокоды</a> |
-        <a href="{% url 'privacy' %}">Политика конфиденциальности</a> |
-        <a href="{% url 'cart_detail' %}">Корзина 🛒</a>
-    </nav>
-</header>
 
-    <!-- Основное содержимое -->
-    <main style="max-width: 1000px; margin: 20px auto; padding: 0 15px;">
-
-        <!-- Заголовок страницы и действия -->
-        <section id="news-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-            <div>
-                <h1>Новости и Аналитика</h1>
-                <p>Актуальные тренды рынка недвижимости, обзоры и прогнозы экспертов.</p>
-            </div>
-
-            {% if perms.agency.add_article %}
-                <div>
-                    <a href="{% url 'article_create' %}" style="padding: 8px 16px; background-color: #28a745; color: white; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9em;">
-                        + Добавить новость
-                    </a>
-                </div>
-            {% endif %}
-        </section>
-
-        <!-- Сообщения системы -->
         {% if messages %}
-            <section id="system-messages" style="margin: 15px 0;">
+        <section aria-label="Сообщения">
+            <ul>
                 {% for message in messages %}
-                    <div style="padding: 10px 15px; border-radius: 4px; font-size: 0.9em; margin-bottom: 8px; {% if message.tags == 'error' %}background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;{% else %}background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;{% endif %}">
-                        {{ message }}
-                    </div>
+                    <li>{{ message }}</li>
                 {% endfor %}
-            </section>
+            </ul>
+        </section>
         {% endif %}
 
         <hr>
 
-        <!-- Список новостей из БД -->
-        <section id="news-list">
-            <div style="display: flex; flex-direction: column; gap: 20px;">
+        <section aria-labelledby="news-list-heading">
+            <h3 id="news-list-heading" hidden>Список новостей</h3>
+
+            {% if articles %}
+            <ul>
                 {% for article in articles %}
-                    <article id="article-{{ article.pk }}" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
-                        
-                        <!-- Картинка статьи -->
-                        <div style="width: 240px; flex-shrink: 0;">
+                <li>
+                    <article>
+                        <header>
+                            <h4>
+                                <a href="{% url 'article_detail' article.pk %}">
+                                    {{ article.title }}
+                                </a>
+                            </h4>
+                            <p>
+                                Дата публикации:
+                                <time datetime="{{ article.published_date|date:'Y-m-d' }}">
+                                    {{ article.published_date|date:"d.m.Y" }}
+                                </time>
+                            </p>
+                        </header>
+
+                        {% if article.image %}
+                        <figure>
                             <a href="{% url 'article_detail' article.pk %}">
-                                {% if article.image %}
-                                    <img src="{{ article.image.url }}" alt="{{ article.title }}" width="240" height="160" style="object-fit: cover; border-radius: 4px; width: 100%;">
-                                {% else %}
-                                    <img src="{% static 'images/flat1.jpg' %}" alt="Нет фото" width="240" height="160" style="object-fit: cover; border-radius: 4px; width: 100%;">
-                                {% endif %}
+                                <img src="{{ article.image.url }}"
+                                     alt="Иллюстрация к новости «{{ article.title }}»"
+                                     width="300"
+                                     loading="lazy">
                             </a>
-                        </div>
+                            <figcaption>{{ article.title }}</figcaption>
+                        </figure>
+                        {% endif %}
 
-                        <!-- Содержание статьи -->
-                        <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; justify-content: space-between;">
-                            <div>
-                                <p style="font-size: 0.85em; color: #6c757d; margin: 0 0 5px 0;">
-                                    Дата публикации: <time datetime="{{ article.published_date|date:'Y-m-d' }}">{{ article.published_date|date:"d.m.Y" }}</time>
-                                </p>
+                        <p>
+                            {% if article.short_description %}
+                                {{ article.short_description }}
+                            {% else %}
+                                {{ article.content|truncatewords:15 }}
+                            {% endif %}
+                        </p>
 
-                                <h3 style="margin: 0 0 10px 0;">
-                                    <a href="{% url 'article_detail' article.pk %}" style="text-decoration: none; color: #007bff;">
-                                        {{ article.title }}
-                                    </a>
-                                </h3>
-
-                                <!-- Краткое содержание (1 предложение) -->
-                                <p style="margin: 0 0 15px 0; color: #333;">
-                                    {% if article.short_description %}
-                                        {{ article.short_description }}
-                                    {% else %}
-                                        {{ article.content|truncatewords:12 }}
-                                    {% endif %}
-                                </p>
-                            </div>
-
-                            <!-- Кнопка «Читать далее» и управление -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                                <a href="{% url 'article_detail' article.pk %}" style="padding: 8px 16px; background-color: #007bff; color: white; border-radius: 4px; text-decoration: none; font-size: 0.9em; font-weight: bold;">
-                                    Читать далее &rarr;
+                        <footer>
+                            <p>
+                                <a href="{% url 'article_detail' article.pk %}">
+                                    Читать далее →
                                 </a>
 
                                 {% if perms.agency.change_article or perms.agency.delete_article %}
-                                    <div style="display: flex; gap: 5px;">
-                                        {% if perms.agency.change_article %}
-                                            <a href="{% url 'article_update' article.pk %}" style="padding: 5px 10px; background-color: #ffc107; color: #212529; text-decoration: none; border-radius: 4px; font-size: 0.8em;">Редактировать</a>
-                                        {% endif %}
+                                    |
+                                    {% if perms.agency.change_article %}
+                                        <a href="{% url 'article_update' article.pk %}">Редактировать</a>
+                                    {% endif %}
 
-                                        {% if perms.agency.delete_article %}
-                                            <a href="{% url 'article_delete' article.pk %}" style="padding: 5px 10px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 4px; font-size: 0.8em;">Удалить</a>
-                                        {% endif %}
-                                    </div>
+                                    {% if perms.agency.delete_article %}
+                                        | <a href="{% url 'article_delete' article.pk %}">Удалить</a>
+                                    {% endif %}
                                 {% endif %}
-                            </div>
-                        </div>
-
+                            </p>
+                        </footer>
                     </article>
-                {% empty %}
-                    <p style="text-align: center; color: #6c757d; margin: 40px 0;">На данный момент нет опубликованных новостей.</p>
+
+                    <hr>
+                </li>
                 {% endfor %}
-            </div>
+            </ul>
+            {% else %}
+            <p><em>На данный момент нет опубликованных новостей.</em></p>
+            {% endif %}
         </section>
 
+        <hr>
+
+        {% if articles %}
+        <section aria-labelledby="summary-heading">
+            <h3 id="summary-heading">Сводная таблица публикаций</h3>
+
+            <table border="1">
+                <caption>Все новости и статьи в ленте</caption>
+                <thead>
+                    <tr>
+                        <th id="n-num" scope="col">№</th>
+                        <th id="n-title" scope="col">Заголовок</th>
+                        <th id="n-date" scope="col">Дата публикации</th>
+                        <th id="n-short" scope="col">Краткое содержание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for article in articles %}
+                    <tr>
+                        <td headers="n-num">{{ forloop.counter }}</td>
+                        <td headers="n-title">
+                            <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+                        </td>
+                        <td headers="n-date">
+                            <time datetime="{{ article.published_date|date:'Y-m-d' }}">
+                                {{ article.published_date|date:"d.m.Y" }}
+                            </time>
+                        </td>
+                        <td headers="n-short">
+                            {{ article.short_description|default:article.content|truncatewords:10 }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" headers="n-title">
+                            Всего публикаций: <strong>{{ articles|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        {% endif %}
     </main>
 
     <hr>
 
-    <!-- Подвал (Footer) -->
     <footer>
-        <p>&copy; {% now "Y" %} Агентство недвижимости «{{ company_info.name|default:"EliteEstate" }}». Все права защищены.</p>
-        {% if company_info.requisites %}
-            <p><small>Реквизиты: {{ company_info.requisites }}</small></p>
-        {% endif %}
-        <p><a href="#top">Наверх страницы &#8593;</a></p>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
     </footer>
 
 </body>

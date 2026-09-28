@@ -1,77 +1,239 @@
-{% extends 'agency/base.html' %}
-{% block title %}{{ action }} объект | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ action }} объекта недвижимости — EliteEstate.">
+    <meta name="keywords" content="добавить объект, недвижимость, EliteEstate">
+    <meta name="author" content="EliteEstate Agency">
+    <meta name="robots" content="noindex, nofollow">
 
-{% block content %}
-<div class="card" style="max-width: 600px; margin: 3rem auto; padding: 2.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);">
-    <h2 style="margin-top: 0; margin-bottom: 2rem; text-align: center; color: #1a252f; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700;">
-        {{ action }} Объект Недвижимости
-    </h2>
+    <title>{{ action }} объект — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
 
-    <form method="post" enctype="multipart/form-data" novalidate>
-        {% csrf_token %}
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
 
-        {% for field in form %}
-            <div class="form-group" style="margin-bottom: 1.5rem; font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
 
-                {% if field.field.widget.input_type == 'checkbox' %}
-                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                        {{ field }}
-                        <span style="font-weight: 600; color: #334155; font-size: 0.95rem;">{{ field.label }}</span>
-                    </label>
-
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
                 {% else %}
-                    <label style="display: block; width: 100%;">
-                        <span style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #334155; font-size: 0.95rem;">
-                            {{ field.label }}
-                        </span>
-                        {{ field }}
-                    </label>
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
                 {% endif %}
+            </ul>
+        </nav>
+    </header>
 
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <p style="color: #dc3545; font-size: 0.85rem; margin-top: 0.4rem; margin-bottom: 0; font-weight: 500;">
-                            <i class="fas fa-exclamation-circle"></i> {{ error }}
-                        </p>
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li aria-current="page">{{ action }} объект</li>
+            </ol>
+        </nav>
+
+        <article>
+            <header>
+                <h2>{{ action }} объект недвижимости</h2>
+                <p>Заполните форму и нажмите «Сохранить». Поля со звёздочкой обязательны.</p>
+            </header>
+
+            {% if form.errors %}
+            <section role="alert" aria-labelledby="form-error-heading">
+                <h3 id="form-error-heading">Ошибки в форме</h3>
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ field }}: {{ error }}</li>
+                        {% endfor %}
                     {% endfor %}
-                {% endif %}
-            </div>
+                </ul>
+            </section>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+
+                <fieldset>
+                    <legend>Основная информация</legend>
+
+                    <p>
+                        <label for="id_title">Название объекта *:</label>
+                        <input type="text"
+                               id="id_title"
+                               name="title"
+                               value="{{ form.title.value|default:'' }}"
+                               maxlength="255"
+                               placeholder="Например: 3-комнатная квартира в центре"
+                               required>
+                    </p>
+
+<p>
+    <label for="id_prop_type">Вид недвижимости *:</label>
+    <select id="id_prop_type" name="prop_type" required>
+        <option value="" disabled {% if not form.prop_type.value %}selected{% endif %}>
+            -- Выберите вид --
+        </option>
+        {% for t in form.fields.prop_type.queryset %}
+            <option value="{{ t.id }}" {% if form.prop_type.value == t.id|slugify %}selected{% endif %}>
+                {{ t.name }}
+            </option>
         {% endfor %}
+    </select>
+</p>
 
-        <div style="display: flex; gap: 1rem; margin-top: 2rem; font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
-            <button type="submit" style="flex: 1; background-color: #17a2b8; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background-color 0.2s;">
-                Сохранить
-            </button>
-            <a href="{% url 'property_list' %}" style="flex: 1; text-align: center; text-decoration: none; background-color: #6c757d; color: white; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 1rem; display: inline-block; box-sizing: border-box; transition: background-color 0.2s;">
-                Отмена
-            </a>
-        </div>
-    </form>
-</div>
+<p>
+    <label for="id_owner">Владелец *:</label>
+    <select id="id_owner" name="owner" required>
+        <option value="" disabled {% if not form.owner.value %}selected{% endif %}>
+            -- Выберите владельца --
+        </option>
+        {% for o in form.fields.owner.queryset %}
+            <option value="{{ o.id }}" {% if form.owner.value == o.id|slugify %}selected{% endif %}>
+                {{ o.full_name }}
+            </option>
+        {% endfor %}
+    </select>
+</p>
 
-<style>
-    .form-control, .form-select {
-        display: block;
-        width: 100%;
-        padding: 10px 12px;
-        font-size: 0.9rem;
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-        color: #334155;
-        background-color: #fff;
-        border: 1px solid #cbd5e1;
-        border-radius: 8px;
-        outline: none;
-        box-sizing: border-box;
-        transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .form-control:focus {
-        border-color: #17a2b8;
-        box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.15);
-    }
-    .form-check-input {
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
-    }
-</style>
-{% endblock %}
+                    <p>
+                        <label for="id_deal_type">Тип сделки *:</label>
+                        <select id="id_deal_type" name="deal_type" required>
+                            <option value="sale"
+                                    {% if form.deal_type.value = 'sale' or not form.deal_type.value %}selected{% endif %}>
+                                Продажа
+                            </option>
+                            <option value="rent"
+                                    {% if form.deal_type.value = 'rent' %}selected{% endif %}>
+                                Аренда
+                            </option>
+                        </select>
+                    </p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Описание и стоимость</legend>
+
+                    <p>
+                        <label for="id_description">Описание *:</label>
+                        <textarea id="id_description"
+                                  name="description"
+                                  rows="6"
+                                  minlength="20"
+                                  maxlength="5000"
+                                  placeholder="Опишите объект, его преимущества и особенности"
+                                  required>{{ form.description.value|default:'' }}</textarea>
+                    </p>
+
+                    <p>
+                        <label for="id_price">Стоимость в USD *:</label>
+                        <input type="number"
+                               id="id_price"
+                               name="price"
+                               value="{{ form.price.value|default:'' }}"
+                               min="0"
+                               step="0.01"
+                               placeholder="100000.00"
+                               required>
+                    </p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Дополнительно</legend>
+
+                    <p>
+                        <label for="id_image">Фотография объекта:</label>
+                        <input type="file"
+                               id="id_image"
+                               name="image"
+                               accept="image/png, image/jpeg, image/webp"
+                               title="Форматы: PNG, JPEG, WEBP">
+                    </p>
+
+                    {% if form.instance.image %}
+                    <figure>
+                        <img src="{{ form.instance.image.url }}"
+                             alt="Текущее изображение"
+                             width="200"
+                             loading="lazy">
+                        <figcaption>Текущее изображение (можно заменить)</figcaption>
+                    </figure>
+                    {% endif %}
+
+                    <p>
+                        <label>
+                            <input type="checkbox"
+                                   name="is_active"
+                                   {% if form.is_active.value or not form.instance.pk %}checked{% endif %}>
+                            Объект доступен для покупки/аренды
+                        </label>
+                    </p>
+                </fieldset>
+
+                <p>
+                    <button type="submit">Сохранить</button>
+                    <a href="{% url 'property_list' %}">
+                        <button type="button">Отмена</button>
+                    </a>
+                </p>
+            </form>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

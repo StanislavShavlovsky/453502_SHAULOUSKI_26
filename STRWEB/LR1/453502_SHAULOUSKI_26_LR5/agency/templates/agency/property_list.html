@@ -1,231 +1,326 @@
-{% extends 'agency/base.html' %}
-{% block title %}Каталог недвижимости | EliteEstate{% endblock %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог недвижимости агентства EliteEstate — актуальные предложения по покупке и аренде премиальных объектов в Минске.">
+    <meta name="keywords" content="каталог недвижимости, купить квартиру, аренда, элитная недвижимость, Минск, EliteEstate">
+    <meta name="author" content="EliteEstate Agency">
 
-{% block content %}
-<style>
-    /* Стили для модального окна */
-    .modal-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.4); display: none; justify-content: center; align-items: center; z-index: 1000;
-    }
-    .modal-overlay:target { display: flex; }
-    .modal-content {
-        background: white; padding: 2rem; border-radius: 12px;
-        width: 100%; max-width: 450px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        transform: translateY(-20px); transition: transform 0.25s ease;
-    }
-    .modal-overlay:target .modal-content { transform: translateY(0); }
-    .modal-close-btn { text-decoration: none; color: #64748b; font-size: 1.25rem; }
-    .modal-close-btn:hover { color: #1e293b; }
+    <meta property="og:title" content="Каталог недвижимости — EliteEstate">
+    <meta property="og:description" content="Актуальные предложения по покупке и аренде премиальных объектов.">
+    <meta property="og:type" content="website">
 
-    /* Интерактивные стили для полей фильтра */
-    .filter-input {
-        padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; color: #334155; outline: none; background-color: #fff; transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .filter-input:focus {
-        border-color: #227c9d; box-shadow: 0 0 0 3px rgba(34, 124, 157, 0.15);
-    }
-</style>
+    <title>Каталог недвижимости — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
 
-<div style="max-width: 1200px; margin: 3rem auto; padding: 0 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
 
-    <div style="margin-bottom: 2.5rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1.2rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
-        <div>
-            <h2 style="color: #1a252f; font-size: 2.2rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">Каталог недвижимости</h2>
-            <p style="color: #718096; margin: 0.5rem 0 0 0; font-size: 1.05rem;">Актуальные предложения по покупке и аренде премиальных объектов.</p>
-        </div>
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Каталог недвижимости</li>
+            </ol>
+        </nav>
+
+        <h2>Каталог недвижимости</h2>
+        <p>Актуальные предложения по покупке и аренде премиальных объектов.</p>
 
         {% if perms.agency.add_property %}
-            <a href="{% url 'property_create' %}" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; background-color: #10b981; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2); transition: background-color 0.2s;">
-                <i class="fas fa-plus"></i> Добавить объект
+        <p>
+            <a href="{% url 'property_create' %}">
+                <button type="button">+ Добавить объект</button>
             </a>
+        </p>
         {% endif %}
-    </div>
 
-    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px 20px; border-radius: 10px; display: flex; align-items: center; gap: 12px;">
-            <div style="color: #227c9d; font-size: 1.2rem;"><i class="fas fa-dollar-sign"></i></div>
-            <div>
-                <div style="font-size: 0.75rem; color: #64748b; text-transform: uppercase;">Курс USD (НБРБ)</div>
-                <div style="font-weight: 700; color: #1e293b;">{{ usd_rate }}</div>
-            </div>
-        </div>
-        <div style="background: #fdfbf7; border: 1px solid #fef3c7; padding: 12px 20px; border-radius: 10px; flex: 1; min-width: 300px; display: flex; align-items: center; gap: 12px;">
-            <div style="color: #d97706; font-size: 1.2rem;"><i class="fas fa-lightbulb"></i></div>
-            <div>
-                <div style="font-size: 0.75rem; color: #b45309; text-transform: uppercase;">Факт дня</div>
-                <div style="font-size: 0.9rem; color: #78350f; font-style: italic;">{{ fact_of_the_day }}</div>
-            </div>
-        </div>
-    </div>
+        <section aria-labelledby="filter-heading">
+            <h3 id="filter-heading">Поиск и фильтрация</h3>
 
-    {% if messages %}
-        <div style="margin-bottom: 1.5rem;">
-            {% for message in messages %}
-                <div style="padding: 12px 20px; border-radius: 8px; font-weight: 500; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;
-                    {% if message.tags == 'error' %}background-color: #fef2f2; color: #991b1b; border: 1px solid #fca5a5;{% else %}background-color: #f0fdf4; color: #166534; border: 1px solid #86efac;{% endif %}">
-                    <i class="fas {% if message.tags == 'error' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}"></i> {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+            <form method="get" action="{% url 'property_list' %}" novalidate>
+    <fieldset>
+        <legend>Параметры поиска</legend>
 
-    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem;">
-        <form method="GET" action="" style="display: flex; flex-direction: column; gap: 1.2rem;">
+        <p>
+            <label for="search-input">Поиск по названию или адресу:</label>
+            <input type="search"
+                   id="search-input"
+                   name="search"
+                   value="{{ request.GET.search }}"
+                   placeholder="Введите название или адрес..."
+                   maxlength="150"
+                   autocomplete="off">
+        </p>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                <div style="flex: 2; min-width: 250px; display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Поиск по названию</label>
-                    <input type="text" name="search" value="{{ request.GET.search }}" placeholder="Введите название..." class="filter-input" style="width: 100%;">
-                </div>
+        <p>
+            <label for="type-select">Вид недвижимости:</label>
+            <select id="type-select" name="type">
+                <option value="">Все виды</option>
+                {% for t in types %}
+                    <option value="{{ t.id }}" {% if request.GET.type == t.id|slugify %}selected{% endif %}>
+                        {{ t.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </p>
 
-                <div style="flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Вид недвижимости</label>
-                    <select name="type" class="filter-input" style="width: 100%; height: 40px; padding: 0 10px;">
-                        <option value="">Все виды</option>
-                        {% for t in types %}
-                            <option value="{{ t.id }}" {% if request.GET.type == t.id|slugify %}selected{% endif %}>{{ t.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+        <p>
+            <label for="deal-select">Тип сделки:</label>
+            <select id="deal-select" name="deal_type">
+                <option value="">Все предложения</option>
+                <option value="sale" {% if request.GET.deal_type == 'sale' %}selected{% endif %}>Продажа</option>
+                <option value="rent" {% if request.GET.deal_type == 'rent' %}selected{% endif %}>Аренда</option>
+            </select>
+        </p>
 
-                <div style="flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Тип сделки</label>
-                    <select name="deal_type" class="filter-input" style="width: 100%; height: 40px; padding: 0 10px;">
-                        <option value="">Все предложения</option>
-                        <option value="sale" {% if request.GET.deal_type == 'sale' %}selected{% endif %}>Продажа</option>
-                        <option value="rent" {% if request.GET.deal_type == 'rent' %}selected{% endif %}>Аренда</option>
-                    </select>
-                </div>
-            </div>
+        <p>
+            <label for="price-min">Цена от ($):</label>
+            <input type="number"
+                   id="price-min"
+                   name="price_min"
+                   value="{{ request.GET.price_min }}"
+                   placeholder="0"
+                   min="0"
+                   step="100">
+        </p>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
-                <div style="flex: 1; min-width: 130px; display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Цена от ($)</label>
-                    <input type="number" name="price_min" value="{{ request.GET.price_min }}" placeholder="0" min="0" class="filter-input">
-                </div>
+        <p>
+            <label for="price-max">Цена до ($):</label>
+            <input type="number"
+                   id="price-max"
+                   name="price_max"
+                   value="{{ request.GET.price_max }}"
+                   placeholder="До..."
+                   min="0"
+                   step="100">
+        </p>
 
-                <div style="flex: 1; min-width: 130px; display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Цена до ($)</label>
-                    <input type="number" name="price_max" value="{{ request.GET.price_max }}" placeholder="До..." min="0" class="filter-input">
-                </div>
+<p>
+    <label for="sort-select">Сортировать по:</label>
+    <select id="sort-select" name="sort">
+        <option value="title" {% if request.GET.sort == 'title' or not request.GET.sort %}selected{% endif %}>
+            Алфавиту (А-Я)
+        </option>
+        <option value="price" {% if request.GET.sort == 'price' %}selected{% endif %}>
+            Дешёвые сверху
+        </option>
+        <option value="-price" {% if request.GET.sort == '-price' %}selected{% endif %}>
+            Дорогие сверху
+        </option>
+    </select>
+</p>
 
-                <div style="flex: 1.5; min-width: 200px; display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Сортировать по</label>
-                    <select name="sort" class="filter-input" style="width: 100%; height: 40px; padding: 0 10px;">
-                        <option value="title" {% if request.GET.sort == 'title' or not request.GET.sort %}selected{% endif %}>Алфавиту (А-Я)</option>
-                        <option value="price" {% if request.GET.sort == 'price' %}selected{% endif %}>Дешевые сверху</option>
-                        <option value="-price" {% if request.GET.sort == '-price' %}selected{% endif %}>Дорогие сверху</option>
-                    </select>
-                </div>
+        <p>
+            <button type="submit">Применить фильтры</button>
+            <a href="{% url 'property_list' %}">
+                <button type="button">Сбросить</button>
+            </a>
+        </p>
+    </fieldset>
+</form>
 
-                <div style="display: flex; gap: 0.75rem; min-width: 250px; flex: 1.5;">
-                    <a href="{% url 'property_list' %}" style="flex: 1; text-align: center; text-decoration: none; background-color: #cbd5e1; color: #334155; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background-color 0.2s;">
-                        Сбросить
-                    </a>
-                    <button type="submit" style="flex: 1.5; background-color: #227c9d; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: background-color 0.2s;">
-                        <i class="fas fa-filter" style="margin-right: 4px;"></i> Применить
-                    </button>
-                </div>
-            </div>
+            {% if request.GET.search %}
+            <p>
+                <mark>Активный поиск:</mark> «{{ request.GET.search }}».
+                <a href="{% url 'property_list' %}">Очистить</a>.
+            </p>
+            {% endif %}
+        </section>
 
-        </form>
-    </div>
+        <hr>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
-        {% for prop in properties %}
-            <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; flex-direction: column; padding: 1rem;">
-                <div style="background-color: #f7fafc; height: 180px; border-radius: 8px; margin-bottom: 1rem; overflow: hidden;">
-                    {% if prop.image %}<img src="{{ prop.image.url }}" alt="{{ prop.title }}" style="width: 100%; height: 100%; object-fit: cover;">{% endif %}
-                </div>
+        <section aria-labelledby="properties-heading">
+            <h3 id="properties-heading" hidden>Список объектов</h3>
 
-                <div style="display: flex; gap: 6px; margin-bottom: 0.25rem; flex-wrap: wrap;">
-                    <span style="background: #e2e8f0; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #475569;">
-                        {{ prop.prop_type.name }}
-                    </span>
+            {% if properties %}
+            <ul>
+                {% for prop in properties %}
+                <li>
+                    <article>
+                        <header>
+                            <h4>
+                                <a href="{% url 'property_detail' prop.pk %}">
+                                    {{ prop.title }}
+                                </a>
+                            </h4>
+                            <p>
+                                <strong>Вид:</strong> {{ prop.prop_type.name }}
+                                |
+                                <strong>Тип сделки:</strong> {{ prop.get_deal_type_display }}
+                            </p>
+                        </header>
 
-                    {% if prop.deal_type == 'rent' %}
-                        <span style="background: #e0f2fe; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #0369a1;">
-                            <i class="fas fa-key" style="font-size: 0.65rem;"></i> Аренда
-                        </span>
-                    {% else %}
-                        <span style="background: #fef2f2; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #b91c1c;">
-                            <i class="fas fa-handshake" style="font-size: 0.65rem;"></i> Продажа
-                        </span>
-                    {% endif %}
-                </div>
-
-                <h3 style="margin: 0.75rem 0 0.5rem 0; color: #1a252f; font-size: 1.25rem;">{{ prop.title }}</h3>
-                <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Адрес:</strong> {{ prop.address }}</p>
-                <p style="font-size: 0.95rem; color: #495057; margin-bottom: 1.5rem;">{{ prop.description|truncatewords:20 }}</p>
-
-                <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid #edf2f7;">
-                    <div style="margin-bottom: 1rem;">
-                        <span style="font-size: 1.4rem; font-weight: bold; color: #227c9d;">
-                            ${{ prop.price }}{% if prop.deal_type == 'rent' %}<span style="font-size: 0.9rem; font-weight: normal; color: #64748b;"> / мес.</span>{% endif %}
-                        </span>
-                        <div style="font-size: 0.85rem; color: #718096;">~ {{ prop.get_price_in_byn }} BYN</div>
-                    </div>
-
-                    {% if user.is_authenticated %}
-                        {% if not user.employeeprofile and not user.is_superuser %}
-
-                            {% if prop.deal_type == 'rent' %}
-                                <a href="#modal-{{ prop.id }}" style="text-decoration: none; display: block; text-align: center; background-color: #0284c7; color: white; padding: 10px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; transition: background-color 0.2s;">Оформить аренду</a>
-                            {% else %}
-                                <a href="#modal-{{ prop.id }}" style="text-decoration: none; display: block; text-align: center; background-color: #227c9d; color: white; padding: 10px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; transition: background-color 0.2s;">Оформить покупку</a>
-                            {% endif %}
-
-                            <div class="modal-overlay" id="modal-{{ prop.id }}">
-                                <div class="modal-content">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                                        <h3 style="margin: 0; color: #1e293b;">
-                                            {% if prop.deal_type == 'rent' %}Заявка на аренду{% else %}Заявка на покупку{% endif %}
-                                        </h3>
-                                        <a href="#" class="modal-close-btn">&times;</a>
-                                    </div>
-                                    <form method="POST" action="/catalog/book/{{ prop.id }}/">
-                                        {% csrf_token %}
-                                        <p style="color: #475569; font-size: 0.95rem; line-height: 1.5;">
-                                            Вы собираетесь отправить запрос на объект <strong>{{ prop.title }}</strong>
-                                            ({% if prop.deal_type == 'rent' %}аренда{% else %}покупка{% endif %}).
-                                        </p>
-                                        <div style="margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 6px;">
-                                            <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Выберите ответственного менеджера:</label>
-                                            <select name="employee_id" required style="width:100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; background: #fff;">
-                                                <option value="" disabled selected>-- Выберите менеджера --</option>
-                                                {% for manager in managers %}
-                                                    <option value="{{ manager.id }}">{{ manager.user.get_full_name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                        <button type="submit" style="width:100%; background: {% if prop.deal_type == 'rent' %}#0284c7{% else %}#227c9d{% endif %}; color:white; border:none; padding:12px; border-radius:6px; font-weight: 600; cursor: pointer;">
-                                            Подтвердить запрос
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                        {% if prop.image %}
+                        <figure>
+                            <a href="{% url 'property_detail' prop.pk %}">
+                                <img src="{{ prop.image.url }}"
+                                     alt="Фото объекта «{{ prop.title }}»"
+                                     width="300"
+                                     loading="lazy">
+                            </a>
+                            <figcaption>{{ prop.title }}</figcaption>
+                        </figure>
                         {% endif %}
-                    {% else %}
-                        <a href="{% url 'login' %}" style="display: block; text-align: center; background-color: #64748b; color: white; padding: 10px; border-radius: 6px; font-size: 0.9rem; text-decoration: none;">Войдите для продолжения</a>
-                    {% endif %}
 
-                    {% if perms.agency.change_property or perms.agency.delete_property %}
-                        <div style="display:flex; gap:0.5rem; margin-top: 0.5rem;">
-                            {% if perms.agency.change_property %}
-                                <a href="{% url 'property_update' prop.pk %}" style="flex:1; text-align:center; padding:0.5rem; background:#ffc107; color: #212529; text-decoration:none; border-radius:4px; font-size:0.8rem; font-weight: 500;">Редакт.</a>
-                            {% endif %}
+                        <p>{{ prop.description|truncatewords:20 }}</p>
 
-                            {% if perms.agency.delete_property %}
-                                <a href="{% url 'property_delete' prop.pk %}" style="flex:1; text-align:center; padding:0.5rem; background:#dc3545; color:white; text-decoration:none; border-radius:4px; font-size:0.8rem; font-weight: 500;">Удалить</a>
+                        <table border="1">
+                            <caption>Характеристики объекта «{{ prop.title }}»</caption>
+                            <tbody>
+                                <tr>
+                                    <th id="p-{{ prop.pk }}-price" scope="row">Цена</th>
+                                    <td headers="p-{{ prop.pk }}-price">${{ prop.price }}</td>
+                                </tr>
+                                <tr>
+                                    <th id="p-{{ prop.pk }}-byn" scope="row">В BYN</th>
+                                    <td headers="p-{{ prop.pk }}-byn">{{ prop.get_price_in_byn }} BYN</td>
+                                </tr>
+                                <tr>
+                                    <th id="p-{{ prop.pk }}-owner" scope="row">Владелец</th>
+                                    <td headers="p-{{ prop.pk }}-owner">{{ prop.owner.full_name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <footer>
+                            <p>
+                                <a href="{% url 'property_detail' prop.pk %}">
+                                    Подробнее и купить →
+                                </a>
+                            </p>
+
+                            {% if perms.agency.change_property or perms.agency.delete_property %}
+                            <p>
+                                {% if perms.agency.change_property %}
+                                    <a href="{% url 'property_update' prop.pk %}">Редактировать</a> |
+                                {% endif %}
+                                {% if perms.agency.delete_property %}
+                                    <a href="{% url 'property_delete' prop.pk %}">Удалить</a>
+                                {% endif %}
+                            </p>
                             {% endif %}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        {% empty %}
-            <p style="grid-column: span 3; text-align: center; padding: 3rem; color: #64748b; font-size: 1.1rem;">Объекты не найдены.</p>
-        {% endfor %}
-    </div>
-</div>
-{% endblock %}
+                        </footer>
+                    </article>
+
+                    <hr>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p><em>Объектов по вашему запросу не найдено. Попробуйте изменить фильтры.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        {% if properties %}
+        <section aria-labelledby="summary-heading">
+            <h3 id="summary-heading">Сводная таблица объектов</h3>
+
+            <table border="1">
+                <caption>Все доступные объекты недвижимости</caption>
+                <thead>
+                    <tr>
+                        <th id="st-num" scope="col">№</th>
+                        <th id="st-title" scope="col">Название</th>
+                        <th id="st-type" scope="col">Вид</th>
+                        <th id="st-deal" scope="col">Тип сделки</th>
+                        <th id="st-price" scope="col">Цена ($)</th>
+                        <th id="st-byn" scope="col">Цена (BYN)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prop in properties %}
+                    <tr>
+                        <td headers="st-num">{{ forloop.counter }}</td>
+                        <td headers="st-title">
+                            <a href="{% url 'property_detail' prop.pk %}">{{ prop.title }}</a>
+                        </td>
+                        <td headers="st-type">{{ prop.prop_type.name }}</td>
+                        <td headers="st-deal">{{ prop.get_deal_type_display }}</td>
+                        <td headers="st-price">${{ prop.price }}</td>
+                        <td headers="st-byn">{{ prop.get_price_in_byn }} BYN</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" headers="st-title">
+                            Всего объектов: <strong>{{ properties|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        {% endif %}
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

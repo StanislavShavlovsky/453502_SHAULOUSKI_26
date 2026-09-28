@@ -47,4 +47,6 @@ urlpatterns = [
     # Async API Endpoints
     path('api/v1/secured-stats/', views.secured_agency_stats_api, name='secured_agency_stats_api'),
     path('catalog/book/<int:property_id>/', views.create_deal_ajax, name='create_deal_ajax'),
+
+path('demo/', views.demo_view, name='demo'),
 ]
