@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог недвижимости агентства EliteEstate — актуальные предложения по покупке и аренде премиальных объектов в Минске.">
+    <meta name="keywords" content="каталог недвижимости, купить квартиру, аренда, элитная недвижимость, Минск, EliteEstate">
+    <meta name="author" content="EliteEstate Agency">
+
+    <meta property="og:title" content="Каталог недвижимости — EliteEstate">
+    <meta property="og:description" content="Актуальные предложения по покупке и аренде премиальных объектов.">
+    <meta property="og:type" content="website">
+
+    <title>Каталог недвижимости — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Каталог недвижимости</li>
+            </ol>
+        </nav>
+
+        <h2>Каталог недвижимости</h2>
+        <p>Актуальные предложения по покупке и аренде премиальных объектов.</p>
+
+        {% if perms.agency.add_property %}
+        <p>
+            <a href="{% url 'property_create' %}">
+                <button type="button">+ Добавить объект</button>
+            </a>
+        </p>
+        {% endif %}
+
+        <section aria-labelledby="filter-heading">
+            <h3 id="filter-heading">Поиск и фильтрация</h3>
+
+            <form method="get" action="{% url 'property_list' %}" novalidate>
+    <fieldset>
+        <legend>Параметры поиска</legend>
+
+        <p>
+            <label for="search-input">Поиск по названию или адресу:</label>
+            <input type="search"
+                   id="search-input"
+                   name="search"
+                   value="{{ request.GET.search }}"
+                   placeholder="Введите название или адрес..."
+                   maxlength="150"
+                   autocomplete="off">
+        </p>
+
+        <p>
+            <label for="type-select">Вид недвижимости:</label>
+            <select id="type-select" name="type">
+                <option value="">Все виды</option>
+                {% for t in types %}
+                    <option value="{{ t.id }}" {% if request.GET.type == t.id|slugify %}selected{% endif %}>
+                        {{ t.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <p>
+            <label for="deal-select">Тип сделки:</label>
+            <select id="deal-select" name="deal_type">
+                <option value="">Все предложения</option>
+                <option value="sale" {% if request.GET.deal_type == 'sale' %}selected{% endif %}>Продажа</option>
+                <option value="rent" {% if request.GET.deal_type == 'rent' %}selected{% endif %}>Аренда</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="price-min">Цена от ($):</label>
+            <input type="number"
+                   id="price-min"
+                   name="price_min"
+                   value="{{ request.GET.price_min }}"
+                   placeholder="0"
+                   min="0"
+                   step="100">
+        </p>
+
+        <p>
+            <label for="price-max">Цена до ($):</label>
+            <input type="number"
+                   id="price-max"
+                   name="price_max"
+                   value="{{ request.GET.price_max }}"
+                   placeholder="До..."
+                   min="0"
+                   step="100">
+        </p>
+
+<p>
+    <label for="sort-select">Сортировать по:</label>
+    <select id="sort-select" name="sort">
+        <option value="title" {% if request.GET.sort == 'title' or not request.GET.sort %}selected{% endif %}>
+            Алфавиту (А-Я)
+        </option>
+        <option value="price" {% if request.GET.sort == 'price' %}selected{% endif %}>
+            Дешёвые сверху
+        </option>
+        <option value="-price" {% if request.GET.sort == '-price' %}selected{% endif %}>
+            Дорогие сверху
+        </option>
+    </select>
+</p>
+
+        <p>
+            <button type="submit">Применить фильтры</button>
+            <a href="{% url 'property_list' %}">
+                <button type="button">Сбросить</button>
+            </a>
+        </p>
+    </fieldset>
+</form>
+
+            {% if request.GET.search %}
+            <p>
+                <mark>Активный поиск:</mark> «{{ request.GET.search }}».
+                <a href="{% url 'property_list' %}">Очистить</a>.
+            </p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section aria-labelledby="properties-heading">
+            <h3 id="properties-heading" hidden>Список объектов</h3>
+
+            {% if properties %}
+            <ul>
+                {% for prop in properties %}
+                <li>
+                    <article>
+                        <header>
+                            <h4>
+                                <a href="{% url 'property_detail' prop.pk %}">
+                                    {{ prop.title }}
+                                </a>
+                            </h4>
+                            <p>
+                                <strong>Вид:</strong> {{ prop.prop_type.name }}
+                                |
+                                <strong>Тип сделки:</strong> {{ prop.get_deal_type_display }}
+                            </p>
+                        </header>
+
+                        {% if prop.image %}
+                        <figure>
+                            <a href="{% url 'property_detail' prop.pk %}">
+                                <img src="{{ prop.image.url }}"
+                                     alt="Фото объекта «{{ prop.title }}»"
+                                     width="300"
+                                     loading="lazy">
+                            </a>
+                            <figcaption>{{ prop.title }}</figcaption>
+                        </figure>
+                        {% endif %}
+
+                        <p>{{ prop.description|truncatewords:20 }}</p>
+
+                        <table border="1">
+                            <caption>Характеристики объекта «{{ prop.title }}»</caption>
+                            <tbody>
+                                <tr>
+                                    <th id="p-{{ prop.pk }}-price" scope="row">Цена</th>
+                                    <td headers="p-{{ prop.pk }}-price">${{ prop.price }}</td>
+                                </tr>
+                                <tr>
+                                    <th id="p-{{ prop.pk }}-byn" scope="row">В BYN</th>
+                                    <td headers="p-{{ prop.pk }}-byn">{{ prop.get_price_in_byn }} BYN</td>
+                                </tr>
+                                <tr>
+                                    <th id="p-{{ prop.pk }}-owner" scope="row">Владелец</th>
+                                    <td headers="p-{{ prop.pk }}-owner">{{ prop.owner.full_name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <footer>
+                            <p>
+                                <a href="{% url 'property_detail' prop.pk %}">
+                                    Подробнее и купить →
+                                </a>
+                            </p>
+
+                            {% if perms.agency.change_property or perms.agency.delete_property %}
+                            <p>
+                                {% if perms.agency.change_property %}
+                                    <a href="{% url 'property_update' prop.pk %}">Редактировать</a> |
+                                {% endif %}
+                                {% if perms.agency.delete_property %}
+                                    <a href="{% url 'property_delete' prop.pk %}">Удалить</a>
+                                {% endif %}
+                            </p>
+                            {% endif %}
+                        </footer>
+                    </article>
+
+                    <hr>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p><em>Объектов по вашему запросу не найдено. Попробуйте изменить фильтры.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        {% if properties %}
+        <section aria-labelledby="summary-heading">
+            <h3 id="summary-heading">Сводная таблица объектов</h3>
+
+            <table border="1">
+                <caption>Все доступные объекты недвижимости</caption>
+                <thead>
+                    <tr>
+                        <th id="st-num" scope="col">№</th>
+                        <th id="st-title" scope="col">Название</th>
+                        <th id="st-type" scope="col">Вид</th>
+                        <th id="st-deal" scope="col">Тип сделки</th>
+                        <th id="st-price" scope="col">Цена ($)</th>
+                        <th id="st-byn" scope="col">Цена (BYN)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prop in properties %}
+                    <tr>
+                        <td headers="st-num">{{ forloop.counter }}</td>
+                        <td headers="st-title">
+                            <a href="{% url 'property_detail' prop.pk %}">{{ prop.title }}</a>
+                        </td>
+                        <td headers="st-type">{{ prop.prop_type.name }}</td>
+                        <td headers="st-deal">{{ prop.get_deal_type_display }}</td>
+                        <td headers="st-price">${{ prop.price }}</td>
+                        <td headers="st-byn">{{ prop.get_price_in_byn }} BYN</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" headers="st-title">
+                            Всего объектов: <strong>{{ properties|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        {% endif %}
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

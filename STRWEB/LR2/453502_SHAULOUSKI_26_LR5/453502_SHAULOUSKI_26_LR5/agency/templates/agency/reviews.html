@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Отзывы клиентов о работе агентства недвижимости EliteEstate — мнения, оценки, рекомендации.">
+    <meta name="keywords" content="отзывы, клиенты, рейтинги, оценки, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
+
+    <meta property="og:title" content="Отзывы клиентов — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Читайте отзывы наших клиентов и оставляйте своё мнение о работе агентства.">
+    <meta property="og:type" content="website">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+
+    <title>Отзывы клиентов — {{ company_info.name|default:'EliteEstate' }}</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация по разделам страницы">
+            <ul>
+                <li><a href="#section-form">Оставить отзыв</a></li>
+                <li><a href="#section-reviews">Все отзывы</a></li>
+                <li><a href="#section-summary">Сводка</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Отзывы</li>
+            </ol>
+        </nav>
+
+        <h2>Отзывы о нашей работе</h2>
+        <p>Ознакомьтесь с отзывами клиентов или поделитесь своим впечатлением от сотрудничества с агентством EliteEstate.</p>
+
+        {% if messages %}
+        <section aria-label="Сообщения">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <hr>
+
+        <section id="section-form" aria-labelledby="form-heading">
+            <h3 id="form-heading">Оставить отзыв</h3>
+
+            {% if user.is_authenticated %}
+                {% if user.clientprofile %}
+                    <p>
+                        Вы вошли как <strong>{{ user.username }}</strong>.
+                        <a href="{% url 'dashboard' %}">Перейти в личный кабинет →</a>
+                    </p>
+
+                    <form method="post" action="{% url 'reviews' %}" novalidate>
+                        {% csrf_token %}
+
+                        <fieldset>
+                            <legend>Ваш отзыв</legend>
+
+                            <p>
+                                <label for="id_property">Объект недвижимости:</label>
+                                <select name="property" id="id_property" required>
+                                    <option value="" disabled selected>-- Выберите объект --</option>
+                                    {% for prop in properties %}
+                                        <option value="{{ prop.id }}">{{ prop.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </p>
+
+                            <p>
+                                <label for="id_rating">Оценка (от 1 до 5):</label>
+                                <select name="rating" id="id_rating" required>
+                                    <option value="5">★ ★ ★ ★ ★ (5 — Отлично)</option>
+                                    <option value="4">★ ★ ★ ★ ☆ (4 — Хорошо)</option>
+                                    <option value="3">★ ★ ★ ☆ ☆ (3 — Удовлетворительно)</option>
+                                    <option value="2">★ ★ ☆ ☆ ☆ (2 — Плохо)</option>
+                                    <option value="1">★ ☆ ☆ ☆ ☆ (1 — Ужасно)</option>
+                                </select>
+                            </p>
+
+                            <p>
+                                <label for="id_comment">Текст отзыва:</label>
+                                <textarea name="comment"
+                                          id="id_comment"
+                                          rows="5"
+                                          minlength="10"
+                                          maxlength="2000"
+                                          placeholder="Напишите ваш отзыв здесь..."
+                                          required></textarea>
+                            </p>
+                        </fieldset>
+
+                        <p>
+                            <button type="submit">Отправить отзыв</button>
+                        </p>
+                    </form>
+                {% else %}
+                    <p><mark>Внимание!</mark> Сотрудники и администраторы не могут оставлять отзывы.</p>
+                {% endif %}
+            {% else %}
+                <p>
+                    Оставлять отзывы могут только зарегистрированные пользователи.
+                    Пожалуйста, <a href="{% url 'login' %}?next={% url 'reviews' %}">войдите</a>
+                    или <a href="{% url 'register' %}">зарегистрируйтесь</a>.
+                </p>
+                <p>
+                    <a href="{% url 'login' %}?next={% url 'reviews' %}">
+                        <button type="button">Войти и оставить отзыв</button>
+                    </a>
+                    <a href="{% url 'register' %}">
+                        <button type="button">Зарегистрироваться</button>
+                    </a>
+                </p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section id="section-reviews" aria-labelledby="reviews-heading">
+            <h3 id="reviews-heading">Все отзывы посетителей</h3>
+
+            {% if reviews %}
+            <ul>
+                {% for r in reviews %}
+                <li>
+                    <article>
+                        <header>
+                            <p>
+                                <strong>{{ r.user.username }}</strong>
+                                {% if r.property %}
+                                    | Объект:
+                                    <a href="{% url 'property_detail' r.property.pk %}">{{ r.property.title }}</a>
+                                {% endif %}
+                            </p>
+                            <p>
+                                <small>
+                                    Опубликовано:
+                                    <time datetime="{{ r.created_at|date:'Y-m-d\TH:i' }}">
+                                        {{ r.created_at|date:"d.m.Y H:i" }}
+                                    </time>
+                                </small>
+                            </p>
+                        </header>
+
+                        <p>
+                            <strong>Оценка:</strong>
+                            <span aria-label="Оценка {{ r.rating }} из 5">
+                                {% if r.rating == 5 %}★★★★★
+                                {% elif r.rating == 4 %}★★★★☆
+                                {% elif r.rating == 3 %}★★★☆☆
+                                {% elif r.rating == 2 %}★★☆☆☆
+                                {% else %}★☆☆☆☆
+                                {% endif %}
+                                ({{ r.rating }} из 5)
+                            </span>
+                        </p>
+
+                        <blockquote>
+                            <p>{{ r.comment }}</p>
+                        </blockquote>
+                    </article>
+
+                    <hr>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p><em>Отзывов пока нет. Будьте первым, кто оставит свой отзыв!</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        {% if reviews %}
+        <section id="section-summary" aria-labelledby="summary-heading">
+            <h3 id="summary-heading">Сводная таблица отзывов</h3>
+
+            <table border="1">
+                <caption>Последние отзывы клиентов</caption>
+                <thead>
+                    <tr>
+                        <th id="r-num" scope="col">№</th>
+                        <th id="r-user" scope="col">Пользователь</th>
+                        <th id="r-property" scope="col">Объект</th>
+                        <th id="r-rating" scope="col">Оценка</th>
+                        <th id="r-date" scope="col">Дата</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in reviews|slice:":10" %}
+                    <tr>
+                        <td headers="r-num">{{ forloop.counter }}</td>
+                        <td headers="r-user">{{ r.user.username }}</td>
+                        <td headers="r-property">
+                            {% if r.property %}
+                                <a href="{% url 'property_detail' r.property.pk %}">{{ r.property.title }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td headers="r-rating">{{ r.rating }} / 5</td>
+                        <td headers="r-date">
+                            <time datetime="{{ r.created_at|date:'Y-m-d' }}">
+                                {{ r.created_at|date:"d.m.Y" }}
+                            </time>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" headers="r-user">
+                            Показано: <strong>{{ reviews|slice:":10"|length }}</strong>
+                            из <strong>{{ reviews|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        {% endif %}
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Аналитика рынка недвижимости — визуализация данных, графики, средние цены в агентстве EliteEstate.">
+    <meta name="keywords" content="аналитика, статистика, графики, рынок недвижимости, EliteEstate">
+    <meta name="author" content="EliteEstate Agency">
+
+    <meta property="og:title" content="Аналитика рынка — EliteEstate">
+    <meta property="og:description" content="Автоматический расчёт показателей и визуализация данных рынка недвижимости.">
+    <meta property="og:type" content="website">
+
+    <title>Аналитика рынка — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Аналитика рынка</li>
+            </ol>
+        </nav>
+
+        <h2>Аналитика рынка недвижимости</h2>
+        <p>Автоматический расчёт показателей и визуализация данных на основе текущего состояния базы данных.</p>
+
+        <section aria-labelledby="rate-heading">
+            <h3 id="rate-heading">Курс валют</h3>
+            <p>
+                <strong>Курс НБРБ (USD/BYN):</strong>
+                <mark>{{ usd_rate }} за $1</mark>
+            </p>
+            <p><em>*Вся аналитика ниже приведена в USD ($).</em></p>
+        </section>
+
+        <hr>
+
+        {% if chart_pie %}
+        <section aria-labelledby="pie-heading">
+            <h3 id="pie-heading">Структура каталога объектов</h3>
+            <figure>
+                <img src="data:image/png;base64,{{ chart_pie }}"
+                     alt="Круговая диаграмма долей типов недвижимости"
+                     width="600"
+                     loading="lazy">
+                <figcaption>Распределение объектов недвижимости по типам</figcaption>
+            </figure>
+        </section>
+
+        <hr>
+        {% endif %}
+
+        {% if chart_bar %}
+        <section aria-labelledby="bar-heading">
+            <h3 id="bar-heading">Сравнение средних цен</h3>
+            <figure>
+                <img src="data:image/png;base64,{{ chart_bar }}"
+                     alt="Столбчатая диаграмма средних цен по типам недвижимости"
+                     width="700"
+                     loading="lazy">
+                <figcaption>Средние цены по типам недвижимости</figcaption>
+            </figure>
+        </section>
+
+        <hr>
+        {% endif %}
+
+        {% if chart_line %}
+        <section aria-labelledby="line-heading">
+            <h3 id="line-heading">Рыночный тренд стоимости</h3>
+            <figure>
+                <img src="data:image/png;base64,{{ chart_line }}"
+                     alt="Линейный график тренда стоимости"
+                     width="700"
+                     loading="lazy">
+                <figcaption>Динамика изменения стоимости объектов на рынке</figcaption>
+            </figure>
+        </section>
+
+        <hr>
+        {% endif %}
+
+        <section aria-labelledby="summary-heading">
+            <h3 id="summary-heading">Сводные показатели</h3>
+
+            <table border="1">
+                <caption>Ключевые метрики рынка</caption>
+                <thead>
+                    <tr>
+                        <th id="sum-param" scope="col">Показатель</th>
+                        <th id="sum-value" scope="col">Значение</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td headers="sum-param">Курс НБРБ (USD/BYN)</td>
+                        <td headers="sum-value">{{ usd_rate }}</td>
+                    </tr>
+                    <tr>
+                        <td headers="sum-param">Всего объектов в каталоге</td>
+                        <td headers="sum-value">{{ total_properties|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <td headers="sum-param">Средняя цена объекта</td>
+                        <td headers="sum-value">${{ avg_price|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <td headers="sum-param">Медианная цена объекта</td>
+                        <td headers="sum-value">${{ median_price|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <td headers="sum-param">Самая дорогая категория</td>
+                        <td headers="sum-value">{{ most_expensive_type|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <td headers="sum-param">Самая популярная категория</td>
+                        <td headers="sum-value">{{ most_popular_type|default:"—" }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" headers="sum-param">
+                            Данные обновляются автоматически при загрузке страницы.
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <hr>
+
+        <aside aria-labelledby="explanation-heading">
+            <h3 id="explanation-heading">О методике расчёта</h3>
+            <dl>
+                <dt><dfn>Средняя цена</dfn></dt>
+                <dd>Сумма стоимостей всех объектов, делённая на их количество.</dd>
+
+                <dt><dfn>Медианная цена</dfn></dt>
+                <dd>Значение, которое делит упорядоченный список цен пополам.</dd>
+
+                <dt><dfn>Популярный тип</dfn></dt>
+                <dd>Тип недвижимости с наибольшим количеством объектов в каталоге.</dd>
+
+                <dt><dfn><abbr title="Национальный банк Республики Беларусь">НБРБ</abbr></dfn></dt>
+                <dd>Источник официального курса валют для пересчёта цен.</dd>
+            </dl>
+        </aside>
+
+        <hr>
+
+        <nav aria-label="Навигация по странице">
+            <p>
+                <a href="{% url 'property_list' %}">← Вернуться в каталог объектов</a>
+            </p>
+        </nav>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

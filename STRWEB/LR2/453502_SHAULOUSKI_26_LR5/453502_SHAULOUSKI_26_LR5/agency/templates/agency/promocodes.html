@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Промокоды и купоны агентства недвижимости EliteEstate — действующие акции и архив предложений.">
+    <meta name="keywords" content="промокоды, купоны, скидки, акции, недвижимость, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
+
+    <meta property="og:title" content="Промокоды и купоны — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Действующие промокоды и архивные акции агентства недвижимости.">
+    <meta property="og:type" content="website">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+
+    <title>Промокоды и купоны — {{ company_info.name|default:'EliteEstate' }}</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация по разделам страницы">
+            <ul>
+                <li><a href="#active-promos">Действующие</a></li>
+                <li><a href="#archived-promos">Архив</a></li>
+                <li><a href="#how-to-use">Как использовать</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Промокоды и купоны</li>
+            </ol>
+        </nav>
+
+        <h2>Промокоды и купоны</h2>
+        <p>
+            Используйте наши <mark>промокоды</mark> для получения скидок
+            на услуги агентства и объекты недвижимости.
+        </p>
+
+        <hr>
+
+        <section id="active-promos" aria-labelledby="active-promos-heading">
+            <h3 id="active-promos-heading">Действующие промокоды</h3>
+
+            {% if active %}
+            <table border="1">
+                <caption>Список активных промокодов</caption>
+                <thead>
+                    <tr>
+                        <th id="ap-num" scope="col">№</th>
+                        <th id="ap-code" scope="col">Промокод</th>
+                        <th id="ap-discount" scope="col">Скидка</th>
+                        <th id="ap-valid" scope="col">Действует до</th>
+                        <th id="ap-status" scope="col">Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in active %}
+                    <tr>
+                        <td headers="ap-num">{{ forloop.counter }}</td>
+                        <td headers="ap-code"><code>{{ p.code }}</code></td>
+                        <td headers="ap-discount">−{{ p.discount }}%</td>
+                        <td headers="ap-valid">
+                            <time datetime="{{ p.valid_until|date:'Y-m-d' }}">
+                                {{ p.valid_until|date:"d.m.Y" }}
+                            </time>
+                        </td>
+                        <td headers="ap-status"><strong>Активен</strong></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" headers="ap-code">
+                            Всего активных: <strong>{{ active|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h4>Акции в карточках</h4>
+
+            <ul>
+                {% for p in active %}
+                <li>
+                    <article>
+                        <header>
+                            <h5><code>{{ p.code }}</code></h5>
+                        </header>
+
+                        <p>
+                            Скидка <strong>−{{ p.discount }}%</strong> на услуги агентства.
+                        </p>
+
+                        <footer>
+                            <p>
+                                <small>
+                                    Действует до
+                                    <time datetime="{{ p.valid_until|date:'Y-m-d' }}">
+                                        {{ p.valid_until|date:"d.m.Y" }}
+                                    </time>
+                                </small>
+                            </p>
+                        </footer>
+                    </article>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p><em>На данный момент активных промокодов нет.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section id="archived-promos" aria-labelledby="archived-promos-heading">
+            <h3 id="archived-promos-heading">Архив промокодов</h3>
+
+            {% if archived %}
+            <table border="1">
+                <caption>Архивные (недействующие) промокоды</caption>
+                <thead>
+                    <tr>
+                        <th id="arp-num" scope="col">№</th>
+                        <th id="arp-code" scope="col">Промокод</th>
+                        <th id="arp-discount" scope="col">Скидка</th>
+                        <th id="arp-valid" scope="col">Истёк</th>
+                        <th id="arp-status" scope="col">Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in archived %}
+                    <tr>
+                        <td headers="arp-num">{{ forloop.counter }}</td>
+                        <td headers="arp-code"><s><code>{{ p.code }}</code></s></td>
+                        <td headers="arp-discount">{{ p.discount }}%</td>
+                        <td headers="arp-valid">
+                            <time datetime="{{ p.valid_until|date:'Y-m-d' }}">
+                                {{ p.valid_until|date:"d.m.Y" }}
+                            </time>
+                        </td>
+                        <td headers="arp-status"><em>В архиве</em></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" headers="arp-code">
+                            Всего в архиве: <strong>{{ archived|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% else %}
+            <p><em>Архив пуст.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section id="how-to-use" aria-labelledby="how-to-use-heading">
+            <h3 id="how-to-use-heading">Как использовать промокод</h3>
+
+            <ol>
+                <li>Выберите объект недвижимости в <a href="{% url 'property_list' %}">каталоге</a>.</li>
+                <li>Добавьте его в <a href="{% url 'cart_detail' %}">корзину</a>.</li>
+                <li>При оформлении заказа введите промокод.</li>
+                <li>Нажмите «Применить» — скидка отобразится в итоговой сумме.</li>
+                <li>Оплатите заказ и получите объект в личном кабинете.</li>
+            </ol>
+
+            <aside aria-labelledby="terms-heading">
+                <h4 id="terms-heading">Условия использования</h4>
+                <ul>
+                    <li>Каждый промокод можно использовать <strong>один раз</strong>.</li>
+                    <li>Промокоды <mark>не суммируются</mark> с другими скидками.</li>
+                    <li>Срок действия указан в описании промокода.</li>
+                    <li>Агентство вправе отменить акцию в любой момент.</li>
+                </ul>
+            </aside>
+        </section>
+
+        <hr>
+
+        <blockquote>
+            <p>
+                «Экономия — это тоже искусство. И у нас оно работает на вас».
+            </p>
+            <footer>
+                <p>— Администрация агентства <cite>{{ company_info.name|default:"EliteEstate" }}</cite></p>
+            </footer>
+        </blockquote>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

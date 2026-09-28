@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Новости и аналитика рынка недвижимости от агентства EliteEstate — тренды, обзоры, прогнозы экспертов.">
+    <meta name="keywords" content="новости недвижимости, аналитика, обзоры, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
+
+    <meta property="og:title" content="Новости и аналитика — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Актуальные тренды рынка недвижимости, обзоры и прогнозы экспертов.">
+    <meta property="og:type" content="website">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+
+    <title>Новости и статьи — {{ company_info.name|default:'EliteEstate' }}</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Новости и статьи</li>
+            </ol>
+        </nav>
+
+        <h2>Новости и аналитика</h2>
+        <p>Актуальные тренды рынка недвижимости, обзоры и прогнозы экспертов.</p>
+
+        {% if perms.agency.add_article %}
+        <p>
+            <a href="{% url 'article_create' %}">
+                <button type="button">+ Добавить новость</button>
+            </a>
+        </p>
+        {% endif %}
+
+        {% if messages %}
+        <section aria-label="Сообщения">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <hr>
+
+        <section aria-labelledby="news-list-heading">
+            <h3 id="news-list-heading" hidden>Список новостей</h3>
+
+            {% if articles %}
+            <ul>
+                {% for article in articles %}
+                <li>
+                    <article>
+                        <header>
+                            <h4>
+                                <a href="{% url 'article_detail' article.pk %}">
+                                    {{ article.title }}
+                                </a>
+                            </h4>
+                            <p>
+                                Дата публикации:
+                                <time datetime="{{ article.published_date|date:'Y-m-d' }}">
+                                    {{ article.published_date|date:"d.m.Y" }}
+                                </time>
+                            </p>
+                        </header>
+
+                        {% if article.image %}
+                        <figure>
+                            <a href="{% url 'article_detail' article.pk %}">
+                                <img src="{{ article.image.url }}"
+                                     alt="Иллюстрация к новости «{{ article.title }}»"
+                                     width="300"
+                                     loading="lazy">
+                            </a>
+                            <figcaption>{{ article.title }}</figcaption>
+                        </figure>
+                        {% endif %}
+
+                        <p>
+                            {% if article.short_description %}
+                                {{ article.short_description }}
+                            {% else %}
+                                {{ article.content|truncatewords:15 }}
+                            {% endif %}
+                        </p>
+
+                        <footer>
+                            <p>
+                                <a href="{% url 'article_detail' article.pk %}">
+                                    Читать далее →
+                                </a>
+
+                                {% if perms.agency.change_article or perms.agency.delete_article %}
+                                    |
+                                    {% if perms.agency.change_article %}
+                                        <a href="{% url 'article_update' article.pk %}">Редактировать</a>
+                                    {% endif %}
+
+                                    {% if perms.agency.delete_article %}
+                                        | <a href="{% url 'article_delete' article.pk %}">Удалить</a>
+                                    {% endif %}
+                                {% endif %}
+                            </p>
+                        </footer>
+                    </article>
+
+                    <hr>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p><em>На данный момент нет опубликованных новостей.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        {% if articles %}
+        <section aria-labelledby="summary-heading">
+            <h3 id="summary-heading">Сводная таблица публикаций</h3>
+
+            <table border="1">
+                <caption>Все новости и статьи в ленте</caption>
+                <thead>
+                    <tr>
+                        <th id="n-num" scope="col">№</th>
+                        <th id="n-title" scope="col">Заголовок</th>
+                        <th id="n-date" scope="col">Дата публикации</th>
+                        <th id="n-short" scope="col">Краткое содержание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for article in articles %}
+                    <tr>
+                        <td headers="n-num">{{ forloop.counter }}</td>
+                        <td headers="n-title">
+                            <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+                        </td>
+                        <td headers="n-date">
+                            <time datetime="{{ article.published_date|date:'Y-m-d' }}">
+                                {{ article.published_date|date:"d.m.Y" }}
+                            </time>
+                        </td>
+                        <td headers="n-short">
+                            {{ article.short_description|default:article.content|truncatewords:10 }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" headers="n-title">
+                            Всего публикаций: <strong>{{ articles|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        {% endif %}
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

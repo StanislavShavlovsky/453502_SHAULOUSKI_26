@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Личный кабинет клиента агентства недвижимости EliteEstate — история покупок, промокоды, календарь.">
+    <meta name="keywords" content="личный кабинет, клиент, покупки, EliteEstate">
+    <meta name="author" content="EliteEstate Agency">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Личный кабинет — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                <li>Привет, <strong>{{ user.username }}</strong></li>
+                <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Личный кабинет</li>
+            </ol>
+        </nav>
+
+        <h2>Личный кабинет клиента: {{ user.username }}</h2>
+
+        <section aria-labelledby="profile-heading">
+            <h3 id="profile-heading">Информация о профиле</h3>
+
+            <table border="1">
+                <caption>Личные данные</caption>
+                <tbody>
+                    <tr>
+                        <th id="dp-username" scope="row">Логин</th>
+                        <td headers="dp-username">{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th id="dp-name" scope="row">Имя</th>
+                        <td headers="dp-name">{{ user.get_full_name|default:"Не указано" }}</td>
+                    </tr>
+                    <tr>
+                        <th id="dp-email" scope="row">Email</th>
+                        <td headers="dp-email">
+                            {% if user.email %}
+                                <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+                            {% else %}
+                                Не указан
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th id="dp-phone" scope="row">Телефон</th>
+                        <td headers="dp-phone">
+                            {% if profile.phone %}
+                                <a href="tel:{{ profile.phone }}">{{ profile.phone }}</a>
+                            {% else %}
+                                Не указан
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th id="dp-tz" scope="row">Таймзона</th>
+                        <td headers="dp-tz">{{ tz_name|default:"Europe/Minsk" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <section aria-labelledby="promo-heading">
+            <h3 id="promo-heading">Мои персональные промокоды</h3>
+
+            {% if promo_codes %}
+            <table border="1">
+                <caption>Доступные промокоды</caption>
+                <thead>
+                    <tr>
+                        <th id="pc-code" scope="col">Промокод</th>
+                        <th id="pc-discount" scope="col">Скидка</th>
+                        <th id="pc-valid" scope="col">Действует до</th>
+                        <th id="pc-status" scope="col">Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for promo in promo_codes %}
+                    <tr>
+                        <td headers="pc-code"><code>{{ promo.code }}</code></td>
+                        <td headers="pc-discount">−{{ promo.discount }}%</td>
+                        <td headers="pc-valid">
+                            <time datetime="{{ promo.valid_until|date:'Y-m-d' }}">
+                                {{ promo.valid_until|date:"d.m.Y" }}
+                            </time>
+                        </td>
+                        <td headers="pc-status">
+                            {% if promo.is_active %}
+                                <strong>Активен</strong>
+                            {% else %}
+                                <em>Архив</em>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" headers="pc-code">
+                            Всего промокодов: <strong>{{ promo_codes|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% else %}
+            <p><em>У вас пока нет персональных промокодов.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section aria-labelledby="purchases-heading">
+            <h3 id="purchases-heading">История покупок и аренды</h3>
+
+            {% if purchases %}
+            <table border="1">
+                <caption>Ваши сделки</caption>
+                <thead>
+                    <tr>
+                        <th id="pu-num" scope="col">№</th>
+                        <th id="pu-title" scope="col">Объект</th>
+                        <th id="pu-type" scope="col">Тип сделки</th>
+                        <th id="pu-amount" scope="col">Сумма (BYN)</th>
+                        <th id="pu-utc" scope="col">Дата (UTC)</th>
+                        <th id="pu-local" scope="col">Дата (локальная)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for purchase in purchases %}
+                    <tr>
+                        <td headers="pu-num">{{ forloop.counter }}</td>
+                        <td headers="pu-title">
+                            <a href="{% url 'property_detail' purchase.property.pk %}">
+                                {{ purchase.property.title }}
+                            </a>
+                        </td>
+                        <td headers="pu-type">{{ purchase.get_deal_type_display }}</td>
+                        <td headers="pu-amount">{{ purchase.amount_byn }} BYN</td>
+                        <td headers="pu-utc">
+                            <time datetime="{{ purchase.created_at_utc|date:'Y-m-d\TH:i' }}">
+                                {{ purchase.created_at_utc|date:"d.m.Y H:i" }}
+                            </time>
+                        </td>
+                        <td headers="pu-local">
+                            <time datetime="{{ purchase.created_at_local|date:'Y-m-d\TH:i' }}">
+                                {{ purchase.created_at_local|date:"d.m.Y H:i" }}
+                            </time>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" headers="pu-title">
+                            Всего сделок: <strong>{{ purchases|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% else %}
+            <p><em>Пока нет совершенных сделок. Ваши покупки и аренда появятся здесь после оформления.</em></p>
+            <p><a href="{% url 'property_list' %}">Перейти в каталог →</a></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <aside aria-labelledby="calendar-heading">
+            <h3 id="calendar-heading">Календарь событий</h3>
+            <p>Таймзона: <strong>{{ tz_name|default:"Europe/Minsk" }}</strong></p>
+            <pre>{{ text_calendar }}</pre>
+        </aside>
+
+        <hr>
+
+        <section aria-labelledby="quick-actions-heading">
+            <h3 id="quick-actions-heading">Быстрые действия</h3>
+            <ul>
+                <li><a href="{% url 'property_list' %}">Перейти в каталог недвижимости</a></li>
+                <li><a href="{% url 'cart_detail' %}">Посмотреть корзину</a></li>
+                <li><a href="{% url 'reviews' %}">Оставить отзыв</a></li>
+                <li><a href="{% url 'promocodes' %}">Посмотреть промокоды</a></li>
+                <li><a href="{% url 'faq' %}">Часто задаваемые вопросы</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Контакты и сотрудники агентства недвижимости EliteEstate — адрес офиса, телефоны, карта проезда.">
+    <meta name="keywords" content="контакты, сотрудники, риелторы, телефоны, EliteEstate">
+    <meta name="author" content="{{ company_info.name|default:'EliteEstate Agency' }}">
+
+    <meta property="og:title" content="Контакты — {{ company_info.name|default:'EliteEstate' }}">
+    <meta property="og:description" content="Профессиональная команда EliteEstate всегда готова помочь вам в сфере недвижимости.">
+    <meta property="og:type" content="website">
+    {% if company_info.logo %}
+        <meta property="og:image" content="{{ company_info.logo.url }}">
+    {% endif %}
+
+    <title>Контакты и сотрудники — {{ company_info.name|default:'EliteEstate' }}</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+                <li><a href="{% url 'privacy' %}">Политика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация по разделам страницы">
+            <ul>
+                <li><a href="#section-info">Контакты</a></li>
+                <li><a href="#section-map">Карта</a></li>
+                <li><a href="#section-staff">Сотрудники</a></li>
+                <li><a href="#section-schedule">Режим работы</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Контакты</li>
+            </ol>
+        </nav>
+
+        <h2>Контакты и сотрудники агентства</h2>
+
+        <section id="section-info" aria-labelledby="info-heading">
+            <h3 id="info-heading">Как с нами связаться</h3>
+
+            <address>
+                <p><strong>Адрес офиса:</strong> г. Минск, ул. Платонова, д. 39</p>
+                <p><strong>Инфолиния:</strong> <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+                <p><strong>Сайт:</strong> <a href="{% url 'home' %}">eliteestate.by</a></p>
+            </address>
+
+            <p>
+                Мы всегда рады помочь вам с выбором недвижимости.
+                Обращайтесь к нашим менеджерам для консультации.
+            </p>
+        </section>
+
+        <hr>
+
+        <section id="section-map" aria-labelledby="map-heading">
+            <h3 id="map-heading">Мы на карте</h3>
+
+            <figure>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.288282386345!2d27.558832!3d53.900601!2m3!1f0!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDU0JzAyLjIiTiAyN8KwMzMnMzEuOCJF!5e0!3m2!1sru!2sby!4v1600000000000!5m2!1sru!2sby"
+                        width="720"
+                        height="450"
+                        title="Карта: офис EliteEstate, ул. Платонова, д. 39, Минск"
+                        allowfullscreen
+                        loading="lazy">
+                </iframe>
+                <figcaption>
+                    Офис агентства расположен по адресу: г. Минск, ул. Платонова, д. 39
+                </figcaption>
+            </figure>
+
+            <p>
+                <a href="https://www.google.com/maps?q=Минск,+ул.+Платонова,+39"
+                   target="_blank"
+                   rel="noopener">
+                    Открыть в Google Картах →
+                </a>
+            </p>
+        </section>
+
+        <hr>
+
+        <section id="section-staff" aria-labelledby="staff-heading">
+            <h3 id="staff-heading">Наша команда</h3>
+
+            {% if employees %}
+            <table border="1">
+                <caption>Сотрудники агентства EliteEstate</caption>
+                <thead>
+                    <tr>
+                        <th id="e-photo" scope="col">Фото</th>
+                        <th id="e-name" scope="col">ФИО</th>
+                        <th id="e-position" scope="col">Должность</th>
+                        <th id="e-phone" scope="col">Телефон</th>
+                        <th id="e-email" scope="col">Email</th>
+                        <th id="e-desc" scope="col">Обязанности</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emp in employees %}
+                    <tr>
+                        <td headers="e-photo">
+                            {% if emp.photo %}
+                                <img src="{{ emp.photo.url }}"
+                                     alt="Фото сотрудника {{ emp.user.get_full_name|default:emp.user.username }}"
+                                     width="100"
+                                     height="100"
+                                     loading="lazy">
+                            {% else %}
+                                <img src="{% static 'images/no-photo.png' %}"
+                                     alt="Фото отсутствует"
+                                     width="100"
+                                     height="100"
+                                     loading="lazy">
+                            {% endif %}
+                        </td>
+                        <td headers="e-name">
+                            <strong>{{ emp.user.get_full_name|default:emp.user.username }}</strong>
+                        </td>
+                        <td headers="e-position">{{ emp.position }}</td>
+                        <td headers="e-phone">
+                            {% if emp.phone %}
+                                <a href="tel:{{ emp.phone }}">{{ emp.phone }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td headers="e-email">
+                            {% if emp.user.email %}
+                                <a href="mailto:{{ emp.user.email }}">{{ emp.user.email }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td headers="e-desc">
+                            {{ emp.job_description|default:"—" }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" headers="e-name">
+                            Всего сотрудников: <strong>{{ employees|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% else %}
+            <p><em>Список сотрудников пока пуст.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section id="section-schedule" aria-labelledby="schedule-heading">
+            <h3 id="schedule-heading">Режим работы офиса</h3>
+
+            <table border="1">
+                <caption>График работы агентства</caption>
+                <thead>
+                    <tr>
+                        <th id="s-day" scope="col">День недели</th>
+                        <th id="s-hours" scope="col">Часы работы</th>
+                        <th id="s-break" scope="col">Перерыв</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td headers="s-day">Понедельник — Пятница</td>
+                        <td headers="s-hours">09:00 — 19:00</td>
+                        <td headers="s-break">13:00 — 14:00</td>
+                    </tr>
+                    <tr>
+                        <td headers="s-day">Суббота</td>
+                        <td headers="s-hours">10:00 — 16:00</td>
+                        <td headers="s-break">—</td>
+                    </tr>
+                    <tr>
+                        <td headers="s-day">Воскресенье</td>
+                        <td headers="s-hours">Выходной</td>
+                        <td headers="s-break">—</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" headers="s-day">
+                            Инфолиния работает <strong>круглосуточно</strong>.
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

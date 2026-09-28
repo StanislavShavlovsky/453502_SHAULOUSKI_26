@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ property.title }} — {{ property.description|truncatewords:25 }}">
+    <meta name="keywords" content="{{ property.title }}, недвижимость, {{ property.prop_type.name }}, EliteEstate">
+    <meta name="author" content="EliteEstate Agency">
+
+    <meta property="og:title" content="{{ property.title }} — EliteEstate">
+    <meta property="og:description" content="{{ property.description|truncatewords:15 }}">
+    <meta property="og:type" content="website">
+    {% if property.image %}
+        <meta property="og:image" content="{{ property.image.url }}">
+    {% endif %}
+
+    <title>{{ property.title }} — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li aria-current="page">{{ property.title }}</li>
+            </ol>
+        </nav>
+
+        <article>
+            <header>
+                <h2>{{ property.title }}</h2>
+                <p>
+                    <strong>Вид:</strong> {{ property.prop_type.name }} |
+                    <strong>Тип сделки:</strong> {{ property.get_deal_type_display }}
+                </p>
+            </header>
+
+            {% if property.image %}
+            <figure>
+                <img src="{{ property.image.url }}"
+                     alt="Фото объекта «{{ property.title }}»"
+                     width="500"
+                     loading="lazy">
+                <figcaption>{{ property.title }}</figcaption>
+            </figure>
+            {% endif %}
+
+            <section aria-labelledby="description-heading">
+                <h3 id="description-heading">Описание объекта</h3>
+                <p>{{ property.description|linebreaks }}</p>
+            </section>
+
+            <hr>
+
+            <section aria-labelledby="characteristics-heading">
+                <h3 id="characteristics-heading">Характеристики</h3>
+
+                <table border="1">
+                    <caption>Информация об объекте «{{ property.title }}»</caption>
+                    <tbody>
+                        <tr>
+                            <th id="pd-title" scope="row">Название</th>
+                            <td headers="pd-title">{{ property.title }}</td>
+                        </tr>
+                        <tr>
+                            <th id="pd-type" scope="row">Вид недвижимости</th>
+                            <td headers="pd-type">{{ property.prop_type.name }}</td>
+                        </tr>
+                        <tr>
+                            <th id="pd-deal" scope="row">Тип сделки</th>
+                            <td headers="pd-deal">{{ property.get_deal_type_display }}</td>
+                        </tr>
+                        <tr>
+                            <th id="pd-price-usd" scope="row">Цена (USD)</th>
+                            <td headers="pd-price-usd">${{ property.price }}</td>
+                        </tr>
+                        <tr>
+                            <th id="pd-price-byn" scope="row">Цена (BYN)</th>
+                            <td headers="pd-price-byn">{{ property.get_price_in_byn }} BYN</td>
+                        </tr>
+                        <tr>
+                            <th id="pd-owner" scope="row">Владелец</th>
+                            <td headers="pd-owner">{{ property.owner.full_name }}</td>
+                        </tr>
+                        <tr>
+                            <th id="pd-owner-phone" scope="row">Телефон владельца</th>
+                            <td headers="pd-owner-phone">
+                                <a href="tel:{{ property.owner.phone }}">{{ property.owner.phone }}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th id="pd-status" scope="row">Статус</th>
+                            <td headers="pd-status">
+                                {% if property.is_active %}
+                                    <strong>Доступен</strong>
+                                {% else %}
+                                    <em>Продан / снят с продажи</em>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <hr>
+
+            <section aria-labelledby="action-heading">
+                <h3 id="action-heading">Действия с объектом</h3>
+
+                {% if user.is_authenticated %}
+                    {% if not user.employeeprofile and not user.is_superuser %}
+                        {% if property.is_active %}
+                        <form action="{% url 'cart_add' property.pk %}" method="post" novalidate>
+                            {% csrf_token %}
+                            <p>
+                                <button type="submit">🛒 Добавить в корзину</button>
+                            </p>
+                        </form>
+                        {% else %}
+                        <p><mark>Объект больше недоступен для покупки или аренды.</mark></p>
+                        {% endif %}
+                    {% else %}
+                        <p><em>Сотрудники не могут оформлять заявки на покупку.</em></p>
+                    {% endif %}
+                {% else %}
+                    <p>
+                        Для оформления заявки
+                        <a href="{% url 'login' %}?next={% url 'property_detail' property.pk %}">войдите</a>
+                        или <a href="{% url 'register' %}">зарегистрируйтесь</a>.
+                    </p>
+                {% endif %}
+            </section>
+
+            <hr>
+
+            <section aria-labelledby="managers-heading">
+                <h3 id="managers-heading">Наши менеджеры</h3>
+
+                {% if managers %}
+                <table border="1">
+                    <caption>Сотрудники агентства</caption>
+                    <thead>
+                        <tr>
+                            <th id="m-name" scope="col">Имя</th>
+                            <th id="m-position" scope="col">Должность</th>
+                            <th id="m-phone" scope="col">Телефон</th>
+                            <th id="m-email" scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in managers %}
+                        <tr>
+                            <td headers="m-name">
+                                {{ m.user.get_full_name|default:m.user.username }}
+                            </td>
+                            <td headers="m-position">{{ m.position }}</td>
+                            <td headers="m-phone">
+                                {% if m.phone %}
+                                    <a href="tel:{{ m.phone }}">{{ m.phone }}</a>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td headers="m-email">
+                                {% if m.user.email %}
+                                    <a href="mailto:{{ m.user.email }}">{{ m.user.email }}</a>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" headers="m-name">
+                                Всего менеджеров: <strong>{{ managers|length }}</strong>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                {% else %}
+                <p>Список менеджеров пока не заполнен.</p>
+                {% endif %}
+            </section>
+
+            <footer>
+                <p>
+                    <a href="{% url 'property_list' %}">← Вернуться к каталогу</a>
+                </p>
+            </footer>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

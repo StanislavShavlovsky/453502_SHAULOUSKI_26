@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Подтверждение удаления объекта недвижимости — EliteEstate.">
+    <meta name="author" content="EliteEstate Agency">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Удаление объекта — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Привет, <strong>{{ user.username }}</strong></li>
+                    <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Выйти</button>
+                        </form>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'property_detail' property.pk %}">{{ property.title }}</a></li>
+                <li aria-current="page">Удаление</li>
+            </ol>
+        </nav>
+
+        <article>
+            <header>
+                <h2>Удаление объекта недвижимости</h2>
+            </header>
+
+            <section role="alert" aria-labelledby="warning-heading">
+                <h3 id="warning-heading">Внимание!</h3>
+
+                <p>
+                    Вы собираетесь <strong>безвозвратно удалить</strong> объект
+                    «<cite>{{ property.title }}</cite>» из базы данных агентства.
+                </p>
+
+                <p>
+                    <mark>Это действие невозможно отменить.</mark>
+                </p>
+            </section>
+
+            <section aria-labelledby="details-heading">
+                <h3 id="details-heading">Информация об объекте</h3>
+
+                <table border="1">
+                    <caption>Параметры удаляемого объекта</caption>
+                    <tbody>
+                        <tr>
+                            <th id="del-title" scope="row">Название</th>
+                            <td headers="del-title">{{ property.title }}</td>
+                        </tr>
+                        <tr>
+                            <th id="del-type" scope="row">Вид недвижимости</th>
+                            <td headers="del-type">{{ property.prop_type.name }}</td>
+                        </tr>
+                        <tr>
+                            <th id="del-deal" scope="row">Тип сделки</th>
+                            <td headers="del-deal">{{ property.get_deal_type_display }}</td>
+                        </tr>
+                        <tr>
+                            <th id="del-price" scope="row">Цена</th>
+                            <td headers="del-price">${{ property.price }}</td>
+                        </tr>
+                        <tr>
+                            <th id="del-owner" scope="row">Владелец</th>
+                            <td headers="del-owner">{{ property.owner.full_name }}</td>
+                        </tr>
+                        <tr>
+                            <th id="del-status" scope="row">Статус</th>
+                            <td headers="del-status">
+                                {% if property.is_active %}
+                                    Доступен
+                                {% else %}
+                                    Продан / снят с продажи
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <hr>
+
+            <section aria-labelledby="confirm-heading">
+                <h3 id="confirm-heading">Подтверждение</h3>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <p>
+                        <button type="submit">Да, удалить объект</button>
+                        <a href="{% url 'property_detail' property.pk %}">
+                            <button type="button">Отмена</button>
+                        </a>
+                        <a href="{% url 'property_list' %}">Вернуться в каталог</a>
+                    </p>
+                </form>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

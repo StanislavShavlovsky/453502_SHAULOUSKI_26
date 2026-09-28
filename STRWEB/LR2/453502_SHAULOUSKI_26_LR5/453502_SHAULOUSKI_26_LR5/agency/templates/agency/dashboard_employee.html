@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Панель управления сотрудника EliteEstate — закреплённые сделки, клиенты, статистика.">
+    <meta name="keywords" content="панель сотрудника, сделки, клиенты, EliteEstate">
+    <meta name="author" content="EliteEstate Agency">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Панель сотрудника — EliteEstate</title>
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+</head>
+<body id="top">
+
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo.jpg' %}" alt="Логотип EliteEstate" width="100" height="60">
+        </a>
+        <h1>EliteEstate</h1>
+
+        <nav aria-label="Основная навигация">
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'property_list' %}">Каталог</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">Словарь</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'vacancies' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'promocodes' %}">Промокоды</a></li>
+                <li><a href="{% url 'statistics' %}">Аналитика</a></li>
+            </ul>
+        </nav>
+
+        <nav aria-label="Навигация пользователя">
+            <ul>
+                <li>Привет, <strong>{{ user.get_full_name|default:user.username }}</strong></li>
+                <li><a href="{% url 'dashboard' %}">Личный кабинет</a></li>
+                <li><a href="{% url 'cart_detail' %}">Корзина</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <nav aria-label="Хлебные крошки">
+            <ol>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li aria-current="page">Панель сотрудника</li>
+            </ol>
+        </nav>
+
+        <h2>Панель управления сотрудника: {{ user.get_full_name|default:user.username }}</h2>
+
+        <section aria-labelledby="role-heading">
+            <h3 id="role-heading" hidden>Информация о роли</h3>
+            <p>
+                <strong>Роль:</strong> Менеджер по сделкам |
+                <strong>Таймзона сервера:</strong> {{ tz_name|default:"Europe/Minsk" }}
+            </p>
+        </section>
+
+        <hr>
+
+        <section aria-labelledby="stats-heading">
+            <h3 id="stats-heading">Ключевые показатели</h3>
+
+            <table border="1">
+                <caption>Статистика работы сотрудника</caption>
+                <thead>
+                    <tr>
+                        <th id="st-param" scope="col">Показатель</th>
+                        <th id="st-value" scope="col">Значение</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td headers="st-param">Общие продажи</td>
+                        <td headers="st-value"><strong>{{ total_sales|default:"0" }} BYN</strong></td>
+                    </tr>
+                    <tr>
+                        <td headers="st-param">Средний чек</td>
+                        <td headers="st-value">{{ avg_sales|default:"0" }} BYN</td>
+                    </tr>
+                    <tr>
+                        <td headers="st-param">Медиана продаж</td>
+                        <td headers="st-value">{{ median_sales|default:"0" }} BYN</td>
+                    </tr>
+                    <tr>
+                        <td headers="st-param">Мода продаж</td>
+                        <td headers="st-value">{{ mode_sales|default:"0" }} BYN</td>
+                    </tr>
+                    <tr>
+                        <td headers="st-param">Сделок (Продажа)</td>
+                        <td headers="st-value">{{ avg_age|default:"0" }} шт.</td>
+                    </tr>
+                    <tr>
+                        <td headers="st-param">Сделок (Аренда)</td>
+                        <td headers="st-value">{{ median_age|default:"0" }} шт.</td>
+                    </tr>
+                    <tr>
+                        <td headers="st-param">Популярный тип недвижимости</td>
+                        <td headers="st-value">{{ popular_type|default:"—" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <section aria-labelledby="deals-heading">
+            <h3 id="deals-heading">Ваши закреплённые сделки</h3>
+
+            {% if deals %}
+            <table border="1">
+                <caption>Список сделок сотрудника</caption>
+                <thead>
+                    <tr>
+                        <th id="d-num" scope="col">№</th>
+                        <th id="d-property" scope="col">Объект</th>
+                        <th id="d-type" scope="col">Тип сделки</th>
+                        <th id="d-client" scope="col">Клиент</th>
+                        <th id="d-amount" scope="col">Сумма (BYN)</th>
+                        <th id="d-utc" scope="col">Время (UTC)</th>
+                        <th id="d-local" scope="col">Локальное время</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for deal in deals %}
+                    <tr>
+                        <td headers="d-num">{{ forloop.counter }}</td>
+                        <td headers="d-property">
+                            <a href="{% url 'property_detail' deal.property.pk %}">
+                                {{ deal.property.title }}
+                            </a>
+                        </td>
+                        <td headers="d-type">{{ deal.get_deal_type_display }}</td>
+                        <td headers="d-client">{{ deal.client.user.username }}</td>
+                        <td headers="d-amount">{{ deal.amount }} BYN</td>
+                        <td headers="d-utc">
+                            <time datetime="{{ deal.created_at_utc|date:'Y-m-d\TH:i' }}">
+                                {{ deal.created_at_utc|date:"d.m.Y H:i:s" }}
+                            </time>
+                        </td>
+                        <td headers="d-local">
+                            <time datetime="{{ deal.created_at_local|date:'Y-m-d\TH:i' }}">
+                                {{ deal.created_at_local|date:"d.m.Y H:i:s" }}
+                            </time>
+                            <br>
+                            <small>({{ deal.timezone_name }})</small>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7" headers="d-property">
+                            Всего сделок: <strong>{{ deals|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% else %}
+            <p><em>Сделок пока не зафиксировано.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section aria-labelledby="clients-heading">
+            <h3 id="clients-heading">Клиенты в активной работе</h3>
+
+            {% if clients %}
+            <table border="1">
+                <caption>Список клиентов сотрудника</caption>
+                <thead>
+                    <tr>
+                        <th id="c-num" scope="col">№</th>
+                        <th id="c-username" scope="col">Логин</th>
+                        <th id="c-name" scope="col">Полное имя</th>
+                        <th id="c-phone" scope="col">Телефон</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <td headers="c-num">{{ forloop.counter }}</td>
+                        <td headers="c-username">
+                            <code>{{ client.user.username }}</code>
+                        </td>
+                        <td headers="c-name">
+                            {{ client.user.get_full_name|default:"Не указано" }}
+                        </td>
+                        <td headers="c-phone">
+                            {% if client.phone %}
+                                <a href="tel:{{ client.phone }}">{{ client.phone }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" headers="c-username">
+                            Всего клиентов: <strong>{{ clients|length }}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% else %}
+            <p><em>Связанные клиенты не найдены.</em></p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        {% if chart_data %}
+        <section aria-labelledby="chart-heading">
+            <h3 id="chart-heading">Популярность типа недвижимости</h3>
+            <figure>
+                <img src="data:image/png;base64,{{ chart_data }}"
+                     alt="Диаграмма популярности типов недвижимости"
+                     width="600"
+                     loading="lazy">
+                <figcaption>Распределение объектов по популярности</figcaption>
+            </figure>
+        </section>
+
+        <hr>
+        {% endif %}
+
+        <aside aria-labelledby="calendar-heading">
+            <h3 id="calendar-heading">Текстовый календарь</h3>
+            <p>Таймзона: <strong>{{ tz_name|default:"Europe/Minsk" }}</strong></p>
+            <pre>{{ text_calendar }}</pre>
+        </aside>
+    </main>
+
+    <hr>
+
+    <footer>
+        <section>
+            <h3>Контакты</h3>
+            <address>
+                <p>г. Минск, ул. Платонова, д. 39</p>
+                <p>Тел.: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+                <p>Email: <a href="mailto:info@eliteestate.by">info@eliteestate.by</a></p>
+            </address>
+        </section>
+
+        <section>
+            <h3>Дополнительно</h3>
+            <p><a href="{% url 'privacy' %}">Политика конфиденциальности</a></p>
+        </section>
+
+        <p><a href="#top">Наверх ↑</a></p>
+        <p>&copy; 2026 EliteEstate Agency. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>
