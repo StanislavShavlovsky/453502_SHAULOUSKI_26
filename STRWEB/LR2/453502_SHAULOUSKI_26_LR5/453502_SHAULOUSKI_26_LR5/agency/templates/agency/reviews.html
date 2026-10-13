@@ -17,8 +17,20 @@
 
     <title>Отзывы клиентов — {{ company_info.name|default:'EliteEstate' }}</title>
     <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+
+    <!-- Общие CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/reviews.css' %}">
 </head>
 <body id="top">
+
+<div class="preloader">
+    <div class="preloader__ring"></div>
+    <div class="preloader__particle"></div>
+</div>
 
     <header>
         <a href="{% url 'home' %}">
@@ -196,18 +208,18 @@
                             </p>
                         </header>
 
-                        <p>
-                            <strong>Оценка:</strong>
-                            <span aria-label="Оценка {{ r.rating }} из 5">
-                                {% if r.rating == 5 %}★★★★★
-                                {% elif r.rating == 4 %}★★★★☆
-                                {% elif r.rating == 3 %}★★★☆☆
-                                {% elif r.rating == 2 %}★★☆☆☆
-                                {% else %}★☆☆☆☆
-                                {% endif %}
-                                ({{ r.rating }} из 5)
-                            </span>
-                        </p>
+<p>
+    <strong>Оценка:</strong>
+    <span aria-label="Оценка {{ r.rating }} из 5">
+        {% if r.rating == 5 %}★★★★★
+        {% elif r.rating == 4 %}★★★★☆
+        {% elif r.rating == 3 %}★★★☆☆
+        {% elif r.rating == 2 %}★★☆☆☆
+        {% else %}★☆☆☆☆
+        {% endif %}
+    </span>
+    <small>({{ r.rating }} из 5)</small>
+</p>
 
                         <blockquote>
                             <p>{{ r.comment }}</p>

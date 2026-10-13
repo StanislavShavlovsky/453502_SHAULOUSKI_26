@@ -17,8 +17,22 @@
 
     <title>EliteEstate — Главная</title>
     <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/catalog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
 </head>
 <body id="top">
+
+    <!-- Прелоадер -->
+    <div class="preloader">
+        <div class="preloader__ring"></div>
+        <div class="preloader__particle"></div>
+    </div>
 
     <header>
         <a href="{% url 'home' %}">
@@ -75,9 +89,69 @@
         </nav>
     </header>
 
-    <hr>
-
     <main>
+
+        <!-- HERO-АНИМАЦИЯ -->
+        <section class="hero">
+            <div class="stars">
+                <div class="star" style="top: 10%; left: 20%; width: 3px; height: 3px; animation-delay: 0s;"></div>
+                <div class="star" style="top: 25%; left: 80%; width: 4px; height: 4px; animation-delay: 1s;"></div>
+                <div class="star" style="top: 15%; left: 50%; width: 2px; height: 2px; animation-delay: 0.5s;"></div>
+                <div class="star" style="top: 35%; left: 10%; width: 5px; height: 5px; animation-delay: 1.5s;"></div>
+                <div class="star" style="top: 5%;  left: 90%; width: 3px; height: 3px; animation-delay: 2s;"></div>
+                <div class="star" style="top: 40%; left: 60%; width: 2px; height: 2px; animation-delay: 0.8s;"></div>
+            </div>
+
+            <div class="moon"></div>
+            <div class="sun"></div>
+
+            <div class="clouds">
+                <div class="cloud" style="width: 120px; height: 35px; top: 15%; animation-duration: 40s; animation-delay: -10s;"></div>
+                <div class="cloud" style="width: 180px; height: 50px; top: 25%; animation-duration: 55s; animation-delay: -25s; opacity: 0.6; transform: scale(0.8)"></div>
+                <div class="cloud" style="width: 100px; height: 30px; top: 10%; animation-duration: 45s; animation-delay: -5s; opacity: 0.8;"></div>
+            </div>
+
+            <div class="houses">
+                <div class="house-wrapper">
+                    <div class="house-card">
+                        🏢
+                        <div class="smoke"></div>
+                        <div class="badge">ПРОДАЕТСЯ</div>
+                    </div>
+                </div>
+                <div class="house-wrapper">
+                    <div class="house-card">
+                        🏠
+                        <div class="smoke" style="animation-delay: 4.5s;"></div>
+                        <div class="badge">ПРОДАЕТСЯ</div>
+                    </div>
+                </div>
+                <div class="house-wrapper">
+                    <div class="house-card">
+                        🏡
+                        <div class="smoke" style="animation-delay: 5s;"></div>
+                        <div class="badge">ПРОДАЕТСЯ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="branding">
+                <h1 class="brand-title">EliteEstate</h1>
+                <div class="brand-subtitle">Premium Real Estate</div>
+            </div>
+
+            <div class="city">
+                <div class="building b1"></div>
+                <div class="building b2"></div>
+                <div class="building b3"></div>
+                <div class="building b4"></div>
+                <div class="building b5"></div>
+                <div class="building b6"></div>
+                <div class="building b1" style="transform: scaleX(-1);"></div>
+                <div class="building b3"></div>
+            </div>
+        </section>
+
         {% if banners %}
         <section id="banners" aria-labelledby="banners-heading">
             <h2 id="banners-heading">Акции и предложения</h2>
@@ -90,13 +164,11 @@
                             <a href="{{ banner.link }}">
                                 <img src="{{ banner.image.url }}"
                                      alt="{{ banner.title }}"
-                                     width="720"
                                      loading="lazy">
                             </a>
                         {% else %}
                             <img src="{{ banner.image.url }}"
                                  alt="{{ banner.title }}"
-                                 width="720"
                                  loading="lazy">
                         {% endif %}
                         <figcaption>{{ banner.title }}</figcaption>
@@ -154,26 +226,20 @@
                 {% for property in properties %}
                 <li>
                     <article>
-                        <header>
-                            <h3>
-                                <a href="{% url 'property_detail' property.id %}">
-                                    {{ property.title }}
-                                </a>
-                            </h3>
-                        </header>
+                        <h3>
+                            <a href="{% url 'property_detail' property.id %}">
+                                {{ property.title }}
+                            </a>
+                        </h3>
 
                         <a href="{% url 'property_detail' property.id %}">
                             {% if property.image %}
                                 <img src="{{ property.image.url }}"
                                      alt="Фото объекта «{{ property.title }}»"
-                                     width="300"
-                                     height="200"
                                      loading="lazy">
                             {% else %}
                                 <img src="{% static 'images/flat1.jpg' %}"
                                      alt="Фото отсутствует"
-                                     width="300"
-                                     height="200"
                                      loading="lazy">
                             {% endif %}
                         </a>
@@ -201,7 +267,6 @@
                         <footer>
                             <p>
                                 <a href="{% url 'property_detail' property.id %}">Подробнее</a>
-                                |
                                 <a href="{% url 'cart_add' property.id %}">🛒 В корзину</a>
                             </p>
                         </footer>
@@ -225,33 +290,30 @@
 
             {% if latest_article %}
             <article>
-                <header>
-                    <h3>
-                        <a href="{% url 'article_detail' latest_article.id %}">
-                            {{ latest_article.title }}
+                <h3>
+                    <a href="{% url 'article_detail' latest_article.id %}">
+                        {{ latest_article.title }}
+                    </a>
+                </h3>
+                <p>
+                    Опубликовано:
+                    <time datetime="{{ latest_article.published_date|date:'Y-m-d' }}">
+                        {{ latest_article.published_date|date:"d.m.Y" }}
+                    </time>
+                    |
+                    Автор:
+                    <address>
+                        <a href="mailto:info@eliteestate.by">
+                            Редакция {{ company_info.name|default:"EliteEstate" }}
                         </a>
-                    </h3>
-                    <p>
-                        Опубликовано:
-                        <time datetime="{{ latest_article.published_date|date:'Y-m-d' }}">
-                            {{ latest_article.published_date|date:"d.m.Y" }}
-                        </time>
-                        |
-                        Автор:
-                        <address>
-                            <a href="mailto:info@eliteestate.by">
-                                Редакция {{ company_info.name|default:"EliteEstate" }}
-                            </a>
-                        </address>
-                    </p>
-                </header>
+                    </address>
+                </p>
 
                 {% if latest_article.image %}
                 <figure>
                     <a href="{% url 'article_detail' latest_article.id %}">
                         <img src="{{ latest_article.image.url }}"
                              alt="Иллюстрация к публикации «{{ latest_article.title }}»"
-                             width="600"
                              loading="lazy">
                     </a>
                     <figcaption>{{ latest_article.title }}</figcaption>
@@ -269,7 +331,6 @@
                 <footer>
                     <p>
                         <a href="{% url 'article_detail' latest_article.id %}">Читать полностью →</a>
-                        |
                         <a href="{% url 'news' %}">Все новости и статьи →</a>
                     </p>
                 </footer>
@@ -287,47 +348,26 @@
             <p>Мы сотрудничаем только с проверенными финансовыми и строительными организациями.</p>
 
             {% if partners %}
-            <table border="1">
-                <caption>Реестр аккредитованных партнёров</caption>
-                <thead>
-                    <tr>
-                        <th id="p-name" scope="col">Партнёр</th>
-                        <th id="p-logo" scope="col">Логотип</th>
-                        <th id="p-site" scope="col">Официальный сайт</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <div class="partner-grid">
                     {% for partner in partners %}
-                    <tr>
-                        <td headers="p-name"><strong>{{ partner.name }}</strong></td>
-                        <td headers="p-logo">
-                            {% if partner.logo %}
-                                <img src="{{ partner.logo.url }}"
-                                     alt="Логотип {{ partner.name }}"
-                                     width="100"
-                                     loading="lazy">
-                            {% else %}
-                                —
-                            {% endif %}
-                        </td>
-                        <td headers="p-site">
+                    <div class="partner-card">
+                        {% if partner.website_url %}
                             <a href="{{ partner.website_url }}" target="_blank" rel="noopener">
-                                {{ partner.website_url }}
+                        {% endif %}
+                            {% if partner.logo %}
+                                <img src="{{ partner.logo.url }}" alt="Логотип {{ partner.name }}" loading="lazy">
+                            {% else %}
+                                <span style="font-size: 2rem;">🤝</span>
+                            {% endif %}
+                            <div class="partner-card__name">{{ partner.name }}</div>
+                        {% if partner.website_url %}
                             </a>
-                        </td>
-                    </tr>
+                        {% endif %}
+                    </div>
                     {% endfor %}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" headers="p-name">
-                            Всего аккредитованных партнёров: <strong>{{ partners|length }}</strong>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+                </div>
             {% else %}
-            <p><em>Список партнёров пока пуст.</em></p>
+                <p><em>Список партнёров пока пуст.</em></p>
             {% endif %}
         </section>
 
@@ -475,7 +515,7 @@
 
         <hr>
 
-        <!-- 8. СТИХ -->
+        <!-- СТИХ -->
         <section aria-labelledby="poem-heading">
             <h2 id="poem-heading">О нашей работе</h2>
 
@@ -489,7 +529,6 @@
     </main>
 
     <hr>
-
     <footer>
         <section>
             <h3>Контакты</h3>

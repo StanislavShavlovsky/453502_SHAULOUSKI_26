@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,20 +12,17 @@
     <title>HTML Demo</title>
     <link rel="icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T/AP8A/62n1zAAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZSURBVDjLY2AY2YARzU2MBoPhMBgMhsMAAALMAAF1x50LAAAAAElFTkSuQmCC" type="image/x-icon">
 
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 20px auto; padding: 0 20px; line-height: 1.6; }
-        section { border: 1px solid #ddd; padding: 15px 20px; margin-bottom: 25px; border-radius: 6px; }
-        section > h2 { margin-top: 0; color: #227c9d; border-bottom: 2px solid #227c9d; padding-bottom: 5px; }
-        table { border-collapse: collapse; margin: 10px 0; }
-        th, td { border: 1px solid #999; padding: 6px 12px; }
-        th { background: #f0f0f0; }
-        code, pre { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; }
-        pre { padding: 10px; overflow-x: auto; }
-        mark { background: yellow; }
-        img, video, iframe, embed, object { max-width: 100%; height: auto; }
-    </style>
+
+     <link rel="stylesheet" href="{% static 'css/demo-styles.css' %}">
 </head>
 <body id="top">
+
+    <!-- Прелоадер -->
+    <div class="preloader" aria-hidden="true">
+        <div class="preloader__circle">
+            <div class="preloader__particle"></div>
+        </div>
+    </div>
 
 <header>
     <h1>HTML Demo</h1>

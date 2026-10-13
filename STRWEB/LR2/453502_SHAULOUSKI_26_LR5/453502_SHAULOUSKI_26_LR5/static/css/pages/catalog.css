@@ -1,0 +1,326 @@
+main > h2 {
+    text-align: center !important;
+    display: block !important;
+    margin: 0 auto var(--spacing-md) !important;
+    max-width: 100% !important;
+}
+
+main > p {
+    text-align: center !important;
+    color: var(--color-gray) !important;
+    max-width: 700px !important;
+    margin: 0 auto var(--spacing-lg) !important;
+}
+
+section[aria-labelledby="properties-heading"] > ul,
+#catalog > ul {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+    gap: 30px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 30px 0 !important;
+    align-items: stretch !important;
+}
+
+section[aria-labelledby="properties-heading"] > ul > li,
+#catalog > ul > li {
+    display: flex !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+section[aria-labelledby="properties-heading"] > ul > li > hr {
+    display: none !important;
+}
+
+section[aria-labelledby="properties-heading"] article {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    border: 1px solid #dfd2af !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+section[aria-labelledby="properties-heading"] article:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+section[aria-labelledby="properties-heading"] article::before,
+section[aria-labelledby="properties-heading"] article::after {
+    display: none !important;
+}
+
+section[aria-labelledby="properties-heading"] article > header {
+    order: 1 !important;
+    padding: 18px 20px 14px 20px !important;
+    background: #ffffff !important;
+    border: none !important;
+}
+
+section[aria-labelledby="properties-heading"] article > header h4 {
+    margin: 0 !important;
+    font-family: "Playfair Display", "Times New Roman", serif !important;
+    font-size: 1.6rem !important;
+    font-weight: 500 !important;
+    color: #5b5976 !important;
+    letter-spacing: 0.5px !important;
+}
+
+section[aria-labelledby="properties-heading"] article > header h4 a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+section[aria-labelledby="properties-heading"] article > header p {
+    display: none !important;
+}
+
+section[aria-labelledby="properties-heading"] article > figure {
+    order: 2 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+section[aria-labelledby="properties-heading"] article > figure img {
+    width: 100% !important;
+    height: 220px !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+section[aria-labelledby="properties-heading"] article > figure figcaption {
+    display: none !important;
+}
+
+section[aria-labelledby="properties-heading"] article table {
+    order: 3 !important;
+    margin: 20px !important;
+    width: calc(100% - 40px) !important;
+    border-collapse: collapse !important;
+    border: none !important;
+    border-top: 1px solid #e6dcb5 !important;
+    border-bottom: 1px solid #e6dcb5 !important;
+}
+
+section[aria-labelledby="properties-heading"] article table caption {
+    caption-side: top !important;
+    text-align: left !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    color: #79808d !important;
+    text-transform: uppercase !important;
+    margin-bottom: 12px !important;
+    padding: 0 !important;
+}
+
+section[aria-labelledby="properties-heading"] article table th,
+section[aria-labelledby="properties-heading"] article table td {
+    padding: 10px 15px !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 0.9rem !important;
+    border: none !important;
+    border-bottom: 1px solid #e6dcb5 !important;
+}
+
+section[aria-labelledby="properties-heading"] article table tr:last-child th,
+section[aria-labelledby="properties-heading"] article table tr:last-child td {
+    border-bottom: none !important;
+}
+
+section[aria-labelledby="properties-heading"] article table th {
+    background-color: #f9f7f1 !important;
+    color: #1a2233 !important;
+    font-weight: 700 !important;
+    width: 40% !important;
+    text-align: left !important;
+}
+
+section[aria-labelledby="properties-heading"] article table td {
+    background-color: #ffffff !important;
+    color: #4a5160 !important;
+}
+
+section[aria-labelledby="properties-heading"] article > p {
+    order: 4 !important;
+    margin: 0 !important;
+    padding: 0 20px 25px 20px !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 0.95rem !important;
+    color: #88909d !important;
+    line-height: 1.5 !important;
+}
+
+section[aria-labelledby="properties-heading"] article > footer {
+    order: 5 !important;
+    margin-top: auto !important;
+    background-color: #0d1726 !important;
+    padding: 18px 20px !important;
+    border-top: none !important;
+}
+
+section[aria-labelledby="properties-heading"] article > footer p {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    margin: 0 !important;
+    flex-wrap: nowrap !important;
+}
+
+section[aria-labelledby="properties-heading"] article > footer a {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    border-radius: 4px !important;
+    padding: 10px 15px !important;
+    transition: all 0.2s ease !important;
+    flex: 1 !important;
+}
+
+section[aria-labelledby="properties-heading"] article > footer a:first-child {
+    background-color: #112340 !important;
+    color: #ffffff !important;
+    border: 1px solid #112340 !important;
+}
+
+section[aria-labelledby="properties-heading"] article > footer a:first-child:hover {
+    background-color: #1a3560 !important;
+}
+
+section[aria-labelledby="properties-heading"] article > footer a:not(:first-child) {
+    background-color: transparent !important;
+    color: #385b8c !important;
+    border: 1px solid #1a2a42 !important;
+}
+
+section[aria-labelledby="properties-heading"] article > footer a:not(:first-child):hover {
+    background-color: #112340 !important;
+    color: #ffffff !important;
+}
+
+section[aria-labelledby="filter-heading"] {
+    max-width: 100% !important;
+    margin: var(--spacing-lg) 0 !important;
+}
+
+section[aria-labelledby="filter-heading"] h3 {
+    font-family: var(--font-heading) !important;
+    font-size: 1.4rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    color: var(--color-primary) !important;
+    margin-bottom: var(--spacing-md) !important;
+    padding-bottom: var(--spacing-xs) !important;
+    border-bottom: 2px solid var(--color-accent) !important;
+    display: inline-block !important;
+}
+
+section[aria-labelledby="filter-heading"] fieldset {
+    background: #fbf9f4 !important;
+    border: 1px solid #dfd2af !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--spacing-md) var(--spacing-lg) !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: var(--spacing-md) !important;
+    align-items: end !important;
+}
+
+section[aria-labelledby="filter-heading"] legend {
+    font-weight: 700 !important;
+    font-variant: small-caps !important;
+    letter-spacing: 1px !important;
+    color: var(--color-primary) !important;
+    padding: 0 var(--spacing-sm) !important;
+}
+
+section[aria-labelledby="filter-heading"] fieldset > p {
+    margin: 0 !important;
+    text-align: left !important;
+}
+
+section[aria-labelledby="filter-heading"] label {
+    display: block !important;
+    font-family: var(--font-main) !important;
+    font-weight: 700 !important;
+    font-size: 0.82rem !important;
+    color: var(--color-primary-dark) !important;
+    margin-bottom: 6px !important;
+    text-transform: uppercase !important;
+}
+
+section[aria-labelledby="filter-heading"] input[type="search"],
+section[aria-labelledby="filter-heading"] input[type="number"],
+section[aria-labelledby="filter-heading"] select {
+    width: 100% !important;
+    padding: 10px 12px !important;
+    font-size: 0.9rem !important;
+    border: 1px solid #dfd2af !important;
+    border-radius: var(--radius-sm) !important;
+    background: var(--color-white) !important;
+    box-sizing: border-box !important;
+}
+
+section[aria-labelledby="filter-heading"] button {
+    width: 100% !important;
+    padding: 11px 16px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    cursor: pointer !important;
+    color: #ffffff !important;
+    background: #112340 !important;
+}
+
+section[aria-labelledby="filter-heading"] button:hover {
+    background: #1a3560 !important;
+}
+
+section[aria-labelledby="filter-heading"] a button {
+    background: transparent !important;
+    border: 1px solid #112340 !important;
+    color: #112340 !important;
+}
+
+section[aria-labelledby="filter-heading"] a button:hover {
+    background: #112340 !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 900px) {
+    section[aria-labelledby="properties-heading"] > ul {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    section[aria-labelledby="properties-heading"] > ul {
+        grid-template-columns: 1fr !important;
+    }
+
+    section[aria-labelledby="properties-heading"] article > figure img {
+        height: 200px !important;
+    }
+
+    section[aria-labelledby="properties-heading"] article > footer p {
+        flex-direction: column !important;
+    }
+
+    section[aria-labelledby="properties-heading"] article > footer a {
+        width: 100% !important;
+    }
+}

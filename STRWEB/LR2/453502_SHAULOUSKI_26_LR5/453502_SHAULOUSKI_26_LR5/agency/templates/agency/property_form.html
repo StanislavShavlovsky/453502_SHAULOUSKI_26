@@ -11,8 +11,21 @@
 
     <title>{{ action }} объект — EliteEstate</title>
     <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+
+    <!-- Общие CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/property_form.css' %}">
 </head>
 <body id="top">
+
+    <!-- Прелоадер -->
+<div class="preloader">
+    <div class="preloader__ring"></div>
+    <div class="preloader__particle"></div>
+</div>
 
     <header>
         <a href="{% url 'home' %}">
@@ -133,12 +146,12 @@
                     <p>
                         <label for="id_deal_type">Тип сделки *:</label>
                         <select id="id_deal_type" name="deal_type" required>
-                            <option value="sale"
-                                    {% if form.deal_type.value = 'sale' or not form.deal_type.value %}selected{% endif %}>
-                                Продажа
-                            </option>
+<option value="sale"
+        {% if form.deal_type.value == 'sale' or not form.deal_type.value %}selected{% endif %}>
+    Продажа
+</option>
                             <option value="rent"
-                                    {% if form.deal_type.value = 'rent' %}selected{% endif %}>
+                                    {% if form.deal_type.value == 'rent' %}selected{% endif %}>
                                 Аренда
                             </option>
                         </select>

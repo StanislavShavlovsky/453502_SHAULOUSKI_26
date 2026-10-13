@@ -1,0 +1,479 @@
+main > h2 {
+    text-align: center;
+    display: block;
+    margin: 0 auto var(--spacing-lg);
+    max-width: 100%;
+    font-size: 2.4rem;
+    letter-spacing: 3px;
+}
+
+main > h2 strong {
+    color: var(--color-accent-dark);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+main > section > h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+}
+
+main > section[aria-labelledby="role-heading"] {
+    max-width: 800px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.1), rgba(15, 39, 68, 0.03));
+    border-left: 5px solid var(--color-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    box-shadow: 0 4px 12px rgba(15, 39, 68, 0.06);
+    text-align: center;
+    position: relative;
+}
+
+main > section[aria-labelledby="role-heading"]::before {
+    content: "👔";
+    position: absolute;
+    top: -18px;
+    left: 20px;
+    background: var(--color-white);
+    padding: 0 var(--spacing-sm);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+main > section[aria-labelledby="role-heading"] h3 {
+    display: none;
+}
+
+main > section[aria-labelledby="role-heading"] p {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--color-primary-mid);
+    text-indent: 0;
+    text-align: center;
+    margin: 0;
+}
+
+main > section[aria-labelledby="role-heading"] p strong {
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-right: 4px;
+}
+
+main > section table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-md) 0;
+    font-size: 0.92rem;
+    box-shadow:
+        0 8px 20px rgba(15, 39, 68, 0.08),
+        0 0 0 1px rgba(201, 169, 97, 0.2);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    table-layout: auto;
+    word-wrap: break-word;
+}
+
+main > section table caption {
+    caption-side: top;
+    padding: var(--spacing-sm) 0 var(--spacing-md);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-align: left;
+    font-variant: normal;
+    letter-spacing: 1px;
+}
+
+main > section table thead th {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    font-family: var(--font-main);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 12px 14px;
+    border: 1px solid var(--color-primary-dark);
+    word-wrap: break-word;
+}
+
+main > section table tbody td {
+    padding: 12px 14px;
+    border: 1px solid var(--color-light-gray);
+    color: var(--color-dark);
+    vertical-align: middle;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-word;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+main > section table tbody tr:nth-child(even) td {
+    background: rgba(201, 169, 97, 0.06);
+}
+
+main > section table tbody tr:hover td {
+    background: rgba(201, 169, 97, 0.14);
+}
+
+main > section table tbody td:first-child {
+    text-align: center;
+    font-weight: 700;
+    color: var(--color-primary);
+    width: 50px;
+}
+
+main > section table tbody td strong {
+    color: var(--color-primary-mid);
+    font-weight: 700;
+}
+
+main > section table tbody td code {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.25), rgba(201, 169, 97, 0.12));
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 1px;
+    border: 1px dashed var(--color-accent);
+    display: inline-block;
+}
+
+main > section table tbody td a {
+    color: var(--color-accent-dark);
+    font-weight: 600;
+    border-bottom: 1px dashed var(--color-accent);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+main > section table tbody td a:hover {
+    color: var(--color-sunset);
+    border-bottom-style: solid;
+}
+
+main > section table tfoot td {
+    padding: 12px 14px;
+    background: rgba(15, 39, 68, 0.05);
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--color-primary-mid);
+    text-align: center;
+    border: 1px solid var(--color-light-gray);
+    border-top: 2px solid var(--color-accent);
+}
+
+main > section table tbody td strong:only-child {
+    color: var(--color-success);
+}
+
+main > section table tbody td em {
+    color: var(--color-gray);
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+main > aside[aria-labelledby="calendar-heading"] {
+    max-width: 700px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #0a1420 0%, #081a2e 100%);
+    border-radius: var(--radius-lg);
+    border-left: 5px solid var(--color-accent);
+    box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, 0.3),
+        0 12px 32px rgba(15, 39, 68, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+main > aside[aria-labelledby="calendar-heading"]::before {
+    content: "📅";
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 1.6rem;
+    opacity: 0.4;
+}
+
+main > aside[aria-labelledby="calendar-heading"] h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+}
+
+main > aside[aria-labelledby="calendar-heading"] p {
+    font-family: var(--font-main);
+    font-size: 0.88rem;
+    color: rgba(224, 200, 138, 0.8);
+    margin-bottom: var(--spacing-md);
+    text-indent: 0;
+    text-align: left;
+}
+
+main > aside[aria-labelledby="calendar-heading"] p strong {
+    color: var(--color-accent-light);
+    font-weight: 700;
+}
+
+main > aside[aria-labelledby="calendar-heading"] pre {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #e0c88a;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    white-space: pre;
+    overflow-x: auto;
+    text-shadow: 0 0 4px rgba(224, 200, 138, 0.3);
+    border: none;
+    border-left: none;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+main > section[aria-labelledby="chart-heading"] {
+    max-width: 900px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg);
+    background: linear-gradient(180deg, #ffffff 0%, #faf7f0 100%);
+    border: 1px solid var(--color-light-gray);
+    border-top: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 24px rgba(15, 39, 68, 0.08);
+    transition: all var(--transition-base);
+}
+
+main > section[aria-labelledby="chart-heading"]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(15, 39, 68, 0.15);
+    border-top-color: var(--color-sunset);
+}
+
+main > section[aria-labelledby="chart-heading"] h3 {
+    text-align: center;
+    display: block;
+    margin: 0 auto var(--spacing-lg);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--color-accent);
+    max-width: 500px;
+}
+
+main > section[aria-labelledby="chart-heading"] figure {
+    margin: 0;
+    text-align: center;
+    padding: var(--spacing-md);
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+}
+
+main > section[aria-labelledby="chart-heading"] figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: var(--radius-sm);
+}
+
+main > section[aria-labelledby="chart-heading"] figcaption {
+    margin-top: var(--spacing-md);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    letter-spacing: 0.5px;
+}
+
+main > section[aria-labelledby="quick-actions-heading"] {
+    max-width: 900px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(26, 58, 92, 0.03), rgba(201, 169, 97, 0.06));
+    border: 2px solid rgba(201, 169, 97, 0.3);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(15, 39, 68, 0.06);
+    position: relative;
+}
+
+main > section[aria-labelledby="quick-actions-heading"]::before {
+    content: "⚡";
+    position: absolute;
+    top: -18px;
+    left: 24px;
+    background: var(--color-white);
+    padding: 0 var(--spacing-sm);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+main > section[aria-labelledby="quick-actions-heading"] h3 {
+    text-align: center;
+    display: block;
+    margin: 0 auto var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--color-accent);
+    max-width: 400px;
+}
+
+main > section[aria-labelledby="quick-actions-heading"] ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--spacing-md);
+}
+
+main > section[aria-labelledby="quick-actions-heading"] li {
+    margin: 0;
+}
+
+main > section[aria-labelledby="quick-actions-heading"] li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    color: var(--color-primary-dark) !important;
+    border-radius: var(--radius-md);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    text-align: center;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+    min-height: 60px;
+}
+
+main > section[aria-labelledby="quick-actions-heading"] li a:hover {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-accent) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 39, 68, 0.3);
+    text-decoration: none;
+}
+
+main > section[aria-labelledby="quick-actions-heading"] li a[href^="http"]::after {
+    content: none;
+}
+
+main > section p a {
+    color: var(--color-accent-dark);
+    font-weight: 700;
+    border-bottom: 1px dashed var(--color-accent);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+main > section p a:hover {
+    color: var(--color-sunset);
+    border-bottom-style: solid;
+}
+
+main > section > p {
+    text-indent: 0;
+    text-align: center;
+    margin: var(--spacing-md) 0;
+}
+
+@media (max-width: 900px) {
+    main > h2 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    main > section > h3 {
+        font-size: 1.3rem;
+        letter-spacing: 1.5px;
+    }
+
+    main > section table {
+        font-size: 0.85rem;
+    }
+
+    main > section table thead th,
+    main > section table tbody td,
+    main > section table tfoot td {
+        padding: 10px 10px;
+    }
+
+    main > section[aria-labelledby="quick-actions-heading"] ul {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    main > h2 {
+        font-size: 1.4rem;
+        letter-spacing: 1.5px;
+    }
+
+    main > section > h3 {
+        font-size: 1.05rem;
+        letter-spacing: 1px;
+    }
+
+    main > section[aria-labelledby="role-heading"] {
+        padding: var(--spacing-sm);
+    }
+
+    main > section[aria-labelledby="role-heading"] p {
+        font-size: 0.85rem;
+    }
+
+    main > section table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        min-width: 640px;
+        font-size: 0.78rem;
+    }
+
+    main > section table thead th,
+    main > section table tbody td,
+    main > section table tfoot td {
+        padding: 8px 10px;
+    }
+
+    main > section[aria-labelledby="quick-actions-heading"] {
+        padding: var(--spacing-md);
+    }
+
+    main > section[aria-labelledby="quick-actions-heading"] ul {
+        grid-template-columns: 1fr;
+    }
+
+    main > aside[aria-labelledby="calendar-heading"] {
+        padding: var(--spacing-md);
+    }
+
+    main > aside[aria-labelledby="calendar-heading"] pre {
+        font-size: 0.7rem;
+    }
+}

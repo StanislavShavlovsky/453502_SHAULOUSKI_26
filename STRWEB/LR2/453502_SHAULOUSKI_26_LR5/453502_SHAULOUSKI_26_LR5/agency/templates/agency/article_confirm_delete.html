@@ -10,8 +10,21 @@
 
     <title>Удаление новости — EliteEstate</title>
     <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+
+    <!-- Общие CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
 </head>
 <body id="top">
+
+    <!-- Прелоадер -->
+    <div class="preloader" aria-hidden="true">
+        <div class="preloader__circle">
+            <div class="preloader__particle"></div>
+        </div>
+    </div>
 
     <header>
         <a href="{% url 'home' %}">

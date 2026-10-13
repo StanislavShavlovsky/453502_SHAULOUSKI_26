@@ -1,0 +1,510 @@
+main > h2 {
+    text-align: center;
+    display: block;
+    margin: 0 auto var(--spacing-lg);
+    max-width: 100%;
+    font-size: 2.4rem;
+    letter-spacing: 3px;
+}
+
+main > p {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--spacing-lg);
+    font-size: 1.05rem;
+    color: var(--color-gray);
+    font-style: italic;
+    text-indent: 0;
+}
+
+section[aria-labelledby="rate-heading"] {
+    max-width: 700px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.1), rgba(15, 39, 68, 0.03));
+    border: 2px solid rgba(201, 169, 97, 0.3);
+    border-left: 6px solid var(--color-accent);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    box-shadow: 0 8px 24px rgba(15, 39, 68, 0.06);
+    text-align: center;
+    position: relative;
+}
+
+section[aria-labelledby="rate-heading"]::before {
+    content: "💱";
+    position: absolute;
+    top: -20px;
+    left: 24px;
+    background: var(--color-white);
+    padding: 0 var(--spacing-sm);
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+section[aria-labelledby="rate-heading"] h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+}
+
+section[aria-labelledby="rate-heading"] p {
+    font-family: var(--font-main);
+    font-size: 1rem;
+    color: var(--color-dark);
+    text-indent: 0;
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+section[aria-labelledby="rate-heading"] p strong {
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+section[aria-labelledby="rate-heading"] mark {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    background: linear-gradient(180deg, transparent 55%, rgba(201, 169, 97, 0.5) 55%);
+    padding: 4px 12px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    font-variant-numeric: tabular-nums;
+}
+
+section[aria-labelledby="rate-heading"] em {
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    font-style: italic;
+    display: block;
+    margin-top: var(--spacing-sm);
+}
+
+section[aria-labelledby="pie-heading"],
+section[aria-labelledby="bar-heading"],
+section[aria-labelledby="line-heading"] {
+    max-width: 900px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg);
+    background: linear-gradient(180deg, #ffffff 0%, #faf7f0 100%);
+    border: 1px solid var(--color-light-gray);
+    border-top: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 24px rgba(15, 39, 68, 0.08);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+section[aria-labelledby="pie-heading"]:hover,
+section[aria-labelledby="bar-heading"]:hover,
+section[aria-labelledby="line-heading"]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(15, 39, 68, 0.15);
+    border-top-color: var(--color-sunset);
+}
+
+section[aria-labelledby="pie-heading"] h3,
+section[aria-labelledby="bar-heading"] h3,
+section[aria-labelledby="line-heading"] h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px dashed rgba(201, 169, 97, 0.4);
+    display: block;
+    text-align: left;
+}
+
+section[aria-labelledby="pie-heading"] figure,
+section[aria-labelledby="bar-heading"] figure,
+section[aria-labelledby="line-heading"] figure {
+    margin: 0;
+    text-align: center;
+    padding: var(--spacing-md);
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(15, 39, 68, 0.04);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+}
+
+section[aria-labelledby="pie-heading"] figure img,
+section[aria-labelledby="bar-heading"] figure img,
+section[aria-labelledby="line-heading"] figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    display: block;
+    margin: 0 auto;
+    transition: transform var(--transition-base);
+}
+
+section[aria-labelledby="pie-heading"] figure img:hover,
+section[aria-labelledby="bar-heading"] figure img:hover,
+section[aria-labelledby="line-heading"] figure img:hover {
+    transform: scale(1.02);
+}
+
+section[aria-labelledby="pie-heading"] figcaption,
+section[aria-labelledby="bar-heading"] figcaption,
+section[aria-labelledby="line-heading"] figcaption {
+    margin-top: var(--spacing-md);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+section[aria-labelledby="summary-heading"] {
+    margin: var(--spacing-lg) auto;
+    max-width: 900px;
+}
+
+section[aria-labelledby="summary-heading"] h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+}
+
+section[aria-labelledby="summary-heading"] table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-md) 0;
+    font-size: 0.95rem;
+    box-shadow:
+        0 8px 20px rgba(15, 39, 68, 0.08),
+        0 0 0 1px rgba(201, 169, 97, 0.2);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+section[aria-labelledby="summary-heading"] table caption {
+    caption-side: top;
+    padding: var(--spacing-sm) 0 var(--spacing-md);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-align: left;
+    font-variant: normal;
+    letter-spacing: 1px;
+}
+
+section[aria-labelledby="summary-heading"] table thead th {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 14px 16px;
+    border: 1px solid var(--color-primary-dark);
+}
+
+section[aria-labelledby="summary-heading"] table tbody td {
+    padding: 14px 16px;
+    border: 1px solid var(--color-light-gray);
+    color: var(--color-dark);
+    vertical-align: middle;
+    text-align: left;
+}
+
+section[aria-labelledby="summary-heading"] table tbody tr:nth-child(even) {
+    background: rgba(201, 169, 97, 0.06);
+}
+
+section[aria-labelledby="summary-heading"] table tbody tr:hover {
+    background: rgba(201, 169, 97, 0.14);
+}
+
+section[aria-labelledby="summary-heading"] table tbody td:first-child {
+    font-weight: 700;
+    color: var(--color-primary);
+    width: 55%;
+}
+
+section[aria-labelledby="summary-heading"] table tbody td:last-child {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-accent-dark);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.5px;
+}
+
+section[aria-labelledby="summary-heading"] table tfoot td {
+    padding: 12px 16px;
+    background: rgba(15, 39, 68, 0.05);
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--color-primary-mid);
+    text-align: center;
+    border: 1px solid var(--color-light-gray);
+    border-top: 2px solid var(--color-accent);
+}
+
+aside[aria-labelledby="explanation-heading"] {
+    max-width: 900px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: linear-gradient(135deg, rgba(26, 58, 92, 0.04), rgba(201, 169, 97, 0.06));
+    border-left: 5px solid var(--color-accent);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    box-shadow: 0 8px 24px rgba(15, 39, 68, 0.06);
+    position: relative;
+}
+
+aside[aria-labelledby="explanation-heading"]::before {
+    content: "📐";
+    position: absolute;
+    top: -20px;
+    left: 24px;
+    background: var(--color-white);
+    padding: 0 var(--spacing-sm);
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+aside[aria-labelledby="explanation-heading"] h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+    font-weight: 700;
+}
+
+aside[aria-labelledby="explanation-heading"] dl {
+    margin: 0;
+    padding: 0;
+}
+
+aside[aria-labelledby="explanation-heading"] dt {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: var(--spacing-md) 0 var(--spacing-xs) 0;
+    padding-left: var(--spacing-md);
+    border-left: 3px solid var(--color-accent);
+    letter-spacing: 0.3px;
+    display: block;
+}
+
+aside[aria-labelledby="explanation-heading"] dt:first-child {
+    margin-top: 0;
+}
+
+aside[aria-labelledby="explanation-heading"] dt dfn {
+    font-style: normal;
+    font-weight: 700;
+}
+
+aside[aria-labelledby="explanation-heading"] dd {
+    margin: 0 0 var(--spacing-md) var(--spacing-md);
+    padding-left: var(--spacing-md);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-dark);
+    text-align: left;
+    position: relative;
+}
+
+aside[aria-labelledby="explanation-heading"] dd::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+aside[aria-labelledby="explanation-heading"] abbr {
+    color: var(--color-accent-dark);
+    font-weight: 700;
+    border-bottom: 1px dotted var(--color-accent);
+    cursor: help;
+    text-decoration: none;
+}
+
+nav[aria-label="Навигация по странице"] {
+    margin: var(--spacing-lg) auto;
+    text-align: center;
+}
+
+nav[aria-label="Навигация по странице"] p {
+    text-indent: 0;
+    text-align: center;
+    margin: 0;
+}
+
+nav[aria-label="Навигация по странице"] a {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-md);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+    transition: all var(--transition-base);
+}
+
+nav[aria-label="Навигация по странице"] a:hover {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 39, 68, 0.3);
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    main > h2 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    section[aria-labelledby="rate-heading"] mark {
+        font-size: 1.15rem;
+        padding: 3px 10px;
+    }
+
+    section[aria-labelledby="pie-heading"] h3,
+    section[aria-labelledby="bar-heading"] h3,
+    section[aria-labelledby="line-heading"] h3,
+    section[aria-labelledby="summary-heading"] h3,
+    aside[aria-labelledby="explanation-heading"] h3 {
+        font-size: 1.25rem;
+        letter-spacing: 1.5px;
+    }
+
+    section[aria-labelledby="summary-heading"] table {
+        font-size: 0.88rem;
+    }
+
+    section[aria-labelledby="summary-heading"] table thead th,
+    section[aria-labelledby="summary-heading"] table tbody td,
+    section[aria-labelledby="summary-heading"] table tfoot td {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    main > h2 {
+        font-size: 1.4rem;
+        letter-spacing: 1.5px;
+    }
+
+    main > p {
+        font-size: 0.9rem;
+    }
+
+    section[aria-labelledby="rate-heading"] {
+        padding: var(--spacing-md);
+    }
+
+    section[aria-labelledby="rate-heading"]::before {
+        font-size: 1.4rem;
+        left: 16px;
+    }
+
+    section[aria-labelledby="rate-heading"] h3 {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+    }
+
+    section[aria-labelledby="rate-heading"] mark {
+        font-size: 1.05rem;
+        padding: 3px 8px;
+        display: inline-block;
+        margin-top: 4px;
+    }
+
+    section[aria-labelledby="pie-heading"],
+    section[aria-labelledby="bar-heading"],
+    section[aria-labelledby="line-heading"] {
+        padding: var(--spacing-md);
+    }
+
+    section[aria-labelledby="pie-heading"] h3,
+    section[aria-labelledby="bar-heading"] h3,
+    section[aria-labelledby="line-heading"] h3,
+    section[aria-labelledby="summary-heading"] h3,
+    aside[aria-labelledby="explanation-heading"] h3 {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    section[aria-labelledby="summary-heading"] table {
+        font-size: 0.78rem;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    section[aria-labelledby="summary-heading"] table thead th,
+    section[aria-labelledby="summary-heading"] table tbody td,
+    section[aria-labelledby="summary-heading"] table tfoot td {
+        padding: 8px 10px;
+    }
+
+    section[aria-labelledby="summary-heading"] table tbody td:first-child {
+        width: auto;
+    }
+
+    aside[aria-labelledby="explanation-heading"] {
+        padding: var(--spacing-md);
+    }
+
+    aside[aria-labelledby="explanation-heading"]::before {
+        font-size: 1.4rem;
+        left: 16px;
+    }
+
+    aside[aria-labelledby="explanation-heading"] dt {
+        font-size: 1rem;
+    }
+
+    aside[aria-labelledby="explanation-heading"] dd {
+        font-size: 0.88rem;
+    }
+
+    nav[aria-label="Навигация по странице"] a {
+        display: block;
+        width: 100%;
+    }
+}

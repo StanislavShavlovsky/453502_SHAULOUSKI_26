@@ -134,22 +134,25 @@ class UserLoginForm(AuthenticationForm):
 # =========================================================
 class ArticleForm(forms.ModelForm):
     class Meta:
-        # Убедись, что модель в models.py называется именно Article
         model = Article
-        fields = ['title', 'content', 'image']
+        fields = ['title', 'short_description', 'content', 'image']   # ← ДОБАВЛЕНО
         labels = {
             'title': 'Заголовок новости',
+            'short_description': 'Краткое содержание (одно предложение)',
             'content': 'Текст публикации',
             'image': 'Изображение / Обложка',
         }
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите заголовок...'}),
+            'short_description': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Краткое содержание (макс. 255 символов)',
+                'maxlength': '255',
+            }),
             'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 6, 'placeholder': 'Напишите текст новости...'}),
-            # Виджет для файла стилизуется стандартным браузерным инпутом
             'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
         }
 
-    # Небольшая валидация на уровне бэка, чтобы заголовки не были слишком короткими
     def clean_title(self):
         title = self.cleaned_data.get('title')
         if title and len(title) < 5:

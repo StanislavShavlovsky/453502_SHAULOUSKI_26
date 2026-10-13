@@ -1,0 +1,609 @@
+main > h2 {
+    text-align: center;
+    display: block;
+    margin: 0 auto var(--spacing-lg);
+    max-width: 100%;
+    font-size: 2.4rem;
+    letter-spacing: 3px;
+}
+
+main > p {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--spacing-lg);
+    font-size: 1.05rem;
+    color: var(--color-gray);
+    font-style: italic;
+    text-indent: 0;
+}
+
+main > p mark {
+    background: linear-gradient(180deg, transparent 60%, rgba(201, 169, 97, 0.4) 60%);
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+main > section[aria-label="Сообщения"] {
+    max-width: 800px;
+    margin: var(--spacing-md) auto;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(201, 169, 97, 0.05));
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    box-shadow: 0 4px 12px rgba(15, 39, 68, 0.08);
+}
+
+main > section[aria-label="Сообщения"] ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+main > section[aria-label="Сообщения"] li {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-xs);
+    padding-left: var(--spacing-md);
+    position: relative;
+}
+
+main > section[aria-label="Сообщения"] li::before {
+    content: "ℹ";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-dark);
+    font-weight: 700;
+}
+
+#section-form {
+    max-width: 800px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(26, 58, 92, 0.03), rgba(201, 169, 97, 0.06));
+    border: 2px solid rgba(201, 169, 97, 0.25);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(15, 39, 68, 0.06);
+}
+
+#section-form > h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+#section-form > p {
+    text-align: center;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--color-gray);
+    margin-bottom: var(--spacing-md);
+    text-indent: 0;
+}
+
+#section-form > p a {
+    color: var(--color-accent-dark);
+    font-weight: 600;
+    border-bottom: 1px dashed var(--color-accent);
+}
+
+#section-form > p a:hover {
+    color: var(--color-sunset);
+    border-bottom-style: solid;
+}
+
+#section-form fieldset {
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    background: var(--color-white);
+}
+
+#section-form legend {
+    font: small-caption;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-variant: small-caps;
+    letter-spacing: 1.5px;
+    color: var(--color-primary);
+    padding: 0 var(--spacing-sm);
+}
+
+#section-form label {
+    display: block;
+    margin-bottom: 6px;
+    font: caption;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary-mid);
+    letter-spacing: 0.3px;
+}
+
+#section-form input[type="text"],
+#section-form input[type="email"],
+#section-form input[type="tel"],
+#section-form input[type="search"],
+#section-form select,
+#section-form textarea {
+    font: menu;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    width: 100%;
+    padding: 10px var(--spacing-md);
+    border: 1.5px solid var(--color-light-gray);
+    border-radius: var(--radius-sm);
+    color: var(--color-dark);
+    background: var(--color-white);
+    transition: all var(--transition-fast);
+    box-sizing: border-box;
+}
+
+#section-form input:focus,
+#section-form select:focus,
+#section-form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.25);
+    background-color: #fffdf7;
+}
+
+#section-form input:hover:not(:focus),
+#section-form select:hover:not(:focus),
+#section-form textarea:hover:not(:focus) {
+    border-color: var(--color-accent-light);
+    background-color: #fffefa;
+}
+
+#section-form input:required,
+#section-form select:required,
+#section-form textarea:required {
+    border-left: 4px solid var(--color-sunset);
+    background-image: linear-gradient(to right, rgba(232, 121, 74, 0.04), transparent 10%);
+}
+
+#section-form input:optional,
+#section-form select:optional,
+#section-form textarea:optional {
+    border-left: 4px solid var(--color-light-gray);
+}
+
+#section-form input:valid:not(:placeholder-shown),
+#section-form select:valid,
+#section-form textarea:valid:not(:placeholder-shown) {
+    border-right: 4px solid var(--color-success);
+}
+
+#section-form input:invalid:not(:placeholder-shown),
+#section-form textarea:invalid:not(:placeholder-shown) {
+    border-right: 4px solid var(--color-danger);
+    background-color: #fff5f5;
+}
+
+#section-form input:placeholder-shown,
+#section-form textarea:placeholder-shown {
+    font-style: italic;
+    color: var(--color-gray);
+}
+
+#section-form input:read-only,
+#section-form textarea:read-only {
+    background-color: var(--color-bg-alt);
+    cursor: not-allowed;
+    color: var(--color-gray);
+}
+
+#section-form input:read-write,
+#section-form textarea:read-write {
+    background-color: var(--color-white);
+}
+
+#section-form input:disabled,
+#section-form select:disabled,
+#section-form textarea:disabled {
+    background-color: var(--color-bg-alt);
+    color: var(--color-gray);
+    cursor: not-allowed;
+    border-style: dashed;
+    opacity: 0.7;
+}
+
+#section-form input:enabled,
+#section-form select:enabled,
+#section-form textarea:enabled {
+    cursor: text;
+}
+
+#section-form input:in-range {
+    background-color: #f0fff4;
+}
+
+#section-form input:out-of-range {
+    background-color: #fdecea;
+    border-color: var(--color-danger);
+}
+
+#section-form input[type="checkbox"]:checked,
+#section-form input[type="radio"]:checked {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+#section-form input[type="checkbox"],
+#section-form input[type="radio"] {
+    width: auto;
+    margin-right: var(--spacing-xs);
+    accent-color: var(--color-accent-dark);
+    cursor: pointer;
+    transform: scale(1.15);
+    vertical-align: middle;
+}
+
+#section-form ::placeholder {
+    color: var(--color-gray);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+#section-form button,
+#section-form input[type="submit"] {
+    font: caption;
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    padding: 12px 28px;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(15, 39, 68, 0.2);
+}
+
+#section-form button:hover,
+#section-form input[type="submit"]:hover {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    border-color: var(--color-accent);
+    color: var(--color-primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(201, 169, 97, 0.45);
+}
+
+#section-form button:active,
+#section-form input[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(15, 39, 68, 0.2);
+}
+
+#section-form button:focus-visible,
+#section-form input:focus-visible {
+    outline: 3px dashed var(--color-accent);
+    outline-offset: 3px;
+}
+
+#section-form > p a > button {
+    display: inline-block;
+    margin: var(--spacing-xs);
+}
+
+#section-form .form-status,
+#section-form .error-message,
+#section-form .success-message {
+    font: status-bar;
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+}
+
+#section-reviews {
+    padding: var(--spacing-lg) 0;
+}
+
+#section-reviews > h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    color: var(--color-primary);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 3px solid var(--color-accent);
+    display: block;
+    max-width: 500px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+#section-reviews > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--spacing-lg);
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-lg) 0;
+}
+
+#section-reviews > ul > li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#section-reviews > ul > li > hr {
+    display: none;
+}
+
+#section-reviews article {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: linear-gradient(180deg, #ffffff 0%, #faf7f0 100%);
+    border: 1px solid var(--color-light-gray);
+    border-top: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: 0 6px 18px rgba(15, 39, 68, 0.08);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+#section-reviews article:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(15, 39, 68, 0.15);
+    border-top-color: var(--color-sunset);
+}
+
+#section-reviews article::before {
+    content: "❝";
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--color-accent);
+    opacity: 0.15;
+    line-height: 1;
+    pointer-events: none;
+}
+
+#section-reviews article > header {
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-sm);
+    border-bottom: 1px dashed rgba(201, 169, 97, 0.4);
+}
+
+#section-reviews article > header p {
+    margin: 0 0 var(--spacing-xs) 0;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    color: var(--color-dark);
+    text-align: left;
+    text-indent: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    line-height: 1.5;
+}
+
+#section-reviews article > header p strong {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+#section-reviews article > header p a {
+    color: var(--color-accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(201, 169, 97, 0.5);
+    transition: all var(--transition-fast);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+}
+
+#section-reviews article > header p a:hover {
+    color: var(--color-sunset);
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-sunset);
+    text-decoration: none;
+}
+
+#section-reviews article > header small {
+    font-family: var(--font-main);
+    font-size: 0.78rem;
+    color: var(--color-gray);
+    font-style: italic;
+}
+
+#section-reviews article > header time {
+    color: var(--color-accent-dark);
+    font-weight: 600;
+    font-style: normal;
+}
+
+#section-reviews article > p {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--color-dark);
+    margin: var(--spacing-sm) 0;
+    text-align: left;
+    text-indent: 0;
+}
+
+#section-reviews article > p strong {
+    color: var(--color-primary-mid);
+    margin: 0;
+    font-weight: 700;
+}
+
+#section-reviews article > p span {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-shadow: 0 1px 2px rgba(201, 169, 97, 0.3);
+    font-weight: 700;
+}
+
+#section-reviews article > p small {
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    color: var(--color-gray);
+    font-style: italic;
+    margin-left: 4px;
+}
+
+#section-reviews article > blockquote {
+    flex: 1 1 auto;
+    margin: var(--spacing-sm) 0 0 0;
+    padding: var(--spacing-md);
+    background: rgba(201, 169, 97, 0.06);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--color-dark);
+    position: relative;
+}
+
+#section-reviews article > blockquote::before,
+#section-reviews article > blockquote::after {
+    content: none !important;
+    display: none !important;
+}
+
+#section-reviews article > blockquote p {
+    margin: 0;
+    text-align: left;
+    text-indent: 0;
+    max-height: 7em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+}
+
+#section-summary {
+    padding: var(--spacing-lg) 0;
+}
+
+#section-summary h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+#section-summary table {
+    max-width: 900px;
+    margin: var(--spacing-md) auto;
+    box-shadow:
+        0 8px 20px rgba(15, 39, 68, 0.08),
+        0 0 0 1px rgba(201, 169, 97, 0.2);
+}
+
+#section-summary table caption {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--color-accent-dark);
+    margin-bottom: var(--spacing-sm);
+    font-variant: small-caps;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+    main > h2 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    #section-form > h3,
+    #section-reviews > h3,
+    #section-summary h3 {
+        font-size: 1.3rem;
+        letter-spacing: 1.5px;
+    }
+
+    #section-reviews > ul {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 600px) {
+    main > h2 {
+        font-size: 1.4rem;
+        letter-spacing: 1.5px;
+    }
+
+    #section-form {
+        padding: var(--spacing-md);
+    }
+
+    #section-form fieldset {
+        padding: var(--spacing-sm);
+    }
+
+    #section-form > h3,
+    #section-reviews > h3,
+    #section-summary h3 {
+        font-size: 1.05rem;
+        letter-spacing: 1px;
+    }
+
+    #section-form button,
+    #section-form input[type="submit"] {
+        display: block;
+        width: 100%;
+        margin: var(--spacing-xs) 0;
+    }
+
+    #section-summary table {
+        font-size: 0.8rem;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    #section-summary table thead th,
+    #section-summary table tbody td,
+    #section-summary table tfoot td {
+        padding: 8px 10px;
+    }
+}

@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --color-primary:        #0a1a2f;
+    --color-primary-mid:    #142a44;
+    --color-primary-dark:   #050d18;
+    --color-primary-light:  #1e3a5f;
+
+    --color-accent:         #d4af37;
+    --color-accent-light:   #f0d67a;
+    --color-accent-dark:    #a8874a;
+    --color-accent-glow:    rgba(212, 175, 55, 0.5);
+
+    --color-sunset:         #e8794a;
+    --color-rose:           #c94f7c;
+
+    --color-bg:             #faf8f4;
+    --color-bg-alt:         #f0ebe0;
+    --color-bg-dark:        #0a1420;
+
+    --color-white:          #ffffff;
+    --color-dark:           #0f1419;
+    --color-gray:           #6b7280;
+    --color-light-gray:     #e5e0d5;
+
+    --color-success:        #10b981;
+    --color-warning:        #f59e0b;
+    --color-danger:         #ef4444;
+
+    --font-heading: 'Playfair Display', 'Times New Roman', Georgia, serif;
+    --font-main:    'Inter', 'Segoe UI', Roboto, Arial, Helvetica, sans-serif;
+    --font-mono:    'JetBrains Mono', 'Courier New', Courier, monospace;
+
+    --spacing-xs:  4px;
+    --spacing-sm:  8px;
+    --spacing-md:  16px;
+    --spacing-lg:  32px;
+    --spacing-xl:  64px;
+    --spacing-2xl: 96px;
+
+    --radius-sm:   6px;
+    --radius-md:   12px;
+    --radius-lg:   20px;
+    --radius-xl:   32px;
+    --radius-full: 9999px;
+
+    --shadow-sm:      0 1px 3px rgba(10, 26, 47, 0.06);
+    --shadow-md:      0 4px 16px rgba(10, 26, 47, 0.08);
+    --shadow-lg:      0 12px 32px rgba(10, 26, 47, 0.12);
+    --shadow-xl:      0 24px 64px rgba(10, 26, 47, 0.16);
+    --shadow-gold:    0 8px 32px rgba(212, 175, 55, 0.35);
+    --shadow-gold-lg: 0 16px 48px rgba(212, 175, 55, 0.45);
+
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --gradient-gold: linear-gradient(135deg, #f0d67a 0%, #d4af37 50%, #a8874a 100%);
+    --gradient-dark: linear-gradient(135deg, #0a1a2f 0%, #050d18 100%);
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-main);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-dark);
+    background-color: var(--color-bg);
+    background-image:
+        radial-gradient(ellipse at top left,  rgba(212, 175, 55, 0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, rgba(10, 26, 47, 0.06) 0%, transparent 55%),
+        linear-gradient(180deg, #faf8f4 0%, #f0ebe0 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.02em;
+    font-kerning: normal;
+    font-feature-settings: "kern" 1, "liga" 1;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+}
+
+h2 {
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+h3 {
+    font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    font-variant: small-caps;
+    letter-spacing: 0.02em;
+}
+
+h4 { font-size: 1.25rem; font-weight: 600; }
+h5 { font-size: 1.05rem; font-weight: 600; }
+h6 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-accent-dark);
+    font-variant: normal;
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.8;
+    word-spacing: 0.05em;
+    text-align: justify;
+    hyphens: auto;
+}
+
+article p:first-of-type {
+    text-indent: 2em;
+}
+
+p, li, td {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+a {
+    color: var(--color-primary-mid);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:link    { color: var(--color-primary-mid); }
+a:visited { color: #5c4a7d; }
+a:hover   { color: var(--color-accent-dark); }
+a:active  { color: var(--color-sunset); }
+
+a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+a[href^="http"]::after {
+    content: " ↗";
+    font-size: 0.75em;
+    color: var(--color-accent);
+    opacity: 0.8;
+}
+
+a[href^="mailto"]::before {
+    content: "✉ ";
+    color: var(--color-accent);
+}
+
+a[href^="tel"]::before {
+    content: "☎ ";
+    color: var(--color-accent);
+}
+
+a[href$=".pdf"]::after {
+    content: " 📄";
+    font-size: 0.9em;
+}
+
+ul, ol {
+    margin: var(--spacing-md) 0;
+    padding-left: var(--spacing-lg);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.7;
+}
+
+::selection {
+    background-color: var(--color-accent);
+    color: var(--color-primary-dark);
+    text-shadow: none;
+}
+::-moz-selection {
+    background-color: var(--color-accent);
+    color: var(--color-primary-dark);
+}
+
+code, pre, kbd, samp {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+code {
+    background-color: rgba(10, 26, 47, 0.06);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    color: var(--color-accent-dark);
+    font-weight: 500;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+pre {
+    background: var(--gradient-dark);
+    color: var(--color-accent-light);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    border-left: 4px solid var(--color-accent);
+    box-shadow: var(--shadow-lg);
+    white-space: pre-wrap;
+}
+
+blockquote {
+    border-left: 4px solid var(--color-accent);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.02));
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+    font-style: italic;
+    color: var(--color-primary-mid);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+}
+
+blockquote::before {
+    content: "«";
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: var(--color-accent);
+    position: absolute;
+    top: -6px;
+    left: 12px;
+    line-height: 1;
+    opacity: 0.35;
+}
+
+blockquote::after {
+    content: "»";
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: var(--color-accent);
+    position: absolute;
+    bottom: -22px;
+    right: 12px;
+    line-height: 1;
+    opacity: 0.35;
+}
+
+q:lang(ru) { quotes: "«" "»" "„" "“"; }
+q:lang(en) { quotes: "\201C" "\201D" "\2018" "\2019"; }
+q:lang(de) { quotes: "\201E" "\201C" "\201A" "\2018"; }
+
+q::before { content: open-quote;  color: var(--color-accent); font-weight: 700; }
+q::after  { content: close-quote; color: var(--color-accent); font-weight: 700; }
+
+@media (max-width: 900px) {
+    html { font-size: 15px; }
+    h1 { font-size: 2rem; letter-spacing: 2px; }
+    h2 { font-size: 1.6rem; }
+}
+
+@media (max-width: 600px) {
+    html { font-size: 14px; }
+    h1 { font-size: 1.5rem; letter-spacing: 1px; }
+    h2 { font-size: 1.3rem; }
+    h3 { font-size: 1.1rem; }
+    body { background-image: none; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    body { padding-top: 80px; }
+    .hero { height: 100vh; min-height: 400px; }
+    .brand-title { font-size: 2rem; }
+}
+
+@media print {
+    body { background: white; color: black; font-size: 12pt; }
+    header, footer, nav, .preloader { display: none !important; }
+    a { color: black; text-decoration: underline; }
+    a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}

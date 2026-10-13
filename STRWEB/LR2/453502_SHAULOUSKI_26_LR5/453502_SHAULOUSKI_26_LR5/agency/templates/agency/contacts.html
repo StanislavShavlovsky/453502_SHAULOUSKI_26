@@ -17,8 +17,20 @@
 
     <title>Контакты и сотрудники — {{ company_info.name|default:'EliteEstate' }}</title>
     <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+
+    <!-- Общие CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/contacts.css' %}">
 </head>
 <body id="top">
+
+<div class="preloader">
+    <div class="preloader__ring"></div>
+    <div class="preloader__particle"></div>
+</div>
 
     <header>
         <a href="{% url 'home' %}">
@@ -128,76 +140,63 @@
 
         <hr>
 
-        <section id="section-staff" aria-labelledby="staff-heading">
-            <h3 id="staff-heading">Наша команда</h3>
+<section id="section-staff" aria-labelledby="staff-heading">
+    <h3 id="staff-heading">Наша команда</h3>
 
-            {% if employees %}
-            <table border="1">
-                <caption>Сотрудники агентства EliteEstate</caption>
-                <thead>
-                    <tr>
-                        <th id="e-photo" scope="col">Фото</th>
-                        <th id="e-name" scope="col">ФИО</th>
-                        <th id="e-position" scope="col">Должность</th>
-                        <th id="e-phone" scope="col">Телефон</th>
-                        <th id="e-email" scope="col">Email</th>
-                        <th id="e-desc" scope="col">Обязанности</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for emp in employees %}
-                    <tr>
-                        <td headers="e-photo">
-                            {% if emp.photo %}
-                                <img src="{{ emp.photo.url }}"
-                                     alt="Фото сотрудника {{ emp.user.get_full_name|default:emp.user.username }}"
-                                     width="100"
-                                     height="100"
-                                     loading="lazy">
-                            {% else %}
-                                <img src="{% static 'images/no-photo.png' %}"
-                                     alt="Фото отсутствует"
-                                     width="100"
-                                     height="100"
-                                     loading="lazy">
-                            {% endif %}
-                        </td>
-                        <td headers="e-name">
-                            <strong>{{ emp.user.get_full_name|default:emp.user.username }}</strong>
-                        </td>
-                        <td headers="e-position">{{ emp.position }}</td>
-                        <td headers="e-phone">
-                            {% if emp.phone %}
-                                <a href="tel:{{ emp.phone }}">{{ emp.phone }}</a>
-                            {% else %}
-                                —
-                            {% endif %}
-                        </td>
-                        <td headers="e-email">
-                            {% if emp.user.email %}
-                                <a href="mailto:{{ emp.user.email }}">{{ emp.user.email }}</a>
-                            {% else %}
-                                —
-                            {% endif %}
-                        </td>
-                        <td headers="e-desc">
-                            {{ emp.job_description|default:"—" }}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="6" headers="e-name">
-                            Всего сотрудников: <strong>{{ employees|length }}</strong>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-            {% else %}
-            <p><em>Список сотрудников пока пуст.</em></p>
-            {% endif %}
-        </section>
+    {% if employees %}
+    <div class="staff-flex">
+        {% for emp in employees %}
+        <article class="staff-card">
+            <div class="staff-card__photo">
+                {% if emp.photo %}
+                    <img src="{{ emp.photo.url }}"
+                         alt="Фото сотрудника {{ emp.user.get_full_name|default:emp.user.username }}"
+                         loading="lazy">
+                {% else %}
+                    <img src="{% static 'images/no-photo.png' %}"
+                         alt="Фото отсутствует"
+                         loading="lazy">
+                {% endif %}
+            </div>
+
+            <div class="staff-card__info">
+                <h4 class="staff-card__name">
+                    {{ emp.user.get_full_name|default:emp.user.username }}
+                </h4>
+
+                <p class="staff-card__position">{{ emp.position }}</p>
+
+                <p class="staff-card__desc">
+                    {{ emp.job_description|default:"Описание обязанностей не указано." }}
+                </p>
+
+                <ul class="staff-card__contacts">
+                    {% if emp.phone %}
+                    <li>
+                        <span class="staff-card__icon" aria-hidden="true">📞</span>
+                        <a href="tel:{{ emp.phone }}">{{ emp.phone }}</a>
+                    </li>
+                    {% endif %}
+
+                    {% if emp.user.email %}
+                    <li>
+                        <span class="staff-card__icon" aria-hidden="true">✉️</span>
+                        <a href="mailto:{{ emp.user.email }}">{{ emp.user.email }}</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <p class="staff-total">
+        Всего сотрудников: <strong>{{ employees|length }}</strong>
+    </p>
+    {% else %}
+    <p><em>Список сотрудников пока пуст.</em></p>
+    {% endif %}
+</section>
 
         <hr>
 

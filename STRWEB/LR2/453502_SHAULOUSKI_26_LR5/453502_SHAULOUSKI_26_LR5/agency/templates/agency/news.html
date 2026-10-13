@@ -17,8 +17,20 @@
 
     <title>Новости и статьи — {{ company_info.name|default:'EliteEstate' }}</title>
     <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+
+    <!-- Общие CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/articles.css' %}">   <!-- ← ДОБАВИТЬ -->
 </head>
 <body id="top">
+
+<div class="preloader">
+    <div class="preloader__ring"></div>
+    <div class="preloader__particle"></div>
+</div>
 
     <header>
         <a href="{% url 'home' %}">
@@ -103,7 +115,6 @@
                 {% for article in articles %}
                 <li>
                     <article>
-                        <header>
                             <h4>
                                 <a href="{% url 'article_detail' article.pk %}">
                                     {{ article.title }}
@@ -115,7 +126,6 @@
                                     {{ article.published_date|date:"d.m.Y" }}
                                 </time>
                             </p>
-                        </header>
 
                         {% if article.image %}
                         <figure>
@@ -129,13 +139,13 @@
                         </figure>
                         {% endif %}
 
-                        <p>
-                            {% if article.short_description %}
-                                {{ article.short_description }}
-                            {% else %}
-                                {{ article.content|truncatewords:15 }}
-                            {% endif %}
-                        </p>
+<p class="article-excerpt">
+    {% if article.short_description %}
+        {{ article.short_description }}
+    {% else %}
+        {{ article.content|truncatewords:20 }}
+    {% endif %}
+</p>
 
                         <footer>
                             <p>
