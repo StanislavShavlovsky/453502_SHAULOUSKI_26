@@ -128,6 +128,7 @@ section[aria-labelledby="news-list-heading"] article > figure figcaption {
     display: none;
 }
 
+
 section[aria-labelledby="news-list-heading"] article > p,
 section[aria-labelledby="news-list-heading"] article > p.article-excerpt {
     display: -webkit-box;
@@ -149,6 +150,7 @@ section[aria-labelledby="news-list-heading"] article > p.article-excerpt {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 
 section[aria-labelledby="news-list-heading"] article > footer {
     margin-top: auto;
@@ -498,6 +500,7 @@ main > article > form textarea {
     resize: vertical;
 }
 
+
 section[aria-labelledby="summary-heading"] {
     max-width: 100%;
     overflow-x: auto;
@@ -608,6 +611,7 @@ section[aria-labelledby="summary-heading"] table thead th:nth-child(2) { width: 
 section[aria-labelledby="summary-heading"] table thead th:nth-child(3) { width: 15%; }
 section[aria-labelledby="summary-heading"] table thead th:nth-child(4) { width: 52%; }
 
+
 main > p > a > button {
     background: var(--color-accent);
     border: 1px solid var(--color-accent);
@@ -625,6 +629,7 @@ main > p > a > button:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(15, 39, 68, 0.3);
 }
+
 
 @media (max-width: 900px) {
     section[aria-labelledby="news-list-heading"] > ul {

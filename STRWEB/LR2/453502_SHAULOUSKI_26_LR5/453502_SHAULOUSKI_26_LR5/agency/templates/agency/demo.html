@@ -1,900 +1,1016 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Демонстрационная страница HTML и CSS.">
-    <meta name="keywords" content="HTML, CSS, демо, элементы, теги">
+    <meta name="description" content="Демонстрация CSS-свойств: селекторы, псевдоклассы, псевдоэлементы, блоки, текст, градиенты, таблицы, формы, трансформации, переходы, анимации, grid, flexbox, медиазапросы.">
+    <meta name="keywords" content="CSS, демо, селекторы, псевдоклассы, grid, flex, анимация">
     <meta name="author" content="Студент">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>HTML + CSS Demo</title>
+    <title>CSS Demo — Grand Demo</title>
     <link rel="icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T/AP8A/62n1zAAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZSURBVDjLY2AY2YARzU2MBoPhMBgMhsMAAALMAAF1x50LAAAAAElFTkSuQmCC" type="image/x-icon">
 
-    <link rel="stylesheet" href="{% static 'css/demo-styles.css' %}">
+    <link rel="stylesheet" href="../../../static/css/demo-styles.css">
 </head>
 <body id="top">
 
-    <div class="preloader" aria-hidden="true">
-        <div class="preloader__circle">
-            <div class="preloader__particle"></div>
-        </div>
-    </div>
+<header>
+    <h1>CSS Demo</h1>
 
-    <header>
-        <h1>HTML + CSS Demo — шпаргалка</h1>
+    <nav aria-label="Содержание">
+        <h2>Содержание</h2>
+        <ul>
+            <li><a href="#s01">Текст и шрифт</a></li>
+            <li><a href="#s02">Псевдоклассы и псевдоэлементы</a></li>
+            <li><a href="#s03">Селекторы и комбинации</a></li>
+            <li><a href="#s04">Блоки, отступы, границы</a></li>
+            <li><a href="#s05">Фоны и градиенты</a></li>
+            <li><a href="#s06">Списки и счётчики</a></li>
+            <li><a href="#s07">Таблицы</a></li>
+            <li><a href="#s08">Формы</a></li>
+            <li><a href="#s09">Позиционирование</a></li>
+            <li><a href="#s10">Трансформации</a></li>
+            <li><a href="#s11">Переходы</a></li>
+            <li><a href="#s12">Анимации</a></li>
+            <li><a href="#s13">Flexbox</a></li>
+            <li><a href="#s14">Grid</a></li>
+            <li><a href="#s15">Многоколоночный макет</a></li>
+            <li><a href="#s16">Фильтры, курсоры, misc</a></li>
+        </ul>
+    </nav>
+</header>
 
-        <nav aria-label="Содержание">
-            <h2>Содержание</h2>
-            <ul>
-                <li><a href="#s1">1. Структура и метаданные</a></li>
-                <li><a href="#s2">2. Выделение текста</a></li>
-                <li><a href="#s3">3. Ссылки и якоря</a></li>
-                <li><a href="#s4">4. Группировка контента</a></li>
-                <li><a href="#s5">5. Семантические секции</a></li>
-                <li><a href="#s6">6. Таблицы</a></li>
-                <li><a href="#s7">7. Формы</a></li>
-                <li><a href="#s8">8. Изображения</a></li>
-                <li><a href="#s9">9. Фреймы</a></li>
-                <li><a href="#s10">10. Видео и аудио</a></li>
-                <li><a href="#css-text">11. CSS: текст и псевдоэлементы</a></li>
-                <li><a href="#css-lists">12. CSS: списки и counter</a></li>
-                <li><a href="#css-tables">13. CSS: таблицы</a></li>
-                <li><a href="#css-border">14. CSS: границы и тени</a></li>
-                <li><a href="#css-position">15. CSS: позиционирование</a></li>
-                <li><a href="#css-float">16. CSS: float и clear</a></li>
-                <li><a href="#css-gradient">17. CSS: градиенты</a></li>
-                <li><a href="#css-transform">18. CSS: трансформации</a></li>
-                <li><a href="#css-transition">19. CSS: transition</a></li>
-                <li><a href="#css-anim">20. CSS: @keyframes</a></li>
-                <li><a href="#css-column">21. CSS: многоколоночный</a></li>
-                <li><a href="#css-grid">22. CSS: Grid Layout</a></li>
-                <li><a href="#css-flex">23. CSS: Flexbox</a></li>
-                <li><a href="#css-filter">24. CSS: фильтры</a></li>
-                <li><a href="#css-cursor">25. CSS: курсоры</a></li>
-                <li><a href="#css-misc">26. CSS: calc, attr, opacity, :target, :not, :empty</a></li>
-            </ul>
-        </nav>
-    </header>
+<hr>
 
-    <hr>
+<main>
 
-    <main>
+<section id="s01">
+    <h2>Текст и шрифт</h2>
 
-        <section id="s1">
-            <h2>1. Структура и метаданные</h2>
-            <div class="demo-block">
-                <span class="demo-caption">title — подсказка при наведении</span>
-                <p title="Подсказка">Наведите курсор на этот абзац.</p>
-            </div>
-            <div class="demo-block">
-                <span class="demo-caption">contenteditable — редактируемый текст</span>
-                <p contenteditable="true">Этот текст можно редактировать в браузере.</p>
-            </div>
-            <div class="demo-block">
-                <span class="demo-caption">spellcheck — проверка орфографии</span>
-                <p spellcheck="true" lang="en">This paragraf has spellcheck enabled.</p>
-            </div>
-            <div class="demo-block">
-                <span class="demo-caption">translate="no"</span>
-                <p translate="no">This text should not be translated.</p>
-            </div>
-            <div class="demo-block">
-                <span class="demo-caption">hidden — скрыт</span>
-                <p hidden>Скрытый текст.</p>
-                <p><em>Выше пусто — элемент hidden не отображается.</em></p>
-            </div>
-            <h3>data-атрибуты</h3>
-            <ul>
-                <li data-animaltype="bird">Сова</li>
-                <li data-animaltype="mammal">Лиса</li>
-                <li data-animaltype="fish">Щука</li>
-            </ul>
-            <h3>Специальные символы</h3>
-            <p>&nbsp;|&nbsp; &lt; &gt; &copy; &reg; &trade; &laquo;кавычки&raquo;</p>
-            <h3>Микроданные</h3>
-            <div itemscope itemtype="http://schema.org/Movie">
-                <h4 itemprop="name">Аватар</h4>
-                <p>Режиссер: <span itemprop="director">Джеймс Кэмерон</span></p>
-            </div>
-        </section>
+    <h3>Заголовки h1–h6</h3>
+    <h1>Заголовок первого уровня</h1>
+    <h2>Заголовок второго уровня</h2>
+    <h3>Заголовок третьего уровня</h3>
+    <h4>Заголовок четвёртого уровня</h4>
+    <h5>Заголовок пятого уровня</h5>
+    <h6>Заголовок шестого уровня</h6>
 
-        <hr>
+    <h3>Выделение текста</h3>
+    <p>
+        <em>Курсив через em</em>, <i>курсив через i</i>,
+        <strong>жирный через strong</strong>, <b>жирный через b</b>,
+        <u>подчёркнутый</u>, <s>зачёркнутый</s>, <del>удалённый</del>,
+        <mark>выделенный</mark>, <small>мелкий</small>.
+    </p>
+    <p>
+        Формула воды: H<sub>2</sub>O. Десять в квадрате: 10<sup>2</sup>.
+    </p>
 
-        <section id="s2">
-            <h2>2. Выделение текста</h2>
-            <p><em>I</em> like <b>apples</b> and <b>oranges</b>. <s>$1 each</s> $2 <small>(+tax)</small></p>
-            <p><strong>Warning:</strong> Eating <u>too many</u> oranges.</p>
-            <p>x<sub>10</sub> — 10<sup>th</sup> point.</p>
+    <h3>Цитаты и определения</h3>
+    <p>
+        <q>Цитата внутри текста</q>. Определение: <dfn>кинозал</dfn> — помещение для показа фильмов.
+    </p>
+    <p>
+        Сокращение: <abbr title="Cascading Style Sheets">CSS</abbr>.
+        Источник: <cite>Спецификация W3C</cite>.
+    </p>
+    <blockquote cite="https://www.w3.org/Style/CSS/">
+        <p>CSS — это язык описания внешнего вида документа, созданного с использованием языка разметки.</p>
+        <footer>— <cite>W3C</cite></footer>
+    </blockquote>
 
-            <h3>Код</h3>
-            <p><code>var fruits = ["apples"];</code></p>
-            <p>Переменная: <var>fruits</var>. Вывод: <samp>I like 4 fruits</samp>. Нажатие: <kbd>cherries</kbd></p>
+    <h3>Дата и время</h3>
+    <p>
+        Открытие состоялось <time datetime="2026-04-15">15 апреля 2026</time>
+        в <time datetime="19:30">19:30</time>.
+    </p>
 
-            <h3>Сокращения и определения</h3>
-            <p><abbr title="Florida Department of Citrus">FDOC</abbr> — департамент цитрусовых.</p>
-            <p><dfn title="apple">apple</dfn> — яблоко.</p>
-
-            <h3>Цитаты</h3>
-            <p><q cite="http://en.wikipedia.org/wiki/Apple">The apple is fruit.</q></p>
-            <p>My book is <cite>Fruit: Edible, Inedible, Incredible</cite>.</p>
-
-            <h3>Дата и время</h3>
-            <p>At <time datetime="15:00">3 o'clock</time> on <time datetime="1984-12-07">December 7th</time>.</p>
-
-            <h3>mark</h3>
-            <p>I would like a <mark>pair</mark> of <mark>pears</mark>.</p>
-
-            <h3>Переносы</h3>
-            <p>I wandered lonely as a cloud<br>That floats on high o'er vales and hills.</p>
-            <p>Длинное слово: метоксихлор<wbr>диэтиламино<wbr>метил<wbr>бутил<wbr>амино<wbr>акридин.</p>
-        </section>
-
-        <hr>
-
-        <section id="s3">
-            <h2>3. Ссылки и якоря</h2>
-
-            <h3>Разные типы ссылок — у каждой свой значок через CSS</h3>
-            <div class="demo-block">
-                <span class="demo-caption">Внешняя (получает ↗)</span>
-                <p><a href="https://mail.ru" target="_blank" rel="noopener">mail.ru</a></p>
-            </div>
-            <div class="demo-block">
-                <span class="demo-caption">mailto (✉) и tel (☎)</span>
-                <p><a href="mailto:info@example.com?subject=Вопрос">Написать письмо</a></p>
-                <p><a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
-            </div>
-            <div class="demo-block">
-                <span class="demo-caption">download — с иконкой ⬇</span>
-                <p><a href="files/report.pdf" download>Скачать отчёт</a></p>
-            </div>
-            <div class="demo-block">
-                <span class="demo-caption">Ссылка, содержащая "example" — выделяется фоном (селектор [href*=...])</span>
-                <p><a href="https://example.com">example.com</a></p>
-            </div>
-
-            <h3>Якоря и :target</h3>
-            <p><a href="#anchor-example">Перейти к примечанию</a></p>
-            <p>... контент ...</p>
-            <p>... контент ...</p>
-            <p id="anchor-example"><strong>Примечание:</strong> при переходе по ссылке этот элемент подсветится через <code>:target</code>.</p>
-        </section>
-
-        <hr>
-
-        <section id="s4">
-            <h2>4. Группировка контента</h2>
-
-            <div class="block-container" id="block1">Блочный контейнер <code>&lt;div&gt;</code>.</div>
-            <p>Первый абзац.</p>
-            <p>Второй абзац.</p>
-
-            <h3>pre</h3>
-            <pre>
-function f(x) {
+    <h3>Код и клавиши</h3>
+    <p>
+        Переменная <var>x</var> равна 10. Код: <code>const a = 5;</code>.
+        Нажмите <kbd>Ctrl</kbd> + <kbd>S</kbd>, результат: <samp>Файл сохранён</samp>.
+    </p>
+    <pre>function f(x) {
     if (x > 0)
         alert(x);
-}
-            </pre>
+}</pre>
 
-            <h3>blockquote</h3>
-            <blockquote cite="http://example.com">The apple forms a tree.</blockquote>
+    <h3>Направление текста</h3>
+    <div class="dir-box" dir="ltr">
+        <strong>dir="ltr":</strong> Текст слева направо. Пример: Привет, мир! 123
+    </div>
+    <div class="dir-box" dir="rtl">
+        <strong>dir="rtl":</strong> Текст справа налево. Пример: مرحبا بالعالم
+    </div>
+    <div class="dir-box" dir="auto">
+        <strong>dir="auto":</strong> автоопределение направления по первому символу.
+    </div>
 
-            <h3>hr</h3>
-            <p>Текст после первой линии.</p>
-            <hr>
-            <p>Текст после второй линии.</p>
+    <h3>Атрибуты и доступность</h3>
+    <p title="Подсказка при наведении">
+        Наведите курсор на этот абзац — появится подсказка.
+    </p>
+    <p contenteditable>Этот текст можно отредактировать прямо в браузере.</p>
+    <p spellcheck lang="en">This paragraf has spellcheck enabled (with error).</p>
+    <p translate="no">This text should not be translated.</p>
+    <p hidden>Этот текст скрыт от пользователя.</p>
 
-            <h3>Списки</h3>
+    <h3>Данные через data-атрибуты</h3>
+    <ul>
+        <li data-animaltype="bird">Сова</li>
+        <li data-animaltype="mammal">Лиса</li>
+        <li data-animaltype="fish">Щука</li>
+    </ul>
+</section>
+
+<hr>
+
+<section id="s02">
+    <h2>Псевдоклассы и псевдоэлементы</h2>
+
+    <h3>Ссылки: :link, :visited, :hover, :active, :focus</h3>
+    <p>
+        <a href="#s02">Внутренняя ссылка</a> |
+        <a href="https://example.com" target="_blank" rel="noopener">Внешняя ссылка</a> |
+        <a href="mailto:info@example.com">Написать письмо</a> |
+        <a href="tel:+375291234567">+375 (29) 123-45-67</a> |
+        <a href="files/report.pdf" download>Скачать отчёт (PDF)</a>
+    </p>
+
+    <h3>Структурные псевдоклассы</h3>
+    <ul class="pseudo-list">
+        <li>Первый элемент (:first-child)</li>
+        <li>Второй элемент (:nth-child(2))</li>
+        <li>Третий элемент (:nth-child(3))</li>
+        <li>Четвёртый элемент (:nth-child(even))</li>
+        <li>Пятый элемент (:nth-child(3n+1))</li>
+        <li>Шестой элемент (:nth-child(3n))</li>
+        <li>Последний элемент (:last-child)</li>
+    </ul>
+
+    <h3>Псевдоэлементы ::before и ::after</h3>
+    <p class="with-markers">
+        Этот абзац имеет декоративные метки до и после текста.
+    </p>
+
+    <h3>Псевдоэлемент ::first-letter и ::first-line</h3>
+    <article class="drop-cap">
+        <p>
+            Буквица — это первая буква абзаца, увеличенная и оформленная особым образом.
+            Этот эффект часто используется в книгах и журналах для привлечения внимания
+            читателя к началу главы или статьи.
+        </p>
+    </article>
+
+    <h3>Псевдоэлемент ::selection</h3>
+    <p>Выделите этот текст мышью — увидите нестандартный цвет выделения.</p>
+
+    <h3>Псевдокласс :target</h3>
+    <p>
+        <a href="#target-demo">Перейти к примечанию</a>
+    </p>
+    <p>... контент раздела ...</p>
+    <p id="target-demo"><strong>Примечание:</strong> это место, куда ведёт ссылка — подсветится при переходе.</p>
+
+    <h3>Псевдокласс :empty</h3>
+    <p>Пустой блок: <span class="empty-span"></span></p>
+    <p>Не пустой: <span class="empty-span">есть текст</span></p>
+</section>
+
+<hr>
+
+<section id="s03">
+    <h2>Селекторы и комбинации</h2>
+
+    <h3>Универсальный селектор *</h3>
+    <p>Все элементы страницы уже имеют box-sizing: border-box.</p>
+
+    <h3>Селектор элемента</h3>
+    <p>Все абзацы стилизованы.</p>
+
+    <h3>Селектор класса</h3>
+    <p class="badge">Простой класс .badge</p>
+    <p class="badge badge--success">Модификатор .badge--success</p>
+    <p class="badge badge--danger">Модификатор .badge--danger</p>
+    <p class="badge badge--warning">Модификатор .badge--warning</p>
+
+    <h3>Селектор идентификатора</h3>
+    <div id="block1">Элемент с id="block1"</div>
+
+    <h3>Селекторы по атрибутам</h3>
+    <p>
+        <a href="https://example.com">[href^="https"]</a> |
+        <a href="files/report.pdf">[href$=".pdf"]</a> |
+        <a href="https://example.com/html/book">[href*="html"]</a>
+    </p>
+    <p data-animaltype="bird">[data-animaltype="bird"]</p>
+    <p data-animaltype="fish">[data-animaltype="fish"]</p>
+
+    <h3>Селекторы потомков и детей</h3>
+    <div class="selector-tree">
+        <p>Прямой потомок — стилизуется через "div p" и "div > p".</p>
+        <blockquote>
+            <p>Глубокий потомок — попадает под "div p", но не под "div > p".</p>
+        </blockquote>
+    </div>
+
+    <h3>Смежные и родственные селекторы</h3>
+    <div class="sibling-demo">
+        <h4>Заголовок (h4)</h4>
+        <p>Первый абзац — под "h4 + p".</p>
+        <p>Второй абзац — под "h4 ~ p", но не под "h4 + p".</p>
+        <p>Третий абзац — тоже под "h4 ~ p".</p>
+    </div>
+
+    <h3>Группировка селекторов</h3>
+    <p>Заголовки h1–h6 и абзацы используют общий шрифт.</p>
+</section>
+
+<hr>
+
+<section id="s04">
+    <h2>Блоки, отступы, границы</h2>
+
+    <h3>Структура блока</h3>
+    <div class="box-demo">
+        содержимое блока (content)
+    </div>
+    <p>Вокруг блока: padding (внутренний отступ), border (граница), margin (внешний отступ).</p>
+
+    <h3>Типы границ border-style</h3>
+    <div class="border-demo border-style-none">border-style: none</div>
+    <div class="border-demo border-style-dotted">border-style: dotted</div>
+    <div class="border-demo border-style-dashed">border-style: dashed</div>
+    <div class="border-demo border-style-solid">border-style: solid</div>
+    <div class="border-demo border-style-double">border-style: double</div>
+    <div class="border-demo border-style-groove">border-style: groove</div>
+    <div class="border-demo border-style-ridge">border-style: ridge</div>
+    <div class="border-demo border-style-inset">border-style: inset</div>
+    <div class="border-demo border-style-outset">border-style: outset</div>
+
+    <h3>Закругление углов border-radius</h3>
+    <div class="border-radius-demo border-radius-1">border-radius: 20px</div>
+    <div class="border-radius-demo border-radius-2">border-radius: 40px 10px</div>
+    <div class="border-radius-demo border-radius-3">border-radius: 13em / 3em</div>
+    <div class="border-radius-demo border-radius-4">border-radius: 13em 0.5em / 1em 0.5em</div>
+    <div class="border-radius-circle"></div>
+
+    <h3>Тень блока box-shadow</h3>
+    <div class="box-shadow-demo shadow-1">shadow: 5px 4px 10px 2px gray</div>
+    <div class="box-shadow-demo shadow-2">shadow: 0 0 20px rgba(...)</div>
+    <div class="box-shadow-demo shadow-3">shadow: inset 0 0 20px ...</div>
+    <div class="box-shadow-demo shadow-4">shadow: две тени одновременно</div>
+
+    <h3>Outline</h3>
+    <div class="outline-demo">outline: thick solid red; border: 5px solid blue</div>
+    <div class="outline-offset-in">outline-offset: -10px</div>
+
+    <h3>box-sizing</h3>
+    <div class="box-sizing-content">box-sizing: content-box (width 300 + padding + border)</div>
+    <div class="box-sizing-border">box-sizing: border-box (width 300 включая padding и border)</div>
+
+    <h3>Переполнение overflow</h3>
+    <div class="overflow-visible">overflow: visible — текст выходит за пределы блока, как видите, он длинный</div>
+    <div class="overflow-hidden">overflow: hidden — текст, выходящий за границы, обрезается</div>
+    <div class="overflow-scroll">overflow: scroll — всегда полосы прокрутки, даже если не нужны</div>
+    <div class="overflow-auto">overflow: auto — полосы прокрутки при необходимости</div>
+
+    <h3>opacity</h3>
+    <p class="opacity-25">opacity: 0.25</p>
+    <p class="opacity-50">opacity: 0.5</p>
+    <p class="opacity-75">opacity: 0.75</p>
+    <p class="opacity-100">opacity: 1</p>
+</section>
+
+<hr>
+
+<section id="s05">
+    <h2>Фоны и градиенты</h2>
+
+    <h3>Линейные градиенты</h3>
+    <div class="gradient-linear-h">linear-gradient(to right, ...)</div>
+    <div class="gradient-linear-v">linear-gradient(180deg, ...)</div>
+    <div class="gradient-linear-angle">linear-gradient(45deg, ...)</div>
+    <div class="gradient-linear-angle-deg">linear-gradient(110deg, red -20px, blue 50%, white)</div>
+    <div class="gradient-linear-repeating">repeating-linear-gradient(45deg, ...)</div>
+
+    <h3>Радиальные градиенты</h3>
+    <div class="gradient-radial-basic">radial-gradient(circle, red, blue)</div>
+    <div class="gradient-radial-ellipse">radial-gradient(ellipse at center, ...)</div>
+    <div class="gradient-radial-at">radial-gradient(circle at 20% 30%, ...)</div>
+    <div class="gradient-radial-closest-side">closest-side</div>
+    <div class="gradient-radial-closest-corner">closest-corner</div>
+    <div class="gradient-radial-farthest-side">farthest-side</div>
+    <div class="gradient-radial-farthest-corner">farthest-corner</div>
+    <div class="gradient-radial-repeating">repeating-radial-gradient(...)</div>
+    <div class="gradient-radial-rainbow"></div>
+</section>
+
+<hr>
+
+<section id="s06">
+    <h2>Списки и счётчики</h2>
+
+    <h3>Стандартные списки</h3>
+    <ul>
+        <li>Маркированный элемент 1</li>
+        <li>Маркированный элемент 2</li>
+        <li>Маркированный элемент 3</li>
+    </ul>
+    <ol>
+        <li>Нумерованный элемент 1</li>
+        <li>Нумерованный элемент 2</li>
+        <li>Нумерованный элемент 3</li>
+    </ol>
+
+    <h3>Вложенные списки</h3>
+    <ol>
+        <li>Первый</li>
+        <li>
+            Второй с подпунктами:
             <ul>
-                <li>Первый элемент</li>
-                <li>Второй элемент</li>
+                <li>Подпункт 1</li>
+                <li>Подпункт 2</li>
             </ul>
-            <ol>
-                <li>Первый</li>
-                <li>Второй</li>
-            </ol>
-            <ul class="custom-markers">
-                <li>Unicode-маркер ✦</li>
-                <li>Ещё один пункт</li>
-            </ul>
-
-            <dl>
-                <dt>HTML-документ</dt>
-                <dd>Текстовый файл...</dd>
-                <dt>Сайт</dt>
-                <dd>Набор страниц...</dd>
-            </dl>
-
-            <figure>
-                <figcaption>Пример кода</figcaption>
-                <code>var fruits = ["apples"];</code>
-            </figure>
-        </section>
-
-        <hr>
-
-        <section id="s5">
-            <h2>5. Семантические секции</h2>
-
-            <article>
-                <header><h3>Статья</h3></header>
-                <p>Текст статьи.</p>
-                <footer><p>Автор: Иван Иванов</p></footer>
-            </article>
-
-            <aside class="demo-block">
-                <span class="demo-caption">aside</span>
-                <p>Боковая панель.</p>
-            </aside>
-
-            <details>
-                <summary>Виды триатлона</summary>
-                <ol>
-                    <li>1.5 км плавание</li>
-                    <li>40 км велогонка</li>
-                    <li>10 км бег</li>
-                </ol>
-            </details>
-
-            <address>
-                Автор: Иван Иванов<br>
-                <a href="mailto:ivan@example.com">ivan@example.com</a>
-            </address>
-        </section>
-
-        <hr>
-
-        <section id="s6">
-            <h2>6. Таблицы</h2>
-
-            <h3>Простая с caption сверху</h3>
-            <table>
-                <caption>Заголовок сверху</caption>
-                <tr><th>H1</th><th>H2</th></tr>
-                <tr><td>R1C1</td><td>R1C2</td></tr>
-                <tr><td>R2C1</td><td>R2C2</td></tr>
-            </table>
-
-            <h3>С caption снизу</h3>
-            <table>
-                <caption class="caption-bottom">Заголовок снизу</caption>
-                <tr><th>A</th><th>B</th></tr>
-                <tr><td>1</td><td>2</td></tr>
-            </table>
-
-            <h3>Объединение ячеек</h3>
-            <table>
-                <tr>
-                    <td rowspan="2">rowspan=2</td>
-                    <td>(1,2)</td>
-                    <td>(1,3)</td>
-                </tr>
-                <tr>
-                    <td colspan="2">colspan=2</td>
-                </tr>
-            </table>
-
-            <h3>Пустые ячейки (видны через :empty)</h3>
-            <table>
-                <thead><tr><th>Категория</th><th>Пример</th><th>Комментарий</th></tr></thead>
-                <tbody>
-                    <tr><td>ID</td><td>Логин</td><td></td></tr>
-                    <tr><td>Контакт</td><td></td><td>Email</td></tr>
-                </tbody>
-                <tfoot><tr><td colspan="3">Пустые ячейки показаны через :empty</td></tr></tfoot>
-            </table>
-        </section>
-
-        <hr>
-
-        <section id="s7">
-            <h2>7. Формы</h2>
-
-            <h3>Псевдоклассы форм</h3>
-            <form action="#" method="post">
-                <p>
-                    <label for="f-username">Имя (optional, зелёная полоса слева):</label>
-                    <input type="text" id="f-username" name="username" placeholder="Введите имя">
-                </p>
-                <p>
-                    <label for="f-email">Email (required, красная полоса слева):</label>
-                    <input type="email" id="f-email" name="email" placeholder="example@mail.com" required>
-                </p>
-                <p>
-                    <label for="f-readonly">read-only поле:</label>
-                    <input type="text" id="f-readonly" value="Только для чтения" readonly>
-                </p>
-                <p>
-                    <label for="f-disabled">disabled поле:</label>
-                    <input type="text" id="f-disabled" value="Отключено" disabled>
-                </p>
-                <p>
-                    <label for="f-number">Число 1..10 (in-range / out-of-range):</label>
-                    <input type="number" id="f-number" name="number" min="1" max="10" value="5">
-                </p>
-                <p>
-                    Пол:<br>
-                    <label><input type="radio" name="sex" value="male" checked> мужской</label><br>
-                    <label><input type="radio" name="sex" value="female"> женский</label>
-                </p>
-                <p>
-                    <label><input type="checkbox" name="subscribe" checked> Подписаться</label>
-                </p>
-                <p>
-                    <input type="submit" value="Отправить">
-                    <input type="reset" value="Очистить">
-                    <button type="button" disabled>Disabled-кнопка</button>
-                </p>
-            </form>
-
-            <h3>Разные поля</h3>
-            <form action="#">
-                <p>Color: <input type="color" value="#ff0000"></p>
-                <p>Date: <input type="date"></p>
-                <p>Range: <input type="range" min="10" max="20"></p>
-                <p>Search: <input type="search"></p>
-                <p>Tel: <input type="tel"></p>
-                <p>URL: <input type="url"></p>
-            </form>
-
-            <h3>Textarea</h3>
-            <form>
-                <textarea name="desc" cols="45" rows="4" placeholder="Описание"></textarea>
-                <p><input type="submit" value="Send!"></p>
-            </form>
-
-            <h3>Select</h3>
-            <form>
-                <select size="4" name="s1">
-                    <option disabled>Choose a hero:</option>
-                    <option value="iron">Iron Man</option>
-                    <option selected value="captain">Captain America</option>
-                    <option value="thor">Thor</option>
-                </select>
-            </form>
-
-            <h3>datalist</h3>
-            <form>
-                <input list="fruitlist" name="fave">
-                <datalist id="fruitlist">
-                    <option value="Apples"></option>
-                    <option value="Oranges"></option>
-                    <option value="Cherries"></option>
-                </datalist>
-                <button type="submit">Submit</button>
-            </form>
-
-            <h3>fieldset / legend</h3>
-            <form>
-                <fieldset>
-                    <legend>User info</legend>
-                    <label for="f-user">User:</label>
-                    <input id="f-user" type="text" name="usr"><br>
-                    <label>Pass: <input type="password" name="pass"></label><br>
-                    <input type="submit" value="Login">
-                </fieldset>
-            </form>
-
-            <h3>File input</h3>
-            <form>
-                <input type="file" accept="image/jpeg,image/png">
-                <p><input type="submit" value="Send!"></p>
-            </form>
-        </section>
-
-        <hr>
-
-        <section id="s8">
-            <h2>8. Изображения</h2>
-
-            <h3>Обычное</h3>
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23227c9d'/><text x='50%' y='50%' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='20'>300x200</text></svg>"
-                 alt="Демо" width="300" height="200">
-
-            <h3>Ссылка-изображение</h3>
-            <a href="https://example.com" target="_blank" rel="noopener">
-                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='100'><rect width='100%' height='100%' fill='%2317a2b8'/><text x='50%' y='50%' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='18'>Click Me</text></svg>"
-                     alt="Click Me" width="200" height="100">
-            </a>
-
-            <h3>picture — адаптивное</h3>
-            <picture>
-                <source media="(min-width: 800px)"
-                        srcset="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='300'><rect width='100%' height='100%' fill='%23227c9d'/><text x='50%' y='50%' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='28'>Large</text></svg>">
-                <source media="(min-width: 400px)"
-                        srcset="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%' height='100%' fill='%2317a2b8'/><text x='50%' y='50%' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='22'>Medium</text></svg>">
-                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='150'><rect width='100%' height='100%' fill='%239b59b6'/><text x='50%' y='50%' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='18'>Small</text></svg>"
-                     alt="Адаптивное">
-            </picture>
-        </section>
-
-        <hr>
-
-        <section id="s9">
-            <h2>9. Фреймы</h2>
-            <figure>
-                <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=27.5,53.85,27.65,53.95&amp;layer=mapnik"
-                        width="600" height="350" title="Карта Минска" loading="lazy"></iframe>
-                <figcaption>Карта через iframe</figcaption>
-            </figure>
-        </section>
-
-        <hr>
-
-        <section id="s10">
-            <h2>10. Видео и аудио</h2>
-            <figure>
-                <video width="480" height="270" controls preload="metadata">
-                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-                </video>
-                <figcaption>Видео</figcaption>
-            </figure>
-
-            <figure>
-                <audio controls preload="metadata">
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                </audio>
-                <figcaption>Аудио</figcaption>
-            </figure>
-        </section>
-
-        <hr>
-
-        <!-- ============ CSS-ПРИЁМЫ ============ -->
-
-        <section id="css-text">
-            <h2>11. CSS: текст и псевдоэлементы</h2>
-
-            <h3>Буквица ::first-letter + ::first-line</h3>
-            <article class="demo-letter">
-                <p>Первый абзац показывает буквицу через ::first-letter, а первая строка — капителью через ::first-line.</p>
-            </article>
-
-            <h3>text-shadow с несколькими тенями</h3>
-            <div class="text-shadow-multi">Text Shadow</div>
-
-            <h3>text-overflow: ellipsis</h3>
-            <div class="ellipsis-one-line">
-                Очень длинный текст, который не помещается в одну строку и обрезается многоточием.
-            </div>
-
-            <h3>word-break: break-all</h3>
-            <div class="word-break-demo">
-                оченьдлинноесловобезпробелов
-            </div>
-
-            <h3>Кавычки в зависимости от языка (q:lang)</h3>
-            <p>Русский: <q lang="ru">Привет, мир!</q></p>
-            <p>English: <q lang="en">Hello, world!</q></p>
-            <p>Deutsch: <q lang="de">Hallo, Welt!</q></p>
-
-            <h3>::selection</h3>
-            <p>Выделите любой текст мышью — он будет <mark>такого</mark> цвета благодаря ::selection.</p>
-
-            <h3>blockquote с ::before и ::after</h3>
-            <blockquote>The apple forms a tree that is small and deciduous.</blockquote>
-        </section>
-
-        <hr>
-
-        <section id="css-lists">
-            <h2>12. CSS: списки и counter</h2>
-
-            <h3>Разные list-style-type</h3>
-            <ul class="list-disc"><li>disc</li><li>Второй</li></ul>
-            <ul class="list-circle"><li>circle</li><li>Второй</li></ul>
-            <ul class="list-square"><li>square</li><li>Второй</li></ul>
-            <ol class="list-roman"><li>lower-roman</li><li>Второй</li></ol>
-            <ol class="list-alpha"><li>lower-alpha</li><li>Второй</li></ol>
-            <ol class="list-decimal"><li>decimal-leading-zero</li><li>Второй</li></ol>
-
-            <h3>list-style-position</h3>
-            <ul class="list-outside"><li>outside — маркер снаружи</li><li>Второй</li></ul>
-            <ul class="list-inside"><li>inside — маркер внутри</li><li>Второй</li></ul>
-
-            <h3>list-style-image</h3>
-            <ul class="list-image"><li>Своя иконка</li><li>Ещё один</li></ul>
-
-            <h3>Кастомные Unicode-маркеры</h3>
-            <ul class="custom-markers"><li>✦ маркер</li><li>Второй</li></ul>
-
-            <h3>Counter — автонумерация</h3>
-            <ol class="custom-numbers">
-                <li>Первый с круглым номером</li>
-                <li>Второй</li>
-                <li>Третий</li>
-            </ol>
-
-            <h3>Counter для глав</h3>
-            <div class="chapter-counter">
-                <h4>Название главы</h4>
-                <p>Текст.</p>
-                <h4>Другая глава</h4>
-                <p>Текст.</p>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="css-tables">
-            <h2>13. CSS: таблицы</h2>
-
-            <p>Таблицы оформлены через <code>border-collapse: collapse</code>, <code>:nth-child(even)</code>, <code>:hover</code>, <code>:empty</code>.</p>
-
-            <table>
-                <caption>Все приёмы</caption>
-                <thead><tr><th>Столбец 1</th><th>Столбец 2</th><th>Столбец 3</th></tr></thead>
-                <tbody>
-                    <tr><td>Чётная — светло-серый фон</td><td>Значение</td><td>100</td></tr>
-                    <tr><td>Нечётная</td><td></td><td>200</td></tr>
-                    <tr><td>Чётная</td><td>Значение</td><td></td></tr>
-                    <tr><td>Нечётная</td><td>Значение</td><td>400</td></tr>
-                </tbody>
-                <tfoot><tr><td colspan="3">tfoot — курсивом на сером фоне</td></tr></tfoot>
-            </table>
-        </section>
-
-        <hr>
-
-        <section id="css-border">
-            <h2>14. CSS: границы и тени</h2>
-
-            <h3>Стили border</h3>
-            <div class="border-demo border-solid">solid</div>
-            <div class="border-demo border-dotted">dotted</div>
-            <div class="border-demo border-dashed">dashed</div>
-            <div class="border-demo border-double">double</div>
-            <div class="border-demo border-groove">groove</div>
-            <div class="border-demo border-ridge">ridge</div>
-            <div class="border-demo border-inset">inset</div>
-            <div class="border-demo border-outset">outset</div>
-
-            <h3>border-radius</h3>
-            <div class="radius-demo radius-one">border-radius: 20px;</div>
-            <div class="radius-demo radius-two">30px 10px;</div>
-            <div class="radius-demo radius-three">30px 10px 40px;</div>
-            <div class="radius-demo radius-four">30px 10px 40px 15px;</div>
-            <div style="text-align:center;">
-                <div class="radius-demo radius-circle">circle</div>
-                <div class="radius-demo radius-ellipse" style="display:inline-flex;align-items:center;justify-content:center;width:160px;height:80px;">ellipse</div>
-            </div>
-
-            <h3>outline и outline-offset</h3>
-            <div class="outline-demo">outline: dashed красный</div>
-            <div class="outline-offset-demo">outline-offset: 6px</div>
-
-            <h3>box-shadow</h3>
-            <div class="shadow-demo shadow-sm">Тень обычная</div>
-            <div class="shadow-demo shadow-gold">Золотая тень</div>
-            <div class="shadow-demo shadow-inset">Внутренняя тень</div>
-            <div class="shadow-demo shadow-multi">Две тени</div>
-
-            <h3>background-clip</h3>
-            <div class="bg-clip-demo">background-clip: padding-box (фон под рамкой)</div>
-            <div class="bg-clip-demo bg-clip-border-box">background-clip: border-box (фон под рамкой включительно)</div>
-
-            <h3>background-origin</h3>
-            <div class="bg-origin-demo">background-origin: content-box</div>
-
-            <h3>background-size</h3>
-            <div class="bg-cover-demo">cover</div>
-            <div class="bg-contain-demo"></div>
-
-            <h3>background-attachment: fixed</h3>
-            <div class="bg-fixed-demo">Прокрутите — фон фиксирован</div>
-
-            <h3>border-image</h3>
-            <div class="border-image-demo">border-image: linear-gradient</div>
-            <div class="border-image-round-demo">border-image: repeating-linear-gradient, round</div>
-        </section>
-
-        <hr>
-
-        <section id="css-position">
-            <h2>15. CSS: позиционирование</h2>
-
-            <h3>relative + absolute</h3>
-            <div class="relative-container">
-                <span class="demo-caption">Родитель: relative. Красный: top/right. Зелёный: bottom/left.</span>
-                <div class="absolute-box">absolute<br>top/right</div>
-                <div class="absolute-box-bottom">absolute<br>bottom/left</div>
-            </div>
-
-            <h3>sticky — фиксируется при прокрутке (прокрутите блок)</h3>
-            <div class="sticky-demo-container">
-                <div class="sticky-header">Я приклеился к верху</div>
-                <p>Строка 1</p><p>Строка 2</p><p>Строка 3</p><p>Строка 4</p>
-                <p>Строка 5</p><p>Строка 6</p><p>Строка 7</p><p>Строка 8</p>
-                <p>Строка 9</p><p>Строка 10</p>
-            </div>
-
-            <h3>z-index — порядок наложения</h3>
-            <div class="z-index-demo">
-                <span class="demo-caption">Наведите на зелёный — он поднимется наверх (z-index: 10)</span>
-                <div class="z-box z-box-1">z-index: 1</div>
-                <div class="z-box z-box-2">z-index: 2</div>
-                <div class="z-box z-box-3">z-index: 3</div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="css-float">
-            <h2>16. CSS: float и clear</h2>
-
-            <h3>float: left — текст обтекает справа</h3>
-            <div class="float-demo">
-                <div class="float-left">float: left</div>
-                <p>Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок.</p>
-            </div>
-
-            <h3>float: right — текст обтекает слева</h3>
-            <div class="float-demo">
-                <div class="float-right">float: right</div>
-                <p>Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок. Текст обтекает этот блок.</p>
-                <div class="clear-both"></div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="css-gradient">
-            <h2>17. CSS: градиенты</h2>
-            <div class="gradient-linear">linear-gradient</div>
-            <div class="gradient-radial">radial-gradient</div>
-            <div class="gradient-repeating">repeating-linear-gradient</div>
-            <div class="gradient-text">Градиентный текст</div>
-        </section>
-
-        <hr>
-
-        <section id="css-transform">
-            <h2>18. CSS: трансформации (наведите)</h2>
-            <div class="transform-container">
-                <div class="transform-box transform-rotate">rotate</div>
-                <div class="transform-box transform-scale">scale</div>
-                <div class="transform-box transform-scaleX">scaleX</div>
-                <div class="transform-box transform-scaleY">scaleY</div>
-                <div class="transform-box transform-translate">translate</div>
-                <div class="transform-box transform-translateX">translateX</div>
-                <div class="transform-box transform-skewX">skewX</div>
-                <div class="transform-box transform-skewY">skewY</div>
-                <div class="transform-box transform-combo">combo</div>
-                <div class="transform-box transform-3d">3D</div>
-            </div>
-
-            <h3>transform-origin</h3>
-            <div class="origin-container">
-                <div class="origin-box origin-center">center</div>
-            </div>
-            <div class="origin-container">
-                <div class="origin-box origin-top-left">top left</div>
-            </div>
-            <div class="origin-container">
-                <div class="origin-box origin-bottom-right">bottom right</div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="css-transition">
-            <h2>19. CSS: transition (наведите)</h2>
-            <div class="transition-demo transition-ease">ease</div>
-            <div class="transition-demo transition-linear">linear</div>
-            <div class="transition-demo transition-ease-in">ease-in</div>
-            <div class="transition-demo transition-ease-out">ease-out</div>
-            <div class="transition-demo transition-ease-in-out">ease-in-out</div>
-            <div class="transition-demo transition-delay">delay 0.5s</div>
-            <div class="transition-demo transition-cubic">cubic-bezier</div>
-            <div class="transition-demo transition-steps">steps(5)</div>
-        </section>
-
-        <hr>
-
-        <section id="css-anim">
-            <h2>20. CSS: @keyframes</h2>
-
-            <h3>slide — движется по квадрату (наведите на блок, чтобы остановить)</h3>
-            <div class="animation-stage">
-                <div class="animated-ball">slide</div>
-            </div>
-
-            <h3>pulse</h3>
-            <div class="pulse-animation">pulse</div>
-
-            <h3>colorChange</h3>
-            <div class="color-animation">colorChange</div>
-
-            <h3>rotate</h3>
-            <div class="rotate-animation">rotate</div>
-
-            <h3>bounce</h3>
-            <div class="bounce-animation">bounce</div>
-
-            <h3>animation-direction</h3>
-            <div class="dir-demo dir-normal">normal</div>
-            <div class="dir-demo dir-reverse">reverse</div>
-            <div class="dir-demo dir-alternate">alternate</div>
-            <div class="dir-demo dir-alternate-reverse">alt-reverse</div>
-
-            <h3>animation-fill-mode</h3>
-            <div class="fill-demo fill-none">none</div>
-            <div class="fill-demo fill-forwards">forwards</div>
-            <div class="fill-demo fill-backwards">backwards</div>
-            <div class="fill-demo fill-both">both</div>
-        </section>
-
-        <hr>
-
-        <section id="css-column">
-            <h2>21. CSS: многоколоночный макет</h2>
-            <div class="multi-column">
-                <h3>column-count: 3</h3>
-                <p>Этот блок разделён на три колонки. Текст автоматически перетекает из одной колонки в другую. Между колонками можно задать промежуток и разделительную линию.</p>
-                <p>Второй абзац. Второй абзац. Второй абзац. Второй абзац. Второй абзац. Второй абзац. Второй абзац. Второй абзац. Второй абзац. Второй абзац.</p>
-                <p>Третий абзац. Третий абзац. Третий абзац. Третий абзац. Третий абзац. Третий абзац. Третий абзац. Третий абзац. Третий абзац. Третий абзац.</p>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="css-grid">
-            <h2>22. CSS: Grid Layout</h2>
-
-            <h3>grid-template-columns: repeat(3, 1fr)</h3>
-            <div class="grid-container">
-                <div class="grid-item">1</div>
-                <div class="grid-item">2</div>
-                <div class="grid-item">3</div>
-                <div class="grid-item">4</div>
-                <div class="grid-item">5</div>
-                <div class="grid-item">6</div>
-            </div>
-
-            <h3>auto-fill — адаптивное число колонок</h3>
-            <div class="grid-auto-fill">
-                <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
-            </div>
-
-            <h3>grid-template-areas</h3>
-            <div class="grid-areas">
-                <div class="grid-area-header">header</div>
-                <div class="grid-area-nav">nav</div>
-                <div class="grid-area-main">main</div>
-                <div class="grid-area-aside">aside</div>
-                <div class="grid-area-footer">footer</div>
-            </div>
-
-            <h3>grid-column / grid-row</h3>
-            <div class="grid-placement">
-                <div class="item-1">1-2 / 1-2</div>
-                <div class="item-2">3-4</div>
-                <div>3-1</div>
-                <div>3-2</div>
-                <div>3-3</div>
-                <div>3-4</div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="css-flex">
-            <h2>23. CSS: Flexbox</h2>
-
-            <h3>flex-wrap: wrap</h3>
-            <div class="flex-container">
-                <div class="flex-item">1</div>
-                <div class="flex-item">2</div>
-                <div class="flex-item">3</div>
-                <div class="flex-item">4</div>
-            </div>
-
-            <h3>flex-direction</h3>
-            <div class="flex-direction-demo flex-row"><div>row 1</div><div>row 2</div><div>row 3</div></div>
-            <div class="flex-direction-demo flex-row-reverse"><div>row-reverse 1</div><div>row-reverse 2</div><div>row-reverse 3</div></div>
-            <div class="flex-direction-demo flex-column"><div>column 1</div><div>column 2</div><div>column 3</div></div>
-            <div class="flex-direction-demo flex-column-reverse"><div>column-rev 1</div><div>column-rev 2</div><div>column-rev 3</div></div>
-
-            <h3>justify-content</h3>
-            <div class="flex-justify-demo justify-start"><div>1</div><div>2</div><div>3</div></div>
-            <div class="flex-justify-demo justify-end"><div>1</div><div>2</div><div>3</div></div>
-            <div class="flex-justify-demo justify-center"><div>1</div><div>2</div><div>3</div></div>
-            <div class="flex-justify-demo justify-space-between"><div>1</div><div>2</div><div>3</div></div>
-            <div class="flex-justify-demo justify-space-around"><div>1</div><div>2</div><div>3</div></div>
-
-            <h3>align-items</h3>
-            <div class="flex-align-demo align-start"><div>1</div><div>2</div><div>3</div></div>
-            <div class="flex-align-demo align-end"><div>1</div><div>2</div><div>3</div></div>
-            <div class="flex-align-demo align-center"><div>1</div><div>2</div><div>3</div></div>
-        </section>
-
-        <hr>
-
-        <section id="css-filter">
-            <h2>24. CSS: фильтры</h2>
-            <div class="filter-demo">
-                <div class="filter-blur">blur</div>
-                <div class="filter-grayscale">grayscale</div>
-                <div class="filter-sepia">sepia</div>
-                <div class="filter-brightness">brightness</div>
-                <div class="filter-contrast">contrast</div>
-                <div class="filter-hue">hue-rotate</div>
-                <div class="filter-invert">invert</div>
-                <div class="filter-saturate">saturate</div>
-                <div class="filter-multiple">multiple</div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="css-cursor">
-            <h2>25. CSS: все значения курсора</h2>
-            <p>Наведите на каждый блок, чтобы увидеть, как меняется курсор.</p>
-            <div class="cursor-demo">
-                <div class="cursor-default">default</div>
-                <div class="cursor-pointer">pointer</div>
-                <div class="cursor-help">help</div>
-                <div class="cursor-wait">wait</div>
-                <div class="cursor-text">text</div>
-                <div class="cursor-move">move</div>
-                <div class="cursor-crosshair">crosshair</div>
-                <div class="cursor-not-allowed">not-allowed</div>
-                <div class="cursor-n-resize">n-resize</div>
-                <div class="cursor-e-resize">e-resize</div>
-                <div class="cursor-s-resize">s-resize</div>
-                <div class="cursor-w-resize">w-resize</div>
-                <div class="cursor-grab">grab</div>
-                <div class="cursor-zoom-in">zoom-in</div>
-                <div class="cursor-zoom-out">zoom-out</div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="css-misc">
-            <h2>26. CSS: прочее (calc, attr, opacity, :target, :not, :empty)</h2>
-
-            <h3>calc()</h3>
-            <div class="calc-demo">width: calc(100% - 60px)</div>
-
-            <h3>attr()</h3>
-            <p class="attr-demo" data-info="подсказка из атрибута">Этот абзац</p>
-
-            <h3>opacity</h3>
-            <div class="opacity-demo opacity-1">opacity: 1</div>
-            <div class="opacity-demo opacity-05">opacity: 0.5</div>
-            <div class="opacity-demo opacity-02">opacity: 0.2</div>
-
-            <h3>visibility и display</h3>
-            <p>Ниже — три блока с разной видимостью:</p>
-            <div class="opacity-demo visibility-visible">visibility: visible (виден)</div>
-            <div class="opacity-demo visibility-hidden">visibility: hidden (не виден, но место осталось)</div>
-            <div class="opacity-demo">Этот блок виден — над ним пустая полоса от visibility:hidden</div>
-
-            <h3>:not() — выбрать все, кроме исключённых</h3>
-            <div class="demo-not">
-                <p>Элемент 1 — получит стиль</p>
-                <p class="exclude">Элемент 2 — исключён (.exclude)</p>
-                <p>Элемент 3 — получит стиль</p>
-            </div>
-
-            <h3>:empty — пустые элементы</h3>
-            <span class="empty-demo"></span>
-            <span class="empty-demo">Есть текст</span>
-            <span class="empty-demo">   </span>
-        </section>
-
-    </main>
-
-    <hr>
-
-    <footer>
-        <p><a href="#top">Наверх ↑</a></p>
-        <p>&copy; HTML + CSS Demo.</p>
-    </footer>
+        </li>
+        <li>Третий</li>
+    </ol>
+
+    <h3>Список определений</h3>
+    <dl>
+        <dt>HTML-документ</dt>
+        <dd>Обычный текстовый файл, содержащий разметку.</dd>
+        <dt>Сайт</dt>
+        <dd>Набор отдельных веб-страниц, связанных между собой ссылками.</dd>
+    </dl>
+
+    <h3>Автоматические счётчики</h3>
+    <div class="counter-demo">
+        <h3>Глава</h3>
+        <h4>Статья</h4>
+        <h4>Статья</h4>
+        <h4>Статья</h4>
+        <h3>Глава</h3>
+        <h4>Статья</h4>
+        <h4>Статья</h4>
+    </div>
+</section>
+
+<hr>
+
+<section id="s07">
+    <h2>Таблицы</h2>
+
+    <h3>Простая таблица</h3>
+    <table>
+        <caption>Заголовок таблицы</caption>
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Row 1, Cell 1</td><td>Row 1, Cell 2</td></tr>
+            <tr><td>Row 2, Cell 1</td><td>Row 2, Cell 2</td></tr>
+        </tbody>
+        <tfoot>
+            <tr><td colspan="2">Итого: 2 строки</td></tr>
+        </tfoot>
+    </table>
+
+    <h3>Объединение ячеек</h3>
+    <table>
+        <tr>
+            <td rowspan="2">(1,1) rowspan=2</td>
+            <td>(1,2)</td>
+            <td>(1,3)</td>
+        </tr>
+        <tr>
+            <td colspan="2">(2,1) colspan=2</td>
+        </tr>
+    </table>
+
+    <h3>Группировка строк</h3>
+    <table>
+        <caption>Продажи по годам</caption>
+        <thead>
+            <tr><th>Год</th><th>Нефть</th><th>Золото</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>2024</td><td>322</td><td>413</td></tr>
+            <tr><td>2025</td><td>346</td><td>697</td></tr>
+            <tr><td>2026</td><td>274</td><td>256</td></tr>
+        </tbody>
+        <tfoot>
+            <tr><td colspan="3">Все данные условны</td></tr>
+        </tfoot>
+    </table>
+
+    <h3>Пустые ячейки</h3>
+    <table>
+        <tr><td>1</td><td></td><td>3</td></tr>
+        <tr><td></td><td>5</td><td></td></tr>
+    </table>
+</section>
+
+<hr>
+
+<section id="s08">
+    <h2>Формы</h2>
+
+    <h3>Текстовые поля</h3>
+    <form action="#" method="post">
+        <p>
+            <label for="f-user">Имя:</label>
+            <input type="text" id="f-user" name="username" placeholder="Введите имя" autocomplete="name">
+        </p>
+        <p>
+            <label for="f-email">Email:</label>
+            <input type="email" id="f-email" name="email" placeholder="example@mail.com" autocomplete="email">
+        </p>
+        <p>
+            <label for="f-pass">Пароль:</label>
+            <input type="password" id="f-pass" name="password" maxlength="16">
+        </p>
+        <p>
+            <label for="f-tel">Телефон:</label>
+            <input type="tel" id="f-tel" name="phone" placeholder="+375 (29) 123-45-67">
+        </p>
+        <p>
+            <label for="f-num">Число (1–10):</label>
+            <input type="number" id="f-num" name="num" min="1" max="10" step="1">
+        </p>
+        <p>
+            <label for="f-date">Дата:</label>
+            <input type="date" id="f-date" name="date">
+        </p>
+        <p>
+            <label for="f-range">Диапазон:</label>
+            <input type="range" id="f-range" name="range" min="0" max="100">
+        </p>
+        <p>
+            <label for="f-color">Цвет:</label>
+            <input type="color" id="f-color" name="color" value="#227c9d">
+        </p>
+        <p>
+            <label for="f-file">Файл:</label>
+            <input type="file" id="f-file" name="file" accept="image/*">
+        </p>
+    </form>
+
+    <h3>Чекбоксы и радиокнопки</h3>
+    <form action="#">
+        <p>
+            <label><input type="checkbox" name="vehicle" value="Bike" checked> У меня есть велосипед</label><br>
+            <label><input type="checkbox" name="vehicle" value="Car"> У меня есть машина</label>
+        </p>
+        <p>
+            Пол:<br>
+            <label><input type="radio" name="sex" value="male" checked> мужской</label><br>
+            <label><input type="radio" name="sex" value="female"> женский</label>
+        </p>
+    </form>
+
+    <h3>Textarea</h3>
+    <form action="#">
+        <p>
+            <label for="f-desc">Описание:</label>
+            <textarea id="f-desc" name="desc" rows="4" placeholder="Введите описание" maxlength="500"></textarea>
+        </p>
+    </form>
+
+    <h3>Select</h3>
+    <form action="#">
+        <p>
+            <label for="f-hero">Выберите героя:</label>
+            <select id="f-hero" name="hero">
+                <option value="" disabled selected>Choose a hero</option>
+                <option value="iron">Iron Man</option>
+                <option value="captain">Captain America</option>
+                <option value="thor">Thor</option>
+            </select>
+        </p>
+        <p>
+            <label for="f-group">Группированный список:</label>
+            <select id="f-group" name="group" size="5">
+                <option value="v1">Not in group</option>
+                <optgroup label="Group 1">
+                    <option value="v2">Item G1-1</option>
+                    <option value="v3">Item G1-2</option>
+                </optgroup>
+                <optgroup label="Group 2">
+                    <option value="v4">Item G2-1</option>
+                    <option value="v5">Item G2-2</option>
+                </optgroup>
+            </select>
+        </p>
+    </form>
+
+    <h3>Datalist</h3>
+    <form action="#">
+        <p>
+            <label for="f-fruit">Фрукт:</label>
+            <input list="fruitlist" id="f-fruit" name="fruit">
+            <datalist id="fruitlist">
+                <option value="Apples"></option>
+                <option value="Oranges"></option>
+                <option value="Cherries"></option>
+            </datalist>
+        </p>
+    </form>
+
+    <h3>Fieldset и legend</h3>
+    <form action="#">
+        <fieldset>
+            <legend>Данные пользователя</legend>
+            <p>
+                <label for="f-user2">Логин:</label>
+                <input type="text" id="f-user2" name="user">
+            </p>
+            <p>
+                <label for="f-pass2">Пароль:</label>
+                <input type="password" id="f-pass2" name="pass">
+            </p>
+        </fieldset>
+        <fieldset disabled>
+            <legend>Заблокированные поля</legend>
+            <p>
+                <label for="f-dis">Только для чтения:</label>
+                <input type="text" id="f-dis" value="нельзя изменить">
+            </p>
+        </fieldset>
+    </form>
+
+    <h3>Кнопки</h3>
+    <p>
+        <button type="submit">Отправить</button>
+        <button type="reset">Очистить</button>
+        <button type="button">Кнопка</button>
+        <button type="button" disabled>Отключена</button>
+    </p>
+</section>
+
+<hr>
+
+<section id="s09">
+    <h2>Позиционирование</h2>
+
+    <h3>position: static (по умолчанию)</h3>
+    <div class="static">static — обычное размещение в потоке</div>
+
+    <h3>position: relative</h3>
+    <div class="static">До relative</div>
+    <div class="relative">relative — смещён на top: 10px, left: 20px</div>
+    <div class="static">После relative</div>
+
+    <h3>position: absolute</h3>
+    <p>Родитель должен иметь position: relative. Ниже — пример.</p>
+
+    <h3>position: fixed</h3>
+    <p>Смотрите правый нижний угол страницы — там фиксированная плашка.</p>
+
+    <h3>position: sticky</h3>
+    <p>Скролльте — заголовок ниже прилипнет к верху окна.</p>
+    <div class="sticky">sticky — прилипающий заголовок</div>
+    <p>... контент под ним ...</p>
+    <p>... контент под ним ...</p>
+    <p>... контент под ним ...</p>
+
+    <h3>float и clear</h3>
+    <div class="float-left-demo">float: left</div>
+    <p>
+        Этот текст обтекает плавающий блок слева.
+        Плавающий блок «прикрепляется» к указанной стороне родителя,
+        а остальные элементы его обтекают с других сторон.
+    </p>
+    <div class="float-right-demo">float: right</div>
+    <p>
+        Этот текст обтекает плавающий блок справа. Плавающим может быть
+        любой блок, кроме абсолютно позиционированных.
+    </p>
+    <p class="clear-both">Этот абзац имеет clear: both — он всегда ниже плавающих блоков.</p>
+</section>
+
+<hr>
+
+<section id="s10">
+    <h2>Трансформации</h2>
+
+    <h3>translate — сдвиг</h3>
+    <div class="transform-demo transform-translate">translate(20px, 10px)</div>
+    <div class="transform-demo transform-translate-x">translateX(30px)</div>
+    <div class="transform-demo transform-translate-y">translateY(-10px)</div>
+
+    <h3>scale — масштаб</h3>
+    <div class="transform-demo transform-scale">scale(1.2)</div>
+    <div class="transform-demo transform-scale-x">scaleX(1.5)</div>
+    <div class="transform-demo transform-scale-y">scaleY(0.7)</div>
+    <div class="transform-demo transform-scale-neg">scale(-1, 1) — отражение</div>
+
+    <h3>rotate — поворот</h3>
+    <div class="transform-demo transform-rotate">rotate(15deg)</div>
+    <div class="transform-demo transform-rotate-turn">rotate(0.25turn)</div>
+
+    <h3>skew — наклон</h3>
+    <div class="transform-demo transform-skew-x">skewX(15deg)</div>
+    <div class="transform-demo transform-skew-y">skewY(10deg)</div>
+    <div class="transform-demo transform-skew">skew(10deg, 5deg)</div>
+
+    <h3>matrix — матрица</h3>
+    <div class="transform-demo transform-matrix">matrix(0.7, 0, 0.5, 0.7, -30, -30)</div>
+
+    <h3>Несколько функций одновременно</h3>
+    <div class="transform-demo transform-multiple">rotate(-15deg) scale(1.3) translateX(10px)</div>
+
+    <h3>transform-origin — точка трансформации</h3>
+    <div class="transform-demo transform-origin-top-left">origin: left top</div>
+    <div class="transform-demo transform-origin-right">origin: right center</div>
+    <div class="transform-demo transform-origin-center">origin: center center</div>
+
+    <h3>Эффект при наведении</h3>
+    <div class="transform-demo">Наведите на меня</div>
+</section>
+
+<hr>
+
+<section id="s11">
+    <h2>Переходы</h2>
+
+    <h3>Изменение ширины (transition: width)</h3>
+    <div class="transition-demo transition-demo--width"></div>
+
+    <h3>Изменение цвета и поворот</h3>
+    <div class="transition-demo transition-demo--color"></div>
+
+    <h3>Разные timing-function при движении вправо</h3>
+    <p>linear:</p>
+    <div class="transition-demo transition-demo--linear"></div>
+    <p>ease-in:</p>
+    <div class="transition-demo transition-demo--ease-in"></div>
+    <p>ease-out:</p>
+    <div class="transition-demo transition-demo--ease-out"></div>
+    <p>ease-in-out:</p>
+    <div class="transition-demo transition-demo--ease-in-out"></div>
+    <p>cubic-bezier с «отскоком»:</p>
+    <div class="transition-demo transition-demo--cubic"></div>
+
+    <h3>Задержка перехода</h3>
+    <div class="transition-demo transition-demo--delay"></div>
+
+    <h3>Несколько свойств одновременно</h3>
+    <div class="transition-demo transition-multi"></div>
+</section>
+
+<hr>
+
+<section id="s12">
+    <h2>Анимации</h2>
+
+    <h3>@keyframes slide + infinite + alternate</h3>
+    <div class="animation-slide"></div>
+    <p>Наведите — анимация поставится на паузу.</p>
+
+    <h3>fadeIn</h3>
+    <div class="animation-fade">Анимация появления</div>
+
+    <h3>pulse</h3>
+    <div class="animation-pulse"></div>
+
+    <h3>rotate 360°</h3>
+    <div class="animation-rotate"></div>
+
+    <h3>bounce</h3>
+    <div class="animation-bounce"></div>
+
+    <h3>rainbow (смена фона)</h3>
+    <div class="animation-rainbow"></div>
+
+    <h3>Краткая запись animation</h3>
+    <div class="animation-shorthand"></div>
+</section>
+
+<hr>
+
+<section id="s13">
+    <h2>Flexbox</h2>
+
+    <h3>display: flex, justify-content: space-between</h3>
+    <div class="flex-container">
+        <div class="flex-item">div1</div>
+        <div class="flex-item">div2</div>
+        <div class="flex-item">div3</div>
+        <div class="flex-item">div4</div>
+    </div>
+
+    <h3>justify-content: center + align-items: center</h3>
+    <div class="flex-container flex-container--center">
+        <div class="flex-item">span1</div>
+        <div class="flex-item">span2</div>
+        <div class="flex-item">span3</div>
+    </div>
+
+    <h3>justify-content: flex-end</h3>
+    <div class="flex-container flex-container--end">
+        <div class="flex-item">div1</div>
+        <div class="flex-item">div2</div>
+        <div class="flex-item">div3</div>
+    </div>
+
+    <h3>justify-content: space-around</h3>
+    <div class="flex-container flex-container--space-around">
+        <div class="flex-item">div1</div>
+        <div class="flex-item">div2</div>
+        <div class="flex-item">div3</div>
+    </div>
+
+    <h3>flex-grow</h3>
+    <div class="flex-container">
+        <div class="flex-item">обычный</div>
+        <div class="flex-item flex-item--grow">flex-grow: 1</div>
+        <div class="flex-item flex-item--grow-2">flex-grow: 2</div>
+    </div>
+
+    <h3>order</h3>
+    <div class="flex-container">
+        <div class="flex-item flex-item--order-2">order: 2</div>
+        <div class="flex-item flex-item--order-neg">order: -1</div>
+        <div class="flex-item">order: 0</div>
+    </div>
+
+    <h3>align-self</h3>
+    <div class="flex-container flex-container--align-center">
+        <div class="flex-item flex-item--self-start">flex-start</div>
+        <div class="flex-item flex-item--self-center">center</div>
+        <div class="flex-item flex-item--self-end">flex-end</div>
+        <div class="flex-item flex-item--self-stretch">stretch</div>
+    </div>
+
+    <h3>flex-direction: column</h3>
+    <div class="flex-container flex-container--column">
+        <div class="flex-item">span1</div>
+        <div class="flex-item">span2</div>
+        <div class="flex-item">span3</div>
+    </div>
+
+    <h3>flex-wrap: wrap</h3>
+    <div class="flex-container flex-container--wrap">
+        <div class="flex-item">div1</div>
+        <div class="flex-item">div2</div>
+        <div class="flex-item">div3</div>
+        <div class="flex-item">div4</div>
+        <div class="flex-item">div5</div>
+        <div class="flex-item">div6</div>
+        <div class="flex-item">div7</div>
+        <div class="flex-item">div8</div>
+    </div>
+</section>
+
+<hr>
+
+<section id="s14">
+    <h2>Grid</h2>
+
+    <h3>Простая сетка 3 колонки</h3>
+    <div class="grid-container">
+        <div class="grid-item">1,1</div>
+        <div class="grid-item">2,1</div>
+        <div class="grid-item">3,1</div>
+        <div class="grid-item">4,2</div>
+        <div class="grid-item">5,2</div>
+        <div class="grid-item">6,2</div>
+    </div>
+
+    <h3>Объединение ячеек: grid-column / grid-row</h3>
+    <div class="grid-container">
+        <div class="grid-item grid-item--col-span-2">grid-column: 1 / 3</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item grid-item--row-span-2">grid-row: 1 / 3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7</div>
+    </div>
+
+    <h3>grid-template-areas: макет сайта</h3>
+    <div class="grid-container grid-container--areas">
+        <div class="grid-item grid-area-header">Header</div>
+        <div class="grid-item grid-area-nav">Nav</div>
+        <div class="grid-item grid-area-main">Main</div>
+        <div class="grid-item grid-area-footer">Footer</div>
+    </div>
+
+    <h3>Автоматическое заполнение</h3>
+    <div class="grid-container grid-container--auto">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+    </div>
+</section>
+
+<hr>
+
+<section id="s15">
+    <h2>Многоколоночный макет</h2>
+
+    <h3>column-count: 2</h3>
+    <div class="columns-two">
+        <p>
+            CSS-свойство column-count позволяет организовать содержимое
+            в несколько вертикальных колонок, подобно газете или журналу.
+            Колонки могут содержать заголовки, текст, таблицы, картинки
+            и любые другие inline-элементы.
+        </p>
+        <p>
+            Настройка колонок выполняется через свойства column-width,
+            column-count, column-gap, column-rule. Свойство columns —
+            сокращённая запись для column-width и column-count.
+        </p>
+        <p>
+            Содержимое автоматически перетекает из колонки в колонку.
+            Высота колонок балансируется браузером автоматически, если
+            не установлено column-fill: auto.
+        </p>
+    </div>
+
+    <h3>column-count: 3 + column-rule</h3>
+    <div class="columns-three">
+        <p>
+            Три колонки с разделительными линиями между ними.
+            Свойство column-rule задаёт цвет, толщину и стиль разделителя.
+            Разделитель не влияет на общую ширину блока.
+        </p>
+        <p>
+            Свойство column-gap задаёт промежуток между колонками.
+            Разделительная линия располагается посередине промежутка.
+        </p>
+    </div>
+
+    <h3>column-span: all — заголовок через все колонки</h3>
+    <div class="columns-two">
+        <h4 class="columns-span-all">Заголовок через все колонки</h4>
+        <p>
+            Заголовок выше растянут на все колонки благодаря column-span: all.
+            А этот текст уже течёт в две колонки.
+        </p>
+        <p>
+            Второй абзац продолжает заполнять колонки. Заголовок остаётся
+            растянутым на всю ширину контейнера, а текст обтекает его снизу.
+        </p>
+    </div>
+
+    <h3>column-fill: balance (по умолчанию)</h3>
+    <p>Колонки автоматически балансируются по высоте.</p>
+    <div class="columns-fill-balance">
+        <p>Первый абзац. Браузер стремится сделать все колонки одинаковой высоты, распределяя контент равномерно.</p>
+        <p>Второй абзац. Если контента мало, колонки всё равно будут одинаковой высоты.</p>
+        <p>Третий абзац. Это поведение по умолчанию для многоколоночного макета.</p>
+    </div>
+
+    <h3>column-fill: auto</h3>
+    <p>Колонки заполняются последовательно, высота может различаться.</p>
+    <div class="columns-fill-auto">
+        <p>Первый абзац. Сначала полностью заполняется первая колонка, затем вторая, и только потом третья.</p>
+        <p>Второй абзац. Последняя колонка может оказаться короче остальных — это нормально.</p>
+        <p>Третий абзац. Чтобы column-fill: auto работал осмысленно, у контейнера должна быть задана высота (height).</p>
+    </div>
+
+    <h3>break-before: column — заголовок начинает новую колонку</h3>
+    <div class="columns-break-before">
+        <h4>Раздел 1</h4>
+        <p>Текст первого раздела. Он занимает первую колонку.</p>
+        <p>Продолжение первого раздела.</p>
+        <h4>Раздел 2</h4>
+        <p>Этот раздел начинается с новой колонки благодаря break-before: column у заголовка.</p>
+        <h4>Раздел 3</h4>
+        <p>И этот раздел тоже начинается с новой колонки.</p>
+    </div>
+
+    <h3>break-after: avoid — заголовок не отрывается от текста</h3>
+    <div class="columns-break-after">
+        <p>Текст перед заголовком. Может занять почти всю колонку.</p>
+        <h4>Заголовок раздела</h4>
+        <p>Этот абзац всегда остаётся с заголовком в одной колонке благодаря break-after: avoid.</p>
+        <p>Продолжение текста.</p>
+    </div>
+
+    <h3>break-inside: avoid — карточка не разрывается между колонками</h3>
+    <div class="columns-break-inside">
+        <p>Обычный текст в первой колонке.</p>
+        <div class="no-break-card">
+            <strong>Карточка товара</strong>
+            <p>Эта карточка не разорвётся между колонками благодаря break-inside: avoid.</p>
+        </div>
+        <p>Текст после карточки.</p>
+        <div class="no-break-card">
+            <strong>Вторая карточка</strong>
+            <p>Она тоже останется целой и перейдёт в следующую колонку целиком.</p>
+        </div>
+        <p>Завершающий текст.</p>
+    </div>
+
+    <h3>Комбинация: заголовки + карточки + разрывы</h3>
+    <div class="columns-full">
+        <h4>Глава 1</h4>
+        <p>Вводный текст первой главы. Он может тянуться через несколько колонок.</p>
+        <div class="no-break-card">Карточка в первой главе — целиком.</div>
+        <h4>Глава 2</h4>
+        <p>Текст второй главы. Заголовок начал новую колонку.</p>
+        <div class="no-break-card">Карточка во второй главе — тоже целиком.</div>
+        <h4>Глава 3</h4>
+        <p>Текст третьей главы.</p>
+    </div>
+</section>
+
+<hr>
+
+<section id="s16">
+    <h2>Фильтры, курсоры, misc</h2>
+
+    <h3>filter</h3>
+    <div class="filter-demo-grid">
+        <div class="filter-item filter-blur">blur(3px)</div>
+        <div class="filter-item filter-brightness">brightness(150%)</div>
+        <div class="filter-item filter-contrast">contrast(200%)</div>
+        <div class="filter-item filter-grayscale">grayscale(100%)</div>
+        <div class="filter-item filter-hue-rotate">hue-rotate(90deg)</div>
+        <div class="filter-item filter-invert">invert(100%)</div>
+        <div class="filter-item filter-saturate">saturate(300%)</div>
+        <div class="filter-item filter-sepia">sepia(100%)</div>
+        <div class="filter-item filter-drop-shadow">drop-shadow(4px 4px 6px)</div>
+    </div>
+
+    <h3>cursor</h3>
+    <ul class="cursor-list">
+        <li class="cursor-pointer">cursor: pointer</li>
+        <li class="cursor-help">cursor: help</li>
+        <li class="cursor-wait">cursor: wait</li>
+        <li class="cursor-move">cursor: move</li>
+        <li class="cursor-crosshair">cursor: crosshair</li>
+        <li class="cursor-text">cursor: text</li>
+        <li class="cursor-not-allowed">cursor: not-allowed</li>
+        <li class="cursor-grab">cursor: grab</li>
+    </ul>
+
+    <h3>calc()</h3>
+    <div class="calc-demo">width: calc(100% - 80px)</div>
+
+    <h3>display</h3>
+    <p>
+        <span class="display-inline">display: inline</span>
+        <span class="display-inline-block">display: inline-block</span>
+        <span class="display-block">display: block</span>
+    </p>
+    <ul>
+        <li class="display-list-item">display: list-item</li>
+    </ul>
+
+    <h3>Реквизиты через itemscope</h3>
+    <div itemscope itemtype="http://schema.org/Movie">
+        <h4 itemprop="name">Аватар</h4>
+        <p>Оригинальное название: <span itemprop="alternateName">Avatar</span></p>
+        <p>
+            Режиссёр:
+            <span itemprop="director" itemscope itemtype="http://schema.org/Person">
+                <span itemprop="name">Джеймс Кэмерон</span>
+            </span>
+        </p>
+        <p>
+            Жанр: <span itemprop="genre">Фантастика</span>,
+            <span itemprop="genre">Боевик</span>
+        </p>
+        <p>Премьера: <time itemprop="datePublished" datetime="2009-12-18">18 декабря 2009</time></p>
+    </div>
+
+    <h3>details и summary</h3>
+    <details>
+        <summary>Виды триатлона</summary>
+        <ol>
+            <li>1.5 км плавание</li>
+            <li>40 км велогонка</li>
+            <li>10 км бег</li>
+        </ol>
+    </details>
+</section>
+
+</main>
+
+<hr>
+
+<footer>
+    <p><a href="#top">Наверх ↑</a></p>
+    <p>&copy; 2026 CSS Demo. Все примеры из лекций 4–6.</p>
+</footer>
+
+<div class="fixed">position: fixed</div>
+<div class="preloader"></div>
 
 </body>
 </html>
